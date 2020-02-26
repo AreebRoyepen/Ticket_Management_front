@@ -1,23 +1,36 @@
 import React from 'react';
-import logo from '../logo.svg';
+import "../styles/login.css";
 
 function Login() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/Login.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <aside className="profile-card">
+        <div className="profile-bio">
+          <div>
+            <img
+              src="http://www.goodwoodmosque.org.za/images/logoImage.JPG"
+              alt="logo"
+              width="100"
+              height="100"
+            />
+          </div>
+          <input
+            type="text"
+            className="sign-up-input"
+            placeholder="Enter in your username"
+            autoFocus
+          />
+          <input
+            type="password"
+            className="sign-up-input"
+            placeholder="Enter in your password"
+            autoFocus
+          />
+          <div>
+            <button className="button ">Sign in</button>
+          </div>
+        </div>
+      </aside>
     </div>
   );
 }
