@@ -341,4 +341,39 @@ export default class Api {
        )
    }
 
+   static getRequest(endpoint){
+
+    const uri = API_BASE_ADDRESS + "/" + endpoint;
+    return fetch(uri, {
+        method: 'GET'
+    });
+
+   }
+
+   static postRequest(endpoint, payload){
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    console.log(payload);
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify(payload)
+    };
+
+    const uri = API_BASE_ADDRESS + "/" + endpoint;
+    return fetch(uri, requestOptions);
+
+   }
+
+   static putRequest(endpoint, payload){
+       
+   }
+
+   static deleteRequest(endpoint, payload){
+
+   }
+
 }
