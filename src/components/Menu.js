@@ -1,28 +1,37 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-
-
+import React from "react";
+import { Link } from "react-router-dom";
+import "../styles/menu.css";
 const Menu = () => {
-
-    const style = {
-        display: 'inline-block',
-        margin: 10
-      };
-
-    return (
-            <div>
-                <h3 style = {style} > <Link to = '/'>Log in</Link></h3>
-                <h3 style = {style}> <Link to = '/CreateEvent'>Create Event</Link></h3>
-                <h3 style = {style}> <Link to = '/LookupScreen'>Lookup Screen</Link></h3>
-                <h3 style = {style}> <Link to = '/Payment'>Payments</Link></h3>
-                <h3 style = {style}> <Link to = '/ReturnTickets'>Return Tickets</Link></h3>
-                <h3 style = {style}> <Link to = '/TicketAllocation'>Ticket Allocation</Link></h3>
-
-            </div>
-    )
-
-
-
-}
+  return (
+    <div>
+      <input type="checkbox" id="menu-toggle" />
+      <label id="trigger" for="menu-toggle" />
+      <label id="burger" for="menu-toggle" />
+      <ul id="menu">
+        <li>
+          <h4 id="CRUD">CREATE / UPDATE</h4>
+        </li>
+        <li>
+          <Link to="/CreateEvent">Events</Link>
+        </li>
+        <li>
+          <Link to="/LookupScreen">Lookup</Link>
+        </li>
+        <li>
+          <Link to="/Payment">Payments</Link>
+        </li>
+        <li>
+          <Link to="/ReturnTickets">Return Tickets</Link>
+        </li>
+        <li>
+          <h4>LOOKUP</h4>
+        </li>
+        <li>
+          <Link to="/TicketAllocation">Ticket Allocation</Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
 
 export default Menu;

@@ -1,37 +1,69 @@
-import React from 'react';
+import React, { Component } from "react";
 import "../styles/login.css";
 
-function Login() {
-  return (
-    <div className="App">
-      <aside className="profile-card">
-        <div className="profile-bio">
-          <div>
-            <img
-              src="http://www.goodwoodmosque.org.za/images/logoImage.JPG"
-              alt="logo"
-              width="100"
-              height="100"
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
+
+  handleClick(event) {
+    //var apiBaseUrl = "http://localhost:3000/api/";
+
+    if (this.state.username === "admin" && this.state.password === "admin") {
+      console.log("Welcome admin");
+    } else if (this.state.username === "cood" && this.state.password === "cood") {
+      console.log("Welcome coordinator");
+    } else {
+      console.log("Username or password does not exist");
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <aside className="profile-card">
+          <div className="profile-bio">
+            <div>
+              <img
+                src="http://www.goodwoodmosque.org.za/images/logoImage.JPG"
+                alt="logo"
+                width="100"
+                height="100"
+              />
+            </div>
+            <input
+              type="text"
+              className="sign-up-input"
+              placeholder="Enter in your username"
+              autoFocus
+              onChange={(event, newValue) =>
+                this.setState({ username: event.target.value })
+              }
             />
+            <input
+              type="password"
+              className="sign-up-input"
+              placeholder="Enter in your password"
+              onChange={(event, newValue) =>
+                this.setState({ password: event.target.value })
+              }
+            />
+            <div>
+              <button
+                className="button"
+                onClick={event => this.handleClick(event)}
+              >
+                Sign in
+              </button>
+            </div>
           </div>
-          <input
-            type="text"
-            className="sign-up-input"
-            placeholder="Enter in your username"
-            autoFocus
-          />
-          <input
-            type="password"
-            className="sign-up-input"
-            placeholder="Enter in your password"
-            autoFocus
-          />
-          <div>
-            <button className="button ">Sign in</button>
-          </div>
-        </div>
-      </aside>
-    </div>
-  );
+        </aside>
+      </div>
+    );
+  }
 }
 export default Login;

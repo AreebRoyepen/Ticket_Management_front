@@ -1,0 +1,153 @@
+@keyframes checked-anim {
+  50% {
+    width: 3000px;
+    height: 3000px;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+@keyframes not-checked-anim {
+  0% {
+    width: 3000px;
+    height: 3000px;
+  }
+}
+
+#CRUD {
+  margin-left: -2px;
+  margin-top: 62px;
+  margin-bottom: -19px;
+}
+a {
+  display: block;
+  font-size: 0.83em;
+  margin-block-start: 1.67em;
+  margin-block-end: 1.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: none;
+}
+
+h4 {
+  display: block;
+  font-size: 1em;
+}
+
+li {
+  color: #03a9f4;
+  font: 14pt "Roboto", sans-serif;
+  font-weight: 700;
+  line-height: 1.8;
+  text-decoration: none;
+  text-transform: none;
+  list-style: none;
+  outline: 0;
+  display: none;
+}
+a,
+h4 {
+  color: #ffffff;
+}
+li {
+  width: 230px;
+  text-indent: 56px;
+}
+a:focus {
+  display: block;
+  color: #333;
+  background-color: #eee;
+  transition: all 0.5s;
+}
+aside {
+  position: absolute;
+  color: white;
+
+  text-align: right;
+}
+h4 {
+  display: block;
+  font-size: 1em;
+  margin-inline-end: -50px;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  overflow: hidden;
+}
+
+#trigger,
+#burger,
+#burger:before,
+#burger:after {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  background: #ffffff;
+  width: 30px;
+  height: 5px;
+  transition: 0.2s ease;
+  z-index: 1;
+}
+#trigger {
+  height: 25px;
+  background: #99cc33;
+}
+#burger:before {
+  content: " ";
+  top: 10px;
+  left: 0;
+}
+#burger:after {
+  content: " ";
+  top: 20px;
+  left: 0;
+}
+#menu-toggle:checked + #trigger + #burger {
+  top: 35px;
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+
+#menu-toggle:checked + #trigger + #burger:before {
+  width: 0px;
+  top: 0px;
+  left: 0px;
+  transition: transform 0.2s ease;
+}
+#menu-toggle:checked + #trigger + #burger:after {
+  width: 0px;
+  top: 0px;
+  left: 0px;
+}
+#menu {
+  position: absolute;
+  margin: 6px;
+  padding: 3px;
+  width: 60px;
+  height: 59px;
+  background-color: #99cc33;
+  border-radius: 74%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  animation: not-checked-anim 0.2s both;
+  transition: 0.2s;
+}
+#menu-toggle:checked + #trigger + #burger + #menu {
+  margin-top: -9px;
+  margin-left: -9px;
+  animation: checked-anim 1s ease both;
+}
+#menu-toggle:checked + #trigger ~ #menu > li,
+a {
+  display: block;
+}
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  display: none;
+}
