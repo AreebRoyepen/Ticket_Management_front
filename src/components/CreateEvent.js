@@ -68,7 +68,7 @@ export default function CreateEvent() {
       <input
         type="text"
         className="sign-up-input"
-        placeholder="Eticket end number"
+        placeholder="Ticket end number"
         onChange={ e => setTo(e.target.value)}
       />
       <input
