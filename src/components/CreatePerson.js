@@ -3,7 +3,7 @@ import Api from "../api/Api";
 import "../styles/login.css";
 
 
-export default function CreateEvent() {
+export default function CreatePerson() {
 
     const [data, setData] = useState([]);
     
@@ -11,9 +11,9 @@ export default function CreateEvent() {
     const isMounted = useRef(true)
 
     const [name, setName] = useState("");
-    const [to, setTo] = useState(0);
-    const [from, setFrom] = useState(0);
-    const [price, setPrice] = useState(0);
+    const [surname, setSurname] = useState("");
+    const [number, setNumber] = useState("");
+    const [email, setEmail] = useState("");
 
     useEffect(() => {
      return isMounted.current = false
@@ -30,13 +30,12 @@ export default function CreateEvent() {
 
       var x = {
         "name": name,
-        "to": parseInt(to),
-        "from": parseInt(from),
-        "ticketPrice": parseInt(price),
-        "active": true
+        "surname": surname,
+        "number": number,
+        "email": email        
       };
 
-      Api.postRequest("addEvent",x)
+      Api.postRequest("addPerson",x)
       .then(response => response.json())
       .then(data => {setData(data)});
 
@@ -45,7 +44,7 @@ export default function CreateEvent() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, to, from,price, name]); // update the callback if the state changes
+    }, [isSending, name, surname,number, email]); // update the callback if the state changes
 
     return (
 
@@ -56,28 +55,28 @@ export default function CreateEvent() {
       <input
         type="text"
         className="sign-up-input"
-        placeholder="Event name"
+        placeholder="Name"
         onChange={ e => setName(e.target.value)}
       />
       <input
         type="text"
         className="sign-up-input"
-        placeholder="ticket start number"
-        onChange={ e => setFrom(e.target.value)}
+        placeholder="Surname"
+        onChange={ e => setSurname(e.target.value)}
       />
       <input
         type="text"
         className="sign-up-input"
-        placeholder="Eticket end number"
-        onChange={ e => setTo(e.target.value)}
+        placeholder="Number"
+        onChange={ e => setNumber(e.target.value)}
       />
       <input
         type="text"
         className="sign-up-input"
-        placeholder="ticket price"
-        onChange={ e => setPrice(e.target.value)}
+        placeholder="email address"
+        onChange={ e => setEmail(e.target.value)}
       />
-          <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
+          <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Add Person</button>
   
       </div>
       </aside>
