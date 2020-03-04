@@ -355,12 +355,12 @@ export default class Api {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    console.log(payload);
+    var p  = JSON.stringify(payload);
 
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: JSON.stringify(payload)
+    body: p
     };
 
     const uri = API_BASE_ADDRESS + "/" + endpoint;
