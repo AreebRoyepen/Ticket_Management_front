@@ -1,0 +1,329 @@
+html {
+    background-color: #fefefe;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+      overflow-x: hidden; /* Hide scrollbars */
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  .container {
+    margin: 2% 0 auto 3%;
+    width: 100%;
+    z-index: -1;
+  }
+  
+  .u-float-right {
+    float: right;
+  }
+  
+  .u-flex-center {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+  
+  .card-lable {
+    color: white;
+    font-size: 12px;
+  }
+  
+  .card {
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+    height: 125px;
+    margin-bottom: 25px;
+    transition: all 300ms ease-out;
+    width: 65%;
+  }
+  
+  .card:hover {
+    box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
+  }
+  
+  .card-object-container {
+    background: none;
+    float: left;
+    height: 100%;
+    width: 35%;
+    position: relative;
+  }
+  
+  .card-object {
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+  }
+  
+  .card-object:after {
+    content: " ";
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 300ms ease-out;
+    z-index: 10;
+  }
+  
+  .card:hover .card-object:after {
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.4) 100%);
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 52%,rgba(0,0,0,0.4) 100%);
+    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 52%,rgba(0,0,0,0.4) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
+    opacity: 1;
+  }
+  
+  .card-object-tag {
+    background-color: #99cc33;
+    color:white;
+    border-radius: 2px;
+    padding: 2px 7px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  
+  .card-object-social-list {
+    bottom: 4px;
+    left: 10px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 20;
+  }
+  
+  .card:hover .card-object-social-list li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .card-object-social-list li:nth-child(1) {
+    transition-delay: 0;
+  }
+  .card-object-social-list li:nth-child(2) {
+    transition-delay: 75ms;
+  }
+  .card-object-social-list li:nth-child(3) {
+    transition-delay: 150ms;
+  }
+  
+  .card-object-social-list-item-additional {
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 12px;
+    padding-top: 7px;
+    text-align: center;
+  }
+  
+  .card-body {
+    background-color: #99cc33;
+    color: white;
+    float: left;
+    height: 100%;
+    padding: 12px 15px;
+    position: relative;
+    width: 145%;
+  }
+  
+  .card-top {
+    display: block;
+  }
+  
+  .card-top-icons {
+    margin-top: -2px;
+    opacity: 0;
+    transition: all 300ms ease-out;
+    transform: translateY(-5px);
+  }
+  
+  .card:hover .card-top-icons {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .card-top-icons > svg {
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 300ms ease-out;
+  }
+  
+  .card-top-icons > svg:hover {
+    fill: #444;
+  }
+  
+  .card-header {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .card-sub-botton {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    opacity: 1;
+    padding: 0 15px;
+    transition: all 300ms ease-out;
+    width: 100%;
+  }
+  
+  .card:hover .card-sub-botton {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  
+  .card-sub-text {
+    display: inline-block;
+  }
+  
+  .card-sub-show {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 300ms ease-out;
+  }
+  
+  .card:hover .card-sub-show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .card-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+
+  
+
+  .card-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+
+#CreateEvent{
+  font-size: 17px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  margin-left: 55%;
+  margin-top: 35%;
+}
+
+.card-sub-text {
+    display: inline-block;
+}
+
+.u-float-right {
+    float: right;
+}
+@media screen and (min-height: 480px)
+{
+.button {
+    color: white;
+    width: 40%;
+    border: 1px solid #ffffff;
+    border-radius: 13px;
+    padding: 0px 20px;
+    font-size: 14px;
+    overflow: hidden;
+    /* height: 47%; */
+    text-decoration: unset;
+    transition: all 0.5s;
+    margin-right: -3px;
+    margin-left: 10px;
+}
+}
+@media screen and (min-height: 480px)
+{
+button {
+    background-color: #99cc33;
+    margin: 0em;
+    font: 100 5px Arial;
+    padding: 10px 20px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: #99cc33;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+user agent stylesheet
+button {
+    -webkit-appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: buttonface;
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+}
+.card-body {
+    background-color: #99cc33;
+    color: white;
+    float: left;
+    height: 100%;
+    padding: 12px 15px;
+    position: relative;
+    width: 145%;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    background-color: #fefefe;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    overflow-x: hidden;
+}
+user agent stylesheet
+html {
+    color: -internal-root-color;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
