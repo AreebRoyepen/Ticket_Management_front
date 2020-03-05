@@ -5,6 +5,7 @@ import createBrowserHistory from "history/createBrowserHistory";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import CreateEvent from "./components/CreateEvent";
+import CreatePerson from "./components/CreatePerson"
 import LookupScreen from "./components/LookupScreen";
 import Payments from "./components/Payments";
 import ReturnTickets from "./components/ReturnTickets";
@@ -12,6 +13,8 @@ import TicketAllocation from "./components/TicketAllocation";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Menu from "./components/Menu";
+import Person from "./components/People";
+import Events from "./components/Events";
 
 const history = createBrowserHistory();
 
