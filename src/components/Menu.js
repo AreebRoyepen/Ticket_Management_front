@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/menu.css";
-const Menu = () => {
+const Menu = ({children}) => {
   return (
     <div>
       <input type="checkbox" id="menu-toggle" />
@@ -30,6 +30,7 @@ const Menu = () => {
           <Link to="/TicketAllocation">Ticket Allocation</Link>
         </li>
       </ul>
+      {children}
     </div>
   );
 };

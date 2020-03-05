@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 import "../styles/login.css";
 
 class Login extends Component {
@@ -6,8 +7,15 @@ class Login extends Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      isValid: false
     };
+  }
+
+  renderRedirect = () => {
+    if (this.state.isValid) {
+      return <Redirect to='/Events' />
+    }
   }
 
   handleClick(event) {
@@ -15,6 +23,7 @@ class Login extends Component {
 
     if (this.state.username === "admin" && this.state.password === "admin") {
       console.log("Welcome admin");
+      this.setState({isValid:true})
     } else if (this.state.username === "cood" && this.state.password === "cood") {
       console.log("Welcome coordinator");
     } else {
@@ -24,7 +33,9 @@ class Login extends Component {
 
   render() {
     return (
+      
       <div className="App">
+        {this.renderRedirect()}
         <aside className="profile-card">
           <div className="profile-bio">
             <div>

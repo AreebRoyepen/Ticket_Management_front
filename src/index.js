@@ -10,9 +10,8 @@ import LookupScreen from "./components/LookupScreen";
 import Payments from "./components/Payments";
 import ReturnTickets from "./components/ReturnTickets";
 import TicketAllocation from "./components/TicketAllocation";
-import Landing from "./components/Landing";
-import Login from "./components/Login";
 import Menu from "./components/Menu";
+import Login from "./components/Login";
 import Person from "./components/People";
 import Events from "./components/Events";
 
@@ -25,49 +24,57 @@ ReactDOM.render(
       <Route
         path="/CreateEvent"
         render={() => (
-          <Landing>
+          <Menu>
             <CreateEvent />
-          </Landing>
+          </Menu>
         )}
       />
       <Route
         path="/LookupScreen"
         render={() => (
-          <Landing>
+          <Menu>
             <LookupScreen />
-          </Landing>
+          </Menu>
         )}
       />
       <Route
         path="/Payments"
         render={() => (
-          <Landing>
+          <Menu>
             <Payments />
-          </Landing>
+          </Menu>
         )}
       />
       <Route
         path="/ReturnTickets"
         render={() => (
-          <Landing>
+          <Menu>
             <ReturnTickets />
-          </Landing>
+          </Menu>
         )}
       />
       <Route
         path="/TicketAllocation"
         render={() => (
-          <Landing>
+          <Menu>
             <TicketAllocation />
-          </Landing>
+          </Menu>
         )}
       />
       <Route
         path="/Menu"
         render={() => (
-          <Landing>
+          <Menu>
             <Menu />
-          </Landing>
+          </Menu>
+        )}
+      />
+      <Route
+        path="/Events"
+        render={() => (
+          <Menu>
+            <Events />
+          </Menu>
         )}
       />
     </Switch>
