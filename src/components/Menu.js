@@ -1,38 +1,87 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/menu.css";
-const Menu = ({children}) => {
-  return (
-    <div>
-      <input type="checkbox" id="menu-toggle" />
-      <label id="trigger" for="menu-toggle" />
-      <label id="burger" for="menu-toggle" />
-      <ul id="menu">
-        <li>
-          <h4 id="CRUD">CREATE / UPDATE</h4>
-        </li>
-        <li>
-          <Link to="/CreateEvent">Events</Link>
-        </li>
-        <li>
-          <Link to="/LookupScreen">Lookup</Link>
-        </li>
-        <li>
-          <Link to="/Payment">Payments</Link>
-        </li>
-        <li>
-          <Link to="/ReturnTickets">Return Tickets</Link>
-        </li>
-        <li>
-          <h4>LOOKUP</h4>
-        </li>
-        <li>
-          <Link to="/TicketAllocation">Ticket Allocation</Link>
-        </li>
-      </ul>
-      {children}
+import { makeStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import DehazeIcon from '@material-ui/icons/Dehaze';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import ListItem from '@material-ui/core/ListItem';
+import "../styles/menu.css";;
+
+const useStyles = makeStyles(theme =>({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
+export default function Menu({children}) {
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (side, open) => event => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setState({ ...state, [side]: open });
+  };
+
+  const sideList = side => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <List>
+        <ListItem> <Link className="menuText" to="/CreateEvent">Events</Link></ListItem>
+        <ListItem>  <Link className="menuText" to="/LookupScreen">Lookup</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/Payment">Payments</Link></ListItem>
+      </List>
+      <Divider />
+      <List>
+      <ListItem> <Link className="menuText" to="/#">a</Link></ListItem>
+        <ListItem>  <Link className="menuText" to="/#">b</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/#">c</Link></ListItem> 
+      </List>
     </div>
   );
-};
-
-export default Menu;
+  return (
+    <div className={classes.root}>
+      <AppBar id= "appBarColor" position="static">
+        <Toolbar>
+        <Button onClick={toggleDrawer('left', true)}><DehazeIcon id ="menuIcon"/></Button>
+      <Drawer open={state.left} onClose={toggleDrawer('left', false)} children={sideList('left')}>
+      </Drawer>
+         <center><Typography variant="h6" className={classes.title}>
+          Ticket Management
+          </Typography></center>
+          
+          <Button color="inherit">Admin</Button>
+        </Toolbar>
+      </AppBar>
+      {children}q
+    </div>
+  );
+}

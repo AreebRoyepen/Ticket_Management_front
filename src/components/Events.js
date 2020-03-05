@@ -34,7 +34,7 @@ export default function Events(){
     return (
         
         <div>
-            <Route exact path="/" render={() => <Menu />} />
+            {/* <Route exact path="/" render={() => <Menu />} /> */}
             <button id="CreateEvent" class="button">CreateEvent</button>
            <div>
             {data.reverse().map( x =>(

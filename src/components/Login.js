@@ -32,8 +32,8 @@ class Login extends Component {
   }
 
   render() {
+    
     return (
-      
       <div className="App">
         {this.renderRedirect()}
         <aside className="profile-card">
