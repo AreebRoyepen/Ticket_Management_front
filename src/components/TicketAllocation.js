@@ -83,6 +83,7 @@ export default function TicketAllocation() {
       console.log(person)
       console.log(ticketNumberF)
       console.log(ticketNumberT)
+      
     }
 
     return (

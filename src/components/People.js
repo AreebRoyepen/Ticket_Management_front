@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../styles/eventCard.css";
 import Api from "../api/Api";
 
 export default function People(){
@@ -13,13 +14,31 @@ export default function People(){
 
     return (
         <div>
-
+            <button id="CreateEvent" handle class="button">Add Person</button>
             {data.map( x =>(
                 <div>
                     
-                    <h1>{x.name + " " + x.surname} </h1>
-                    <h2>number: {x.number}</h2>
-                    <h2>email: {x.email}</h2>
+                    <div>
+                    
+                    <div className="container"> 
+                    <div className="card">
+                        <div class="card-body">
+                            <div className="card-top">
+                                <span className="card-lable">Person</span>
+                            </div>
+                            <span className="card-header">{x.name + " " + x.surname}</span>
+                            <div className="card-sub-botton">
+                            <span className="card-sub-text card-lable">Number: {x.number}</span>
+                            <span className="card-sub-text card-lable u-float-right"> Email: {x.email} </span>
+                            </div>
+                            <div className="card-sub-botton card-sub-show">
+                                <button  className="button card-sub-text card-link u-float-right">Delete</button>
+                                <button  className="button card-sub-text card-link u-float-right">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             
                 </div>
             ))}

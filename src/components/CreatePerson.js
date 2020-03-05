@@ -65,7 +65,7 @@ export default function CreatePerson() {
         onChange={ e => setSurname(e.target.value)}
       />
       <input
-        type="text"
+        type="number"
         className="sign-up-input"
         placeholder="Number"
         onChange={ e => setNumber(e.target.value)}
