@@ -57,7 +57,7 @@ export default function Menu({children}) {
       <List>
         <ListItem> <Link className="menuText" to="/CreateEvent">Events</Link></ListItem>
         <ListItem>  <Link className="menuText" to="/LookupScreen">Lookup</Link></ListItem>
-        <ListItem> <Link className="menuText" to="/Payment">Payments</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/Payments">Payments</Link></ListItem>
       </List>
       <Divider />
       <List>
@@ -81,7 +81,7 @@ export default function Menu({children}) {
           <Button color="inherit">Admin</Button>
         </Toolbar>
       </AppBar>
-      {children}q
+      {children}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { useLocation, useHistory } from "react-router-dom";
 
 import Api from "../api/Api";
 import "../styles/login.css";
@@ -9,6 +10,8 @@ import "../styles/login.css";
 
 export default function ReturnTickets() {
 
+    let location = useLocation();
+    let history = useHistory();
     const [data, setData] = useState([]);
     
     const [open, setOpen] = React.useState(false);
@@ -20,7 +23,6 @@ export default function ReturnTickets() {
 
     const [ticketNumber, setTicketNumber] = useState(0);
     const [person, setPerson] = useState(null);
-    const [name, setName] = useState("");
 
     const [eventID, setEventID] = useState(0);
 
@@ -84,6 +86,13 @@ export default function ReturnTickets() {
 
     }, [isSending, ticketNumber, eventID, person]); // update the callback if the state changes
 
+    const bob = () =>{
+
+      console.log(ticketNumber)
+      console.log(location.state.id)
+      history.goBack();
+
+    }
     
     return (
 
@@ -134,7 +143,7 @@ export default function ReturnTickets() {
         
       />
 
-      <button className = "button" type="button" disabled={isSending} onClick={returnTicket}> Return Ticket</button>
+      <button className = "button" type="button" disabled={isSending} onClick={bob}> Return Ticket</button>
   
       </div>
       </aside>
