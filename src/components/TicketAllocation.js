@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { useLocation, useHistory } from "react-router-dom";
 
 import Api from "../api/Api";
 import "../styles/login.css";
@@ -9,6 +10,8 @@ import "../styles/login.css";
 export default function TicketAllocation() {
 
     const [data, setData] = useState([]);    
+    let location = useLocation();
+    let history = useHistory();
 
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
@@ -80,15 +83,18 @@ export default function TicketAllocation() {
     }, [isSending, ticketNumberF, ticketNumberT, eventID, person]); // update the callback if the state changes
 
     const bob = () => {
-      console.log(person)
+      
       console.log(ticketNumberF)
       console.log(ticketNumberT)
+      console.log(location.state.id)
+      history.goBack();
       
     }
 
     return (
 
       <div className="App">
+        {      console.log(location)  }
         <aside className="profile-card">
           <div className="profile-bio">
 
