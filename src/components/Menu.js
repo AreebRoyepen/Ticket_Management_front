@@ -74,9 +74,9 @@ export default function Menu({children}) {
         <Button onClick={toggleDrawer('left', true)}><DehazeIcon id ="menuIcon"/></Button>
       <Drawer open={state.left} onClose={toggleDrawer('left', false)} children={sideList('left')}>
       </Drawer>
-         <center><Typography variant="h6" className={classes.title}>
+         <Typography variant="h6" align = "center" className={classes.title}>
           Ticket Management
-          </Typography></center>
+          </Typography>
           
           <Button color="inherit">Admin</Button>
         </Toolbar>

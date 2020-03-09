@@ -25,11 +25,26 @@ export default function ReturnTickets() {
     const [person, setPerson] = useState(null);
 
     const [eventID, setEventID] = useState(0);
+    const[loadTickets, setLoadTickets] = useState(false)
+    const [tickets, setTickets] = useState(0)
+    
+    useEffect(()=>{
 
-    useEffect(() => {
-     return isMounted.current = false
-    },[]);
+      let x = location.state.id
 
+      if (loadTickets) return
+
+      setLoadTickets(true)
+
+      Api.getRequest("unallocated/" + x).
+        then( response =>  response.json()).
+        then( data =>{setTickets(data.message); console.log(data.message)})
+
+        setLoadTickets(false)
+
+    },[loadTickets])
+
+ 
 
     useEffect(() => {
       let active = true;
@@ -44,7 +59,7 @@ export default function ReturnTickets() {
       const persons = await response.json();
 
         if (active) {
-          setOptions(persons);;
+          setOptions(persons);
         }
       })();
   
@@ -88,8 +103,8 @@ export default function ReturnTickets() {
 
     const bob = () =>{
 
-      console.log(ticketNumber)
-      console.log(location.state.id)
+      // console.log(ticketNumber)
+      // console.log(location.state.id)
       history.goBack();
 
     }
@@ -100,7 +115,8 @@ export default function ReturnTickets() {
         <aside className="profile-card">
           <div className="profile-bio">
 
-      
+          {location.state.name}<br/>
+          amount of tickets left: {tickets}
           <Autocomplete
           id="asynchronous-demo"
           style={{ width: 250 }}
