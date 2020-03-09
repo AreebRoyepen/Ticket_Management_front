@@ -12,7 +12,6 @@ import Payments from "./components/Payments";
 import People from "./components/People";
 import ReturnTickets from "./components/ReturnTickets";
 import TicketAllocation from "./components/TicketAllocation";
-import Tickets from "./components/Tickets"; 
 import Menu from "./components/Menu";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
@@ -38,8 +37,6 @@ ReactDOM.render(
       <Route path="/ReturnTickets" render={() => (<Menu> <ReturnTickets /></Menu> )} />
 
       <Route path="/TicketAllocation" render={() => ( <Menu> <TicketAllocation /> </Menu> )}/>
-
-      <Route path="/Tickets" render={() => (<Menu> <Tickets /></Menu> )} />
       
     </Switch>
   </Router>,

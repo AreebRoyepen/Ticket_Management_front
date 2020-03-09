@@ -9,7 +9,7 @@ import "../styles/login.css";
 
 export default function TicketAllocation() {
 
-    const [data, setData] = useState([]);    
+    const [ setData] = useState([]);    
     let location = useLocation();
     let history = useHistory();
 
@@ -23,7 +23,7 @@ export default function TicketAllocation() {
     const [ticketNumberT, setTicketNumberT] = useState(0);
 
     const [person, setPerson] = useState(null);
-    const [eventID, setEventID] = useState(0);
+    const [eventID] = useState(0);
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
 

@@ -46,10 +46,12 @@ class Login extends Component {
                 height="100"
               />
             </div>
+            <form>
             <input
               type="text"
               className="sign-up-input"
               placeholder="Enter in your username"
+              autoComplete="username"
               autoFocus
               onChange={(event, newValue) =>
                 this.setState({ username: event.target.value })
@@ -59,10 +61,13 @@ class Login extends Component {
               type="password"
               className="sign-up-input"
               placeholder="Enter in your password"
+              autoComplete="current-password"
               onChange={(event, newValue) =>
                 this.setState({ password: event.target.value })
               }
             />
+            </form>
+           
             <div>
               <button
                 className="button"
