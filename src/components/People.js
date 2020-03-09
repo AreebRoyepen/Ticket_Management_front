@@ -16,9 +16,9 @@ export default function People(){
 
     return (
         <div>
-            <button onClick = {() => {  history.push("/CreatePerson",{id:null, edit:false})  }} id="CreateEvent" handle class="button">Add Person</button>
+            <button onClick = {() => {  history.push("/CreatePerson",{id:null, edit:false})  }} id="CreateEvent">Add Person</button>
             {data.map( x =>(
-                <div>
+                <div key = {x.id}>
                     
                     <div>
                     

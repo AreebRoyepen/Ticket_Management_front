@@ -24,6 +24,7 @@ ReactDOM.render(
       <Route exact path="/" render={() => <Login />} />
 
       <Route path="/CreateEvent" render={() => (<Menu> <CreateEvent /></Menu> )} />
+      
       <Route path="/Dashboard" render={() => (<Menu> <Dashboard /></Menu> )} />
 
       <Route path="/CreatePerson" render={() => ( <Menu> <CreatePerson /> </Menu> )}/>

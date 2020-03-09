@@ -30,7 +30,7 @@ export default function ReturnTickets() {
     
     useEffect(()=>{
 
-      let x = location.state.id
+      let x = location.state.event.id
 
       if (loadTickets) return
 
@@ -115,7 +115,7 @@ export default function ReturnTickets() {
         <aside className="profile-card">
           <div className="profile-bio">
 
-          {location.state.name}<br/>
+          {location.state.event.name}<br/>
           amount of tickets left: {tickets}
           <Autocomplete
           id="asynchronous-demo"

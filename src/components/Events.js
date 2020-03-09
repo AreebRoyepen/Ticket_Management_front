@@ -24,22 +24,27 @@ export default function Events(){
             {data.reverse().map( x =>(
 
 
-                <div>
+                <div key = {x.id}>
                     
                     <div className="container"> 
                     <div className="card">
                         <div class="card-body">
-                            <div className="card-top">
-                                <span className="card-lable">Event Name</span>
+                            <div className="card-header">
+                                <span className="card-lable">{x.name}</span>
                             </div>
-                            <span className="card-header">{x.name}</span>
+                            <span className="card-header">Tickets {x.from} - {x.to}</span>
                             <div className="card-sub-botton">
-                            <span className="card-sub-text card-lable">Tickets {x.from} - {x.to}, Status: {x.active.toString()}</span>
-                            <span className="card-sub-text card-lable u-float-right">Price :  R {x.ticketPrice}</span>
+                                {x.active
+                                    ?
+                                    <span className="card-sub-text card-lable">Status: Active</span>
+                                    :
+                                    <span className="card-sub-text card-lable">Status: Closed</span>
+                                }
+                            <span className="card-sub-text card-lable u-float-right">Ticket Price :  R {x.ticketPrice}</span>
                             </div>
                             <div className="card-sub-botton card-sub-show">
-                                <button  onClick = {() => { console.log(x.id);  history.push("/TicketAllocation",{id:x.id})  }} className="buttonCards card-sub-text card-link u-float-right">Allocate Tickets</button>
-                                <button  onClick = {()=>{console.log(x.id);  history.push("/ReturnTickets",{id:x.id})}} className="buttonCards card-sub-text card-link u-float-right">Return Tickets</button>
+                                <button  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} className="buttonCards card-sub-text card-link u-float-right">Allocate Tickets</button>
+                                <button  onClick = {()=>{history.push("/ReturnTickets",{event:x})}} className="buttonCards card-sub-text card-link u-float-right">Return Tickets</button>
                             </div>
                         </div>
                     </div>

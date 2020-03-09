@@ -30,14 +30,19 @@ export default function TicketAllocation() {
 
     useEffect(()=>{
 
-      let x = location.state.id
+      let x = location.state.event.id
 
       if (loadTickets) return
 
       setLoadTickets(true)
 
-      Api.getRequest("unallocated/" + x).then( response =>  response.json()).then( data =>{setTickets(data.message); console.log(data.message)})
-      setLoadTickets(false)},[loadTickets])
+      Api.getRequest("unallocated/" + x).
+        then( response =>  response.json()).
+        then( data =>{setTickets(data.message); console.log(data.message)})
+
+        setLoadTickets(false)
+
+    },[loadTickets])
 
     useEffect(() => {
       let active = true;
@@ -111,7 +116,7 @@ export default function TicketAllocation() {
         <aside className="profile-card">
           <div className="profile-bio">
 
-          {location.state.name}<br/>
+          {location.state.event.name}<br/>
           amount of tickets left: {tickets}
 
 

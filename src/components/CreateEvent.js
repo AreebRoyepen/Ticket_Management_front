@@ -19,9 +19,6 @@ export default function CreateEvent() {
     const [from, setFrom] = useState(0);
     const [price, setPrice] = useState(0);
 
-    useEffect(() => {
-     return isMounted.current = false
-    },[]);
 
     const sendRequest = useCallback(async () => {
       // don't send again while we are sending
