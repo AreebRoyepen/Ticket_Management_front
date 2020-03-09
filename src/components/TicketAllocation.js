@@ -36,13 +36,8 @@ export default function TicketAllocation() {
 
       setLoadTickets(true)
 
-      Api.getRequest("unallocated/" + x).
-        then( response =>  response.json()).
-        then( data =>{setTickets(data.message); console.log(data.message)})
-
-        setLoadTickets(false)
-
-    },[loadTickets])
+      Api.getRequest("unallocated/" + x).then( response =>  response.json()).then( data =>{setTickets(data.message); console.log(data.message)})
+      setLoadTickets(false)},[loadTickets])
 
     useEffect(() => {
       let active = true;

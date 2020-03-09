@@ -19,7 +19,7 @@ export default function Events(){
         
         <div>
 
-            <button onClick = {() => {  history.push("/CreateEvent") }} id="CreateEvent" class="button">CreateEvent</button>
+<button onClick = {() => {  history.push("/CreateEvent") }} id="CreateEvent">CreateEvent</button>
            <div>
             {data.reverse().map( x =>(
 
@@ -38,8 +38,8 @@ export default function Events(){
                             <span className="card-sub-text card-lable u-float-right">Price :  R {x.ticketPrice}</span>
                             </div>
                             <div className="card-sub-botton card-sub-show">
-                                <button  onClick = {() => { console.log(x.id);  history.push("/TicketAllocation",{id:x.id})  }} className="button card-sub-text card-link u-float-right">Allocate Tickets</button>
-                                <button  onClick = {()=>{console.log(x.id);  history.push("/ReturnTickets",{id:x.id})}} className="button card-sub-text card-link u-float-right">Return Tickets</button>
+                                <button  onClick = {() => { console.log(x.id);  history.push("/TicketAllocation",{id:x.id})  }} className="buttonCards card-sub-text card-link u-float-right">Allocate Tickets</button>
+                                <button  onClick = {()=>{console.log(x.id);  history.push("/ReturnTickets",{id:x.id})}} className="buttonCards card-sub-text card-link u-float-right">Return Tickets</button>
                             </div>
                         </div>
                     </div>
