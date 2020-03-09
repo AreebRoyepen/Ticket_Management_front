@@ -61,7 +61,7 @@ export default function Menu({children}) {
       </List>
       <Divider />
       <List>
-      <ListItem> <Link className="menuText" to="/#">a</Link></ListItem>
+      <ListItem> <Link className="menuText" to="/Dashboard">Dashboard</Link></ListItem>
         <ListItem>  <Link className="menuText" to="/#">b</Link></ListItem>
         <ListItem> <Link className="menuText" to="/#">c</Link></ListItem> 
       </List>

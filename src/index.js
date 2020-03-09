@@ -16,7 +16,7 @@ import TicketAllocation from "./components/TicketAllocation";
 import Tickets from "./components/Tickets"; 
 import Menu from "./components/Menu";
 import Login from "./components/Login";
-
+import Dashboard from "./components/Dashboard";
 const history = createBrowserHistory();
 
 ReactDOM.render(
@@ -26,6 +26,7 @@ ReactDOM.render(
       <Route exact path="/" render={() => <Login />} />
 
       <Route path="/CreateEvent" render={() => (<Menu> <CreateEvent /></Menu> )} />
+      <Route path="/Dashboard" render={() => (<Menu> <Dashboard /></Menu> )} />
 
       <Route path="/CreatePerson" render={() => ( <Menu> <CreatePerson /> </Menu> )}/>
 
