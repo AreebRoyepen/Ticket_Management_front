@@ -83,7 +83,7 @@ export default function Menu({children}) {
   );
   return (
     <div className={classes.root}>
-      <AppBar id= "appBarColor" position="static">
+      <AppBar id= "appBarColor" position="fixed">
         <Toolbar>
         <Button onClick={toggleDrawer('left', true)}><DehazeIcon id ="menuIcon"/></Button>
       <Drawer open={state.left} onClose={toggleDrawer('left', false)} children={sideList('left')}>
