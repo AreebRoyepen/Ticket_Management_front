@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
 import Api from "../api/Api";
@@ -7,7 +7,7 @@ import "../styles/login.css";
 
 export default function CreateEvent() {
 
-    const [data, setData] = useState([]);
+    const [setData] = useState([]);
     
     let history = useHistory();
     
@@ -46,7 +46,7 @@ export default function CreateEvent() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, to, from,price, name]); // update the callback if the state changes
+    }, [isSending, to, from,price, name, setData]); // update the callback if the state changes
 
     const bob = () => {
 

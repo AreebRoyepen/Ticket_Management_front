@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/dashboard.css";
 import { Doughnut } from 'react-chartjs-2';
+import Api from "../api/Api";
 
 
 
@@ -24,9 +25,21 @@ const data = {
 
 export default function Dashboard(){
 
+  const [tickets, setTickets] = useState()
+  const [allocated, setAllocated] = useState()
+
+  useEffect( () =>{
+
+    Api.postRequest("tickets",{})
+    .then(data => data.json())
+    .then(data => setTickets(data))
+
+  },[setTickets])
+
     return (
         
         <div>
+          {console.log(tickets)}
             <main>
   <div>
     <section>

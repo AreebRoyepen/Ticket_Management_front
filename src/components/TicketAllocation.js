@@ -36,13 +36,13 @@ export default function TicketAllocation() {
 
       setLoadTickets(true)
 
-      Api.getRequest("unallocated/" + x).
-        then( response =>  response.json()).
-        then( data =>{setTickets(data.message); console.log(data.message)})
+      Api.getRequest("unallocated/" + x)
+      .then( response =>  response.json())
+      .then( data =>{setTickets(data.message); console.log(data.message)})
 
         setLoadTickets(false)
 
-    },[loadTickets])
+    },[loadTickets, location])
 
     useEffect(() => {
       let active = true;
@@ -99,7 +99,7 @@ export default function TicketAllocation() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, eventID, person]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, eventID, person, setData]); // update the callback if the state changes
 
     const bob = () => {
       

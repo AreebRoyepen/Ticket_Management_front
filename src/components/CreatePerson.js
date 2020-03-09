@@ -6,18 +6,11 @@ import "../styles/login.css";
 
 export default function CreatePerson() {
 
-    const [data, setData] = useState();
+    const [setData] = useState();
     let history = useHistory();
     let location = useLocation();
 
     console.log(location)
-
-    const [id, setId] = useState(0);
-    const [edit, setEdit] = useState(false);
-    const isLoad = useRef(false);
-    
-    
-
     
     const [isSending, setIsSending] = useState(false);
     const isMounted = useRef(true)
@@ -36,7 +29,7 @@ export default function CreatePerson() {
       
       
 
-     });
+     },[setName,location]);
 
     const sendRequest = useCallback(async () => {
       // don't send again while we are sending
@@ -59,7 +52,7 @@ export default function CreatePerson() {
 
         Api.putRequest("updatePerson/"+location.state.x.id,x)
         .then(response => response.json())
-        .then(data => console.log(data));
+        .then(data => {setData(data) ; console.log(data);});
 
 
       }else{
@@ -67,8 +60,8 @@ export default function CreatePerson() {
       Api.postRequest("addPerson",x)
       .then(response => response.json())
       .then(data => {
-
-          console.log(data)
+          setData(data);
+          console.log(data);
       
       });
       }
@@ -79,7 +72,7 @@ export default function CreatePerson() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, name, surname,number, email, edit, id]); // update the callback if the state changes
+    }, [isSending, name, surname,number, email, location, setData]); // update the callback if the state changes
 
     const bob = () =>{
 

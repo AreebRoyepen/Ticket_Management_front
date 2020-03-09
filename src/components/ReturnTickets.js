@@ -12,7 +12,7 @@ export default function ReturnTickets() {
 
     let location = useLocation();
     let history = useHistory();
-    const [data, setData] = useState([]);
+    const [setData] = useState([]);
     
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
@@ -24,7 +24,7 @@ export default function ReturnTickets() {
     const [ticketNumber, setTicketNumber] = useState(0);
     const [person, setPerson] = useState(null);
 
-    const [eventID, setEventID] = useState(0);
+    const [eventID] = useState(0);
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
     
@@ -36,13 +36,13 @@ export default function ReturnTickets() {
 
       setLoadTickets(true)
 
-      Api.getRequest("unallocated/" + x).
-        then( response =>  response.json()).
-        then( data =>{setTickets(data.message); console.log(data.message)})
+      Api.getRequest("unallocated/" + x)
+      .then( response =>  response.json())
+      .then( data =>{setTickets(data.message); console.log(data.message)})
 
         setLoadTickets(false)
 
-    },[loadTickets])
+    },[loadTickets, location])
 
  
 
@@ -99,7 +99,7 @@ export default function ReturnTickets() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumber, eventID, person]); // update the callback if the state changes
+    }, [isSending, ticketNumber, eventID, person, setData]); // update the callback if the state changes
 
     const bob = () =>{
 
