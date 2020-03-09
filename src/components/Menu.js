@@ -55,9 +55,10 @@ export default function Menu({children}) {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem> <Link className="menuText" to="/CreateEvent">Events</Link></ListItem>
-        <ListItem>  <Link className="menuText" to="/LookupScreen">Lookup</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/Events">Events</Link></ListItem>
         <ListItem> <Link className="menuText" to="/Payments">Payments</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/People">People</Link></ListItem>
+
       </List>
       <Divider />
       <List>

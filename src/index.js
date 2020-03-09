@@ -8,7 +8,6 @@ import * as serviceWorker from "./serviceWorker";
 import CreateEvent from "./components/CreateEvent";
 import CreatePerson from "./components/CreatePerson"
 import Events from "./components/Events";
-import LookupScreen from "./components/LookupScreen";
 import Payments from "./components/Payments";
 import People from "./components/People";
 import ReturnTickets from "./components/ReturnTickets";
@@ -31,8 +30,6 @@ ReactDOM.render(
       <Route path="/CreatePerson" render={() => ( <Menu> <CreatePerson /> </Menu> )}/>
 
       <Route path="/Events" render={() => (<Menu> <Events /></Menu> )} />
-
-      <Route path="/LookupScreen" render={() => ( <Menu> <LookupScreen /> </Menu> )}/>
       
       <Route path="/Payments" render={() => (<Menu> <Payments /></Menu> )} />
 
