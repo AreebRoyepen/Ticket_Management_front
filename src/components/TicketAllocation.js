@@ -19,11 +19,30 @@ export default function TicketAllocation() {
     const [isSending, setIsSending] = useState(false)
     const isMounted = useRef(true)
 
-    const [ticketNumberF, setTicketNumberF] = useState(null);
-    const [ticketNumberT, setTicketNumberT] = useState(null);
+    const [ticketNumberF, setTicketNumberF] = useState(0);
+    const [ticketNumberT, setTicketNumberT] = useState(0);
 
     const [person, setPerson] = useState(null);
     const [eventID, setEventID] = useState(0);
+    const[loadTickets, setLoadTickets] = useState(false)
+    const [tickets, setTickets] = useState(0)
+
+
+    useEffect(()=>{
+
+      let x = location.state.id
+
+      if (loadTickets) return
+
+      setLoadTickets(true)
+
+      Api.getRequest("unallocated/" + x).
+        then( response =>  response.json()).
+        then( data =>{setTickets(data.message); console.log(data.message)})
+
+        setLoadTickets(false)
+
+    },[loadTickets])
 
     useEffect(() => {
       let active = true;
@@ -84,9 +103,9 @@ export default function TicketAllocation() {
 
     const bob = () => {
       
-      console.log(ticketNumberF)
-      console.log(ticketNumberT)
-      console.log(location.state.id)
+      // console.log(ticketNumberF)
+      // console.log(ticketNumberT)
+      // console.log(location.state.id)
       history.goBack();
       
     }
@@ -94,9 +113,11 @@ export default function TicketAllocation() {
     return (
 
       <div className="App">
-        {      console.log(location)  }
         <aside className="profile-card">
           <div className="profile-bio">
+
+          {location.state.name}<br/>
+          amount of tickets left: {tickets}
 
 
         <Autocomplete

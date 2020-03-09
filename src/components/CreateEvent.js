@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useLocation, useHistory } from "react-router-dom";
+
 import Api from "../api/Api";
 import "../styles/login.css";
 
@@ -6,6 +8,8 @@ import "../styles/login.css";
 export default function CreateEvent() {
 
     const [data, setData] = useState([]);
+    
+    let history = useHistory();
     
     const [isSending, setIsSending] = useState(false)
     const isMounted = useRef(true)
@@ -47,6 +51,11 @@ export default function CreateEvent() {
 
     }, [isSending, to, from,price, name]); // update the callback if the state changes
 
+    const bob = () => {
+
+      history.goBack()
+    }
+
     return (
 
       <div className="App">
@@ -77,7 +86,7 @@ export default function CreateEvent() {
         placeholder="ticket price"
         onChange={ e => setPrice(e.target.value)}
       />
-          <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
+          <button className = "button" type="button" disabled={isSending} onClick={bob}> Create Event</button>
   
       </div>
       </aside>
