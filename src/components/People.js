@@ -35,7 +35,7 @@ export default function People(){
                             </div>
                             <div className="card-sub-botton card-sub-show">
                                 <button className="button card-sub-text card-link u-float-right">Delete</button>
-                                <button onClick = {() => { console.log(x.id);  history.push("/CreatePerson",{id:x.id, edit:true})  }} className="button card-sub-text card-link u-float-right">Edit</button>
+                                <button onClick = {() => { console.log(x.id);  history.push("/CreatePerson",{x:x, edit:true})  }} className="button card-sub-text card-link u-float-right">Edit</button>
                             </div>
                         </div>
                     </div>

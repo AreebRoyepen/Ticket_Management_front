@@ -19,7 +19,7 @@ export default function Events(){
         
         <div>
 
-            <button id="CreateEvent" class="button">CreateEvent</button>
+            <button onClick = {() => {  history.push("/CreateEvent") }} id="CreateEvent" class="button">CreateEvent</button>
            <div>
             {data.reverse().map( x =>(
 
