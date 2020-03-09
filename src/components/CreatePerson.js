@@ -28,13 +28,6 @@ export default function CreatePerson() {
     const [email, setEmail] = useState("");
 
     
-
-
-    useEffect(() => {      
-     return isMounted.current = false
-    });
-
-
     useEffect(() => {      
 
       if(location.state.edit){
@@ -89,6 +82,8 @@ export default function CreatePerson() {
     }, [isSending, name, surname,number, email, edit, id]); // update the callback if the state changes
 
     const bob = () =>{
+
+      history.goBack()
 
 
     }
