@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link , useHistory} from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import DehazeIcon from '@material-ui/icons/Dehaze';
@@ -43,12 +43,14 @@ export default function Menu({children}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
+  let history = useHistory();
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
+
     setAnchorEl(null);
   };
 
@@ -83,7 +85,7 @@ export default function Menu({children}) {
   );
   return (
     <div className={classes.root}>
-      <AppBar id= "appBarColor" position="static">
+      <AppBar id= "appBarColor" position="fixed">
         <Toolbar>
         <Button onClick={toggleDrawer('left', true)}><DehazeIcon id ="menuIcon"/></Button>
       <Drawer open={state.left} onClose={toggleDrawer('left', false)} children={sideList('left')}>
@@ -92,7 +94,7 @@ export default function Menu({children}) {
           Ticket Management
           </Typography>
           
-          <Button onClick={handleMenu} color="inherit">Admin</Button>
+          <Button onClick={handleMenu} color="inherit">Hi, Admin</Button>
 
           <MenuUI
                 id="menu-appbar"
@@ -109,8 +111,7 @@ export default function Menu({children}) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick = {() => { history.push("/") }}> Log Out</MenuItem>
               </MenuUI>
 
         </Toolbar>
