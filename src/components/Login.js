@@ -14,7 +14,7 @@ class Login extends Component {
 
   renderRedirect = () => {
     if (this.state.isValid) {
-      return <Redirect to='/Events' />
+      return <Redirect to='/Dashboard' />
     }
   }
 

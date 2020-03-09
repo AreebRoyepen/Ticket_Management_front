@@ -1,4 +1,4 @@
-const API_BASE_ADDRESS = 'http://192.168.0.105:8080';
+const API_BASE_ADDRESS = 'http://192.168.0.131:8080';
 
 export default class Api {
 

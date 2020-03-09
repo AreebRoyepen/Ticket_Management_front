@@ -19,7 +19,7 @@ export default function Events(){
         
         <div>
 
-            <button id="CreateEvent" class="button">CreateEvent</button>
+            <button id="CreateEvent" class="buttonCards">CreateEvent</button>
            <div>
             {data.reverse().map( x =>(
 

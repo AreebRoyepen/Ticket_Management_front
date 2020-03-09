@@ -61,7 +61,7 @@ export default function Menu({children}) {
       </List>
       <Divider />
       <List>
-      <ListItem> <Link className="menuText" to="/#">a</Link></ListItem>
+      <ListItem> <Link className="menuText" to="/Dashboard">Dashboard</Link></ListItem>
         <ListItem>  <Link className="menuText" to="/#">b</Link></ListItem>
         <ListItem> <Link className="menuText" to="/#">c</Link></ListItem> 
       </List>
@@ -74,9 +74,9 @@ export default function Menu({children}) {
         <Button onClick={toggleDrawer('left', true)}><DehazeIcon id ="menuIcon"/></Button>
       <Drawer open={state.left} onClose={toggleDrawer('left', false)} children={sideList('left')}>
       </Drawer>
-         <center><Typography variant="h6" className={classes.title}>
+         <Typography variant="h6" className={classes.title}>
           Ticket Management
-          </Typography></center>
+          </Typography>
           
           <Button color="inherit">Admin</Button>
         </Toolbar>

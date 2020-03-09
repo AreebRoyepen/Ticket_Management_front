@@ -229,7 +229,7 @@ html {
 }
 @media screen and (min-height: 480px)
 {
-.button {
+.buttonCards {
     color: white;
     width: 40%;
     border: 1px solid #ffffff;
@@ -246,7 +246,7 @@ html {
 }
 @media screen and (min-height: 480px)
 {
-button {
+  .buttonCards {
     background-color: #99cc33;
     margin: 0em;
     font: 100 5px Arial;
@@ -262,7 +262,7 @@ button {
     box-sizing: inherit;
 }
 user agent stylesheet
-button {
+.buttonCards {
     -webkit-appearance: button;
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
