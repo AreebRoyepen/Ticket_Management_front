@@ -361,7 +361,7 @@
     float: none;
     border-right: none;
   }
-  @media screen and (orientation: landscape)and (min-device-width: 500px){
+  @media screen and (orientation: landscape)and (max-device-width: 640px){
     .profile-card .profile-bio {
       overflow-x:visible;
       overflow-y: visible;
