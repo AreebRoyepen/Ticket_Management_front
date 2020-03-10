@@ -370,6 +370,7 @@
 
 @media screen and (min-height: 50px) {
   .profile-card header {
+    overflow: auto;
     width: auto;
     height: auto;
     padding: 30px 20px;
@@ -378,6 +379,7 @@
     border-right: none;
   }
   .profile-card .profile-bio {
+    overflow: auto;
     width: auto;
     height: auto;
     padding: 15px 20px 30px 20px;
@@ -385,6 +387,7 @@
     float: none;
   }
   .profile-social-links {
+    overflow: auto;
     width: 100%;
     display: block;
     float: none;
@@ -406,6 +409,7 @@
   }
 
   .sign-up {
+    overflow: auto;
     position: relative;
     margin: 20px auto;
     width: 280px;
@@ -415,6 +419,7 @@
   }
   
   .sign-up:before, .sign-up:after {
+    overflow: auto;
     content: '';
     position: absolute;
     bottom: 1px;
