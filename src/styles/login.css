@@ -347,7 +347,7 @@
   }
 }
 
-@media screen and (min-aspect-ratio: 4/3) {
+@media screen and (min-aspect-ratio: 1/8) {
   body {
     background-size: cover;
   }
@@ -368,7 +368,7 @@
   }
 }
 
-@media screen and (min-height: 480px) {
+@media screen and (min-height: 100px) {
   .profile-card header {
     width: auto;
     height: auto;

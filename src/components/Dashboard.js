@@ -33,11 +33,11 @@ export default function Dashboard(){
 
     Api.postRequest("tickets",{})
     .then(data => data.json())
-    .then(data => setAllocated(data))
+    .then(data => setAllocated(data))//sizeof
 
     Api.getRequest("unallocated")
     .then(data=> data.json())
-    .then(data => setUnallocated(data))
+    .then(data => setUnallocated(data))//message
 
   },[setTickets])
 
