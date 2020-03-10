@@ -3,7 +3,7 @@ import Api from "../api/Api";
 import { useHistory } from "react-router-dom";
 import "../styles/eventCard.css";
 
-export default function Events(){
+export default function Tickets(){
 
     const [data, setData] = useState([]);
     let history = useHistory();
@@ -14,18 +14,10 @@ export default function Events(){
         .then(data => {setData(data); console.log(data)});
     },[]);
 
-    const popup = () => { 
-
-        console.log("deleted apparently")
-
-    }
-
 
     return (
         
         <div>
-
-<button onClick = {() => {  history.push("/CreateEvent") }} id="CreateEvent">CreateEvent</button>
            <div>
             {data.reverse().map( x =>(
 
@@ -49,8 +41,9 @@ export default function Events(){
                             <span className="card-sub-text card-lable u-float-right">Ticket Price :  R {x.ticketPrice}</span>
                             </div>
                             <div className="card-sub-botton card-sub-show">
-                                <button  onClick = {() => {history.push("/CreateEvent",{event:x})  }} className="buttonCards card-sub-text card-link u-float-right">Edit</button>
-                                <button  onClick = {()=>{popup()}} className="buttonCards card-sub-text card-link u-float-right"> Delete</button>
+                                <button  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} className="buttonCards card-sub-text card-link u-float-right">Allocate Tickets</button>
+                                <button  onClick = {()=>{history.push("/ReturnTickets",{event:x})}} className="buttonCards card-sub-text card-link u-float-right">Return Tickets</button>
+                                <button  onClick = {()=>{history.push("/Payments",{event:x})}} className="buttonCards card-sub-text card-link u-float-right">Payments</button>
                             </div>
                         </div>
                     </div>
