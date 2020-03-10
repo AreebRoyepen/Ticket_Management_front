@@ -4,40 +4,45 @@ import { Doughnut } from 'react-chartjs-2';
 import Api from "../api/Api";
 
 
-
-const data = {
-	labels: [
-		'Paid',
-		'Unpaid'
-	],
-	datasets: [{
-		data: [300,100],
-		backgroundColor: [
-		'#99cc33',
-		'#9c9c9c'
-		],
-		hoverBackgroundColor: [
-		'#99cc33',
-		'#9c9c9c',
-		]
-	}]
-};
-
 export default function Dashboard(){
 
   const [tickets, setTickets] = useState()
   const [allocated, setAllocated] = useState()
   const [unallocated, setUnallocated] = useState()
+  const [paid, setPaid] = useState()
+  const [unpaid, setUnpaid] = useState()
+
+  const data = {
+    labels: [
+      'Allocated',
+      'Unallocated'
+    ],
+    datasets: [{
+      data: [allocated + 100,unallocated],
+      backgroundColor: [
+      '#99cc33',
+      '#9c9c9c'
+      ],
+      hoverBackgroundColor: [
+      '#99cc33',
+      '#9c9c9c',
+      ]
+    }]
+  };
 
   useEffect( () =>{
 
     Api.postRequest("tickets",{})
     .then(data => data.json())
-    .then(data => setAllocated(data))//sizeof
+    .then(data => setAllocated(data.length))//sizeof
 
     Api.getRequest("unallocated")
     .then(data=> data.json())
-    .then(data => setUnallocated(data))//message
+    .then(data => setUnallocated(data.message))//message
+
+    Api.postRequest("tickets",{})
+    .then(data => data.json())
+    .then(data => setAllocated(data.length))//sizeof
 
   },[setAllocated, setUnallocated])
 
@@ -56,30 +61,35 @@ export default function Dashboard(){
         </header>
         <hr/>
         <div>
-        <h3>Tickets</h3>
+    <h3></h3>
         
         <div className = " chart-wrapper">
+        Total Allocated Tickets - {(allocated / unallocated * 100).toFixed(2)}%
         <Doughnut data={data} options={{
+          cutoutPercentage: 80,
           style:{
              width:"100",
              height: "100",
+
              float:"left",
              display:"inline-block"},
             legend:{
-              display:true,
+              display:false,
               position:'right'
             }
           }}/>
           
         </div> 
             <div className = "chart-wrapper">
+              Total Paid Tickets - 
               < Doughnut data={data}options={{
+                cutoutPercentage: 80,
                 style:{width:"100",
                 height: "100",
                 float:"left",
                 display:"inline-block"},
             legend:{
-              display:true,
+              display:false,
               position:'right'
             }
           }}/>
