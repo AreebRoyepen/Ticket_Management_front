@@ -368,7 +368,7 @@
   }
 }
 
-@media screen and (min-height: 100px) {
+@media screen and (min-height: 50px) {
   .profile-card header {
     width: auto;
     height: auto;
