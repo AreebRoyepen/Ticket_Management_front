@@ -13,12 +13,12 @@ const data = {
 	datasets: [{
 		data: [300,100],
 		backgroundColor: [
-		'#FF6384',
-		'#36A2EB'
+		'#99cc33',
+		'#9c9c9c'
 		],
 		hoverBackgroundColor: [
-		'#FF6384',
-		'#36A2EB',
+		'#99cc33',
+		'#9c9c9c',
 		]
 	}]
 };
@@ -57,29 +57,33 @@ export default function Dashboard(){
         <hr/>
         <div>
         <h3>Tickets</h3>
+        
+        <div className = " chart-wrapper">
         <Doughnut data={data} options={{
-          width:"100",
-          height: "100",
+          style:{
+             width:"100",
+             height: "100",
+             float:"left",
+             display:"inline-block"},
             legend:{
               display:true,
               position:'right'
             }
           }}/>
-      
-          <div>
-            <div>
+          
+        </div> 
+            <div className = "chart-wrapper">
               < Doughnut data={data}options={{
-          width:"100",
-          height: "100",
+                style:{width:"100",
+                height: "100",
+                float:"left",
+                display:"inline-block"},
             legend:{
               display:true,
               position:'right'
             }
-          }}></ Doughnut>
+          }}/>
             </div>
-            <h3>Tickets</h3>
-            <h4>Paid vs Unpaid</h4>
-          </div>
         </div>
       </article>
     </section>
