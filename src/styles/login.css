@@ -102,23 +102,7 @@
   animation: moveIn 1s 3.1s ease forwards;
 }
 
-.profile-social-links {
-  width: 218px;
-  display: inline-block;
-  float: right;
-  margin: 0px;
-  padding: 15px 20px;
-  background: #FFFFFF;
-  margin-top: 50px;
-  text-align: center;
-  opacity: 0;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-animation: moveIn 1s 3.1s ease forwards;
-  animation: moveIn 1s 3.1s ease forwards;
-}
-
-.profile-social-links li {
+ li {
   list-style: none;
   margin: -5px 0px 0px 0px;
   padding: 0px;
@@ -126,8 +110,6 @@
   width: 25%;
   text-align: center;
 }
-
-
 
 @-webkit-keyframes init {
   0% {
@@ -347,7 +329,7 @@
   }
 }
 
-@media screen and (min-aspect-ratio: 1/8) {
+@media screen and (min-aspect-ratio: 1/8)  {
   body {
     background-size: cover;
   }
@@ -368,9 +350,10 @@
   }
 }
 
-@media screen and (min-height: 50px) {
+@media screen and (min-height: 50px)  {
   .profile-card header {
-    overflow-x: auto;
+    overflow-x: visible;
+    overflow-y: visible;
     width: auto;
     height: auto;
     padding: 30px 20px;
@@ -378,20 +361,29 @@
     float: none;
     border-right: none;
   }
-  .profile-card .profile-bio {
-    overflow-x: auto;
-    width: auto;
-    height: auto;
-    padding: 15px 20px 30px 20px;
-    display: block;
-    float: none;
+  @media screen and (orientation: landscape)and (min-device-width: 500px){
+    .profile-card .profile-bio {
+      overflow-x:visible;
+      overflow-y: visible;
+      width: auto;
+      height: auto;
+      padding: 80px 20px 30px 20px !important;
+      display: block;
+      float: none;
+    }
   }
-  .profile-social-links {
-    overflow: auto;
-    width: 100%;
-    display: block;
-    float: none;
+  @media screen {
+    .profile-card .profile-bio {
+      overflow-x: visible;
+      overflow-y: visible;
+      width: auto;
+      height: auto;
+      padding: 15px 20px 30px 20px;
+      display: block;
+      float: none;
+    }
   }
+ 
  
   @keyframes materia {
     0% {
@@ -409,7 +401,7 @@
   }
 
   .sign-up {
-    overflow-x: auto;
+    overflow-x: visible;
     position: relative;
     margin: 20px auto;
     width: 280px;
@@ -478,8 +470,7 @@
   }
   
   
-  
-  .lt-ie9 .sign-up-input {
+  .sign-up-input {
     line-height: 48px;
   }
   
@@ -534,6 +525,7 @@
   }
 
   img {
+    overflow-y: scroll;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -584,3 +576,6 @@ button {
   z-index: 2;
 } 
 }
+
+
+

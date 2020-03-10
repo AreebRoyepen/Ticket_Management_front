@@ -66,10 +66,12 @@ export default function Dashboard(){
              float:"left",
              display:"inline-block"},
             legend:{
-              display:true,
+              display:false,
               position:'right'
             }
           }}/>
+          <h2>blah</h2>
+          <h1>yeet</h1>
           
         </div> 
             <div className = "chart-wrapper">
