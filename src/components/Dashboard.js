@@ -78,6 +78,8 @@ export default function Dashboard(){
               position:'right'
             }
           }}/>
+          <h2>blah</h2>
+          <h1>yeet</h1>
           
         </div> 
             <div className = "chart-wrapper">
