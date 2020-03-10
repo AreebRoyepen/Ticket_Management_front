@@ -64,7 +64,6 @@ export default function Dashboard(){
     <h3></h3>
         
         <div className = " chart-wrapper">
-        Total Allocated Tickets - {(allocated / unallocated * 100).toFixed(2)}%
         <Doughnut data={data} options={{
           cutoutPercentage: 80,
           style:{
@@ -78,24 +77,65 @@ export default function Dashboard(){
               position:'right'
             }
           }}/>
-          <h2>blah</h2>
-          <h1>yeet</h1>
-          
+          <h3 className="h3Style">Allocated vs Unallocated</h3>
+          <h4 className="h4Style">{(allocated / unallocated * 100).toFixed(2)}%</h4>
         </div> 
-            <div className = "chart-wrapper">
-              Total Paid Tickets - 
-              < Doughnut data={data}options={{
-                cutoutPercentage: 80,
-                style:{width:"100",
-                height: "100",
-                float:"left",
-                display:"inline-block"},
+
+
+        <div className = " chart-wrapper">
+        <Doughnut data={data} options={{
+          cutoutPercentage: 80,
+          style:{
+             width:"100",
+             height: "100",
+
+             float:"left",
+             display:"inline-block"},
             legend:{
               display:false,
               position:'right'
             }
           }}/>
-            </div>
+          <h3 className="h3Style">Allocated vs Unallocated</h3>
+          <h4 className="h4Style">{(allocated / unallocated * 100).toFixed(2)}%</h4>
+        </div> 
+
+        <div className = " chart-wrapper">
+        <Doughnut data={data} options={{
+          cutoutPercentage: 80,
+          style:{
+             width:"100",
+             height: "100",
+
+             float:"left",
+             display:"inline-block"},
+            legend:{
+              display:false,
+              position:'right'
+            }
+          }}/>
+          <h3 className="h3Style">Allocated vs Unallocated</h3>
+          <h4 className="h4Style">{(allocated / unallocated * 100).toFixed(2)}%</h4>
+        </div> 
+
+        <div className = " chart-wrapper">
+        <Doughnut data={data} options={{
+          cutoutPercentage: 80,
+          style:{
+             width:"100",
+             height: "100",
+
+             float:"left",
+             display:"inline-block"},
+            legend:{
+              display:false,
+              position:'right'
+            }
+          }}/>
+          <h3 className="h3Style">Allocated vs Unallocated</h3>
+          <h4 className="h4Style">{(allocated / unallocated * 100).toFixed(2)}%</h4>
+        </div> 
+
         </div>
       </article>
     </section>
