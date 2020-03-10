@@ -1,6 +1,7 @@
 .chart-wrapper {
     padding: 2%;
     display: inline-block;
+    float: left;
   }
   
   .main.chart-wrapper {
