@@ -39,7 +39,7 @@ export default function Dashboard(){
     .then(data=> data.json())
     .then(data => setUnallocated(data))//message
 
-  },[setTickets])
+  },[setAllocated, setUnallocated])
 
     return (
         

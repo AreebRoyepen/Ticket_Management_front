@@ -71,7 +71,7 @@ export default function Menu({children}) {
     >
       <List>
         <ListItem> <Link className="menuText" to="/Events">Events</Link></ListItem>
-        <ListItem> <Link className="menuText" to="/Payments">Payments</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/Tickets">Tickets</Link></ListItem>
         <ListItem> <Link className="menuText" to="/People">People</Link></ListItem>
 
       </List>
