@@ -27,19 +27,25 @@ export default function Dashboard(){
 
   const [tickets, setTickets] = useState()
   const [allocated, setAllocated] = useState()
+  const [unallocated, setUnallocated] = useState()
 
   useEffect( () =>{
 
     Api.postRequest("tickets",{})
     .then(data => data.json())
-    .then(data => setTickets(data))
+    .then(data => setAllocated(data))
+
+    Api.getRequest("unallocated")
+    .then(data=> data.json())
+    .then(data => setUnallocated(data))
 
   },[setTickets])
 
     return (
         
         <div>
-          {console.log(tickets)}
+          {console.log(allocated)}
+          {console.log(unallocated)}
             <main>
   <div>
     <section>
