@@ -2,8 +2,22 @@
     padding: 2%;
     display: inline-block;
     float: left;
+    margin-bottom: 20%;
   }
-  
+  .h3Style{
+      color: gray;
+      text-align: center;
+  }
+  .h4Style
+  {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-top: -15px;
+    text-align: center;
+    margin-top: -150px;
+}
+
+
   .main.chart-wrapper {
     width: 96%;
     height: 400px;

@@ -122,7 +122,7 @@ export default function Dashboard(){
         <div>
     <h3></h3>
         
-    <div className = " chart-wrapper">       
+        <div className = " chart-wrapper">
         <Doughnut data={data4} options={{
           cutoutPercentage: 80,
           style:{
@@ -136,27 +136,30 @@ export default function Dashboard(){
               position:'right'
             }
           }}/>
-          <h3>Total Allocated</h3>
-          <h4>{(allocated / (unallocated+allocated) * 100).toFixed(2)}%</h4>          
+          <h3 className="h3Style">Total Allocated</h3>
+          <h4 className="h4Style">{(allocated / (unallocated+ allocated) * 100).toFixed(2)}%</h4>
         </div> 
 
-        <div className = "chart-wrapper">
-              < Doughnut data={data3}options={{
-                cutoutPercentage: 80,
-                style:{width:"100",
-                height: "100",
-                float:"left",
-                display:"inline-block"},
+
+        <div className = " chart-wrapper">
+        <Doughnut data={data3} options={{
+          cutoutPercentage: 80,
+          style:{
+             width:"100",
+             height: "100",
+
+             float:"left",
+             display:"inline-block"},
             legend:{
               display:false,
               position:'right'
             }
           }}/>
-          <h3>Total Paid</h3>
-          <h4>{(paid / (allocated+unallocated) * 100).toFixed(2)}%</h4>
-            </div>
+          <h3 className="h3Style">Total Paid</h3>
+          <h4 className="h4Style">{(paid / (unallocated+ allocated) * 100).toFixed(2)}%</h4>
+        </div> 
 
-        <div className = " chart-wrapper">       
+        <div className = " chart-wrapper">
         <Doughnut data={data} options={{
           cutoutPercentage: 80,
           style:{
@@ -170,28 +173,27 @@ export default function Dashboard(){
               position:'right'
             }
           }}/>
-          <h3>Total Allocated vs Total Unallocated Tickets</h3>
-          <h4>{(allocated / unallocated * 100).toFixed(2)}%</h4>          
+          <h3 className="h3Style">Allocated vs Unallocated</h3>
+          <h4 className="h4Style">{(allocated / unallocated * 100).toFixed(2)}%</h4>
         </div> 
 
-            <div className = "chart-wrapper">
-              < Doughnut data={data2}options={{
-                cutoutPercentage: 80,
-                style:{width:"100",
-                height: "100",
-                float:"left",
-                display:"inline-block"},
+        <div className = " chart-wrapper">
+        <Doughnut data={data2} options={{
+          cutoutPercentage: 80,
+          style:{
+             width:"100",
+             height: "100",
+
+             float:"left",
+             display:"inline-block"},
             legend:{
               display:false,
               position:'right'
             }
           }}/>
-          <h3>Total Paid vs Total Allocated Tickets</h3>
-          <h4>{(paid / allocated * 100).toFixed(2)}%</h4>
-            </div>
-
-
-
+          <h3 className="h3Style">Paid vs Allocated</h3>
+          <h4 className="h4Style">{(paid / allocated * 100).toFixed(2)}%</h4>
+        </div> 
 
         </div>
       </article>
