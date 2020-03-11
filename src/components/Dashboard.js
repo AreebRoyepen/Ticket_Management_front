@@ -6,11 +6,11 @@ import Api from "../api/Api";
 
 export default function Dashboard(){
 
-  const [tickets, setTickets] = useState()
-  const [allocated, setAllocated] = useState()
-  const [unallocated, setUnallocated] = useState()
-  const [paid, setPaid] = useState()
-  const [unpaid, setUnpaid] = useState()
+  const [tickets, setTickets] = useState(0)
+  const [allocated, setAllocated] = useState(0)
+  const [unallocated, setUnallocated] = useState(0)
+  const [paid, setPaid] = useState(0)
+  const [unpaid, setUnpaid] = useState(0)
 
   const data = {
     labels: [
@@ -108,8 +108,6 @@ export default function Dashboard(){
     return (
         
         <div>
-          {console.log(allocated)}
-          {console.log(unallocated)}
             <main>
   <div>
     <section>

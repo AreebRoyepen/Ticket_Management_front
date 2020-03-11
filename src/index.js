@@ -5,8 +5,8 @@ import {createBrowserHistory} from "history";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 
-import CreateEvent from "./components/CreateEvent";
-import CreatePerson from "./components/CreatePerson"
+import EventPage from "./components/EventPage";
+import PersonPage from "./components/PersonPage";
 import Events from "./components/Events";
 import Payments from "./components/Payments";
 import People from "./components/People";
@@ -25,11 +25,11 @@ ReactDOM.render(
 
       <Route exact path="/" render={() => <Login />} />
 
-      <Route path="/CreateEvent" render={() => (<Menu> <CreateEvent /></Menu> )} />
+      <Route path="/EventPage" render={() => (<Menu> <EventPage /></Menu> )} />
       
       <Route path="/Dashboard" render={() => (<Menu> <Dashboard /></Menu> )} />
 
-      <Route path="/CreatePerson" render={() => ( <Menu> <CreatePerson /> </Menu> )}/>
+      <Route path="/PersonPage" render={() => ( <Menu> <PersonPage /> </Menu> )}/>
 
       <Route path="/Events" render={() => (<Menu> <Events /></Menu> )} />
       

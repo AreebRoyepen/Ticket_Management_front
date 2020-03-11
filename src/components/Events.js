@@ -25,7 +25,7 @@ export default function Events(){
         
         <div>
 
-<button onClick = {() => {  history.push("/CreateEvent") }} id="CreateEvent">CreateEvent</button>
+<button onClick = {() => {  history.push("/EventPage", {id:null, edit:false}) }} id="CreateEvent">CreateEvent</button>
            <div>
             {data.reverse().map( x =>(
 
@@ -49,7 +49,7 @@ export default function Events(){
                             <span className="card-sub-text card-lable u-float-right">Ticket Price :  R {x.ticketPrice}</span>
                             </div>
                             <div className="card-sub-botton card-sub-show">
-                                <button  onClick = {() => {history.push("/CreateEvent",{event:x})  }} className="buttonCards card-sub-text card-link u-float-right">Edit</button>
+                                <button  onClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} className="buttonCards card-sub-text card-link u-float-right">Edit</button>
                                 <button  onClick = {()=>{popup()}} className="buttonCards card-sub-text card-link u-float-right"> Delete</button>
                             </div>
                         </div>

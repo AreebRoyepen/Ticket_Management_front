@@ -1,24 +1,34 @@
-import React, { useState, useRef, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useRef, useCallback, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 
 import Api from "../api/Api";
 import "../styles/login.css";
 
 
-export default function CreateEvent() {
+export default function EventPage() {
 
     const [setData] = useState([]);
     
     let history = useHistory();
+    let location = useLocation();
     
     const [isSending, setIsSending] = useState(false)
     const isMounted = useRef(true)
 
     const [name, setName] = useState("");
-    const [to, setTo] = useState(0);
-    const [from, setFrom] = useState(0);
-    const [price, setPrice] = useState(0);
+    const [to, setTo] = useState("");
+    const [from, setFrom] = useState("");
+    const [price, setPrice] = useState("");
 
+    useEffect(() => {      
+
+      if(location.state.edit){
+        setName(location.state.event.name)
+        setTo(location.state.event.to)
+        setFrom(location.state.event.from)
+        setPrice(location.state.event.ticketPrice)
+      }
+    }, [location])
 
     const sendRequest = useCallback(async () => {
       // don't send again while we are sending
@@ -37,16 +47,23 @@ export default function CreateEvent() {
         "active": true
       };
 
-      Api.postRequest("addEvent",x)
-      .then(response => response.json())
-      .then(data => {setData(data)});
+      if(location.state.edit){
+
+        Api.putRequest("updateEvent/"+location.state.event.id, x)
+        .then(resp => resp.json())
+        .then(d => console.log(d))
+      }else{
+        Api.postRequest("addEvent",x)
+        .then(response => response.json())
+        .then(data => {setData(data)});
+      }
 
 
       // once the request is sent, update state again
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, to, from,price, name, setData]); // update the callback if the state changes
+    }, [isSending, to, from,price, name, setData, location]); // update the callback if the state changes
 
     const bob = () => {
 
@@ -64,27 +81,38 @@ export default function CreateEvent() {
         className="sign-up-input"
         placeholder="Event name"
         onChange={ e => setName(e.target.value)}
+        value = {name}
       />
       <input
         type="text"
         className="sign-up-input"
         placeholder="ticket start number"
         onChange={ e => setFrom(e.target.value)}
+        value = {from}
       />
       <input
         type="text"
         className="sign-up-input"
         placeholder="Ticket end number"
         onChange={ e => setTo(e.target.value)}
+        value  = {to}
       />
       <input
         type="text"
         className="sign-up-input"
         placeholder="ticket price"
         onChange={ e => setPrice(e.target.value)}
+        value = {price}
       />
-          <button className = "button" type="button" disabled={isSending} onClick={bob}> Create Event</button>
+          
   
+          {location.state.edit ? 
+      
+      <button className = "button" type="button" disabled={isSending} onClick={bob}> Edit Event</button>
+    :
+    
+    <button className = "button" type="button" disabled={isSending} onClick={bob}> Create Event</button>
+    }
       </div>
       </aside>
       </div>

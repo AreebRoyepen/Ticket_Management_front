@@ -4,7 +4,7 @@ import Api from "../api/Api";
 import "../styles/login.css";
 
 
-export default function CreatePerson() {
+export default function PersonPage() {
 
     const [setData] = useState();
     let history = useHistory();
@@ -25,6 +25,9 @@ export default function CreatePerson() {
 
       if(location.state.edit){
         setName(location.state.x.name)
+        setSurname(location.state.x.surname)
+        setEmail(location.state.x.email)
+        setNumber(location.state.x.number)
       }
       
       
@@ -117,8 +120,14 @@ export default function CreatePerson() {
         value = {email}
         onChange={ e => setEmail(e.target.value)}
       />
-          <button className = "button" type="button" disabled={isSending} onClick={bob}> Add Person</button>
-  
+      {location.state.edit ? 
+      
+      <button className = "button" type="button" disabled={isSending} onClick={bob}> Edit Person</button>
+    :
+    
+    <button className = "button" type="button" disabled={isSending} onClick={bob}> Add Person</button>
+    }
+
       </div>
       </aside>
       </div>
