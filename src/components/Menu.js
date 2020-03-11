@@ -12,7 +12,12 @@ import Typography from '@material-ui/core/Typography';
 import MenuUI from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
+import { TiTicket } from "react-icons/ti";
+import {MdEvent, MdDashboard,MdPeople} from "react-icons/md";
+import {FaTicketAlt} from "react-icons/fa"
+
 import "../styles/menu.css";;
+
 
 const useStyles = makeStyles(theme =>({
   list: {
@@ -70,16 +75,14 @@ export default function Menu({children}) {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem> <Link className="menuText" to="/Events">Events</Link></ListItem>
-        <ListItem> <Link className="menuText" to="/Tickets">Tickets</Link></ListItem>
-        <ListItem> <Link className="menuText" to="/People">People</Link></ListItem>
-
-      </List>
-      <Divider />
-      <List>
-      <ListItem> <Link className="menuText" to="/Dashboard">Dashboard</Link></ListItem>
-        <ListItem>  <Link className="menuText" to="/#">b</Link></ListItem>
-        <ListItem> <Link className="menuText" to="/#">c</Link></ListItem> 
+        <ListItem className="menuHeader" ><TiTicket/>GIS Ticket Management</ListItem>
+        <List>
+          <ListItem> <Link className="menuText" to="/Dashboard"><MdDashboard/>Dashboard</Link></ListItem>
+        </List>
+        <Divider/>
+        <ListItem> <Link className="menuText" to="/Events"><MdEvent/>Events</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/Tickets"><FaTicketAlt/>Tickets</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/People"><MdPeople/>People</Link></ListItem>
       </List>
     </div>
   );

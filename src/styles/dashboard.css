@@ -3,6 +3,7 @@
     display: inline-block;
     float: left;
     margin-bottom: 20%;
+    margin-left: -120px;
   }
   .h3Style{
       color: gray;

@@ -2,6 +2,17 @@
 .menuText{
   color: #99cc33;
   text-decoration: none;
+  height: 40px;
+  width: 290px;
+  font-size: 1.4rem;
+}
+
+.menuHeader {
+  margin-top: 10px;
+  color: #99cc33;
+  font-weight: 300;
+  margin-bottom: 30px;
+  font-size: 1.3em;
 }
 #menuIcon
 {

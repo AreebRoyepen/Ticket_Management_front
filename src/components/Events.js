@@ -9,9 +9,12 @@ export default function Events(){
     let history = useHistory();
 
     useEffect(() => {
-      Api.getRequest("events")
-        .then(response => response.json())
-        .then(data => {setData(data); console.log(data)});
+
+    //   Api.getRequest("events")
+    //     .then(response => response.json())
+    //     .then(data => {setData(data); console.log(data)});
+    setData(Api.events()) 
+
     },[]);
 
     const popup = () => { 
