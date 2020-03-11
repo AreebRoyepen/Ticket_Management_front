@@ -10,10 +10,10 @@ export default function Events(){
 
     useEffect(() => {
 
-    //   Api.getRequest("events")
-    //     .then(response => response.json())
-    //     .then(data => {setData(data); console.log(data)});
-    setData(Api.events()) 
+       Api.getRequest("events")
+         .then(response => response.json())
+        .then(data => {setData(data); console.log(data)});
+   // setData(Api.events()) 
 
     },[]);
 
@@ -52,8 +52,9 @@ export default function Events(){
                             <span className="card-sub-text card-lable u-float-right">Ticket Price :  R {x.ticketPrice}</span>
                             </div>
                             <div className="card-sub-botton card-sub-show">
-                                <button  onClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} className="buttonCards card-sub-text card-link u-float-right">Edit</button>
-                                <button  onClick = {()=>{popup()}} className="buttonCards card-sub-text card-link u-float-right"> Delete</button>
+
+                            <input onClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} type="submit" value="Edit Event" name="button"class="cardButtons  card-link u-float-right"/>
+                            <input onClick = {()=>{popup()}} type="submit" value="Delete Event" name="button"class="cardButtons  card-link u-float-right"/>
                             </div>
                         </div>
                     </div>

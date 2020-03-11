@@ -34,8 +34,8 @@ export default function People(){
                             <span className="card-sub-text card-lable u-float-right"> Email: {x.email} </span>
                             </div>
                             <div className="card-sub-botton card-sub-show">
-                                <button className="button card-sub-text card-link u-float-right">Delete</button>
-                                <button onClick = {() => { console.log(x.id);  history.push("/PersonPage",{x:x, edit:true})  }} className="button card-sub-text card-link u-float-right">Edit</button>
+                                <input  type="submit" value="Delete" name="button"class="cardButtons  card-link u-float-right"/>
+                                <input  onClick = {() => { console.log(x.id);  history.push("/PersonPage",{x:x, edit:true})}} type="submit" value="Edit" name="button"class="cardButtons  card-link u-float-right"/>
                             </div>
                         </div>
                     </div>

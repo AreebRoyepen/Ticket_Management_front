@@ -75,14 +75,14 @@ export default function Menu({children}) {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem className="menuHeader" ><TiTicket/>GIS Ticket Management</ListItem>
+        <ListItem className="menuHeader" ><TiTicket/>&nbsp;GIS Ticket Management</ListItem>
         <List>
-          <ListItem> <Link className="menuText" to="/Dashboard"><MdDashboard/>Dashboard</Link></ListItem>
+          <ListItem> <Link className="menuText" to="/Dashboard">&nbsp;<MdDashboard/>&nbsp;&nbsp;Dashboard</Link></ListItem>
         </List>
         <Divider/>
-        <ListItem> <Link className="menuText" to="/Events"><MdEvent/>Events</Link></ListItem>
-        <ListItem> <Link className="menuText" to="/Tickets"><FaTicketAlt/>Tickets</Link></ListItem>
-        <ListItem> <Link className="menuText" to="/People"><MdPeople/>People</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/Events">&nbsp;<MdEvent/>&nbsp;&nbsp;Events</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/Tickets">&nbsp;<FaTicketAlt/>&nbsp;&nbsp;Tickets</Link></ListItem>
+        <ListItem> <Link className="menuText" to="/People">&nbsp;<MdPeople/>&nbsp;&nbsp;People</Link></ListItem>
       </List>
     </div>
   );
