@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Api from "../api/Api";
 import { useHistory } from "react-router-dom";
+
 import "../styles/eventCard.css";
 
 export default function Events(){
@@ -51,10 +52,15 @@ export default function Events(){
                                 }
                             <span className="card-sub-text card-lable u-float-right">Ticket Price :  R {x.ticketPrice}</span>
                             </div>
-                            <div className="card-sub-botton card-sub-show">
+                            <div className="card-sub-show ">
 
-                            <input onClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} type="submit" value="Edit Event" name="button"class="cardButtons  card-link u-float-right"/>
-                            <input onClick = {()=>{popup()}} type="submit" value="Delete Event" name="button"class="cardButtons  card-link u-float-right"/>
+                            <div class="dropup">
+                                 <button class="dropbtn">Dropup</button>
+                                 <div class="dropup-content">
+                                    <input onClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} value="Edit"type="submit" name="button"class="cardButtons  card-link u-float-right"></input>
+                                     <input onClick = {()=>{popup()}} type="submit" value="Delete Event" name="button"class="cardButtons  card-link u-float-right"/>
+                                  </div>
+                            </div>
                             </div>
                         </div>
                     </div>
