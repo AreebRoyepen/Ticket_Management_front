@@ -13,7 +13,7 @@ export default function Tickets(){
         async function fetchData(){
           
             let x = await Api.getRequest("events")
-            setData(x)
+            setData(x.event)
         }
       
         fetchData()
