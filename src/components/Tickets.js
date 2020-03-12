@@ -46,9 +46,9 @@ export default function Tickets(){
                             <span className="card-sub-text card-lable u-float-right">Ticket Price :  R {x.ticketPrice}</span>
                             </div>
                             <div className="card-sub-botton card-sub-show">
-                                <input  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} type="submit" value="Allocate Tickets" name="button"class="cardButtons  card-link u-float-right"/>
-                                <input  onClick = {()=>{history.push("/ReturnTickets",{event:x})}}  type="submit" value="Return Tickets" name="button"class="cardButtons  card-link u-float-right"/>
-                                <input  onClick = {()=>{history.push("/Payments",{event:x})}}  type="submit" value="Payments" name="button"class="cardButtons  card-link u-float-right"/>
+                                <input  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} type="submit" value="Allocate" name="button"class="cardButtons  card-link u-float-right"/>
+                                <input  onClick = {()=>{history.push("/ReturnTickets",{event:x})}}  type="submit" value="Return" name="button"class="cardButtons  card-link u-float-right"/>
+                                <input  onClick = {()=>{history.push("/Payments",{event:x})}}  type="submit" value="Pay" name="button"class="cardButtons  card-link u-float-right"/>
                             </div>
                         </div>
                     </div>

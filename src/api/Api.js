@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let API_BASE_ADDRESS = 'http://localhost:8080';
+let API_BASE_ADDRESS = 'http://192.168.0.103:8080';
 // if(process.env.NODE_ENV == "development"){
 //     API_BASE_ADDRESS = ""
 // }
@@ -29,7 +29,7 @@ export default class Api {
     return (
         [
             {
-                "name": "Food Fair April 2018",
+                "name": "Food Fair April 2018 mmmmmmmmmmmmmmmmmmmmm mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm mmmmmmmmmmmmmmmmmmmmmm",
                 "active": false,
                 "ticketPrice": 100,
                 "id": 1,
