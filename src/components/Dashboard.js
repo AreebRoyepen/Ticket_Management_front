@@ -4,6 +4,7 @@ import { Doughnut } from 'react-chartjs-2';
 import Api from "../api/Api";
 
 
+
 export default function Dashboard(){
 
   const [tickets, setTickets] = useState(0)
@@ -87,21 +88,25 @@ export default function Dashboard(){
 
   useEffect( () =>{
 
-    Api.postRequest("tickets",{})
-    .then(data => data.json())
-    .then(data => setAllocated(data.length))//sizeof
+    async function fetchData(){
 
-    Api.getRequest("unallocated")
-    .then(data=> data.json())
-    .then(data => setUnallocated(data.message))//message
+      let x = await Api.postRequest("tickets",{})
+    
+      console.log(x.ticket.length)
+      setAllocated(x.ticket.length)//sizeof
+     
+      let y = await Api.getRequest("unallocated")
+      setUnallocated(y.ticket)//message
 
-    Api.postRequest("tickets",{paid:true})
-    .then(data => data.json())
-    .then(data => setPaid(data.length))//sizeof
+      let z = await Api.postRequest("tickets",{paid:true})
+      setPaid(z.ticket.length)//sizeof
 
-    Api.postRequest("tickets",{paid:false})
-    .then(data => data.json())
-    .then(data => setUnpaid(data.length))//sizeof
+      let a = await Api.postRequest("tickets",{paid:false})
+      setUnpaid(a.ticket.length)//sizeof
+
+    }
+
+    fetchData()
 
   },[setAllocated, setUnallocated])
 
@@ -109,6 +114,9 @@ export default function Dashboard(){
         
         <div>
             <main>
+              {console.log("Allocated " + allocated)}
+              {console.log("Unallocated " + unallocated)}
+              {console.log("Paid " + paid)}
   <div>
     <section>
       <article>

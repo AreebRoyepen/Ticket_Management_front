@@ -9,9 +9,14 @@ export default function People(){
     let history = useHistory();
 
     useEffect(() => {
-      Api.getRequest("person")
-        .then(response => response.json())
-        .then(data => setData(data));
+        async function fetchData(){
+
+            let x = await Api.getRequest("person");
+            setData(x.person)
+
+        }
+      
+        fetchData()
     },[]);
 
     return (

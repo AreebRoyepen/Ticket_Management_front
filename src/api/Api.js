@@ -1,4 +1,9 @@
-const API_BASE_ADDRESS = 'http://192.168.0.131:8080';
+import axios from 'axios';
+
+let API_BASE_ADDRESS = 'http://localhost:8080';
+// if(process.env.NODE_ENV == "development"){
+//     API_BASE_ADDRESS = ""
+// }
 
 export default class Api {
 
@@ -341,32 +346,62 @@ export default class Api {
        )
    }
 
-   static getRequest(endpoint){
+
+   static async getRequest(endpoint){
 
     const uri = API_BASE_ADDRESS + "/" + endpoint;
-    return fetch(uri, {
-        method: 'GET'
-    });
+    
+    return axios.get(uri)
+    // .then((response) => {
+    //     console.log(response);
+    //   }, (error) => {
+    //     console.log(error);
+    //   });
+
+
+    .then(resp => {
+        if(resp.status == 200){
+            return resp.data
+        }else if (resp.data == 500){
+
+            console.log( "SERVER TIME OUT")
+        }
+
+
+    })
 
    }
 
-   static postRequest(endpoint, payload){
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var p  = JSON.stringify(payload);
-
-    var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: p
-    };
+   static async postRequest(endpoint, payload){
 
     const uri = API_BASE_ADDRESS + "/" + endpoint;
-    return fetch(uri, requestOptions);
+    
+    return axios.post(uri,payload)
+    // .then((response) => {
+    //     console.log(response);
+    //   }, (error) => {
+    //     console.log(error);
+    //   });
 
-   }
+
+    .then(resp => {
+
+        if(resp.status == 200){
+            return resp.data
+        }else if (resp.data == 500){
+            console.log( "SERVER TIME OUT")
+
+        }
+
+
+    // }).catch(resp =>{
+
+    //         console.log(resp)
+
+    //     }
+    // )
+   })
+}
 
    static putRequest(endpoint, payload){
        
