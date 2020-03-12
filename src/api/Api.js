@@ -352,21 +352,13 @@ export default class Api {
     const uri = API_BASE_ADDRESS + "/" + endpoint;
     
     return axios.get(uri)
-    // .then((response) => {
-    //     console.log(response);
-    //   }, (error) => {
-    //     console.log(error);
-    //   });
-
-
     .then(resp => {
-        if(resp.status == 200){
+        if(resp.status === 200){
             return resp.data
-        }else if (resp.data == 500){
+        }else if (resp.data === 500){
 
             console.log( "SERVER TIME OUT")
         }
-
 
     })
 
@@ -377,37 +369,48 @@ export default class Api {
     const uri = API_BASE_ADDRESS + "/" + endpoint;
     
     return axios.post(uri,payload)
-    // .then((response) => {
-    //     console.log(response);
-    //   }, (error) => {
-    //     console.log(error);
-    //   });
-
-
     .then(resp => {
 
-        if(resp.status == 200){
+        if(resp.status === 200){
             return resp.data
-        }else if (resp.data == 500){
+        }else if (resp.data === 500){
             console.log( "SERVER TIME OUT")
 
         }
-
-
-    // }).catch(resp =>{
-
-    //         console.log(resp)
-
-    //     }
-    // )
    })
 }
 
-   static putRequest(endpoint, payload){
+   static async putRequest(endpoint, payload){
+
+    const uri = API_BASE_ADDRESS + "/" + endpoint;
+    
+    return axios.put(uri,payload)
+    .then(resp => {
+
+        if(resp.status === 200){
+            return resp.data
+        }else if (resp.data === 500){
+            console.log( "SERVER TIME OUT")
+
+        }
+   })
        
    }
 
-   static deleteRequest(endpoint, payload){
+   static async deleteRequest(endpoint, payload){
+
+    const uri = API_BASE_ADDRESS + "/" + endpoint;
+    
+    return axios.delete(uri,payload)
+    .then(resp => {
+
+        if(resp.status === 200){
+            return resp.data
+        }else if (resp.data === 500){
+            console.log( "SERVER TIME OUT")
+
+        }
+   })
 
    }
 

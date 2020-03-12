@@ -44,19 +44,19 @@ export default function EventPage() {
         "to": parseInt(to),
         "from": parseInt(from),
         "ticketPrice": parseInt(price),
-        "active": true
       };
 
-      if(location.state.edit){
+      async function fetchData(){
+        if(location.state.edit){
 
-        Api.putRequest("updateEvent/"+location.state.event.id, x)
-        .then(resp => resp.json())
-        .then(d => console.log(d))
-      }else{
-        Api.postRequest("addEvent",x)
-        .then(response => response.json())
-        .then(data => {setData(data)});
+          await Api.putRequest("updateEvent/"+location.state.event.id, x)
+          history.goBack()
+        }else{
+          await Api.postRequest("addEvent",x)
+          history.goBack()
+        }
       }
+      fetchData()
 
 
       // once the request is sent, update state again
@@ -108,10 +108,10 @@ export default function EventPage() {
   
           {location.state.edit ? 
       
-      <button className = "button" type="button" disabled={isSending} onClick={bob}> Edit Event</button>
+      <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Edit Event</button>
     :
     
-    <button className = "button" type="button" disabled={isSending} onClick={bob}> Create Event</button>
+    <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
     }
       </div>
       </aside>

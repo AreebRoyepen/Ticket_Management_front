@@ -90,13 +90,11 @@ export default function Dashboard(){
 
     async function fetchData(){
 
-      let x = await Api.postRequest("tickets",{})
-    
-      console.log(x.ticket.length)
+      let x = await Api.postRequest("tickets",{})    
       setAllocated(x.ticket.length)//sizeof
      
       let y = await Api.getRequest("unallocated")
-      setUnallocated(y.ticket)//message
+      setUnallocated(y.ticket)
 
       let z = await Api.postRequest("tickets",{paid:true})
       setPaid(z.ticket.length)//sizeof

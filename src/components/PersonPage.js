@@ -50,24 +50,25 @@ export default function PersonPage() {
         "email": email        
       };
 
-      if(location.state.edit){
+      async function fetchData(){
+
+        if(location.state.edit){
 
 
-        Api.putRequest("updatePerson/"+location.state.x.id,x)
-        .then(response => response.json())
-        .then(data => {setData(data) ; console.log(data);});
-
-
-      }else{
+          Api.putRequest("updatePerson/"+location.state.x.id,x)
+          history.goBack()
+  
+  
+        }else{
+          
+        Api.postRequest("addPerson",x)
+        history.goBack()
         
-      Api.postRequest("addPerson",x)
-      .then(response => response.json())
-      .then(data => {
-          setData(data);
-          console.log(data);
-      
-      });
+        }
+
       }
+
+      fetchData()
 
 
 
@@ -122,10 +123,10 @@ export default function PersonPage() {
       />
       {location.state.edit ? 
       
-      <button className = "button" type="button" disabled={isSending} onClick={bob}> Edit Person</button>
+      <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Edit Person</button>
     :
     
-    <button className = "button" type="button" disabled={isSending} onClick={bob}> Add Person</button>
+    <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Add Person</button>
     }
 
       </div>

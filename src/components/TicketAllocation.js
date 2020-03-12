@@ -30,17 +30,23 @@ export default function TicketAllocation() {
 
     useEffect(()=>{
 
-      let x = location.state.event.id
 
       if (loadTickets) return
 
       setLoadTickets(true)
 
-      Api.getRequest("unallocated/" + x)
-      .then( response =>  response.json())
-      .then( data =>{setTickets(data.message); console.log(data.message)})
+      async function fetchData(){
 
-        setLoadTickets(false)
+        let x = location.state.event.id
+
+        let t = await Api.getRequest("unallocated/" + x)
+        setTickets(t.ticket)       
+
+      }
+
+      fetchData()
+
+      setLoadTickets(false)
 
     },[loadTickets, location])
 
@@ -53,11 +59,12 @@ export default function TicketAllocation() {
   
       (async () => {
    
-      const response = await Api.getRequest("person");
-      const persons = await response.json();
+      let persons = await Api.getRequest("person");
+
+
 
         if (active) {
-          setOptions(persons);;
+          setOptions(persons.person);
         }
       })();
   
@@ -90,9 +97,13 @@ export default function TicketAllocation() {
         "person" : person.id
       };
 
-      Api.postRequest("bulkAllocateTicket",x)
-      .then(response => response.json())
-      .then(data => {setData(data)});
+      async function fetchData(){
+
+        Api.postRequest("bulkAllocateTicket",x)
+
+      }
+
+      fetchData()      
 
 
       // once the request is sent, update state again

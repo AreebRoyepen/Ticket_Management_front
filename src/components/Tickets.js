@@ -12,7 +12,7 @@ export default function Tickets(){
 
         async function fetchData(){
           
-            let x = await Api.getRequest("events")
+            let x = await Api.getRequest("availableEvents")
             setData(x.event)
         }
       

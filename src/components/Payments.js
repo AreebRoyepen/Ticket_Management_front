@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { useLocation, useHistory } from "react-router-dom";
-
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import Api from "../api/Api";
 import "../styles/login.css";
 
@@ -21,60 +22,34 @@ export default function Payments() {
     const [isSending, setIsSending] = useState(false)
     const isMounted = useRef(true)
 
-    const [ticketNumber, setTicketNumber] = useState(0);
-    const [person, setPerson] = useState(null);
+    const [ticketNumberF, setTicketNumberF] = useState(0);
+    const [ticketNumberT, setTicketNumberT] = useState(0);
 
     const [eventID] = useState(0);
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
-    
-    useEffect(()=>{
 
-      let x = location.state.event.id
+    const[bulk,setBulk] = useState(false);
+    
+    useEffect(()=>{     
 
       if (loadTickets) return
 
       setLoadTickets(true)
 
-      Api.getRequest("unallocated/" + x)
-      .then( response =>  response.json())
-      .then( data =>{setTickets(data.message); console.log(data.message)})
+      async function fetchData(){
+        let id = location.state.event.id
+        let x = await Api.getRequest("unallocated/" + id)
+        setTickets(x.ticket)
+      }
 
-        setLoadTickets(false)
+      fetchData();
 
-    },[loadTickets, location])
+      setLoadTickets(false)
+
+    },[loadTickets, location]);
 
  
-
-    useEffect(() => {
-      let active = true;
-  
-      if (!loading) {
-        return undefined;
-      }
-  
-      (async () => {
-   
-      const response = await Api.getRequest("person");
-      const persons = await response.json();
-
-        if (active) {
-          setOptions(persons);
-        }
-      })();
-  
-      return () => {
-        active = false;
-      };
-    }, [loading]);
-
-
-    useEffect(() => {
-      if (!open) {
-        setOptions([]);
-      }
-    }, [open]);
-
     const returnTicket = useCallback(async () => {
       // don't send again while we are sending
       if (isSending) return
@@ -84,16 +59,40 @@ export default function Payments() {
 
       // send the actual request
 
-      Api.getRequest("payment/"+eventID+"/"+parseInt(ticketNumber))
-      .then(response => response.json())
-      .then(data => {setData(data)});
+      
+      async function fetchData(){
 
+        if(bulk){
+
+          let pay = {
+	
+            "event": eventID,
+            "ticketNumberF": parseInt(ticketNumberF),
+            "ticketNumberT": parseInt(ticketNumberT)
+            
+          }
+          
+          let x = Api.postRequest("bulkPayment",pay)
+          setData(x.ticket)
+          history.goBack()
+
+
+        }else{
+          let x = Api.getRequest("payment/"+eventID+"/"+parseInt(ticketNumberF))
+          setData(x.ticket)
+          history.goBack()
+        }
+        
+
+      }
+
+      fetchData();
 
       // once the request is sent, update state again
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumber, eventID, person, setData]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, eventID, setData]); // update the callback if the state changes
 
     const bob = () =>{
 
@@ -111,47 +110,61 @@ export default function Payments() {
 
           {location.state.event.name}<br/>
           amount of tickets left: {tickets}
-          <Autocomplete
-          id="asynchronous-demo"
-          style={{ width: 250 }}
-          open={open}
-          onOpen={() => { setOpen(true); }}
-          onClose={() => {setOpen(false); }}
-          getOptionSelected={(option, value) => option.name === value.name}
-          getOptionLabel={option => option.name +" " +option.surname }
-          options={options}
-          loading={loading}
-          value = {person}
-          onChange={(event, newValue) => { setPerson(newValue); }}
-          renderInput={params => (
-            <TextField
-              {...params}
-              label="Select Person"
-              variant="outlined"
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <React.Fragment>
-                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                    {params.InputProps.endAdornment}
-                  </React.Fragment>
-                ),
-              }}
+ 
+
+          
+          <FormControlLabel
+
+           control={
+
+            <Grid component="label" container alignItems="center" spacing={1}>
+              <Grid item>Off</Grid>
+              <Grid item>
+
+                <Switch
+                  checked={bulk}
+                  onChange={e => setBulk(e.target.checked)}
+                  color = "#"
+                />
+
+
+              </Grid>
+              <Grid item>On</Grid>
+            </Grid>
+           }
+
           />
-        )}
-      />
+
 
       <TextField
         id="filled-number"
         label="ticket range from"
         type="number"
-        onChange = {e => {setTicketNumber(e.target.value)}}
+        onChange = {e => {setTicketNumberF(e.target.value)}}
         InputLabelProps={{
           shrink: true,
         }}
         variant="outlined"
         
       />
+
+        {bulk
+
+          ?
+            <TextField
+            id="filled-number"
+            label="ticket range to"
+            type="number"
+            onChange = {e => {setTicketNumberT(e.target.value)}}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+            
+          />
+          :
+            <div/>
+        }
 
       <button className = "button" type="button" disabled={isSending} onClick={bob}> Pay </button>
   

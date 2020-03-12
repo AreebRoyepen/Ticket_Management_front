@@ -21,8 +21,8 @@ export default function ReturnTickets() {
     const [isSending, setIsSending] = useState(false)
     const isMounted = useRef(true)
 
-    const [ticketNumber, setTicketNumber] = useState(0);
-    const [person, setPerson] = useState(null);
+    const [ticketNumberF, setTicketNumberF] = useState(0);
+    const [ticketNumberT, setTicketNumberT] = useState(0);
 
     const [eventID] = useState(0);
     const[loadTickets, setLoadTickets] = useState(false)
@@ -30,51 +30,25 @@ export default function ReturnTickets() {
     
     useEffect(()=>{
 
-      let x = location.state.event.id
+      
 
       if (loadTickets) return
 
       setLoadTickets(true)
 
-      Api.getRequest("unallocated/" + x)
-      .then( response =>  response.json())
-      .then( data =>{setTickets(data.message); console.log(data.message)})
+      async function fetchData(){
+        let x = location.state.event.id
+        let d = Api.getRequest("unallocated/" + x)
+        setTickets(d.ticket)
+      }
 
-        setLoadTickets(false)
+      fetchData()
+
+      setLoadTickets(false)
 
     },[loadTickets, location])
 
  
-
-    useEffect(() => {
-      let active = true;
-  
-      if (!loading) {
-        return undefined;
-      }
-  
-      (async () => {
-   
-      const response = await Api.getRequest("person");
-      const persons = await response.json();
-
-        if (active) {
-          setOptions(persons);
-        }
-      })();
-  
-      return () => {
-        active = false;
-      };
-    }, [loading]);
-
-
-    useEffect(() => {
-      if (!open) {
-        setOptions([]);
-      }
-    }, [open]);
-
     const returnTicket = useCallback(async () => {
       // don't send again while we are sending
       if (isSending) return
@@ -85,21 +59,26 @@ export default function ReturnTickets() {
       // send the actual request
 
       var x = {
-        "ticketNumber": parseInt(ticketNumber),
-        "person": person.id,
+        "ticketNumberF": parseInt(ticketNumberF),
+        "ticketNumberT": parseInt(ticketNumberT),
         "event" : eventID
       };
 
-      Api.postRequest("returnTicket",x)
-      .then(response => response.json())
-      .then(data => {setData(data)});
+      async function fetchData(){
 
+        let t = Api.deleteRequest("returnTicket/"+eventID+"/"+parseInt(ticketNumberF)) 
+        setData(t.ticket)
+
+      }
+
+      
+      fetchData()
 
       // once the request is sent, update state again
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumber, eventID, person, setData]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, eventID, setData]); // update the callback if the state changes
 
     const bob = () =>{
 
@@ -117,41 +96,12 @@ export default function ReturnTickets() {
 
           {location.state.event.name}<br/>
           amount of tickets left: {tickets}
-          <Autocomplete
-          id="asynchronous-demo"
-          style={{ width: 250 }}
-          open={open}
-          onOpen={() => { setOpen(true); }}
-          onClose={() => {setOpen(false); }}
-          getOptionSelected={(option, value) => option.name === value.name}
-          getOptionLabel={option => option.name +" " +option.surname }
-          options={options}
-          loading={loading}
-          value = {person}
-          onChange={(event, newValue) => { setPerson(newValue); }}
-          renderInput={params => (
-            <TextField
-              {...params}
-              label="Select Person"
-              variant="outlined"
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <React.Fragment>
-                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                    {params.InputProps.endAdornment}
-                  </React.Fragment>
-                ),
-              }}
-          />
-        )}
-      />
 
       <TextField
         id="filled-number"
         label="ticket range from"
         type="number"
-        onChange = {e => {setTicketNumber(e.target.value)}}
+        onChange = {e => {setTicketNumberF(e.target.value)}}
         InputLabelProps={{
           shrink: true,
         }}
@@ -159,6 +109,17 @@ export default function ReturnTickets() {
         
       />
 
+      <TextField
+              id="filled-number"
+              label="ticket range to"
+              type="number"
+              onChange = {e => {setTicketNumberT(e.target.value)}}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              
+            />
       <button className = "button" type="button" disabled={isSending} onClick={bob}> Return Ticket</button>
   
       </div>
