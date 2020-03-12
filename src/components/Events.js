@@ -11,11 +11,12 @@ export default function Events(){
 
     useEffect(() => {
 
-       Api.getRequest("events")
-         .then(response => response.json())
-        .then(data => {setData(data); console.log(data)});
-   // setData(Api.events()) 
+        async function fetchData(){
+            let x = await Api.getRequest("events")
+            setData(x.event);
+        }
 
+        fetchData()
     },[]);
 
     const popup = () => { 
