@@ -1,321 +1,266 @@
 html {
-    background-color: #fefefe;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-      overflow-x: hidden; /* Hide scrollbars */
-  }
-  
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
+  background-color: #fefefe;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+    overflow-x: hidden; /* Hide scrollbars */
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 
 
 
 
-  .cardButtons[name=button]{
-    border: 2px solid white;
-    border-radius: 4px;
-    font-size: 13px;
-    padding: 10px;
-    color: white;
-    transition: all .15s ease-in;
+.cardButtons[name=button]{
+  border: 2px solid white;
+  border-radius: 4px;
+  font-size: 13px;
+  padding: 7px;
+  color: white;
+  transition: all .15s ease-in;
 }
 
 .cardButtons[name=button] {
-    background-color: #99cc33;
-    color: #fff;
-    font-weight: bold;
-    border: 3px solid white;
-}
-
-.cardButtons[name=button]::focus {
-    border: 1px solid #fff;
+  background-color:#99cc33;
+  color: white;
+  font-weight: bold;
+  border: 3px solid white;
 }
 
 .cardButtons[name=button]:focus {
-    border-color: rgb(53, 114, 210);
-    box-shadow: 0px 0px 8px 2px rgba(53, 114, 210, .5);
-    outline: none;
+  border: 1px solid #fff;
+  background-color: #99cc33;
+}
+
+
+.cardButtons[name=button]:focus {
+  border: 1px solid #fff;
+  background-color: #99cc33;
+}
+
+.cardButtons[name=button]:focus {
+  border-color: rgb(53, 114, 210);
+  box-shadow: 0px 0px 8px 2px rgba(53, 114, 210, .5);
+  outline: none;
 }
 
 .cardButtons[name=button]::placeholder {
-    color: #999;
+  color: #999;
 }
 
 
 
 
-  
-  .container {
-    margin: 2% 0 auto 3%;
-    width: 100%;
-    z-index: -1;
-  }
-  
-  .u-float-right {
-    float: right;
-  }
-  
-  .u-flex-center {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
-  }
-  
-  .card-lable {
-    color: white;
-    font-size: 12px;
-  }
-  
-  .card {
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
-    height: 125px;
-    margin-bottom: 25px;
-    transition: all 300ms ease-out;
-    width: 65%;
-  }
-  
-  .card:hover {
-    box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
-  }
-  
-  .card-object-container {
-    background: none;
-    float: left;
-    height: 100%;
-    width: 35%;
-    position: relative;
-  }
-  
-  .card-object {
-    background-position: center center;
-    background-size: cover;
-    height: 100%;
-  }
-  
-  .card-object:after {
-    content: " ";
-    display: block;
-    height: 100%;
-    left: 0;
-    opacity: 0;
-    position: relative;
-    right: 0;
-    top: 0;
-    transition: all 300ms ease-out;
-    z-index: 10;
-  }
-  
-  .card:hover .card-object:after {
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.4) 100%);
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 52%,rgba(0,0,0,0.4) 100%);
-    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 52%,rgba(0,0,0,0.4) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
-    opacity: 1;
-  }
-  
-  .card-body {
-    background-color: #99cc33;
-    color: white;
-    float: left;
-    height: 100%;
-    padding: 12px 15px;
-    position: relative;
-    width: 145%;
-  }
-  
-  .card-top {
-    display: block;
-  }
-  
-  .card:hover{
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  
-  .card-header {
-    display: block;
-    margin-top: 10px;
-  }
-  
-  .card-sub-botton {
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    opacity: 1;
-    padding: 0 15px;
-    transition: all 300ms ease-out;
-    width: 100%;
-  }
-  
-  .card:hover .card-sub-botton {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  
-  .card-sub-text {
-    display: inline-block;
-  }
-  
-  .card-sub-show {
-    opacity: 0;
-    transform: translateY(8px);
-    transition: all 300ms ease-out;
-  }
-  
-  .card:hover .card-sub-show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  .card-link {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-  }
 
-
-#CreateEvent{
-  font-size: 17px;
-  padding-bottom: 15px;
-  padding-top: 15px;
-  margin-left: 55%;
-  margin-top: 35%;
-}
-
-.card-sub-text {
-    display: inline-block;
+.container {
+  margin: 2% 0 auto 3%;
+  width: 100%;
+  z-index: -1;
 }
 
 .u-float-right {
-    float: right;
+  float: right;
 }
 
-
-*, *:before, *:after {
-    box-sizing: inherit;
-}
-.card-body {
-    background-color: #99cc33;
-    color: white;
-    float: left;
-    height: 100%;
-    padding: 12px 15px;
-    position: relative;
-    width: 145%;
-}
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: "Roboto", sans-serif;
+.u-flex-center {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
 }
 
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-html {
-    background-color: #fefefe;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    overflow-x: hidden;
-}
-user agent stylesheet
-html {
-    color: -internal-root-color;
-}
-*, *:before, *:after {
-    box-sizing: inherit;
-}
-
-*, *:before, *:after {
-    box-sizing: inherit;
-}
-
-
-
-.combo-box {
-  float: left;
-  z-index: 1;
-  margin-left: 15px;
-  margin-top: 15px;
-  cursor: pointer;
-  border: 1px solid black;
-  background: lightgrey;
-  width: 160px;
-  padding: 5px;
-}
-.combo-box-options {
-  display: none;
-}
-.combo-box:hover > .combo-box-options {
-  z-index: 1000;
-  position: relative;
-  display: block;
-  margin-top: 6px;
-  padding: 3px;
-  margin-left: -6px;
-  position: relative;
-  width: 160px;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
-}
-.combo-box-arrow {
+.card-lable {
+  color: #99cc33;
   font-size: 12px;
 }
 
-
-
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
+.card {
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+  height: 125px;
+  margin-bottom: 25px;
+  transition: all 300ms ease-out;
+  width: 65%;
 }
 
-.dropup {
+.card .card-body:hover {
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
+  background-color: #99cc33;
+  color: white;
+  
+}
+.card-header .card-lable:hover{
+  color: white;
+}
+.card-object-container {
+  background: none;
+  float: left;
+  height: 100%;
+  width: 35%;
   position: relative;
+}
+
+.card-object {
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+}
+
+.card-object:after {
+  content: " ";
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all 300ms ease-out;
+  z-index: 10;
+}
+
+.card:hover .card-object:after {
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.4) 100%);
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 52%,rgba(0,0,0,0.4) 100%);
+  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 52%,rgba(0,0,0,0.4) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
+  opacity: 1;
+}
+
+.card-body {
+  background-color: white;
+  color: #99cc33;
+  float: left;
+  height: 100%;
+  padding: 12px 15px;
+  position: relative;
+  width: 145%;
+}
+
+.card-top {
+  display: block;
+}
+
+.card:hover{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.event-name
+{
+  margin-top: -10px;
+}
+
+.card-header {
+  display: block;
+}
+
+.card-sub-botton {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  opacity: 1;
+  padding: 0 15px;
+  transition: all 300ms ease-out;
+  width: 100%;
+}
+
+.card:hover .card-sub-botton {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.card-sub-text {
   display: inline-block;
 }
 
-.dropup-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  bottom: 50px;
-  height: 100px;
-  z-index: 1;
+.card-sub-show {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 300ms ease-out;
 }
 
-.dropup-content a {
-  color: black;
-  padding: 12px 16px;
+.card:hover .card-sub-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-link {
+  color: #99cc33;
   text-decoration: none;
-  display: block;
+  margin-left: 20px;
 }
 
-.dropup-content a:hover {background-color: #ccc}
-
-.dropup:hover .dropup-content {
-  display: block;
+.funButton {
+  font-size: 13px;
+  padding-bottom: 9px;
+  padding-top: 9px;
+  margin-top: 80px;
+  border-style: solid;
+  color: #99cc33;
+  border-radius: 15px;
 }
 
-.dropup:hover .dropbtn {
-  background-color: #2980B9;
+.card-sub-text {
+  display: inline-block;
+}
+
+.u-float-right {
+  float: right;
+}
+
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.card-body {
+  background-color: white;
+  color: #99cc33;
+  float: left;
+  border-style: solid;
+  border-radius: 10px;
+  height: 100%;
+  padding: 12px 15px;
+  position: relative;
+  width: 145%;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background-color: #fefefe;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  overflow-x: hidden;
+}
+user agent stylesheet
+html {
+  color: -internal-root-color;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }

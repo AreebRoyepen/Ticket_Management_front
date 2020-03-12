@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Api from "../api/Api";
 import { useHistory } from "react-router-dom";
-
 import "../styles/eventCard.css";
 
 export default function Events(){
@@ -30,7 +29,7 @@ export default function Events(){
         
         <div>
 
-<button onClick = {() => {  history.push("/EventPage", {id:null, edit:false}) }} id="CreateEvent">CreateEvent</button>
+<button onClick = {() => {  history.push("/EventPage", {id:null, edit:false}) }} className="funButton">Create Event</button>
            <div>
             {data.reverse().map( x =>(
 
@@ -40,28 +39,21 @@ export default function Events(){
                     <div className="container"> 
                     <div className="card">
                         <div class="card-body">
-                            <div className="card-header">
-                                <span className="card-lable">{x.name}</span>
+                            <div className="card-header event-name">
+                                <p>{x.name}</p>
                             </div>
-                            <span className="card-header">Tickets {x.from} - {x.to}</span>
-                            <div className="card-sub-botton">
-                                {x.active
+                            <span className="card-header">Tickets {x.from} - {x.to} |&nbsp;&nbsp;
+                            {x.active
                                     ?
-                                    <span className="card-sub-text card-lable">Status: Active</span>
+                                    <span>Active |&nbsp;&nbsp;</span>
                                     :
-                                    <span className="card-sub-text card-lable">Status: Closed</span>
+                                    <span>Closed |&nbsp;&nbsp;</span>
                                 }
-                            <span className="card-sub-text card-lable u-float-right">Ticket Price :  R {x.ticketPrice}</span>
-                            </div>
-                            <div className="card-sub-show ">
-
-                            <div class="dropup">
-                                 <button class="dropbtn">Dropup</button>
-                                 <div class="dropup-content">
-                                    <input onClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} value="Edit"type="submit" name="button"class="cardButtons  card-link u-float-right"></input>
-                                     <input onClick = {()=>{popup()}} type="submit" value="Delete Event" name="button"class="cardButtons  card-link u-float-right"/>
-                                  </div>
-                            </div>
+                             <span>R {x.ticketPrice} </span>
+                            </span>   
+                            <div className="card-sub-botton card-sub-show">
+                            <input onClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} type="submit" value="EDIT" name="button"class="cardButtons  card-link u-float-right"/>
+                            <input onClick = {()=>{popup()}} type="submit" value="DELETE" name="button"class="cardButtons  card-link u-float-right"/>
                             </div>
                         </div>
                     </div>
