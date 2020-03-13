@@ -401,7 +401,7 @@ export default class Api {
 
     const uri = API_BASE_ADDRESS + "/" + endpoint;
     
-    return axios.delete(uri,payload)
+    return axios.delete(uri,{data : payload})
     .then(resp => {
 
         if(resp.status === 200){

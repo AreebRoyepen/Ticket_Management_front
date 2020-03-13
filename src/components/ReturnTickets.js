@@ -19,7 +19,6 @@ export default function ReturnTickets() {
     const [ticketNumberT, setTicketNumberT] = useState(0);
     const[bulk,setBulk] = useState(false);
 
-    const [eventID] = useState(0);
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
     
@@ -33,7 +32,7 @@ export default function ReturnTickets() {
 
       async function fetchData(){
         let x = location.state.event.id
-        let d = Api.getRequest("unallocated/" + x)
+        let d = await Api.getRequest("unallocated/" + x)
         setTickets(d.ticket)
       }
 
@@ -56,14 +55,16 @@ export default function ReturnTickets() {
       var x = {
         "ticketNumberF": parseInt(ticketNumberF),
         "ticketNumberT": parseInt(ticketNumberT),
-        "event" : eventID
+        "event" : location.state.event.id,
       };
 
       async function fetchData(){
 
+        console.log(x)
         if(bulk){
 
-          let t = Api.deleteRequest("bulkReturn",x)
+          let t = await Api.deleteRequest("bulkReturn",x)
+          console.log(t)
           if(t.message === "success"){
 
             history.goBack()
@@ -72,8 +73,7 @@ export default function ReturnTickets() {
           }
 
         }else{
-
-          let t = Api.deleteRequest("returnTicket/"+eventID+"/"+parseInt(ticketNumberF)) 
+          let t = await Api.deleteRequest("returnTicket/"+location.state.event.id+"/"+(ticketNumberF)) 
           if(t.message === "success"){
 
             history.goBack()
@@ -94,7 +94,7 @@ export default function ReturnTickets() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, eventID, bulk, history]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, bulk, history]); // update the callback if the state changes
 
     const back = () =>{
 

@@ -19,7 +19,6 @@ export default function Payments() {
     const [ticketNumberF, setTicketNumberF] = useState(0);
     const [ticketNumberT, setTicketNumberT] = useState(0);
 
-    const [eventID] = useState(0);
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
 
@@ -60,13 +59,13 @@ export default function Payments() {
 
           let pay = {
 	
-            "event": eventID,
+            "event": location.state.event.id,
             "ticketNumberF": parseInt(ticketNumberF),
             "ticketNumberT": parseInt(ticketNumberT)
             
           }
           
-          let x = Api.postRequest("bulkPayment",pay)
+          let x = await Api.postRequest("bulkPayment",pay)
           if(x.message === "success"){
 
             history.goBack()
@@ -75,7 +74,7 @@ export default function Payments() {
           }
 
         }else{
-          let x = Api.getRequest("payment/"+eventID+"/"+parseInt(ticketNumberF))
+          let x = await Api.getRequest("payment/"+location.state.event.id+"/"+parseInt(ticketNumberF))
           if(x.message === "success"){
 
             history.goBack()
@@ -93,7 +92,7 @@ export default function Payments() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, eventID, history, bulk]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, history, bulk]); // update the callback if the state changes
 
     const back = () =>{
 

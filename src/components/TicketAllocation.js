@@ -24,7 +24,6 @@ export default function TicketAllocation() {
     const [bulk, setBulk] = useState(false)
 
     const [person, setPerson] = useState(null);
-    const [eventID] = useState(0);
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
 
@@ -100,11 +99,12 @@ export default function TicketAllocation() {
           var x = {
             "ticketNumberF": parseInt(ticketNumberF),
             "ticketNumberT": parseInt(ticketNumberT),
-            "event": eventID,
+            "event": location.state.event.id,
             "person" : person.id
           };
-
-          let t = Api.postRequest("bulkAllocateTicket",x)
+          console.log(x)
+          let t = await Api.postRequest("bulkAllocateTicket",x)
+          console.log(t)
           if(t.message === "success"){
 
             history.goBack()
@@ -115,11 +115,11 @@ export default function TicketAllocation() {
 
           var x = {
             "ticketNumber": parseInt(ticketNumberF),
-            "event": eventID,
+            "event": location.state.event.id,
             "person" : person.id
           };
 
-          let t = Api.postRequest("allocateTicket",x)
+          let t = await Api.postRequest("allocateTicket",x)
           if(t.message === "success"){
 
             history.goBack()
@@ -136,7 +136,7 @@ export default function TicketAllocation() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, eventID, person, bulk, history]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history]); // update the callback if the state changes
 
     const back = () => {
       
@@ -150,6 +150,7 @@ export default function TicketAllocation() {
     return (
 
       <div className="App">
+        {console.log(location.state.event.id)}
         <aside className="profile-card">
           <div className="profile-bio">
 
