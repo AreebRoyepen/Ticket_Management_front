@@ -1,10 +1,18 @@
+.charts-container {
+  width: 80%;
+  margin: 0 auto;
+  height: 90%;
+  padding: 20px;
+}
+
 .chart-wrapper {
-    padding: 2%;
-    display: inline-block;
-    float: left;
-    margin-bottom: 20%;
-    margin-left: -120px;
-  }
+ 
+    margin-left: 5px;
+    margin-top: 40px;
+    float:left;
+}
+
+
   .h3Style{
       color: gray;
       text-align: center;

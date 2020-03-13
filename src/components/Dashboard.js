@@ -125,16 +125,11 @@ export default function Dashboard(){
         <hr/>
         <div>
     <h3></h3>
-        
+      <div className="charts-container">
         <div className = " chart-wrapper">
         <Doughnut data={data4} options={{
           cutoutPercentage: 80,
-          style:{
-             width:"100",
-             height: "100",
-
-             float:"left",
-             display:"inline-block"},
+          
             legend:{
               display:false,
               position:'right'
@@ -142,18 +137,15 @@ export default function Dashboard(){
           }}/>
           <h3 className="h3Style">Total Allocated</h3>
           <h4 className="h4Style">{(allocated / (unallocated+ allocated) * 100).toFixed(2)}%</h4>
+          
+
         </div> 
 
 
         <div className = " chart-wrapper">
         <Doughnut data={data3} options={{
           cutoutPercentage: 80,
-          style:{
-             width:"100",
-             height: "100",
-
-             float:"left",
-             display:"inline-block"},
+         
             legend:{
               display:false,
               position:'right'
@@ -166,12 +158,6 @@ export default function Dashboard(){
         <div className = " chart-wrapper">
         <Doughnut data={data} options={{
           cutoutPercentage: 80,
-          style:{
-             width:"100",
-             height: "100",
-
-             float:"left",
-             display:"inline-block"},
             legend:{
               display:false,
               position:'right'
@@ -184,12 +170,6 @@ export default function Dashboard(){
         <div className = " chart-wrapper">
         <Doughnut data={data2} options={{
           cutoutPercentage: 80,
-          style:{
-             width:"100",
-             height: "100",
-
-             float:"left",
-             display:"inline-block"},
             legend:{
               display:false,
               position:'right'
@@ -198,7 +178,7 @@ export default function Dashboard(){
           <h3 className="h3Style">Paid vs Allocated</h3>
           <h4 className="h4Style">{(paid / allocated * 100).toFixed(2)}%</h4>
         </div> 
-
+        </div>
         </div>
       </article>
     </section>
