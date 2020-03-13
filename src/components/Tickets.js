@@ -31,7 +31,7 @@ export default function Tickets(){
                     
                     <div className="container"> 
                     <div className="card">
-                        <div class="card-body">
+                        <div className="card-body">
                             <div className="card-header">
                                 <span className="card-lable">{x.name}</span>
                             </div>
@@ -46,9 +46,9 @@ export default function Tickets(){
                             <span className="card-sub-text card-lable u-float-right">Ticket Price :  R {x.ticketPrice}</span>
                             </div>
                             <div className="card-sub-botton card-sub-show">
-                                <input  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} type="submit" value="Allocate" name="button"class="cardButtons  card-link u-float-right"/>
-                                <input  onClick = {()=>{history.push("/ReturnTickets",{event:x})}}  type="submit" value="Return" name="button"class="cardButtons  card-link u-float-right"/>
-                                <input  onClick = {()=>{history.push("/Payments",{event:x})}}  type="submit" value="Pay" name="button"class="cardButtons  card-link u-float-right"/>
+                                <input  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} type="submit" value="Allocate" name="button"className="cardButtons  card-link u-float-right"/>
+                                <input  onClick = {()=>{history.push("/ReturnTickets",{event:x})}}  type="submit" value="Return" name="button"className="cardButtons  card-link u-float-right"/>
+                                <input  onClick = {()=>{history.push("/Payments",{event:x})}}  type="submit" value="Pay" name="button"className="cardButtons  card-link u-float-right"/>
                             </div>
                         </div>
                     </div>

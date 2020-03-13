@@ -21,7 +21,7 @@ export default function People(){
 
     return (
         <div>
-            <button onClick = {() => {  history.push("/PersonPage",{id:null, edit:false})  }} id="CreateEvent">Add Person</button>
+            <button onClick = {() => {  history.push("/PersonPage",{id:null, edit:false})  }} className="funButton">Add Person</button>
             {data.map( x =>(
                 <div key = {x.id}>
                     
@@ -29,7 +29,7 @@ export default function People(){
                     
                     <div className="container"> 
                     <div className="card">
-                        <div class="card-body">
+                        <div className="card-body">
                             <div className="card-top">
                                 <span className="card-lable">Person</span>
                             </div>
@@ -39,8 +39,8 @@ export default function People(){
                             <span className="card-sub-text card-lable u-float-right"> Email: {x.email} </span>
                             </div>
                             <div className="card-sub-botton card-sub-show">
-                                <input  type="submit" value="Delete" name="button"class="cardButtons  card-link u-float-right"/>
-                                <input  onClick = {() => { console.log(x.id);  history.push("/PersonPage",{x:x, edit:true})}} type="submit" value="Edit" name="button"class="cardButtons  card-link u-float-right"/>
+                                <input  type="submit" value="Delete" name="button"className="cardButtons  card-link u-float-right"/>
+                                <input  onClick = {() => { console.log(x.id);  history.push("/PersonPage",{x:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right"/>
                             </div>
                         </div>
                     </div>

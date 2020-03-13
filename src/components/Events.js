@@ -38,7 +38,7 @@ export default function Events(){
                     
                     <div className="container"> 
                     <div className="card">
-                        <div class="card-body">
+                        <div className="card-body">
                             <div className="card-header event-name">
                                 <p>{x.name}</p>
                             </div>
@@ -52,8 +52,8 @@ export default function Events(){
                              <span>R {x.ticketPrice} </span>
                             </span>   
                             <div className="card-sub-botton card-sub-show">
-                            <input onClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} type="submit" value="EDIT" name="button"class="cardButtons  card-link u-float-right"/>
-                            <input onClick = {()=>{popup()}} type="submit" value="DELETE" name="button"class="cardButtons  card-link u-float-right"/>
+                            <input onClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} type="submit" value="EDIT" name="button"className="cardButtons  card-link u-float-right"/>
+                            <input onClick = {()=>{popup()}} type="submit" value="DELETE" name="button"className="cardButtons  card-link u-float-right"/>
                             </div>
                         </div>
                     </div>
