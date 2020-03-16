@@ -61,10 +61,16 @@ export default function TicketAllocation() {
    
       let persons = await Api.getRequest("person");
 
+      // const response = await fetch(
+      //   "https://country.register.gov.uk/records.json?page-size=5000"
+      // );
+      //let persons =await response.json();
 
 
         if (active) {
           setOptions(persons.person);
+          //setOptions(Object.keys(persons).map(key => persons[key].item[0]));
+
         }
       })();
   
@@ -136,7 +142,7 @@ export default function TicketAllocation() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history, location]); // update the callback if the state changes
 
     const back = () => {
       
@@ -151,6 +157,8 @@ export default function TicketAllocation() {
 
       <div className="App">
         {console.log(location.state.event.id)}
+
+        {console.log(person)}
         <aside className="profile-card">
           <div className="profile-bio">
 
@@ -183,13 +191,12 @@ export default function TicketAllocation() {
 
 
         <Autocomplete
-          id="asynchronous-demo"
           style={{ width: 250 }}
           open={open}
           onOpen={() => { setOpen(true); }}
           onClose={() => {setOpen(false); }}
           getOptionSelected={(option, value) => option.name === value.name}
-          getOptionLabel={option => option.name +" " +option.surname }
+          getOptionLabel={option => option.name +" "+option.surname }
           options={options}
           loading={loading}
           value = {person}

@@ -12,6 +12,7 @@ export default function Dashboard(){
   const [unallocated, setUnallocated] = useState(0)
   const [paid, setPaid] = useState(0)
   const [unpaid, setUnpaid] = useState(0)
+  const [connection, setConnection] = useState(false)
 
   const data = {
     labels: [
@@ -92,16 +93,26 @@ export default function Dashboard(){
 
       let x = await Api.postRequest("tickets",{})    
       setAllocated(x.ticket.length)//sizeof
+      console.log(x.ticket)
+
+      var truestuff = x.ticket.filter( key => {
+        if (key.paid == true)
+        return key
+      })
+      console.log(truestuff)
+      setPaid(truestuff.length)
+
+      var falsestuff = x.ticket.filter( key => {
+        if (key.paid == false)
+        return key
+      })
+      console.log(falsestuff)
+
+      setUnpaid(falsestuff.length)
      
       let y = await Api.getRequest("unallocated")
       setUnallocated(y.ticket)
-
-      let z = await Api.postRequest("tickets",{paid:true})
-      setPaid(z.ticket.length)//sizeof
-
-      let a = await Api.postRequest("tickets",{paid:false})
-      setUnpaid(a.ticket.length)//sizeof
-
+      setConnection(true)
     }
 
     fetchData()
@@ -110,100 +121,119 @@ export default function Dashboard(){
 
     return (
         
-        <div>
-            <main>
-              {console.log("Allocated " + allocated)}
-              {console.log("Unallocated " + unallocated)}
-              {console.log("Paid " + paid)}
-  <div>
-    <section>
-      <article>
-        <header>
-          <h2>Dashboard</h2>
-          <h1>Overview</h1>
-        </header>
-        <hr/>
-        <div>
-    <h3></h3>
+      <div>
+        {connection 
+
+
+          
         
-        <div className = " chart-wrapper">
-        <Doughnut data={data4} options={{
-          cutoutPercentage: 80,
-          style:{
-             width:"100",
-             height: "100",
+        ?
 
-             float:"left",
-             display:"inline-block"},
-            legend:{
-              display:false,
-              position:'right'
-            }
-          }}/>
-          <h3 className="h3Style">Total Allocated</h3>
-          <h4 className="h4Style">{(allocated / (unallocated+ allocated) * 100).toFixed(2)}%</h4>
-        </div> 
+        <div>
+        <main>
+          {console.log("Allocated " + allocated)}
+          {console.log("Unallocated " + unallocated)}
+          {console.log("Paid " + paid)}
+<div>
+<section>
+  <article>
+    <header>
+      <h2>Dashboard</h2>
+      <h1>Overview</h1>
+    </header>
+    <hr/>
+    <div>
+<h3></h3>
+    
+    <div className = " chart-wrapper">
+    <Doughnut data={data4} options={{
+      cutoutPercentage: 80,
+      style:{
+         width:"100",
+         height: "100",
+
+         float:"left",
+         display:"inline-block"},
+        legend:{
+          display:false,
+          position:'right'
+        }
+      }}/>
+      <h3 className="h3Style">Total Allocated</h3>
+      <h4 className="h4Style">{(allocated / (unallocated+ allocated) * 100).toFixed(2)}%</h4>
+    </div> 
 
 
-        <div className = " chart-wrapper">
-        <Doughnut data={data3} options={{
-          cutoutPercentage: 80,
-          style:{
-             width:"100",
-             height: "100",
+    <div className = " chart-wrapper">
+    <Doughnut data={data3} options={{
+      cutoutPercentage: 80,
+      style:{
+         width:"100",
+         height: "100",
 
-             float:"left",
-             display:"inline-block"},
-            legend:{
-              display:false,
-              position:'right'
-            }
-          }}/>
-          <h3 className="h3Style">Total Paid</h3>
-          <h4 className="h4Style">{(paid / (unallocated+ allocated) * 100).toFixed(2)}%</h4>
-        </div> 
+         float:"left",
+         display:"inline-block"},
+        legend:{
+          display:false,
+          position:'right'
+        }
+      }}/>
+      <h3 className="h3Style">Total Paid</h3>
+      <h4 className="h4Style">{(paid / (unallocated+ allocated) * 100).toFixed(2)}%</h4>
+    </div> 
 
-        <div className = " chart-wrapper">
-        <Doughnut data={data} options={{
-          cutoutPercentage: 80,
-          style:{
-             width:"100",
-             height: "100",
+    <div className = " chart-wrapper">
+    <Doughnut data={data} options={{
+      cutoutPercentage: 80,
+      style:{
+         width:"100",
+         height: "100",
 
-             float:"left",
-             display:"inline-block"},
-            legend:{
-              display:false,
-              position:'right'
-            }
-          }}/>
-          <h3 className="h3Style">Allocated vs Unallocated</h3>
-          <h4 className="h4Style">{(allocated / unallocated * 100).toFixed(2)}%</h4>
-        </div> 
+         float:"left",
+         display:"inline-block"},
+        legend:{
+          display:false,
+          position:'right'
+        }
+      }}/>
+      <h3 className="h3Style">Allocated vs Unallocated</h3>
+      <h4 className="h4Style">{(allocated / unallocated * 100).toFixed(2)}%</h4>
+    </div> 
 
-        <div className = " chart-wrapper">
-        <Doughnut data={data2} options={{
-          cutoutPercentage: 80,
-          style:{
-             width:"100",
-             height: "100",
+    <div className = " chart-wrapper">
+    <Doughnut data={data2} options={{
+      cutoutPercentage: 80,
+      style:{
+         width:"100",
+         height: "100",
 
-             float:"left",
-             display:"inline-block"},
-            legend:{
-              display:false,
-              position:'right'
-            }
-          }}/>
-          <h3 className="h3Style">Paid vs Allocated</h3>
-          <h4 className="h4Style">{(paid / allocated * 100).toFixed(2)}%</h4>
-        </div> 
+         float:"left",
+         display:"inline-block"},
+        legend:{
+          display:false,
+          position:'right'
+        }
+      }}/>
+      <h3 className="h3Style">Paid vs Allocated</h3>
+      <h4 className="h4Style">{(paid / allocated * 100).toFixed(2)}%</h4>
+    </div> 
 
-        </div>
-      </article>
-    </section>
-  </div>
+    </div>
+  </article>
+</section>
+</div>
 </main>
-        </div>
+    </div>
+
+
+
+        :
+
+
+      <h1>Loading </h1>
+
+      
+        }
+      </div>
     );
 }

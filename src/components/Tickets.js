@@ -6,6 +6,7 @@ import "../styles/eventCard.css";
 export default function Tickets(){
 
     const [data, setData] = useState([]);
+    const [connection, setConnection] = useState(false);
     let history = useHistory();
 
     useEffect(() => {
@@ -13,7 +14,11 @@ export default function Tickets(){
         async function fetchData(){
           
             let x = await Api.getRequest("availableEvents")
-            setData(x.event)
+            if(x.message === "success"){
+                setData(x.event)
+                setConnection(true)
+            }
+            
         }
       
         fetchData()
@@ -23,6 +28,14 @@ export default function Tickets(){
     return (
         
         <div>
+            {connection
+            
+            ?
+            
+          
+            <div>
+                  <button className="funButton"  style={{opacity:0}}></button>
+           
            <div>
             {data.reverse().map( x =>(
 
@@ -57,5 +70,15 @@ export default function Tickets(){
             ))}</div>
 
         </div>
+        
+            :
+            
+            
+                <div>Loading</div>
+                }
+
+
+        </div>
+        
     );
 }

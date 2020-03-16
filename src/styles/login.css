@@ -2,6 +2,10 @@
   font-family: sans-serif;
   text-align: center;
 }
+.MuiAutocomplete-option{
+  width: 100%;
+  float : none;
+}
 
 .profile-card {
   background:  #99cc33;

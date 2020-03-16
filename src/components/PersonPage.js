@@ -54,7 +54,7 @@ export default function PersonPage() {
         if(location.state.edit){
 
 
-          let resp = Api.putRequest("updatePerson/"+location.state.x.id,x)
+          let resp = await Api.putRequest("updatePerson/"+location.state.x.id,x)
           if(resp.message === "success"){
             history.goBack()
           }else{
@@ -65,7 +65,8 @@ export default function PersonPage() {
   
         }else{
           
-          let resp =Api.postRequest("addPerson",x)
+          let resp =await Api.postRequest("addPerson",x)
+          console.log(resp)
           if(resp.message === "success"){
             history.goBack()
           }else{

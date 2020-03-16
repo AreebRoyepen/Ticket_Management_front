@@ -94,7 +94,7 @@ export default function ReturnTickets() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, bulk, history]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, bulk, history, location]); // update the callback if the state changes
 
     const back = () =>{
 

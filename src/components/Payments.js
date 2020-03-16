@@ -92,7 +92,7 @@ export default function Payments() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, history, bulk]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, history, bulk, location]); // update the callback if the state changes
 
     const back = () =>{
 

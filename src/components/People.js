@@ -6,13 +6,17 @@ import { useHistory } from "react-router-dom";
 export default function People(){
 
     const [data, setData] = useState([]);
+    const [connection, setConnection] = useState(false);
     let history = useHistory();
 
     useEffect(() => {
         async function fetchData(){
 
             let x = await Api.getRequest("person");
-            setData(x.person)
+            if(x.message === "success"){
+                setData(x.person)
+                setConnection(true)
+            }            
 
         }
       
@@ -21,6 +25,12 @@ export default function People(){
 
     return (
         <div>
+
+            {connection
+            
+            ?
+        
+            <div>
             <button onClick = {() => {  history.push("/PersonPage",{id:null, edit:false})  }} className="funButton">Add Person</button>
             {data.map( x =>(
                 <div key = {x.id}>
@@ -49,6 +59,15 @@ export default function People(){
             
                 </div>
             ))}
+
+
+        </div>
+        
+    
+            :
+            
+                <div>Loading</div>
+                }
 
 
         </div>
