@@ -63,7 +63,7 @@ export default function Events(){
                              <span>R {x.ticketPrice} </span>
                             </span>   
                             <div className="card-sub-botton card-sub-show">
-                            <input onClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} type="submit" value="EDIT" name="button"className="cardButtons  card-link u-float-right"/>
+                            <input onDoubleClick = {() => {history.push("/EventPage",{event:x, edit: true})  }} type="submit" value="EDIT" name="button"className="cardButtons  card-link u-float-right"/>
                             <input onClick = {()=>{popup()}} type="submit" value="DELETE" name="button"className="cardButtons  card-link u-float-right"/>
                             </div>
                         </div>
