@@ -353,14 +353,28 @@ export default class Api {
     
     return axios.get(uri)
     .then(resp => {
+        console.log(resp)
         if(resp.status === 200){
             return resp.data
-        }else if (resp.data === 500){
+        }else if (resp.status === 500){
 
-            console.log( "SERVER TIME OUT")
+            console.log( resp.status)
+            return {'message' : ""}
+        }else if(resp.status === 400){
+            console.log(resp.status)
+            return {'message' : ""}
         }
 
     })
+
+    .catch(
+        e =>{
+            console.log(e)
+            return {"message" : "no connection"}
+            //return Promise.reject(e)
+        }
+    )
+    
 
    }
 
@@ -373,11 +387,20 @@ export default class Api {
 
         if(resp.status === 200){
             return resp.data
-        }else if (resp.data === 500){
-            console.log( "SERVER TIME OUT")
+        }else if (resp.status === 500){
 
+            console.log( resp.status)
+        }else if(resp.status === 400){
+            console.log(resp.status)
         }
    })
+   .catch(
+    e =>{
+        console.log(e)
+        return {"message" : "no connection"}
+        //return Promise.reject(e)
+    }
+)
 }
 
    static async putRequest(endpoint, payload){
@@ -389,11 +412,20 @@ export default class Api {
 
         if(resp.status === 200){
             return resp.data
-        }else if (resp.data === 500){
-            console.log( "SERVER TIME OUT")
+        }else if (resp.status === 500){
 
+            console.log( resp.status)
+        }else if(resp.status === 400){
+            console.log(resp.status)
         }
    })
+   .catch(
+    e =>{
+        console.log(e)
+        return {"message" : "no connection"}
+        //return Promise.reject(e)
+    }
+)
        
    }
 
@@ -406,11 +438,21 @@ export default class Api {
 
         if(resp.status === 200){
             return resp.data
-        }else if (resp.data === 500){
-            console.log( "SERVER TIME OUT")
+        }else if (resp.status === 500){
 
+            console.log( resp.status)
+        }else if(resp.status === 400){
+            console.log(resp.status)
         }
+
    })
+   .catch(
+    e =>{
+        console.log(e)
+        return {"message" : "no connection"}
+        //return Promise.reject(e)
+    }
+)
 
    }
 
