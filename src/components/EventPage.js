@@ -8,9 +8,7 @@ import "../styles/login.css";
 
 
 export default function EventPage() {
-
-    const [setData] = useState([]);
-    
+   
     let history = useHistory();
     let location = useLocation();
     
@@ -51,11 +49,20 @@ export default function EventPage() {
       async function fetchData(){
         if(location.state.edit){
 
-          await Api.putRequest("updateEvent/"+location.state.event.id, x)
-          history.goBack()
+          let resp = await Api.putRequest("updateEvent/"+location.state.event.id, x)
+          if(resp.message === "success"){
+            console.log("success")
+            history.goBack()
+          }
+          
         }else{
-          await Api.postRequest("addEvent",x)
-          history.goBack()
+          let resp = await Api.postRequest("addEvent",x)
+          if(resp.message === "success"){
+            console.log("success")
+            history.goBack()
+          }else{
+            console.log(resp.message)
+          }
         }
       }
       fetchData()
@@ -65,12 +72,14 @@ export default function EventPage() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, to, from,price, name, setData, location]); // update the callback if the state changes
+    }, [isSending, to, from,price, name, location, history]); // update the callback if the state changes
 
-    const bob = () => {
+    const back = () =>{
 
-      history.goBack()
+      history.goBack();
+
     }
+
 
     return (
 
@@ -115,6 +124,9 @@ export default function EventPage() {
     
     <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
     }
+
+<button className = "button" type="button" onClick={back}> Cancel</button>
+
       </div>
       </aside>
       </div>

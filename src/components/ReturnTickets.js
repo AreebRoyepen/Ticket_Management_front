@@ -1,30 +1,24 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { useLocation, useHistory } from "react-router-dom";
 
 import Api from "../api/Api";
 import "../styles/login.css";
+import { FormControlLabel, Grid, Switch } from "@material-ui/core";
 
 
 export default function ReturnTickets() {
 
     let location = useLocation();
     let history = useHistory();
-    const [setData] = useState([]);
     
-    const [open, setOpen] = React.useState(false);
-    const [options, setOptions] = React.useState([]);
-    const loading = open && options.length === 0;
-
     const [isSending, setIsSending] = useState(false)
     const isMounted = useRef(true)
 
     const [ticketNumberF, setTicketNumberF] = useState(0);
     const [ticketNumberT, setTicketNumberT] = useState(0);
+    const[bulk,setBulk] = useState(false);
 
-    const [eventID] = useState(0);
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
     
@@ -38,7 +32,7 @@ export default function ReturnTickets() {
 
       async function fetchData(){
         let x = location.state.event.id
-        let d = Api.getRequest("unallocated/" + x)
+        let d = await Api.getRequest("unallocated/" + x)
         setTickets(d.ticket)
       }
 
@@ -61,13 +55,35 @@ export default function ReturnTickets() {
       var x = {
         "ticketNumberF": parseInt(ticketNumberF),
         "ticketNumberT": parseInt(ticketNumberT),
-        "event" : eventID
+        "event" : location.state.event.id,
       };
 
       async function fetchData(){
 
-        let t = Api.deleteRequest("returnTicket/"+eventID+"/"+parseInt(ticketNumberF)) 
-        setData(t.ticket)
+        console.log(x)
+        if(bulk){
+
+          let t = await Api.deleteRequest("bulkReturn",x)
+          console.log(t)
+          if(t.message === "success"){
+
+            history.goBack()
+          }else{
+            console.log(t.message)
+          }
+
+        }else{
+          let t = await Api.deleteRequest("returnTicket/"+location.state.event.id+"/"+(ticketNumberF)) 
+          if(t.message === "success"){
+
+            history.goBack()
+          }else{
+            console.log(t.message)
+          }
+
+        }
+
+        
 
       }
 
@@ -78,9 +94,9 @@ export default function ReturnTickets() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, eventID, setData]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, bulk, history]); // update the callback if the state changes
 
-    const bob = () =>{
+    const back = () =>{
 
       // console.log(ticketNumber)
       // console.log(location.state.id)
@@ -97,9 +113,32 @@ export default function ReturnTickets() {
           {location.state.event.name}<br/>
           amount of tickets left: {tickets}
 
+          <FormControlLabel
+
+          control={
+
+          <Grid component="label" container alignItems="center" spacing={1}>
+            <Grid item>Off</Grid>
+            <Grid item>
+
+              <Switch
+                checked={bulk}
+                onChange={e => setBulk(e.target.checked)}
+                color = "#"
+              />
+
+
+            </Grid>
+            <Grid item>On</Grid>
+          </Grid>
+          }
+
+          />
+
+
       <TextField
         id="filled-number"
-        label="ticket range from"
+        label={bulk ?  "From" : "Ticket Number"}
         type="number"
         onChange = {e => {setTicketNumberF(e.target.value)}}
         InputLabelProps={{
@@ -109,18 +148,27 @@ export default function ReturnTickets() {
         
       />
 
-      <TextField
-              id="filled-number"
-              label="ticket range to"
-              type="number"
-              onChange = {e => {setTicketNumberT(e.target.value)}}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              
-            />
-      <button className = "button" type="button" disabled={isSending} onClick={bob}> Return Ticket</button>
+
+        {bulk ?
+        
+        <TextField
+        id="filled-number"
+        label="To"
+        type="number"
+        onChange = {e => {setTicketNumberT(e.target.value)}}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        variant="outlined"
+        
+      />
+
+        :
+        <div/>
+        }
+      <button className = "button" type="button" disabled={isSending} onClick={returnTicket}> Return Ticket</button>
+
+      <button className = "button" type="button" onClick={back}> Cancel</button>
   
       </div>
       </aside>

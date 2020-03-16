@@ -6,7 +6,6 @@ import "../styles/login.css";
 
 export default function PersonPage() {
 
-    const [setData] = useState();
     let history = useHistory();
     let location = useLocation();
 
@@ -55,14 +54,24 @@ export default function PersonPage() {
         if(location.state.edit){
 
 
-          Api.putRequest("updatePerson/"+location.state.x.id,x)
-          history.goBack()
+          let resp = Api.putRequest("updatePerson/"+location.state.x.id,x)
+          if(resp.message === "success"){
+            history.goBack()
+          }else{
+            console.log(resp.message)
+          }
+          
   
   
         }else{
           
-        Api.postRequest("addPerson",x)
-        history.goBack()
+          let resp =Api.postRequest("addPerson",x)
+          if(resp.message === "success"){
+            history.goBack()
+          }else{
+            console.log(resp.message)
+          }
+        
         
         }
 
@@ -76,15 +85,13 @@ export default function PersonPage() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, name, surname,number, email, location, setData]); // update the callback if the state changes
+    }, [isSending, name, surname,number, email, location, history]); // update the callback if the state changes
 
-    const bob = () =>{
+    const back = () =>{
 
-      history.goBack()
-
+      history.goBack();
 
     }
-
 
     return (
 
@@ -128,6 +135,8 @@ export default function PersonPage() {
     
     <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Add Person</button>
     }
+
+<button className = "button" type="button" onClick={back}> Cancel</button>
 
       </div>
       </aside>

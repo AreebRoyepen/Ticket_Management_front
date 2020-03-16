@@ -6,10 +6,10 @@ import { useLocation, useHistory } from "react-router-dom";
 
 import Api from "../api/Api";
 import "../styles/login.css";
+import { FormControlLabel, Grid, Switch } from "@material-ui/core";
 
 export default function TicketAllocation() {
 
-    const [ setData] = useState([]);    
     let location = useLocation();
     let history = useHistory();
 
@@ -21,9 +21,9 @@ export default function TicketAllocation() {
 
     const [ticketNumberF, setTicketNumberF] = useState(0);
     const [ticketNumberT, setTicketNumberT] = useState(0);
+    const [bulk, setBulk] = useState(false)
 
     const [person, setPerson] = useState(null);
-    const [eventID] = useState(0);
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
 
@@ -90,17 +90,43 @@ export default function TicketAllocation() {
 
       // send the actual request
 
-      var x = {
-        "ticketNumberF": parseInt(ticketNumberF),
-        "ticketNumberT": parseInt(ticketNumberT),
-        "event": eventID,
-        "person" : person.id
-      };
+
 
       async function fetchData(){
 
-        Api.postRequest("bulkAllocateTicket",x)
+        if(bulk){
 
+          var x = {
+            "ticketNumberF": parseInt(ticketNumberF),
+            "ticketNumberT": parseInt(ticketNumberT),
+            "event": location.state.event.id,
+            "person" : person.id
+          };
+          console.log(x)
+          let t = await Api.postRequest("bulkAllocateTicket",x)
+          console.log(t)
+          if(t.message === "success"){
+
+            history.goBack()
+          }else{
+            console.log(t.message)
+          }
+        }else{
+
+          var x = {
+            "ticketNumber": parseInt(ticketNumberF),
+            "event": location.state.event.id,
+            "person" : person.id
+          };
+
+          let t = await Api.postRequest("allocateTicket",x)
+          if(t.message === "success"){
+
+            history.goBack()
+          }else{
+            console.log(t.message)
+          }
+        }
       }
 
       fetchData()      
@@ -110,9 +136,9 @@ export default function TicketAllocation() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, eventID, person, setData]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history]); // update the callback if the state changes
 
-    const bob = () => {
+    const back = () => {
       
       // console.log(ticketNumberF)
       // console.log(ticketNumberT)
@@ -124,11 +150,36 @@ export default function TicketAllocation() {
     return (
 
       <div className="App">
+        {console.log(location.state.event.id)}
         <aside className="profile-card">
           <div className="profile-bio">
 
           {location.state.event.name}<br/>
           amount of tickets left: {tickets}
+
+
+
+          <FormControlLabel
+
+          control={
+
+          <Grid component="label" container alignItems="center" spacing={1}>
+            <Grid item>Off</Grid>
+            <Grid item>
+
+              <Switch
+                checked={bulk}
+                onChange={e => setBulk(e.target.checked)}
+                color = "#"
+              />
+
+
+            </Grid>
+            <Grid item>On</Grid>
+          </Grid>
+          }
+
+          />
 
 
         <Autocomplete
@@ -164,7 +215,7 @@ export default function TicketAllocation() {
 
       <TextField
         id="filled-number"
-        label="ticket range from"
+        label={bulk ?  "From" : "Ticket Number"}
         type="number"
         onChange = {e => {setTicketNumberF(e.target.value)}}
         InputLabelProps={{
@@ -174,19 +225,24 @@ export default function TicketAllocation() {
         
       />
 
-      <TextField
-        id="filled-number"
-        label="ticket range to"
-        type="number"
-        onChange = {e => setTicketNumberT(e.target.value)}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        variant="outlined"
-        
-      />
+        {bulk ?
+              <TextField
+              id="filled-number"
+              label="To"
+              type="number"
+              onChange = {e => setTicketNumberT(e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              
+            />
+          :
+          <div/>
+          }
 
-      <button className = "button" type="button" disabled={isSending} onClick={bob}> Allocate Ticket</button> 
+      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket}> Allocate Ticket</button> 
+      <button className = "button" type="button" onClick={back}> Cancel</button>
   
       </div>
       </aside>

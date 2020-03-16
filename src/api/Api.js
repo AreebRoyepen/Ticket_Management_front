@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let API_BASE_ADDRESS = 'http://192.168.0.104:8080';
+let API_BASE_ADDRESS = 'http://localhost:8080';
 // if(process.env.NODE_ENV == "development"){
 //     API_BASE_ADDRESS = ""
 // }
@@ -401,7 +401,7 @@ export default class Api {
 
     const uri = API_BASE_ADDRESS + "/" + endpoint;
     
-    return axios.delete(uri,payload)
+    return axios.delete(uri,{data : payload})
     .then(resp => {
 
         if(resp.status === 200){
