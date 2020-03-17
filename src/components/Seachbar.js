@@ -63,7 +63,7 @@ export default function Searchbar (content) {
                     <div className="container"> 
                     
                     <div className="card">
-                        <div className="card-body">
+                        <div className="card-body" id ={JSON.stringify(x.active)}>
                             <div className="card-header event-name">
                                 <p>{x.name}</p>
                             </div>
@@ -77,9 +77,8 @@ export default function Searchbar (content) {
                              <span>R {x.ticketPrice} </span>
                             </span>   
                             <div className="card-sub-botton card-sub-show">
-                            <input  onClick = {() => { console.log(x.id);  history.push("/EventPage",{event:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right"/>
-                            <input  type="submit" value="EDIT" name="button"className="cardButtons  card-link u-float-right"/>
-                            <input  type="submit" value="DELETE" name="button"className="cardButtons  card-link u-float-right"/>
+                            <input  onClick = {() => { console.log(x.id);  history.push("/EventPage",{event:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+                            <input  type="submit" value="DELETE" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
                             </div>
                         </div>
                     </div>
