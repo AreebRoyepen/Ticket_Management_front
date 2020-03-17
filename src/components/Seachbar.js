@@ -1,47 +1,67 @@
-import React,{Component, useState} from 'react';
+import React,{Component, useState, useEffect} from 'react';
 import "../styles/eventCard.css";
+import { useHistory } from "react-router-dom";
 
 
-export default class Searchbar extends Component {
+export default function Searchbar (content) {
 
   
-    state = {
-        initialItems: ([]),
-        items: [],
-        data:[]
+    // state = {
+    //     initialItems: ([]),
+    //     items: [],
+    //     data:[]
 
-    };
-    
-    filterList = (event) => {
-      let items = this.state.initialItems;
+    // };
+
+    const [initialItems, setInitialItems] = useState(content.content);
+    const [items, setItems] = useState(content.content);
+
+    let history = useHistory();
+
+    function filterList  (event){
+      let items = initialItems;
      console.log(items.length);
+     console.log(event.target.value)
       items = items.filter((item) => {
         return JSON.stringify(item).toLowerCase().search(event.target.value.toLowerCase()) !== -1;
       });
-      this.setState({items: items});
+      console.log(items)
+      setItems(items);
+      //this.setState({items: items});
     }
 
-    componentWillMount = () => {
-      this.setState({
-          initialItems: this.props.content,
-          items: this.props.content
-      })
-    }
+    // useEffect(() =>{
 
-    render() {
+    //   setInitialItems(content.content);
+    //   setItems(content.content);
+
+
+    // });
+    
+    // componentWillMount = () => {
+    //   this.setState({
+    //       initialItems: this.props.content,
+    //       items: this.props.content
+    //   })
+    // }
+
+ 
       return (
         <div>
           <form>
-                <input type="text" placeholder="Search" onChange={this.filterList}/>
+                <input type="text" placeholder="Search" onChange={ e => filterList(e)}/>
           </form>
 
           <div>
-            {this.state.items.reverse().map( x =>(
+            
+            {items.reverse().map( x =>(
 
+               
 
                 <div key = {x.id}>
                     
                     <div className="container"> 
+                    
                     <div className="card">
                         <div className="card-body">
                             <div className="card-header event-name">
@@ -57,6 +77,7 @@ export default class Searchbar extends Component {
                              <span>R {x.ticketPrice} </span>
                             </span>   
                             <div className="card-sub-botton card-sub-show">
+                            <input  onClick = {() => { console.log(x.id);  history.push("/EventPage",{event:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right"/>
                             <input  type="submit" value="EDIT" name="button"className="cardButtons  card-link u-float-right"/>
                             <input  type="submit" value="DELETE" name="button"className="cardButtons  card-link u-float-right"/>
                             </div>
@@ -67,5 +88,5 @@ export default class Searchbar extends Component {
             ))}</div>
         </div>
       );
-    }
+    
 };
