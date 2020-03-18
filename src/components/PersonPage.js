@@ -3,7 +3,6 @@ import { useLocation, useHistory } from "react-router-dom";
 import Api from "../api/Api";
 import "../styles/login.css";
 
-
 export default function PersonPage() {
 
     let history = useHistory();

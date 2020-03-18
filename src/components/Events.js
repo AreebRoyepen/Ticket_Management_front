@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Api from "../api/Api";
-import Searchbar from "./Seachbar";
+import Searchbar from "./SearchComponents/SearchEvent";
 import { useHistory } from "react-router-dom";
 import "../styles/eventCard.css";
 
