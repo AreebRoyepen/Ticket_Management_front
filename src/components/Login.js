@@ -1,41 +1,61 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Redirect } from 'react-router-dom';
 import "../styles/login.css";
+import Api from "../api/Api";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      isValid: false
-    };
-  }
+export default function Login ()  {
 
-  renderRedirect = () => {
-    if (this.state.isValid) {
+
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [isValid, setISValid] = useState();
+
+  
+
+
+  const renderRedirect = () => {
+    if (isValid) {
       return <Redirect to='/Dashboard' />
     }
   }
 
-  handleClick(event) {
-    //var apiBaseUrl = "http://localhost:3000/api/";
+  
+  const handleClick = (event) => {
 
-    if (this.state.username === "admin" && this.state.password === "admin") {
-      console.log("Welcome admin");
-      this.setState({isValid:true})
-    } else if (this.state.username === "cood" && this.state.password === "cood") {
-      console.log("Welcome coordinator");
-    } else {
-      console.log("Username or password does not exist");
-    }
+    async function fetchData(){
+
+      var body = {
+        "username" : username,
+        "password" : password
+      }
+
+      console.log(body)
+
+
+      let x = await Api.login("login", body)
+      if(x.message === "success"){
+        console.log(localStorage.token)
+        setISValid(true)
+        console.log(x)
+
+      }else if (x.message === "unauthorized"){
+          console.log(x.message)
+      }else if ("no connection"){
+        console.log(x)
+        
+      }
+      
+  }
+  fetchData()
+
+    //var apiBaseUrl = "http://localhost:3000/api/";
   }
 
-  render() {
+
     
     return (
       <div className="App">
-        {this.renderRedirect()}
+        {renderRedirect()}
         <aside className="profile-card">
           <div className="profile-bio">
             <div>
@@ -53,25 +73,22 @@ class Login extends Component {
               placeholder="Enter in your username"
               autoComplete="username"
               autoFocus
-              onChange={(event, newValue) =>
-                this.setState({ username: event.target.value })
-              }
+              onChange={e => setUsername(e.target.value)}
+              
             />
             <input
               type="password"
               className="sign-up-input"
               placeholder="Enter in your password"
               autoComplete="current-password"
-              onChange={(event, newValue) =>
-                this.setState({ password: event.target.value })
-              }
+              onChange={e => setPassword(e.target.value)}
             />
             </form>
            
             <div>
               <button
                 className="button"
-                onClick={event => this.handleClick(event)}
+                onClick={event => handleClick(event)}
               >
                 Sign in
               </button>
@@ -80,6 +97,5 @@ class Login extends Component {
         </aside>
       </div>
     );
-  }
+  
 }
-export default Login;

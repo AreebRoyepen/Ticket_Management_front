@@ -114,7 +114,7 @@ export default function Menu({children}) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick = {() => { history.push("/") }}> Log Out</MenuItem>
+                <MenuItem onClick = {() => { history.push("/");   localStorage.clear(); }}> Log Out</MenuItem>
               </MenuUI>
 
         </Toolbar>
