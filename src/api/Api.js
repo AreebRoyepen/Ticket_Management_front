@@ -11,7 +11,7 @@ export default class Api {
 
     const uri = API_BASE_ADDRESS + "/" + endpoint;
     
-    return axios.post(uri,payload, {timeout : 2})
+    return axios.post(uri,payload)
     .then(resp => {
 
         if(resp.status === 200){
