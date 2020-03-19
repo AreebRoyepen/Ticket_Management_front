@@ -49,12 +49,13 @@ export default function SearchEvent (content) {
       return (
         <div>
           <form>
-                <input type="text" placeholder="Search" onChange={ e => filterList(e)}/>
+                <input className ="searchBoxStyle" type="text" placeholder="Search" onChange={ e => filterList(e)}>
+                  </input>
           </form>
 
           <div>
             
-            {items.reverse().map( x =>(
+            {items.map( x =>(
 
                
 

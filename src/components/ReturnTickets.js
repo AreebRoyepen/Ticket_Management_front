@@ -109,10 +109,10 @@ export default function ReturnTickets() {
       <div className="App">
         <aside className="profile-card">
           <div className="profile-bio">
-
+          <h3>
           {location.state.event.name}<br/>
           amount of tickets left: {tickets}
-
+          </h3>
           <FormControlLabel
 
           control={
@@ -166,9 +166,9 @@ export default function ReturnTickets() {
         :
         <div/>
         }
-      <button className = "button" type="button" disabled={isSending} onClick={returnTicket}> Return Ticket</button>
+      <button className = "button" type="button" disabled={isSending} onClick={returnTicket} style={{marginTop: "30px"}}> Return Ticket</button>
 
-      <button className = "button" type="button" onClick={back}> Cancel</button>
+      <button className = "button" type="button" onClick={back} style={{marginTop: "30px"}} > Cancel</button>
   
       </div>
       </aside>

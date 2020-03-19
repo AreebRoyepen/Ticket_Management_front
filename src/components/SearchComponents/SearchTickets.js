@@ -25,12 +25,12 @@ export default function SearchTickets (content) {
       return (
         <div>
           <form>
-                <input type="text" placeholder="Search" onChange={ e => filterList(e)}/>
+                <input  className ="searchBoxStyle" type="text" placeholder="Search" onChange={ e => filterList(e)}/>
           </form>
 
           <div>
             
-            {items.reverse().map( x =>(
+            {items.map( x =>(
 
                
 

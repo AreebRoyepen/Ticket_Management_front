@@ -162,8 +162,8 @@ export default function TicketAllocation() {
         <aside className="profile-card">
           <div className="profile-bio">
 
-          {location.state.event.name}<br/>
-          amount of tickets left: {tickets}
+          <h3>{location.state.event.name}<br/>
+          amount of tickets left: {tickets}</h3>
 
 
 
@@ -191,7 +191,7 @@ export default function TicketAllocation() {
 
 
         <Autocomplete
-          style={{ width: 250 }}
+          style={{ width: 250 },{marginBottom: "30px"}}
           open={open}
           onOpen={() => { setOpen(true); }}
           onClose={() => {setOpen(false); }}
@@ -248,8 +248,8 @@ export default function TicketAllocation() {
           <div/>
           }
 
-      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket}> Allocate Ticket</button> 
-      <button className = "button" type="button" onClick={back}> Cancel</button>
+      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "30px"}}>allocate ticket</button> 
+      <button className = "button" type="button" onClick={back} style={{marginTop: "30px"}}> Cancel</button>
   
       </div>
       </aside>

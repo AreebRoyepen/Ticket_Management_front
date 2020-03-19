@@ -86,7 +86,7 @@ export default function EventPage() {
       <div className="App">
         <aside className="profile-card">
           <div className="profile-bio">
-
+          <button style={{opacity:0}}></button>
       <input
         type="text"
         className="sign-up-input"
@@ -119,13 +119,13 @@ export default function EventPage() {
   
           {location.state.edit ? 
       
-      <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Edit Event</button>
+      <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Edit Event</button>
     :
     
     <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
     }
 
-<button className = "button" type="button" onClick={back}> Cancel</button>
+<button className = "button" type="button" onClick={back}  style={{marginTop: "10px"}}> Cancel</button>
 
       </div>
       </aside>

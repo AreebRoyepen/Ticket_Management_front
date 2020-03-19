@@ -36,7 +36,15 @@ export default function People(){
             <Searchbar content={data}/>
         </div>
             :
-                <div>Loading</div>
+            <div class="dots-container">
+            <div class="dots">L</div>
+            <div class="dots">o</div>
+            <div class="dots">a</div>
+            <div class="dots">d</div>
+            <div class="dots">i</div>
+            <div class="dots">n</div>
+            <div class="dots">g</div>
+          </div>
                 }
         </div>
     );

@@ -99,7 +99,7 @@ export default function PersonPage() {
         
         <aside className="profile-card">
           <div className="profile-bio">
-
+          <button style={{opacity:0}}></button>
       <input
         type="text"
         className="sign-up-input"
