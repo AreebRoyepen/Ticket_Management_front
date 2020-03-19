@@ -125,9 +125,9 @@ export default function Payments() {
       <div className="App">
         <aside className="profile-card">
           <div className="profile-bio">
-
-          {location.state.event.name}<br/>
-          amount of tickets left: {tickets}
+          
+          <h3>{location.state.event.name}<br/>
+          amount of tickets left: {tickets}</h3>
  
 
           
@@ -153,8 +153,8 @@ export default function Payments() {
 
           />
 
-
       <TextField
+       style={{marginTop: "30px"}}
         id="filled-number"
         label={bulk ?  "From" : "Ticket Number"}
         type="number"
@@ -184,8 +184,8 @@ export default function Payments() {
             <div/>
         }
 
-      <button className = "button" type="button" disabled={isSending} onClick={payment}> Pay </button>
-      <button className = "button" type="button" onClick={back}> Cancel</button>
+      <button className = "button" type="button" disabled={isSending} onClick={payment}   style={{marginTop: "30px"}} > Pay </button>
+      <button className = "button" type="button" onClick={back}  style={{marginTop: "30px"}}> Cancel</button>
   
       </div>
       </aside>

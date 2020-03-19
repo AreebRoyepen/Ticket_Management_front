@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/dashboard.css";
-import { Doughnut } from 'react-chartjs-2';
+import { Chart, Doughnut } from 'react-chartjs-2';
 import Api from "../api/Api";
 import { useHistory } from "react-router-dom";
 
@@ -148,13 +148,34 @@ export default function Dashboard(){
 
   },[setAllocated, setUnallocated])
 
+
+  Chart.pluginService.register({
+    beforeDraw: function(chart) {
+      var width = chart.chart.width,
+          height = chart.chart.height,
+          ctx = chart.chart.ctx;
+  
+      ctx.restore();
+      var fontSize = 1.2;
+      ctx.fontColor = "red";
+      ctx.font = fontSize + "em sans-serif";
+      ctx.textBaseline = "center";
+  
+      var text = chart.options.centerText.text,
+          textX = Math.round((width - ctx.measureText(text).width) / 2),
+          textY = height / 2;
+  
+      ctx.fillText(text, textX, textY);
+      ctx.save();
+    }
+  });
+
+
+
     return (
         
       <div>
-        {connection 
-
-
-          
+        {connection         
         
         ?
 
@@ -166,85 +187,93 @@ export default function Dashboard(){
 <div>
 <section>
   <article>
-    <header>
-      <h2>Dashboard</h2>
-      <h1>Overview</h1>
+    <header className="dashboardHeader">
+      <h2 className="h2Dashboard">Dashboard</h2>
+      <h1 className="h1Dashboard">Overview</h1>
     </header>
     <hr/>
     <div>
-<h3></h3>
-    
     <div className = " chart-wrapper">
     <Doughnut data={data4} options={{
       cutoutPercentage: 80,
+      responsive: true,
       style:{
-         width:"100",
-         height: "100",
+         width:"600px",
+         height: "300px",
 
          float:"left",
          display:"inline-block"},
         legend:{
           display:false,
           position:'right'
-        }
+        },
+        centerText: {
+          display: true,
+          text: "Total Allocated",
+          
+      }
       }}/>
-      <h3 className="h3Style">Total Allocated</h3>
-      <h4 className="h4Style">{(allocated / (unallocated+ allocated) * 100).toFixed(2)}%</h4>
     </div> 
-
 
     <div className = " chart-wrapper">
     <Doughnut data={data3} options={{
       cutoutPercentage: 80,
+      responsive: true,
       style:{
-         width:"100",
-         height: "100",
+         width:"600px",
+         height: "300px",
 
          float:"left",
          display:"inline-block"},
         legend:{
           display:false,
           position:'right'
-        }
+        },
+        centerText: {
+          display: true,
+          text: "Total Paid"
+      }
       }}/>
-      <h3 className="h3Style">Total Paid</h3>
-      <h4 className="h4Style">{(paid / (unallocated+ allocated) * 100).toFixed(2)}%</h4>
+      
     </div> 
 
     <div className = " chart-wrapper">
     <Doughnut data={data} options={{
       cutoutPercentage: 80,
+      responsive: true,
       style:{
-         width:"100",
-         height: "100",
+         width:"600px",
+         height: "300px",
 
          float:"left",
          display:"inline-block"},
         legend:{
           display:false,
           position:'right'
-        }
+        },
+        centerText: {
+          display: true,
+          text: "Allocated vs Unallocated"
+      }
       }}/>
-      <h3 className="h3Style">Allocated vs Unallocated</h3>
-      <h4 className="h4Style">{(allocated / unallocated * 100).toFixed(2)}%</h4>
     </div> 
 
     <div className = " chart-wrapper">
     <Doughnut data={data2} options={{
       cutoutPercentage: 80,
+      responsive: true,
       style:{
-         width:"100",
-         height: "100",
-
          float:"left",
          display:"inline-block"},
         legend:{
           display:false,
           position:'right'
-        }
+        },
+          centerText: {
+          display: true,
+          text: "Paid vs Allocated"
+      }
       }}/>
-      <h3 className="h3Style">Paid vs Allocated</h3>
-      <h4 className="h4Style">{(paid / allocated * 100).toFixed(2)}%</h4>
     </div> 
 
     </div>
@@ -259,7 +288,15 @@ export default function Dashboard(){
         :
 
 
-      <h1>Loading </h1>
+        <div class="dots-container">
+  <div class="dots">L</div>
+  <div class="dots">o</div>
+  <div class="dots">a</div>
+  <div class="dots">d</div>
+  <div class="dots">i</div>
+  <div class="dots">n</div>
+  <div class="dots">g</div>
+</div>
 
       
         }
