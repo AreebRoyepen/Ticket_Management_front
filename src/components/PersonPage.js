@@ -56,8 +56,13 @@ export default function PersonPage() {
           let resp = await Api.putRequest("updatePerson/"+location.state.x.id,x)
           if(resp.message === "success"){
             history.goBack()
-          }else{
-            console.log(resp.message)
+          }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/", {last : "/PersonPage"})
+          }else if(x.message === "error"){
+            console.log("error")
+          }else if(x.message === "no connection"){
+            console.log("no connection")
           }
           
   
@@ -68,8 +73,13 @@ export default function PersonPage() {
           console.log(resp)
           if(resp.message === "success"){
             history.goBack()
-          }else{
-            console.log(resp.message)
+          }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/", {last : "/PersonPage"})
+          }else if(x.message === "error"){
+            console.log("error")
+          }else if(x.message === "no connection"){
+            console.log("no connection")
           }
         
         

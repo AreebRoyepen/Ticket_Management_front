@@ -17,7 +17,14 @@ export default function People(){
             if(x.message === "success"){
                 setData(x.person)
                 setConnection(true)
-            }            
+            }else if (x.message === "unauthorized"){
+                localStorage.clear();
+                history.push("/" , {last: "/People"})
+            }else if(x.message === "error"){
+              console.log("error")
+            }else if(x.message === "no connection"){
+              console.log("no connection")
+            }
 
         }
       

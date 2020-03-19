@@ -24,15 +24,18 @@ export default class Api {
     e =>{
         console.log(e)
 
-        if(e.response.status === 500){
+        if(e.response){
+
+            if(e.response.status === 400){
+                return {"message" : "error"}
+            }else if(e.response.status === 401){
+                return {"message" : "unauthorized"}
+            }
+
+        }else{
+            console.log("nice")
             return {"message" : "no connection"}
-        }else if(e.response.status === 400){
-            return {"message" : "400"}
-        }else if(e.response.status === 401){
-            return {"message" : "unauthorized"}
-        }
-        
-        //return Promise.reject(e)
+        }    
     }
 )
 }
@@ -48,13 +51,6 @@ export default class Api {
         console.log(resp)
         if(resp.status === 200){
             return resp.data
-        }else if (resp.status === 500){
-
-            console.log( resp.status)
-            return {'message' : ""}
-        }else if(resp.status === 400){
-            console.log(resp.status)
-            return {'message' : ""}
         }
 
     })
@@ -62,8 +58,18 @@ export default class Api {
     .catch(
         e =>{
             console.log(e)
-            return {"message" : "no connection"}
-            //return Promise.reject(e)
+
+            if(e.response){
+    
+                if(e.response.status === 400){
+                    return {"message" : "error"}
+                }else if(e.response.status === 401){
+                    return {"message" : "unauthorized"}
+                }
+    
+            }else{
+                return {"message" : "no connection"}
+            }
         }
     )
     
@@ -85,15 +91,18 @@ export default class Api {
     e =>{
         console.log(e)
 
-        if(e.response.status === 500){
+        if(e.response){
+
+            if(e.response.status === 400){
+                return {"message" : "error"}
+            }else if(e.response.status === 401){
+                return {"message" : "unauthorized"}
+            }
+
+        }else{
+            console.log("nice")
             return {"message" : "no connection"}
-        }else if(e.response.status === 400){
-            return {"message" : "400"}
-        }else if(e.response.status === 401){
-            return {"message" : "unauthorized"}
         }
-        
-        //return Promise.reject(e)
     }
 )
 }
@@ -107,18 +116,24 @@ export default class Api {
 
         if(resp.status === 200){
             return resp.data
-        }else if (resp.status === 500){
-
-            console.log( resp.status)
-        }else if(resp.status === 400){
-            console.log(resp.status)
         }
    })
    .catch(
     e =>{
         console.log(e)
-        return {"message" : "no connection"}
-        //return Promise.reject(e)
+
+        if(e.response){
+
+            if(e.response.status === 400){
+                return {"message" : "error"}
+            }else if(e.response.status === 401){
+                return {"message" : "unauthorized"}
+            }
+
+        }else{
+            console.log("nice")
+            return {"message" : "no connection"}
+        }
     }
 )
        
@@ -133,19 +148,25 @@ export default class Api {
 
         if(resp.status === 200){
             return resp.data
-        }else if (resp.status === 500){
-
-            console.log( resp.status)
-        }else if(resp.status === 400){
-            console.log(resp.status)
         }
 
    })
    .catch(
     e =>{
         console.log(e)
-        return {"message" : "no connection"}
-        //return Promise.reject(e)
+
+        if(e.response){
+
+            if(e.response.status === 400){
+                return {"message" : "error"}
+            }else if(e.response.status === 401){
+                return {"message" : "unauthorized"}
+            }
+
+        }else{
+            console.log("nice")
+            return {"message" : "no connection"}
+        }
     }
 )
 

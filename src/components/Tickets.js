@@ -18,6 +18,13 @@ export default function Tickets(){
             if(x.message === "success"){
                 setData(x.event)
                 setConnection(true)
+            }else if (x.message === "unauthorized"){
+                localStorage.clear();
+                history.push("/",  {last : "/Tickets"})
+            }else if(x.message === "error"){
+              console.log("error")
+            }else if(x.message === "no connection"){
+              console.log("no connection")
             }
             
         }

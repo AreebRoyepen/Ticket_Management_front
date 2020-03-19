@@ -33,7 +33,17 @@ export default function Payments() {
       async function fetchData(){
         let id = location.state.event.id
         let x = await Api.getRequest("unallocated/" + id)
-        setTickets(x.ticket)
+        if(x.message==="success"){
+          setTickets(x.ticket)
+        }else if (x.message === "unauthorized"){
+          localStorage.clear();
+          history.push("/", {last: "/Payments"})
+      }else if(x.message === "error"){
+        console.log("error")
+      }else if(x.message === "no connection"){
+        console.log("no connection")
+      }
+        
       }
 
       fetchData();
@@ -69,8 +79,13 @@ export default function Payments() {
           if(x.message === "success"){
 
             history.goBack()
-          }else{
-            console.log(x.message)
+          }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/" , {last: "/Payments"})
+          }else if(x.message === "error"){
+            console.log("error")
+          }else if(x.message === "no connection"){
+            console.log("no connection")
           }
 
         }else{
@@ -78,8 +93,13 @@ export default function Payments() {
           if(x.message === "success"){
 
             history.goBack()
-          }else{
-            console.log(x.message)
+          }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/", {last: "/Payments"})
+          }else if(x.message === "error"){
+            console.log("error")
+          }else if(x.message === "no connection"){
+            console.log("no connection")
           }
         }
         

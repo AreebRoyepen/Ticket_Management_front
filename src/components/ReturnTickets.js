@@ -33,7 +33,16 @@ export default function ReturnTickets() {
       async function fetchData(){
         let x = location.state.event.id
         let d = await Api.getRequest("unallocated/" + x)
-        setTickets(d.ticket)
+        if(d.message === "success"){
+          setTickets(d.ticket)
+        }else if (x.message === "unauthorized"){
+          localStorage.clear();
+          history.push("/", {last : "/ReturnTickets"})
+        }else if(x.message === "error"){
+          console.log("error")
+        }else if(x.message === "no connection"){
+          console.log("no connection")
+        }
       }
 
       fetchData()
@@ -68,8 +77,13 @@ export default function ReturnTickets() {
           if(t.message === "success"){
 
             history.goBack()
-          }else{
-            console.log(t.message)
+          }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/", {last : "/ReturnTickets"})
+          }else if(x.message === "error"){
+            console.log("error")
+          }else if(x.message === "no connection"){
+            console.log("no connection")
           }
 
         }else{
@@ -77,8 +91,13 @@ export default function ReturnTickets() {
           if(t.message === "success"){
 
             history.goBack()
-          }else{
-            console.log(t.message)
+          }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/", {last : "/ReturnTickets"})
+          }else if(x.message === "error"){
+            console.log("error")
+          }else if(x.message === "no connection"){
+            console.log("no connection")
           }
 
         }

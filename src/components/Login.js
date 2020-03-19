@@ -1,10 +1,12 @@
 import React, { Component, useState } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect, useLocation, useHistory } from 'react-router-dom';
 import "../styles/login.css";
 import Api from "../api/Api";
 
 export default function Login ()  {
 
+  let location = useLocation()
+  let history = useHistory()
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -15,7 +17,12 @@ export default function Login ()  {
 
   const renderRedirect = () => {
     if (isValid) {
-      return <Redirect to='/Dashboard' />
+      if(location.state){
+        history.push(location.state.last)
+      }else{
+        return <Redirect to='/Dashboard' />
+      }
+      
     }
   }
 
@@ -33,6 +40,7 @@ export default function Login ()  {
 
 
       let x = await Api.login("login", body)
+      console.log(x)
       if(x.message === "success"){
         console.log(localStorage.token)
         setISValid(true)
@@ -40,9 +48,10 @@ export default function Login ()  {
 
       }else if (x.message === "unauthorized"){
           console.log(x.message)
-      }else if ("no connection"){
-        console.log(x)
-        
+      }else if(x.message === "error"){
+        console.log("error")
+      }else if(x.message === "no connection"){
+        console.log("no connection")
       }
       
   }
@@ -56,6 +65,7 @@ export default function Login ()  {
     return (
       <div className="App">
         {renderRedirect()}
+        {console.log(location)}
         <aside className="profile-card">
           <div className="profile-bio">
             <div>

@@ -40,7 +40,17 @@ export default function TicketAllocation() {
         let x = location.state.event.id
 
         let t = await Api.getRequest("unallocated/" + x)
-        setTickets(t.ticket)       
+        if(t.message === "success"){
+          setTickets(t.ticket)
+        }else if (x.message === "unauthorized"){
+          localStorage.clear();
+          history.push("/",  {last : "/TicketAllocation"})
+      }else if(x.message === "error"){
+        console.log("error")
+      }else if(x.message === "no connection"){
+        console.log("no connection")
+      }
+               
 
       }
 
@@ -114,8 +124,13 @@ export default function TicketAllocation() {
           if(t.message === "success"){
 
             history.goBack()
-          }else{
-            console.log(t.message)
+          }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/",  {last : "/TicketAllocation"})
+          }else if(x.message === "error"){
+            console.log("error")
+          }else if(x.message === "no connection"){
+            console.log("no connection")
           }
         }else{
 
@@ -129,8 +144,13 @@ export default function TicketAllocation() {
           if(t.message === "success"){
 
             history.goBack()
-          }else{
-            console.log(t.message)
+          }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/",  {last : "/TicketAllocation"})
+          }else if(x.message === "error"){
+            console.log("error")
+          }else if(x.message === "no connection"){
+            console.log("no connection")
           }
         }
       }

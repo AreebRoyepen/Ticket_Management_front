@@ -17,8 +17,13 @@ export default function Events(){
             if(x.message === "success"){
                 setData(x.event);
                 setConnection(true)
+            }else if (x.message === "unauthorized"){
+                localStorage.clear();
+                history.push("/", {last: "/Events"})
+            }else if(x.message === "error"){
+              console.log("error")
             }else if(x.message === "no connection"){
-                console.log(x.message)
+              console.log("no connection")
             }
             
         }

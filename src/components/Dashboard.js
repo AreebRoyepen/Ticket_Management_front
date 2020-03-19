@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/dashboard.css";
 import { Doughnut } from 'react-chartjs-2';
 import Api from "../api/Api";
+import { useHistory } from "react-router-dom";
 
 
 
@@ -13,6 +14,8 @@ export default function Dashboard(){
   const [paid, setPaid] = useState(0)
   const [unpaid, setUnpaid] = useState(0)
   const [connection, setConnection] = useState(false)
+
+  let history = useHistory();
 
   const data = {
     labels: [
@@ -91,27 +94,53 @@ export default function Dashboard(){
 
     async function fetchData(){
 
-      let x = await Api.postRequest("tickets",{})    
-      setAllocated(x.ticket.length)//sizeof
-      console.log(x.ticket)
+      let x = await Api.postRequest("tickets",{})   
 
-      var truestuff = x.ticket.filter( key => {
-        if (key.paid == true)
-        return key
-      })
-      console.log(truestuff)
-      setPaid(truestuff.length)
+      console.log(x)
 
-      var falsestuff = x.ticket.filter( key => {
-        if (key.paid == false)
-        return key
-      })
-      console.log(falsestuff)
+      if(x.message === "success"){
+        setAllocated(x.ticket.length)//sizeof
 
-      setUnpaid(falsestuff.length)
+        var truestuff = x.ticket.filter( key => {
+          if (key.paid == true)
+          return key
+        })
+        setPaid(truestuff.length)
+
+        var falsestuff = x.ticket.filter( key => {
+          if (key.paid == false)
+          return key
+        })
+        setUnpaid(falsestuff.length)
      
+      }else if (x.message === "no connection"){
+
+        console.log("check your internet connection")
+
+      } else if(x.message === "unauthorized"){
+
+        localStorage.clear();
+        history.push("/", {last : "/Dashboard"})
+
+      }
+      
       let y = await Api.getRequest("unallocated")
-      setUnallocated(y.ticket)
+
+      if(y.message === "success"){
+
+        console.log(y)
+        setUnallocated(y.ticket)
+
+      }else if (y.message === "unauthorized"){
+        localStorage.clear();
+        history.push("/", {last : "/Dashboard"})
+    }else if(y.message === "error"){
+      console.log("error")
+    }else if(y.message === "no connection"){
+      console.log("no connection")
+    }
+
+
       setConnection(true)
     }
 

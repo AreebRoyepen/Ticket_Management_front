@@ -53,16 +53,28 @@ export default function EventPage() {
           if(resp.message === "success"){
             console.log("success")
             history.goBack()
-          }
+          }else if (resp.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/" , {last : "/EventPage"})
+        }else if(resp.message === "error"){
+          console.log("error")
+        }else if(resp.message === "no connection"){
+          console.log("no connection")
+        }
           
         }else{
           let resp = await Api.postRequest("addEvent",x)
           if(resp.message === "success"){
             console.log("success")
             history.goBack()
-          }else{
-            console.log(resp.message)
-          }
+          }else if (resp.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/", {last : "/EventPage"})
+        }else if(resp.message === "error"){
+          console.log("error")
+        }else if(resp.message === "no connection"){
+          console.log("no connection")
+        }
         }
       }
       fetchData()
