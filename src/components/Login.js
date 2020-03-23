@@ -18,7 +18,7 @@ export default function Login ()  {
   const renderRedirect = () => {
     if (isValid) {
       if(location.state){
-        history.push(location.state.last)
+        history.push(location.state.last, location.state.data)
       }else{
         return <Redirect to='/Dashboard' />
       }
@@ -43,6 +43,7 @@ export default function Login ()  {
       console.log(x)
       if(x.message === "success"){
         console.log(localStorage.token)
+        console.log(JSON.parse(localStorage.user))
         setISValid(true)
         console.log(x)
 
@@ -57,7 +58,6 @@ export default function Login ()  {
   }
   fetchData()
 
-    //var apiBaseUrl = "http://localhost:3000/api/";
   }
 
 

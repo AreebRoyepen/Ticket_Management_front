@@ -22,6 +22,7 @@ export default function TicketAllocation() {
     const [ticketNumberF, setTicketNumberF] = useState(0);
     const [ticketNumberT, setTicketNumberT] = useState(0);
     const [bulk, setBulk] = useState(false)
+    const[paid, setPaid] = useState(false)
 
     const [person, setPerson] = useState(null);
     const[loadTickets, setLoadTickets] = useState(false)
@@ -71,16 +72,8 @@ export default function TicketAllocation() {
    
       let persons = await Api.getRequest("person");
 
-      // const response = await fetch(
-      //   "https://country.register.gov.uk/records.json?page-size=5000"
-      // );
-      //let persons =await response.json();
-
-
         if (active) {
           setOptions(persons.person);
-          //setOptions(Object.keys(persons).map(key => persons[key].item[0]));
-
         }
       })();
   
@@ -110,49 +103,101 @@ export default function TicketAllocation() {
 
       async function fetchData(){
 
-        if(bulk){
+          if(bulk){
 
-          var x = {
-            "ticketNumberF": parseInt(ticketNumberF),
-            "ticketNumberT": parseInt(ticketNumberT),
-            "event": location.state.event.id,
-            "person" : person.id
-          };
-          console.log(x)
-          let t = await Api.postRequest("bulkAllocateTicket",x)
-          console.log(t)
-          if(t.message === "success"){
+            console.log("IN BULK")
+            var allocateBulk = {
+              "ticketNumberF": parseInt(ticketNumberF),
+              "ticketNumberT": parseInt(ticketNumberT),
+              "event": location.state.event.id,
+              "person" : person.id
+            };
 
-            history.goBack()
-          }else if (x.message === "unauthorized"){
-            localStorage.clear();
-            history.push("/",  {last : "/TicketAllocation"})
-          }else if(x.message === "error"){
-            console.log("error")
-          }else if(x.message === "no connection"){
-            console.log("no connection")
-          }
+            console.log(allocateBulk)
+            let t = await Api.postRequest("bulkAllocateTicket",allocateBulk)
+            console.log(t)
+            if(t.message === "success"){
+
+              console.log("In success")
+
+              //can only pay for tickets if allocated successfully
+              if(paid){
+                console.log("in paid")
+                  let pay = {
+      
+                    "event": location.state.event.id,
+                    "ticketNumberF": parseInt(ticketNumberF),
+                    "ticketNumberT": parseInt(ticketNumberT)
+                    
+                  }
+                  
+                  let p = await Api.postRequest("bulkPayment",pay)
+                  console.log(p)
+                  if(p.message === "success"){
+        
+                    history.goBack()
+                  }else if (p.message === "unauthorized"){
+                    localStorage.clear();
+                    history.push("/" , {last: "/Payments"})
+                  }else if(p.message === "error"){
+                    console.log("error")
+                  }else if(p.message === "no connection"){
+                    console.log("no connection")
+                  }
+                }else{
+                  history.goBack()
+                }
+
+            }else if (t.message === "unauthorized"){
+              localStorage.clear();
+              history.push("/",  {last : "/TicketAllocation"})
+            }else if(t.message === "error"){
+              console.log("error")
+            }else if(t.message === "no connection"){
+              console.log("no connection")
+            }
+
+
+          
         }else{
 
-          var x = {
+          var allocate = {
             "ticketNumber": parseInt(ticketNumberF),
             "event": location.state.event.id,
             "person" : person.id
           };
 
-          let t = await Api.postRequest("allocateTicket",x)
+          let t = await Api.postRequest("allocateTicket",allocate)
           if(t.message === "success"){
 
-            history.goBack()
-          }else if (x.message === "unauthorized"){
+            if(paid){
+              let pay = await Api.getRequest("payment/"+location.state.event.id+"/"+parseInt(ticketNumberF))
+              if(pay.message === "success"){
+
+                history.goBack()
+              }else if (pay.message === "unauthorized"){
+                localStorage.clear();
+                history.push("/", {last: "/Payments", data: location.state})
+              }else if(pay.message === "error"){
+                console.log("error")
+              }else if(pay.message === "no connection"){
+                console.log("no connection")
+              }
+            }else{
+              history.goBack()
+
+            }
+
+          }else if (t.message === "unauthorized"){
             localStorage.clear();
-            history.push("/",  {last : "/TicketAllocation"})
-          }else if(x.message === "error"){
+            history.push("/",  {last : "/TicketAllocation", data : location.state})
+          }else if(t.message === "error"){
             console.log("error")
-          }else if(x.message === "no connection"){
+          }else if(t.message === "no connection"){
             console.log("no connection")
           }
         }
+
       }
 
       fetchData()      
@@ -165,11 +210,8 @@ export default function TicketAllocation() {
     }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history, location]); // update the callback if the state changes
 
     const back = () => {
-      
-      // console.log(ticketNumberF)
-      // console.log(ticketNumberT)
-      // console.log(location.state.id)
-      history.goBack();
+      history.push("/Tickets");
+
       
     }
 
@@ -183,7 +225,7 @@ export default function TicketAllocation() {
           <div className="profile-bio">
 
           <h3>{location.state.event.name}<br/>
-          amount of tickets left: {tickets}</h3>
+          unallocated tickets left: {tickets}</h3>
 
 
 
@@ -192,7 +234,7 @@ export default function TicketAllocation() {
           control={
 
           <Grid component="label" container alignItems="center" spacing={1}>
-            <Grid item>Off</Grid>
+            <Grid item>Single</Grid>
             <Grid item>
 
               <Switch
@@ -203,7 +245,7 @@ export default function TicketAllocation() {
 
 
             </Grid>
-            <Grid item>On</Grid>
+            <Grid item>Bulk</Grid>
           </Grid>
           }
 
@@ -268,7 +310,37 @@ export default function TicketAllocation() {
           <div/>
           }
 
-      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "30px"}}>allocate ticket</button> 
+          <FormControlLabel
+
+          control={
+
+          <Grid component="label" container alignItems="center" spacing={1}>
+            <Grid item>
+
+              <Switch
+                checked={paid}
+                onChange={e => {console.log(e.target.checked)
+                  setPaid(e.target.checked)}}
+                color = "#"
+              />
+
+
+            </Grid>
+            <Grid item>Paid</Grid>
+          </Grid>
+          }
+
+          />
+
+      {paid ?
+      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "30px"}}>Allocate & Pay</button> 
+
+    
+      :
+      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "30px"}}>Allocate Ticket</button> 
+
+      
+      }
       <button className = "button" type="button" onClick={back} style={{marginTop: "30px"}}> Cancel</button>
   
       </div>

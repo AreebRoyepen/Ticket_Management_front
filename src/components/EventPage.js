@@ -11,6 +11,8 @@ export default function EventPage() {
    
     let history = useHistory();
     let location = useLocation();
+
+    console.log(location)
     
     const [isSending, setIsSending] = useState(false)
     const isMounted = useRef(true)
@@ -55,7 +57,7 @@ export default function EventPage() {
             history.goBack()
           }else if (resp.message === "unauthorized"){
             localStorage.clear();
-            history.push("/" , {last : "/EventPage"})
+            history.push("/" , {last : "/EventPage", data : location.state})
         }else if(resp.message === "error"){
           console.log("error")
         }else if(resp.message === "no connection"){
@@ -88,7 +90,8 @@ export default function EventPage() {
 
     const back = () =>{
 
-      history.goBack();
+      history.push("/Tickets");
+
 
     }
 

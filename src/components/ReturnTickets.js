@@ -93,7 +93,7 @@ export default function ReturnTickets() {
             history.goBack()
           }else if (x.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last : "/ReturnTickets"})
+            history.push("/", {last : "/ReturnTickets", data : location.state})
           }else if(x.message === "error"){
             console.log("error")
           }else if(x.message === "no connection"){
@@ -119,7 +119,8 @@ export default function ReturnTickets() {
 
       // console.log(ticketNumber)
       // console.log(location.state.id)
-      history.goBack();
+      history.push("/Tickets");
+
 
     }
     
@@ -130,14 +131,14 @@ export default function ReturnTickets() {
           <div className="profile-bio">
           <h3>
           {location.state.event.name}<br/>
-          amount of tickets left: {tickets}
+          unallocated tickets left: {tickets}
           </h3>
           <FormControlLabel
 
           control={
 
           <Grid component="label" container alignItems="center" spacing={1}>
-            <Grid item>Off</Grid>
+            <Grid item>Single</Grid>
             <Grid item>
 
               <Switch
@@ -148,7 +149,7 @@ export default function ReturnTickets() {
 
 
             </Grid>
-            <Grid item>On</Grid>
+            <Grid item>Bulk</Grid>
           </Grid>
           }
 

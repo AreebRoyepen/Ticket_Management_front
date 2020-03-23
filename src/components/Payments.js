@@ -21,6 +21,7 @@ export default function Payments() {
 
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
+    const [unpaidTickets, setUnpaidTickets] = useState(0)
 
     const[bulk,setBulk] = useState(false);
     
@@ -32,17 +33,32 @@ export default function Payments() {
 
       async function fetchData(){
         let id = location.state.event.id
-        let x = await Api.getRequest("unallocated/" + id)
-        if(x.message==="success"){
-          setTickets(x.ticket)
-        }else if (x.message === "unauthorized"){
+
+        let unpaid = await Api.postRequest("tickets", {event : id})
+        console.log(unpaid)
+        if(unpaid.message==="success"){
+          var truestuff = unpaid.ticket.filter( key => {
+            if (key.paid == true)
+            return key
+          })
+  
+          var falsestuff = unpaid.ticket.filter( key => {
+            if (key.paid == false)
+            return key
+          })
+          setUnpaidTickets(falsestuff.length)
+          setTickets(truestuff.length)
+
+        }else if (unpaid.message === "unauthorized"){
           localStorage.clear();
           history.push("/", {last: "/Payments"})
-      }else if(x.message === "error"){
+      }else if(unpaid.message === "error"){
         console.log("error")
-      }else if(x.message === "no connection"){
+      }else if(unpaid.message === "no connection"){
         console.log("no connection")
       }
+
+
         
       }
 
@@ -90,12 +106,13 @@ export default function Payments() {
 
         }else{
           let x = await Api.getRequest("payment/"+location.state.event.id+"/"+parseInt(ticketNumberF))
+          console.log(x)
           if(x.message === "success"){
 
             history.goBack()
           }else if (x.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last: "/Payments"})
+            history.push("/", {last: "/Payments", data: location.state})
           }else if(x.message === "error"){
             console.log("error")
           }else if(x.message === "no connection"){
@@ -116,7 +133,7 @@ export default function Payments() {
 
     const back = () =>{
 
-      history.goBack();
+      history.push("/Tickets");
 
     }
     
@@ -126,8 +143,12 @@ export default function Payments() {
         <aside className="profile-card">
           <div className="profile-bio">
           
-          <h3>{location.state.event.name}<br/>
-          amount of tickets left: {tickets}</h3>
+          <h3>
+          {location.state.event.name}<br/>
+          {unpaidTickets} allocated  <br/>
+          and {tickets} unpaid tickets<br/>
+          
+          </h3>
  
 
           

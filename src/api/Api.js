@@ -16,7 +16,7 @@ export default class Api {
 
         if(resp.status === 200){
             localStorage.setItem("token","Bearer " + resp.data.token)
-            localStorage.setItem("user", resp.data.user)
+            localStorage.setItem("user", JSON.stringify(resp.data.user))
             return {"message" : "success"}
         }
    })
@@ -143,7 +143,7 @@ export default class Api {
 
     const uri = API_BASE_ADDRESS + "/" + endpoint;
     
-    return axios.delete(uri,{data : payload}, {headers : {"Authorization" : localStorage.getItem("token")}})
+    return axios.delete(uri, {headers : {"Authorization" : localStorage.getItem("token")} ,data : payload})
     .then(resp => {
 
         if(resp.status === 200){
