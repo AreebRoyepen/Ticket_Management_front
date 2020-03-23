@@ -7,6 +7,14 @@
   border-bottom: 3px solid #FF5D73;
 }
 
+#submit_button {
+  display: none;
+}
+
+#submit_button.active {
+  display: block;
+}
+
 #false{
    display: none;
 }

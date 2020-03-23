@@ -3,6 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import Api from "../api/Api";
 import "../styles/login.css";
 import "../styles/validationForm.css";
+import { wait } from "@testing-library/react";
 
 export default function PersonPage() {
 
@@ -18,7 +19,7 @@ export default function PersonPage() {
     const [surname, setSurname] = useState("");
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
-
+    const[isValid, setValid] = useState(false);
     
     useEffect(() => {      
 
@@ -33,13 +34,14 @@ export default function PersonPage() {
 
      },[setName,location]);
 
+ 
+
     const sendRequest = useCallback(async () => {
       // don't send again while we are sending
       if (isSending) return
 
       // update state
       setIsSending(true)
-
       // send the actual request
 
       var x = {
@@ -96,8 +98,26 @@ export default function PersonPage() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, name, surname,number, email, location, history]); // update the callback if the state changes
+    }, [isSending,name, surname,number, email, location, history]); // update the callback if the state changes
 
+    
+    const validateForm=() =>
+    {
+      var x = {
+        "name": name,
+        "surname": surname,
+        "number": number,
+        "email": email        
+      };
+      var emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      console.log("yeet"+ x.name)
+      if((/^\D*$/.test(x.name)) && (/^\D*$/.test(x.surname)) && (/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(x.number))
+       && emailRegex.test(x.email) && !(/(null|undefined|^$|^\d+$)/).test(x.name) && !(/(null|undefined|^$|^\d+$)/).test(x.surname))
+        return true;
+      return false;
+    }
+    
+    
     const back = () =>{
 
       history.goBack();
@@ -143,16 +163,19 @@ export default function PersonPage() {
       Please enter a valid email address
     </div>
     </div>
- <div>
- {location.state.edit ? 
+       <div id = {JSON.stringify(validateForm())}>
+   
+       {location.state.edit ? 
+            
+            
+            <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Edit Person</button>
+          :
+          
+          <button className = "button" type="submit" disabled={isSending} onClick={sendRequest }  id={validateForm} checkFormValidation ="true"> Add Person</button>
+          }
+       </div>
       
-      
-      <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Edit Person</button>
-    :
-    
-    <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Add Person</button>
-    }
- </div>
+ 
 
 
   <button className = "button" type="button" onClick={back}> Cancel</button>
