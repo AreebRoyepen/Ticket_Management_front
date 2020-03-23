@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import Api from "../api/Api";
 import "../styles/login.css";
+import "../styles/validationForm.css";
 
 export default function PersonPage() {
 
@@ -107,55 +108,59 @@ export default function PersonPage() {
     }
 
     return (
+     
+        <body class="bodyVal htmlVal spanVal">
+<form class="form ">
+    <div>
+		<label for="text" class="form__label">First Name</label>
+		<input required type="text" class="form__input inputValText" name="text" placeholder="John" pattern="^\D*$"  value = {name}
+        onChange={ e => setName(e.target.value)} />
+		<div class="form__requirements">
+      First name is required
+    </div>
+    </div>
 
-      <div className="App">
+    <div>
+		<label for="text" class="form__label ">Last Name</label>
+		<input required type="text" class="form__input inputValText" name="text" placeholder="Doe" pattern="^\D*$"  value = {surname}
+        onChange={ e => setSurname(e.target.value)} />
+		<div class="form__requirements">
+      Last name is required
+    </div>
+    </div>
 
-        {console.log(location)}
-        
-        <aside className="profile-card">
-          <div className="profile-bio">
-          <button style={{opacity:0}}></button>
-      <input
-        type="text"
-        className="sign-up-input"
-        placeholder="Name"
-        value = {name}
-        onChange={ e => setName(e.target.value)}
-      />
-      <input
-        type="text"
-        className="sign-up-input"
-        placeholder="Surname"
-        value = {surname}
-        onChange={ e => setSurname(e.target.value)}
-      />
-      <input
-        type="number"
-        className="sign-up-input"
-        placeholder="Number"
-        value = {number}
-        onChange={ e => setNumber(e.target.value)}
-      />
-      <input
-        type="text"
-        className="sign-up-input"
-        placeholder="email address"
-        value = {email}
-        onChange={ e => setEmail(e.target.value)}
-      />
-      {location.state.edit ? 
+    <div>
+		<label for="text" class="form__label">Contact Number</label>
+		<input required type="text" class="form__input inputValText" name="text" placeholder="0841235678" pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" value = {number}
+        onChange={ e => setNumber(e.target.value)} />
+		<div class="form__requirements">
+      Please enter in a valid contact number
+    </div>
+    </div>
+
+     <div>
+		<label for="email" class="form__label">Email</label>
+		<input required type="email" class="form__input inputValEmail" name="email" placeholder="example@aol.com"  value = {email}
+        onChange={ e => setEmail(e.target.value)} />
+		<div class="form__requirements">
+      Please enter a valid email address
+    </div>
+    </div>
+ <div>
+ {location.state.edit ? 
       
-      <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Edit Person</button>
+      
+      <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Edit Person</button>
     :
     
-    <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Add Person</button>
+    <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Add Person</button>
     }
+ </div>
 
-<button className = "button" type="button" onClick={back}> Cancel</button>
 
-      </div>
-      </aside>
-      </div>
+  <button className = "button" type="button" onClick={back}> Cancel</button>
+</form>
+</body>
 
     );
 }
