@@ -102,7 +102,7 @@ export default function PersonPage() {
 
     const back = () =>{
 
-      history.push("/Tickets");
+      history.push("/People");
 
 
     }

@@ -90,7 +90,7 @@ export default function EventPage() {
 
     const back = () =>{
 
-      history.push("/Tickets");
+      history.push("/Events");
 
 
     }
