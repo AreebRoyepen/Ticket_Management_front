@@ -57,14 +57,16 @@ export default function PersonPage() {
 
 
           let resp = await Api.putRequest("updatePerson/"+location.state.x.id,x)
+          console.log(resp)
           if(resp.message === "success"){
             history.goBack()
-          }else if (x.message === "unauthorized"){
+          }else if (resp.message === "unauthorized"){
+            console.log("resp")
             localStorage.clear();
-            history.push("/", {last : "/PersonPage"})
-          }else if(x.message === "error"){
+            history.push("/", {last : "/PersonPage", data: location.state})
+          }else if(resp.message === "error"){
             console.log("error")
-          }else if(x.message === "no connection"){
+          }else if(resp.message === "no connection"){
             console.log("no connection")
           }
           
@@ -120,7 +122,8 @@ export default function PersonPage() {
     
     const back = () =>{
 
-      history.goBack();
+      history.push("/Tickets");
+
 
     }
 
