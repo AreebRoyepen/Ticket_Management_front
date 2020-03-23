@@ -17,11 +17,8 @@ export default function SearchEvent (content) {
 
     let history = useHistory();
 
-    const onSubmit = event => {
-      event.preventDefault(event);
-    };
 
-    const triggerText = "Open form";
+
 
     function filterList  (event){
       let items = initialItems;
@@ -53,16 +50,10 @@ export default function SearchEvent (content) {
  
       return (
         <div>
-          <form>
-                <input className ="searchBoxStyle" type="text" placeholder="Search" onChange={ e => filterList(e)}>
-                  </input>
-          </form>
-
+                <input className ="searchBoxStyle" type="text" placeholder="Search" onChange={ e => filterList(e)}/>
           <div>
             
-            {items.map( x =>(
-
-               
+            {items.map( x =>(       
 
                 <div key = {x.id}>
                     

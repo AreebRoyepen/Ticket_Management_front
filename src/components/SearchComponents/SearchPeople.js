@@ -23,16 +23,10 @@ export default function SearchPeople (content) {
 
       return (
         <div>
-          <form>
                 <input className ="searchBoxStyle" type="text" placeholder="Search" onChange={ e => filterList(e)}/>
-          </form>
-
           <div>
             
             {items.map( x =>(
-
-               
-
                 <div key = {x.id}>
                     
                     <div className="container"> 
