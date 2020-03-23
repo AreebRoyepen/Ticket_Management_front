@@ -1,7 +1,6 @@
 import React,{Component, useState, useEffect} from 'react';
 import "../../styles/eventCard.css";
 import { useHistory } from "react-router-dom";
-import { PopUp } from "../PopUp";
 
 export default function SearchEvent (content) {
 
@@ -86,7 +85,6 @@ export default function SearchEvent (content) {
                             <div className="card-sub-botton card-sub-show">
                             <input  onClick = {() => { console.log(x.id);  history.push("/EventPage",{event:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
                             <input  type="submit" value="DELETE" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
-                            <PopUp triggerText="delete" onSubmit={onSubmit} />
                             </div>
                         </div>
                     </div>
