@@ -113,7 +113,7 @@ export default function PersonPage() {
       };
       var emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
       console.log(x)
-      if((/^\D*$/.test(x.name)) && (/^\D*$/.test(x.surname)) && (/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(x.number))
+      if((/^\D*$/.test(x.name)) && (/^\D*$/.test(x.surname)) && x.number.length >9
        && emailRegex.test(x.email) && !(/(null|undefined|^$|^\d+$)/).test(x.name) && !(/(null|undefined|^$|^\d+$)/).test(x.surname))
         return true;
       return false;
@@ -151,7 +151,7 @@ export default function PersonPage() {
 
     <div>
 		<label for="text" class="form__label">Contact Number</label>
-		<input required type="text" class="form__input inputValText" name="text" placeholder="0841235678" pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" value = {number}
+		<input required type="tel" class="form__input inputValText" name="text" placeholder="0841235678"  pattern="[0-9a-zA-Z]{10,}" maxlength="10" value = {number}
         onChange={ e => setNumber(e.target.value)} />
 		<div class="form__requirements">
       Please enter in a valid contact number
