@@ -24,7 +24,7 @@ export default function Payments() {
     const [ticketNumberF, setTicketNumberF] = useState(0);
     const [ticketNumberT, setTicketNumberT] = useState(0);
 
-    const[amount, setAmount] = useState();
+    const[amount, setAmount] = useState(0);
     const [person, setPerson] = useState(null);
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
@@ -103,13 +103,23 @@ export default function Payments() {
       setIsSending(true)
 
       // send the actual request
-
       
       async function fetchData(){
 
-        if(payOption){
+        if(!payOption){
+          let x = await Api.getRequest("payByPerson/"+location.state.event.id+"/"+person.id+"/"+parseInt(amount))
 
-          
+          if(x.message === "success"){
+  
+            history.goBack()
+          }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/" , {last: "/Payments"})
+          }else if(x.message === "error"){
+            console.log("error")
+          }else if(x.message === "no connection"){
+            console.log("no connection")
+          }
 
         }else{
           if(bulk){
@@ -118,11 +128,16 @@ export default function Payments() {
     
               "event": location.state.event.id,
               "ticketNumberF": parseInt(ticketNumberF),
-              "ticketNumberT": parseInt(ticketNumberT)
+              "ticketNumberT": parseInt(ticketNumberT),
+              "amount": parseInt(amount)
               
             }
+
+            console.log(pay)
             
             let x = await Api.postRequest("bulkPayment",pay)
+            console.log(x)
+
             if(x.message === "success"){
   
               history.goBack()
@@ -136,7 +151,7 @@ export default function Payments() {
             }
   
           }else{
-            let x = await Api.getRequest("payment/"+location.state.event.id+"/"+parseInt(ticketNumberF))
+            let x = await Api.getRequest("payment/"+location.state.event.id+"/"+parseInt(ticketNumberF)+"/"+parseInt(amount))
             console.log(x)
             if(x.message === "success"){
   
@@ -161,7 +176,7 @@ export default function Payments() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, history, bulk, location]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, history, bulk, location, person]); // update the callback if the state changes
 
     const back = () =>{
 
@@ -172,6 +187,9 @@ export default function Payments() {
     return (
 
       <div className="App">
+                {console.log(person)}
+                {parseInt(amount)}
+
         <aside className="profile-card">
           <div className="profile-bio">
           

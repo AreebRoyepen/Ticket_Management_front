@@ -23,6 +23,7 @@ export default function TicketAllocation() {
     const [ticketNumberT, setTicketNumberT] = useState(0);
     const [bulk, setBulk] = useState(false)
     const[paid, setPaid] = useState(false)
+    const[amount, setAmount] = useState()
 
     const [person, setPerson] = useState(null);
     const[loadTickets, setLoadTickets] = useState(false)
@@ -127,7 +128,8 @@ export default function TicketAllocation() {
       
                     "event": location.state.event.id,
                     "ticketNumberF": parseInt(ticketNumberF),
-                    "ticketNumberT": parseInt(ticketNumberT)
+                    "ticketNumberT": parseInt(ticketNumberT),
+                    "amount": parseInt(amount)
                     
                   }
                   
@@ -171,7 +173,9 @@ export default function TicketAllocation() {
           if(t.message === "success"){
 
             if(paid){
-              let pay = await Api.getRequest("payment/"+location.state.event.id+"/"+parseInt(ticketNumberF))
+              let pay = await Api.getRequest("payment/"+location.state.event.id+"/"+parseInt(ticketNumberF)+"/"+parseInt(amount))
+
+              console.log(pay)
               if(pay.message === "success"){
 
                 history.goBack()
@@ -333,15 +337,31 @@ export default function TicketAllocation() {
           />
 
       {paid ?
-      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "30px"}}>Allocate & Pay</button> 
+
+        <div> 
+            <TextField
+                style={{marginTop: "15px"}}
+                id="filled-number"
+                label={"Amount"}
+                type="number"
+                onChange = {e => {setAmount(e.target.value)}}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                
+                />
+      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "15px"}}>Allocate & Pay</button> 
+
+        </div>
 
     
       :
-      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "30px"}}>Allocate Ticket</button> 
+      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "15px"}}>Allocate Ticket</button> 
 
       
       }
-      <button className = "button" type="button" onClick={back} style={{marginTop: "30px"}}> Cancel</button>
+      <button className = "button" type="button" onClick={back} style={{marginTop: "15px"}}> Cancel</button>
   
       </div>
       </aside>
