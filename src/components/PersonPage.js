@@ -177,10 +177,6 @@ export default function PersonPage() {
           <button className = "button" type="submit" disabled={isSending} onClick={sendRequest }  id={validateForm} checkFormValidation ="true"> Add Person</button>
           }
        </div>
-      
- 
-
-
   <button className = "button" type="button" onClick={back}> Cancel</button>
 </form>
 </body>

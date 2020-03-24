@@ -1,11 +1,8 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-
-
-
 import Api from "../api/Api";
 import "../styles/login.css";
-
+import "../styles/validationForm.css";
 
 export default function EventPage() {
    
@@ -94,57 +91,76 @@ export default function EventPage() {
 
 
     }
+  
+    const validateForm=() =>
+    {
+      var a = {
+        "name": name,
+        "to": parseInt(to),
+        "from": parseInt(from),
+        "ticketPrice": parseInt(price)
+      };
+
+      if(!(/(null|undefined|^$|^\d+$)/).test(a.name) & (/(null|undefined|^$|^\d+$)/).test(a.from) 
+      & (/(null|undefined|^$|^\d+$)/).test(a.to) & (/(null|undefined|^$|^\d+$)/).test(a.price))
+       {  console.log(a.price+" price output is weird")
+          return true;}
+      
+      return false;
+    }
 
 
     return (
 
-      <div className="App">
-        <aside className="profile-card">
-          <div className="profile-bio">
-          <button style={{opacity:0}}></button>
-      <input
-        type="text"
-        className="sign-up-input"
-        placeholder="Event name"
-        onChange={ e => setName(e.target.value)}
-        value = {name}
-      />
-      <input
-        type="text"
-        className="sign-up-input"
-        placeholder="ticket start number"
-        onChange={ e => setFrom(e.target.value)}
-        value = {from}
-      />
-      <input
-        type="text"
-        className="sign-up-input"
-        placeholder="Ticket end number"
-        onChange={ e => setTo(e.target.value)}
-        value  = {to}
-      />
-      <input
-        type="text"
-        className="sign-up-input"
-        placeholder="ticket price"
-        onChange={ e => setPrice(e.target.value)}
-        value = {price}
-      />
-          
-  
+      <body class="bodyVal htmlVal spanVal">
+      <form class="form ">
+          <div>
+          <label for="text" class="form__label">Event Name</label>
+          <input required type="text" class="form__input inputValText" name="text" placeholder="Event Name" value = {name}
+              onChange={ e => setName(e.target.value)} />
+          <div class="form__requirements">
+            Event Name is required
+          </div>
+          </div>
+
+          <div>
+          <label for="number" class="form__label">Ticket Start Number</label>
+          <input required type="number" class="form__input inputValText" name="text" placeholder="2001"  value = {from}
+             onChange={ e => setFrom(e.target.value)}/>
+          <div class="form__requirements">
+            Please enter in a valid ticket number
+          </div>
+          </div>
+
+        <div>
+          <label for="number" class="form__label">Ticket end number</label>
+          <input required type="number" class="form__input inputValText" name="text" placeholder="2005"  value = {to}
+             onChange={ e => setTo(e.target.value)}/>
+          <div class="form__requirements">
+            Please enter in a valid ticket number
+          </div>
+          </div>
+
+           <div>
+          <label for="number" class="form__label">Ticket Price (R)</label>
+          <input required type="number" class="form__input inputValEmail" name="email" placeholder="100"  value = {price}
+              onChange={ e => setPrice(e.target.value)} />
+          <div class="form__requirements">
+            Please enter a valid ticket price
+          </div>
+          </div>
+             <div id = {JSON.stringify(validateForm())}>
+              
           {location.state.edit ? 
       
-      <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Edit Event</button>
-    :
+               <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Edit Event</button>
+                  :
     
-    <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
-    }
-
-<button className = "button" type="button" onClick={back}  style={{marginTop: "10px"}}> Cancel</button>
-
-      </div>
-      </aside>
-      </div>
-
+               <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
+             }
+             </div>
+        <button className = "button" type="button" onClick={back}> Cancel</button>
+      </form>
+      </body>
     );
 }
