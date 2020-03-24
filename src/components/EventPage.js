@@ -101,8 +101,9 @@ export default function EventPage() {
         "ticketPrice": parseInt(price)
       };
 
+      console.log(a);
       if(!(/(null|undefined|^$|^\d+$)/).test(a.name) & (/(null|undefined|^$|^\d+$)/).test(a.from) 
-      & (/(null|undefined|^$|^\d+$)/).test(a.to) & (/(null|undefined|^$|^\d+$)/).test(a.price))
+      & (/(null|undefined|^$|^\d+$)/).test(a.to) & (/(null|undefined|^$|^\d+$)/).test(a.ticketPrice))
        {  console.log(a.price+" price output is weird")
           return true;}
       
@@ -143,7 +144,7 @@ export default function EventPage() {
 
            <div>
           <label for="number" class="form__label">Ticket Price (R)</label>
-          <input required type="number" class="form__input inputValEmail" name="email" placeholder="100"  value = {price}
+          <input required type="number" class="form__input inputValEmail" name="text" placeholder="100"  value = {price}
               onChange={ e => setPrice(e.target.value)} />
           <div class="form__requirements">
             Please enter a valid ticket price

@@ -112,7 +112,7 @@ export default function PersonPage() {
         "email": email        
       };
       var emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-      console.log("yeet"+ x.name)
+      console.log(x)
       if((/^\D*$/.test(x.name)) && (/^\D*$/.test(x.surname)) && (/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(x.number))
        && emailRegex.test(x.email) && !(/(null|undefined|^$|^\d+$)/).test(x.name) && !(/(null|undefined|^$|^\d+$)/).test(x.surname))
         return true;
