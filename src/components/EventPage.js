@@ -105,9 +105,9 @@ export default function EventPage() {
       if(!(/(null|undefined|^$|^\d+$)/).test(a.name) & (/(null|undefined|^$|^\d+$)/).test(a.from) 
       & (/(null|undefined|^$|^\d+$)/).test(a.to) & (/(null|undefined|^$|^\d+$)/).test(a.ticketPrice))
        {  console.log(a.price+" price output is weird")
-          return true;}
+          return "trueValid";}
       
-      return false;
+      return "falseValid";
     }
 
 
@@ -150,14 +150,14 @@ export default function EventPage() {
             Please enter a valid ticket price
           </div>
           </div>
-             <div id = {JSON.stringify(validateForm())}>
+             <div id = {validateForm()}>
               
           {location.state.edit ? 
       
-               <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Edit Event</button>
+               <button className = "button falseValid" type="button" disabled={isSending} onClick={sendRequest} > Edit Event</button>
                   :
     
-               <button className = "button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
+               <button className = " falseValid button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
              }
              </div>
         <button className = "button" type="button" onClick={back}> Cancel</button>
