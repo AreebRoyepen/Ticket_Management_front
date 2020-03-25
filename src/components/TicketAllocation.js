@@ -60,7 +60,7 @@ export default function TicketAllocation() {
 
       setLoadTickets(false)
 
-    },[loadTickets, location])
+    },[loadTickets, location, history])
 
     useEffect(() => {
       let active = true;
@@ -106,7 +106,6 @@ export default function TicketAllocation() {
 
           if(bulk){
 
-            console.log("IN BULK")
             var allocateBulk = {
               "ticketNumberF": parseInt(ticketNumberF),
               "ticketNumberT": parseInt(ticketNumberT),
@@ -119,11 +118,9 @@ export default function TicketAllocation() {
             console.log(t)
             if(t.message === "success"){
 
-              console.log("In success")
 
               //can only pay for tickets if allocated successfully
               if(paid){
-                console.log("in paid")
                   let pay = {
       
                     "event": location.state.event.id,
@@ -211,7 +208,7 @@ export default function TicketAllocation() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history, location]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history, location, amount, paid]); // update the callback if the state changes
 
     const back = () => {
       history.push("/Tickets");
@@ -222,7 +219,6 @@ export default function TicketAllocation() {
     return (
 
       <div className="App">
-        {console.log(location.state.event.id)}
 
         {console.log(person)}
         <aside className="profile-card">
@@ -257,7 +253,7 @@ export default function TicketAllocation() {
 
 
         <Autocomplete
-          style={{ width: 250 },{marginBottom: "30px"}}
+          style={{ width: 250 , marginBottom: "30px"}}
           open={open}
           onOpen={() => { setOpen(true); }}
           onClose={() => {setOpen(false); }}

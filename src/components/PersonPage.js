@@ -3,14 +3,11 @@ import { useLocation, useHistory } from "react-router-dom";
 import Api from "../api/Api";
 import "../styles/login.css";
 import "../styles/validationForm.css";
-import { wait } from "@testing-library/react";
 
 export default function PersonPage() {
 
     let history = useHistory();
     let location = useLocation();
-
-    console.log(location)
     
     const [isSending, setIsSending] = useState(false);
     const isMounted = useRef(true)
@@ -19,7 +16,6 @@ export default function PersonPage() {
     const [surname, setSurname] = useState("");
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
-    const[isValid, setValid] = useState(false);
     
     useEffect(() => {      
 
@@ -129,40 +125,40 @@ export default function PersonPage() {
 
     return (
      
-        <body class="bodyVal htmlVal spanVal">
-<form class="form ">
+        <body className="bodyVal htmlVal spanVal">
+<form className="form ">
     <div>
-		<label for="text" class="form__label">First Name</label>
-		<input required type="text" class="form__input inputValText" name="text" placeholder="John" pattern="^\D*$"  value = {name}
+		<label htmlFor="text" className="form__label">First Name</label>
+		<input required type="text" className="form__input inputValText" name="text" placeholder="John" pattern="^\D*$"  value = {name}
         onChange={ e => setName(e.target.value)} />
-		<div class="form__requirements">
+		<div className="form__requirements">
       First name is required
     </div>
     </div>
 
     <div>
-		<label for="text" class="form__label ">Last Name</label>
-		<input required type="text" class="form__input inputValText" name="text" placeholder="Doe" pattern="^\D*$"  value = {surname}
+		<label htmlFor="text" className="form__label ">Last Name</label>
+		<input required type="text" className="form__input inputValText" name="text" placeholder="Doe" pattern="^\D*$"  value = {surname}
         onChange={ e => setSurname(e.target.value)} />
-		<div class="form__requirements">
+		<div className="form__requirements">
       Last name is required
     </div>
     </div>
 
     <div>
-		<label for="text" class="form__label">Contact Number</label>
-		<input required type="tel" class="form__input inputValText" name="text" placeholder="0841235678"  pattern="[0-9a-zA-Z]{10,}" maxlength="10" value = {number}
+		<label htmlFor="text" className="form__label">Contact Number</label>
+		<input required type="tel" className="form__input inputValText" name="text" placeholder="0841235678"  pattern="[0-9a-zA-Z]{10,}" maxLength="10" value = {number}
         onChange={ e => setNumber(e.target.value)} />
-		<div class="form__requirements">
+		<div className="form__requirements">
       Please enter in a valid contact number
     </div>
     </div>
 
      <div>
-		<label for="email" class="form__label">Email</label>
-		<input required type="email" class="form__input inputValEmail" name="email" placeholder="example@aol.com"  value = {email}
+		<label htmlFor="email" className="form__label">Email</label>
+		<input required type="email" className="form__input inputValEmail" name="email" placeholder="example@aol.com"  value = {email}
         onChange={ e => setEmail(e.target.value)} />
-		<div class="form__requirements">
+		<div className="form__requirements">
       Please enter a valid email address
     </div>
     </div>

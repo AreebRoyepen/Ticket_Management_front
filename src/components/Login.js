@@ -1,5 +1,5 @@
-import React, { Component, useState } from "react";
-import { Redirect, useLocation, useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useLocation, useHistory } from 'react-router-dom';
 import "../styles/login.css";
 import Api from "../api/Api";
 
@@ -10,23 +10,7 @@ export default function Login ()  {
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [isValid, setISValid] = useState();
-
-  
-
-
-  const renderRedirect = () => {
-    if (isValid) {
-      if(location.state){
-        history.push(location.state.last, location.state.data)
-      }else{
-        return <Redirect to='/Dashboard' />
-      }
-      
-    }
-  }
-
-  
+ 
   const handleClick = (event) => {
 
     async function fetchData(){
@@ -44,8 +28,14 @@ export default function Login ()  {
       if(x.message === "success"){
         console.log(localStorage.token)
         console.log(JSON.parse(localStorage.user))
-        setISValid(true)
         console.log(x)
+
+        if(location.state){
+          history.push(location.state.last, location.state.data)
+        }else{
+          history.push("/Dashboard")
+        }
+
 
       }else if (x.message === "unauthorized"){
           console.log(x.message)
@@ -64,8 +54,6 @@ export default function Login ()  {
     
     return (
       <div className="App">
-        {renderRedirect()}
-        {console.log(location)}
         <aside className="profile-card">
           <div className="profile-bio">
             <div>

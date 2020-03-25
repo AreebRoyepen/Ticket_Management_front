@@ -49,7 +49,7 @@ export default function ReturnTickets() {
 
       setLoadTickets(false)
 
-    },[loadTickets, location])
+    },[loadTickets, location, history])
 
  
     const returnTicket = useCallback(async () => {

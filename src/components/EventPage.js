@@ -8,8 +8,6 @@ export default function EventPage() {
    
     let history = useHistory();
     let location = useLocation();
-
-    console.log(location)
     
     const [isSending, setIsSending] = useState(false)
     const isMounted = useRef(true)
@@ -104,7 +102,7 @@ export default function EventPage() {
       console.log(a);
       if(!(/(null|undefined|^$|^\d+$)/).test(a.name) & (/(null|undefined|^$|^\d+$)/).test(a.from) 
       & (/(null|undefined|^$|^\d+$)/).test(a.to) & (/(null|undefined|^$|^\d+$)/).test(a.ticketPrice))
-       {  console.log(a.price+" price output is weird")
+       {  
           return true;}
       
       return false;
@@ -113,40 +111,40 @@ export default function EventPage() {
 
     return (
 
-      <body class="bodyVal htmlVal spanVal">
-      <form class="form ">
+      <body className="bodyVal htmlVal spanVal">
+      <form className="form ">
           <div>
-          <label for="text" class="form__label">Event Name</label>
-          <input required type="text" class="form__input inputValText" name="text" placeholder="Event Name" value = {name}
+          <label htmlFor="text" className="form__label">Event Name</label>
+          <input required type="text" className="form__input inputValText" name="text" placeholder="Event Name" value = {name}
               onChange={ e => setName(e.target.value)} />
-          <div class="form__requirements">
+          <div className="form__requirements">
             Event Name is required
           </div>
           </div>
 
           <div>
-          <label for="number" class="form__label">Ticket Start Number</label>
-          <input required type="number" class="form__input inputValText" name="text" placeholder="2001"  value = {from}
+          <label htmlFor="number" className="form__label">Ticket Start Number</label>
+          <input required type="number" className="form__input inputValText" name="text" placeholder="2001"  value = {from}
              onChange={ e => setFrom(e.target.value)}/>
-          <div class="form__requirements">
+          <div className="form__requirements">
             Please enter in a valid ticket number
           </div>
           </div>
 
         <div>
-          <label for="number" class="form__label">Ticket end number</label>
-          <input required type="number" class="form__input inputValText" name="text" placeholder="2005"  value = {to}
+          <label htmlFor="number" className="form__label">Ticket end number</label>
+          <input required type="number" className="form__input inputValText" name="text" placeholder="2005"  value = {to}
              onChange={ e => setTo(e.target.value)}/>
-          <div class="form__requirements">
+          <div className="form__requirements">
             Please enter in a valid ticket number
           </div>
           </div>
 
            <div>
-          <label for="number" class="form__label">Ticket Price (R)</label>
-          <input required type="number" class="form__input inputValEmail" name="text" placeholder="100"  value = {price}
+          <label htmlFor="number" className="form__label">Ticket Price (R)</label>
+          <input required type="number" className="form__input inputValEmail" name="text" placeholder="100"  value = {price}
               onChange={ e => setPrice(e.target.value)} />
-          <div class="form__requirements">
+          <div className="form__requirements">
             Please enter a valid ticket price
           </div>
           </div>

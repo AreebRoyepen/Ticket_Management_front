@@ -13,6 +13,7 @@ export default class Api {
     
     return axios.post(uri,payload)
     .then(resp => {
+        console.log(resp)
 
         if(resp.status === 200){
             localStorage.setItem("token","Bearer " + resp.data.token)
@@ -44,7 +45,6 @@ export default class Api {
    static async getRequest(endpoint){
 
     const uri = API_BASE_ADDRESS + "/" + endpoint;
-    console.log("IN GET")
     
     return axios.get(uri, {headers : {"Authorization" : localStorage.getItem("token")}})
     .then(resp => {
@@ -113,6 +113,7 @@ export default class Api {
     
     return axios.put(uri,payload, {headers : {"Authorization" : localStorage.getItem("token")}})
     .then(resp => {
+        console.log(resp)
 
         if(resp.status === 200){
             return resp.data
@@ -131,7 +132,6 @@ export default class Api {
             }
 
         }else{
-            console.log("nice")
             return {"message" : "no connection"}
         }
     }
@@ -145,6 +145,7 @@ export default class Api {
     
     return axios.delete(uri, {headers : {"Authorization" : localStorage.getItem("token")} ,data : payload})
     .then(resp => {
+        console.log(resp)
 
         if(resp.status === 200){
             return resp.data
@@ -164,7 +165,6 @@ export default class Api {
             }
 
         }else{
-            console.log("nice")
             return {"message" : "no connection"}
         }
     }
