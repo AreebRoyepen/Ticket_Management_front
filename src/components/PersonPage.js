@@ -111,8 +111,8 @@ export default function PersonPage() {
       console.log(x)
       if((/^\D*$/.test(x.name)) && (/^\D*$/.test(x.surname)) && x.number.length >9
        && emailRegex.test(x.email) && !(/(null|undefined|^$|^\d+$)/).test(x.name) && !(/(null|undefined|^$|^\d+$)/).test(x.surname))
-        return true;
-      return false;
+       return "trueValid";
+     return "falseValid";
     }
     
     
@@ -162,7 +162,7 @@ export default function PersonPage() {
       Please enter a valid email address
     </div>
     </div>
-       <div id = {JSON.stringify(validateForm())}>
+       <div id = {validateForm()}>
    
        {location.state.edit ? 
             
