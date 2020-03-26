@@ -13,6 +13,8 @@ export default function Dashboard(){
   const [paid, setPaid] = useState(0)
   const [unpaid, setUnpaid] = useState(0)
   const [connection, setConnection] = useState(false)
+  const [totalFunds, setTotalFunds] = useState(0)
+  const [funds, setFunds] = useState(0)
 
   let history = useHistory();
 
@@ -100,6 +102,15 @@ export default function Dashboard(){
       if(x.message === "success"){
         setAllocated(x.ticket.length)//sizeof
 
+        var money =0;
+        x.ticket.forEach(element => {
+          
+          money = money + element.amount
+  
+        });
+  
+        setFunds(money)
+
         var truestuff = x.ticket.filter( key => {
           if (key.paid === true)
           return key
@@ -139,6 +150,30 @@ export default function Dashboard(){
       console.log("no connection")
     }
 
+    let z = await Api.getRequest("events")
+    if(z.message === "success"){
+
+      console.log(z)
+      
+      var total =0;
+      z.event.forEach(element => {
+        
+        var count = element.to - element.from + 1;
+        total = total +  count * element.ticketPrice
+
+      });
+
+      setTotalFunds(total)
+
+    }else if (z.message === "unauthorized"){
+      localStorage.clear();
+      history.push("/", {last : "/Dashboard"})
+  }else if(z.message === "error"){
+    console.log("error")
+  }else if(z.message === "no connection"){
+    console.log("no connection")
+  }
+
 
       setConnection(true)
     }
@@ -174,6 +209,8 @@ export default function Dashboard(){
     return (
         
       <div>
+        {console.log(funds)}
+        {console.log(totalFunds)}
         {connection         
         
         ?
