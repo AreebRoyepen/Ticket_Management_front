@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 
 export default function Dashboard(){
 
-  const [tickets, setTickets] = useState(0)
   const [allocated, setAllocated] = useState(0)
   const [unallocated, setUnallocated] = useState(0)
   const [paid, setPaid] = useState(0)
@@ -102,13 +101,13 @@ export default function Dashboard(){
         setAllocated(x.ticket.length)//sizeof
 
         var truestuff = x.ticket.filter( key => {
-          if (key.paid == true)
+          if (key.paid === true)
           return key
         })
         setPaid(truestuff.length)
 
         var falsestuff = x.ticket.filter( key => {
-          if (key.paid == false)
+          if (key.paid === false)
           return key
         })
         setUnpaid(falsestuff.length)
@@ -146,7 +145,7 @@ export default function Dashboard(){
 
     fetchData()
 
-  },[setAllocated, setUnallocated])
+  },[setAllocated, setUnallocated, history, setUnpaid])
 
 
   Chart.pluginService.register({
@@ -181,9 +180,6 @@ export default function Dashboard(){
 
         <div>
         <main>
-          {console.log("Allocated " + allocated)}
-          {console.log("Unallocated " + unallocated)}
-          {console.log("Paid " + paid)}
 <div>
 <section>
   <article>
@@ -288,14 +284,14 @@ export default function Dashboard(){
         :
 
 
-        <div class="dots-container">
-  <div class="dots">L</div>
-  <div class="dots">o</div>
-  <div class="dots">a</div>
-  <div class="dots">d</div>
-  <div class="dots">i</div>
-  <div class="dots">n</div>
-  <div class="dots">g</div>
+        <div className="dots-container">
+  <div className="dots">L</div>
+  <div className="dots">o</div>
+  <div className="dots">a</div>
+  <div className="dots">d</div>
+  <div className="dots">i</div>
+  <div className="dots">n</div>
+  <div className="dots">g</div>
 </div>
 
       

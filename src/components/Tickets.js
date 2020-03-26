@@ -30,7 +30,7 @@ export default function Tickets(){
         }
       
         fetchData()
-    },[]);
+    },[history]);
 
 
     return (
@@ -52,14 +52,14 @@ export default function Tickets(){
             :
             
             
-            <div class="dots-container">
-            <div class="dots">L</div>
-            <div class="dots">o</div>
-            <div class="dots">a</div>
-            <div class="dots">d</div>
-            <div class="dots">i</div>
-            <div class="dots">n</div>
-            <div class="dots">g</div>
+            <div className="dots-container">
+            <div className="dots">L</div>
+            <div className="dots">o</div>
+            <div className="dots">a</div>
+            <div className="dots">d</div>
+            <div className="dots">i</div>
+            <div className="dots">n</div>
+            <div className="dots">g</div>
           </div>
                 }
 

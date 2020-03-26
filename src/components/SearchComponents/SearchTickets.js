@@ -1,19 +1,17 @@
-import React,{Component, useState, useEffect} from 'react';
+import React,{ useState } from 'react';
 import "../../styles/eventCard.css";
 import { useHistory } from "react-router-dom";
 
 
 export default function SearchTickets (content) {
 
-    const [initialItems, setInitialItems] = useState(content.content);
+    const [initialItems] = useState(content.content);
     const [items, setItems] = useState(content.content);
 
     let history = useHistory();
 
     function filterList  (event){
       let items = initialItems;
-     console.log(items.length);
-     console.log(event.target.value)
       items = items.filter((item) => {
         return JSON.stringify(item).toLowerCase().search(event.target.value.toLowerCase()) !== -1;
       });

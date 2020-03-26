@@ -1,18 +1,11 @@
-import React,{Component, useState, useEffect} from 'react';
+import React,{ useState } from 'react';
 import "../../styles/eventCard.css";
 import { useHistory } from "react-router-dom";
 
 export default function SearchEvent (content) {
 
   
-    // state = {
-    //     initialItems: ([]),
-    //     items: [],
-    //     data:[]
-
-    // };
-
-    const [initialItems, setInitialItems] = useState(content.content);
+    const [initialItems] = useState(content.content);
     const [items, setItems] = useState(content.content);
 
     let history = useHistory();
@@ -22,30 +15,14 @@ export default function SearchEvent (content) {
 
     function filterList  (event){
       let items = initialItems;
-     console.log(items.length);
-     console.log(event.target.value)
       items = items.filter((item) => {
         return JSON.stringify(item).toLowerCase().search(event.target.value.toLowerCase()) !== -1;
       });
       console.log(items)
       setItems(items);
-      //this.setState({items: items});
     }
 
-    // useEffect(() =>{
 
-    //   setInitialItems(content.content);
-    //   setItems(content.content);
-
-
-    // });
-    
-    // componentWillMount = () => {
-    //   this.setState({
-    //       initialItems: this.props.content,
-    //       items: this.props.content
-    //   })
-    // }
 
  
       return (

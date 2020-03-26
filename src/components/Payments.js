@@ -69,7 +69,7 @@ export default function Payments() {
         if(unpaid.message==="success"){
  
           var falsestuff = unpaid.ticket.filter( key => {
-            if (key.paid == false)
+            if (key.paid === false)
             return key
           })
           setAllocated(unpaid.ticket.length)
@@ -92,7 +92,7 @@ export default function Payments() {
 
       setLoadTickets(false)
 
-    },[loadTickets, location]);
+    },[loadTickets, location, history]);
 
  
     const payment = useCallback(async () => {
@@ -176,7 +176,7 @@ export default function Payments() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, history, bulk, location, person]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, history, bulk, location, person, amount, payOption]); // update the callback if the state changes
 
     const back = () =>{
 
@@ -188,7 +188,6 @@ export default function Payments() {
 
       <div className="App">
                 {console.log(person)}
-                {parseInt(amount)}
 
         <aside className="profile-card">
           <div className="profile-bio">
@@ -215,7 +214,7 @@ export default function Payments() {
                 <Switch
                   checked={payOption}
                   onChange={e => setPayOption(e.target.checked)}
-                  color = "#"
+                  color = "#99cc33"
                 />
 
 
@@ -311,7 +310,7 @@ export default function Payments() {
       :
 
       <Autocomplete
-              style={{ width: 250 },{marginBottom: "15px"},{marginTop: "15px"}
+              style={{ width: 250 ,marginBottom: "15px",marginTop: "15px"}
             }
               open={open}
               onOpen={() => { setOpen(true); }}
