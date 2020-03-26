@@ -102,7 +102,7 @@ export default function EventPage() {
       console.log(a);
       if(!(/(null|undefined|^$|^\d+$)/).test(a.name) & (/(null|undefined|^$|^\d+$)/).test(a.from) 
       & (/(null|undefined|^$|^\d+$)/).test(a.to) & (/(null|undefined|^$|^\d+$)/).test(a.ticketPrice))
-       {  console.log(a.price+" price output is weird")
+       {  
           return "trueValid";}
       
       return "falseValid";

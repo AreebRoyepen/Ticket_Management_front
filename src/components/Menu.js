@@ -18,6 +18,7 @@ import {FaTicketAlt} from "react-icons/fa"
 
 import "../styles/menu.css";;
 
+var user = JSON.parse(localStorage.user)
 
 const useStyles = makeStyles(theme =>({
   list: {
@@ -97,7 +98,7 @@ export default function Menu({children}) {
           Ticket Management
           </Typography>
           
-          <Button onClick={handleMenu} color="inherit">Hi, Admin</Button>
+          <Button onClick={handleMenu} color="inherit">Hi, {user.name}</Button>
 
           <MenuUI
                 id="menu-appbar"
