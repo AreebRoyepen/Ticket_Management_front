@@ -1,13 +1,38 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 import Api from "../api/Api";
 import "../styles/login.css";
 import "../styles/validationForm.css";
+
+function Alert(props) {
+  return <MuiAlert elevation={6}  {...props} />;
+}
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 export default function EventPage() {
    
     let history = useHistory();
     let location = useLocation();
+
+    const classes = useStyles();
+    const [openSnackbar, setOpenSnackbar] = useState({
+      severity : "",
+      message : "",
+      open : false,
+      time : 0,
+      closeType : null
+    });
     
     const [isSending, setIsSending] = useState(false)
     const isMounted = useRef(true)
@@ -16,6 +41,22 @@ export default function EventPage() {
     const [to, setTo] = useState("");
     const [from, setFrom] = useState("");
     const [price, setPrice] = useState("");
+
+
+    const successClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }  
+      history.push("/Events");
+    };
+
+    const errorClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
+    };
+
 
     useEffect(() => {      
 
@@ -44,34 +85,59 @@ export default function EventPage() {
       };
 
       async function fetchData(){
+        var time;
         if(location.state.edit){
 
           let resp = await Api.putRequest("updateEvent/"+location.state.event.id, x)
           if(resp.message === "success"){
-            console.log("success")
-            history.goBack()
+            time = 3000
+            setOpenSnackbar({severity : "success", message : "Successfully edited", open : true, time : time, closeType : successClose})
+            
           }else if (resp.message === "unauthorized"){
             localStorage.clear();
             history.push("/" , {last : "/EventPage", data : location.state})
-        }else if(resp.message === "error"){
-          console.log("error")
-        }else if(resp.message === "no connection"){
-          console.log("no connection")
-        }
+
+          }else if(resp.message === "error"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+            
+          }else if(resp.message === "no connection"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+            
+          }else if(resp.message === "timeout"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+            
+          }
           
         }else{
           let resp = await Api.postRequest("addEvent",x)
           if(resp.message === "success"){
-            console.log("success")
-            history.goBack()
+            time = 3000
+            setOpenSnackbar({severity : "success", message : "Successfully added", open : true, time : time, closeType : successClose})
+            
           }else if (resp.message === "unauthorized"){
             localStorage.clear();
             history.push("/", {last : "/EventPage"})
-        }else if(resp.message === "error"){
-          console.log("error")
-        }else if(resp.message === "no connection"){
-          console.log("no connection")
-        }
+
+          }else if(resp.message === "error"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+            
+          }else if(resp.message === "no connection"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+
+          }else if(resp.message === "timeout"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+            
+          }else{
+            time = 6000
+            setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : errorClose})
+
+          }
         }
       }
       fetchData()
@@ -81,14 +147,9 @@ export default function EventPage() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, to, from,price, name, location, history]); // update the callback if the state changes
+    }, [isSending, to, from,price, name, location, history, errorClose, successClose]); // update the callback if the state changes
 
-    const back = () =>{
-
-      history.push("/Events");
-
-
-    }
+    const back = () =>{ history.push("/Events"); }
   
     const validateForm=() =>
     {
@@ -110,6 +171,16 @@ export default function EventPage() {
 
 
     return (
+      
+      <div>
+
+      <div className={classes.root}>
+      <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
+        <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
+          {openSnackbar.message}
+        </Alert>
+      </Snackbar>
+      </div>
 
       <body className="bodyVal htmlVal spanVal">
       <form className="form ">
@@ -161,5 +232,7 @@ export default function EventPage() {
         <button className = "button" type="button" onClick={back}> Cancel</button>
       </form>
       </body>
+
+      </div>
     );
 }

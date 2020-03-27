@@ -2,16 +2,41 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 import { useLocation, useHistory } from "react-router-dom";
 
 import Api from "../api/Api";
 import "../styles/login.css";
 import { FormControlLabel, Grid, Switch } from "@material-ui/core";
 
+function Alert(props) {
+  return <MuiAlert elevation={6}  {...props} />;
+}
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
+
 export default function TicketAllocation() {
 
     let location = useLocation();
     let history = useHistory();
+
+    const classes = useStyles();
+    const [openSnackbar, setOpenSnackbar] = useState({
+      severity : "",
+      message : "",
+      open : false,
+      time : 0,
+      closeType : null
+    });
 
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
@@ -30,6 +55,20 @@ export default function TicketAllocation() {
     const [tickets, setTickets] = useState(0)
 
 
+    const successClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      history.push("/Tickets");
+    };
+
+    const errorClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
+    };
+
     useEffect(()=>{
 
 
@@ -40,17 +79,21 @@ export default function TicketAllocation() {
       async function fetchData(){
 
         let x = location.state.event.id
+        var time = 6000
 
         let t = await Api.getRequest("unallocated/" + x)
         if(t.message === "success"){
           setTickets(t.ticket)
+
         }else if (x.message === "unauthorized"){
           localStorage.clear();
           history.push("/",  {last : "/TicketAllocation"})
+
       }else if(x.message === "error"){
-        console.log("error")
+        setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+
       }else if(x.message === "no connection"){
-        console.log("no connection")
+        setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
       }
                
 
@@ -99,11 +142,9 @@ export default function TicketAllocation() {
       setIsSending(true)
 
       // send the actual request
-
-
-
       async function fetchData(){
 
+        var time = 3000
           if(bulk){
 
             var allocateBulk = {
@@ -118,7 +159,6 @@ export default function TicketAllocation() {
             console.log(t)
             if(t.message === "success"){
 
-
               //can only pay for tickets if allocated successfully
               if(paid){
                   let pay = {
@@ -132,31 +172,59 @@ export default function TicketAllocation() {
                   
                   let p = await Api.postRequest("bulkPayment",pay)
                   console.log(p)
-                  if(p.message === "success"){
-        
-                    history.goBack()
+                  if(p.message === "success"){        
+                    var message = "Payment Successful"              
+              
+                    if(p.short) 
+                      setOpenSnackbar({severity : "warning", message : message + " R"+p.amount+" outstanding", open : true, time : time, closeType : successClose})
+                    else if(p.surplus)
+                      setOpenSnackbar({severity : "success", message : message + " R"+p.amount + " surplus given", open : true, time : time, closeType : successClose})
+                    else
+                      setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
+      
                   }else if (p.message === "unauthorized"){
                     localStorage.clear();
                     history.push("/" , {last: "/Payments"})
+
                   }else if(p.message === "error"){
-                    console.log("error")
+                    time = 6000
+                    setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+
                   }else if(p.message === "no connection"){
-                    console.log("no connection")
+                    time = 6000
+                    setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+
+                  }else if(p.message === "timeout"){
+                    time = 6000
+                    setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+                    
                   }
                 }else{
-                  history.goBack()
+                  setOpenSnackbar({severity : "success", message : "Allocation Successful", open : true, time : time, closeType : successClose})
+
                 }
 
             }else if (t.message === "unauthorized"){
               localStorage.clear();
               history.push("/",  {last : "/TicketAllocation"})
+
             }else if(t.message === "error"){
-              console.log("error")
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+
             }else if(t.message === "no connection"){
-              console.log("no connection")
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+
+            }else if(t.message === "timeout"){
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+              
+            }else{
+              time = 6000
+              setOpenSnackbar({severity : "warning", message : t.message, open : true, time : time, closeType : errorClose})
+
             }
-
-
           
         }else{
 
@@ -174,28 +242,57 @@ export default function TicketAllocation() {
 
               console.log(pay)
               if(pay.message === "success"){
+                var message = "Payment Successful"
+                            
+                if(pay.short) 
+                  setOpenSnackbar({severity : "warning", message :message + " R"+pay.amount+" outstanding", open : true, time : time, closeType : successClose})
+                else if(pay.surplus)
+                  setOpenSnackbar({severity : "success", message :message + " R"+pay.amount + " surplus given", open : true, time : time, closeType : successClose})
+                else
+                  setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
+  
+                }else if (pay.message === "unauthorized"){
+                  localStorage.clear();
+                  history.push("/", {last: "/Payments", data: location.state})
 
-                history.goBack()
-              }else if (pay.message === "unauthorized"){
-                localStorage.clear();
-                history.push("/", {last: "/Payments", data: location.state})
-              }else if(pay.message === "error"){
-                console.log("error")
+                }else if(pay.message === "error"){
+                time = 6000
+                setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+              
               }else if(pay.message === "no connection"){
-                console.log("no connection")
+                time = 6000
+                setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+
+              }else if(pay.message === "timeout"){
+                time = 6000
+                setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+                
               }
             }else{
-              history.goBack()
+              setOpenSnackbar({severity : "success", message : "Allocation Successful", open : true, time : time, closeType : successClose})
 
             }
 
           }else if (t.message === "unauthorized"){
             localStorage.clear();
             history.push("/",  {last : "/TicketAllocation", data : location.state})
+
           }else if(t.message === "error"){
-            console.log("error")
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+          
           }else if(t.message === "no connection"){
-            console.log("no connection")
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+
+          }else if(t.message === "timeout"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+            
+          }else{
+            time = 6000
+            setOpenSnackbar({severity : "warning", message : t.message, open : true, time : time, closeType : errorClose})
+
           }
         }
 
@@ -208,7 +305,7 @@ export default function TicketAllocation() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history, location, amount, paid]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history, location, amount, paid, errorClose, successClose]); // update the callback if the state changes
 
     const back = () => {
       history.push("/Tickets");
@@ -220,37 +317,38 @@ export default function TicketAllocation() {
 
       <div className="App">
 
-        {console.log(person)}
+        <div className={classes.root}>
+            <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
+            <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
+              {openSnackbar.message}
+            </Alert>
+          </Snackbar>
+        </div>
+
         <aside className="profile-card">
           <div className="profile-bio">
 
           <h3>{location.state.event.name}<br/>
           unallocated tickets left: {tickets}</h3>
 
-
-
           <FormControlLabel
+            control={
 
-          control={
+            <Grid component="label" container alignItems="center" spacing={1}>
+              <Grid item>Single</Grid>
+              <Grid item>
 
-          <Grid component="label" container alignItems="center" spacing={1}>
-            <Grid item>Single</Grid>
-            <Grid item>
+                <Switch
+                  checked={bulk}
+                  onChange={e => setBulk(e.target.checked)}
+                  color = "#"
+                />
 
-              <Switch
-                checked={bulk}
-                onChange={e => setBulk(e.target.checked)}
-                color = "#"
-              />
-
-
+              </Grid>
+              <Grid item>Bulk</Grid>
             </Grid>
-            <Grid item>Bulk</Grid>
-          </Grid>
-          }
-
+            }
           />
-
 
         <Autocomplete
           style={{ width: 250 , marginBottom: "30px"}}
@@ -303,17 +401,14 @@ export default function TicketAllocation() {
               InputLabelProps={{
                 shrink: true,
               }}
-              variant="outlined"
-              
+              variant="outlined"              
             />
           :
           <div/>
           }
 
           <FormControlLabel
-
           control={
-
           <Grid component="label" container alignItems="center" spacing={1}>
             <Grid item>
 
@@ -324,12 +419,10 @@ export default function TicketAllocation() {
                 color = "#"
               />
 
-
             </Grid>
             <Grid item>Paid</Grid>
           </Grid>
           }
-
           />
 
       {paid ?
@@ -346,17 +439,14 @@ export default function TicketAllocation() {
                 }}
                 variant="outlined"
                 
-                />
+            />
       <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "15px"}}>Allocate & Pay</button> 
 
-        </div>
-
-    
+        </div>    
       :
       <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "15px"}}>Allocate Ticket</button> 
-
-      
       }
+
       <button className = "button" type="button" onClick={back} style={{marginTop: "15px"}}> Cancel</button>
   
       </div>

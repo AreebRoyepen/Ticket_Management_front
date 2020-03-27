@@ -1,4 +1,4 @@
-import React,{Component, useState, useEffect} from 'react';
+import React,{ useState } from 'react';
 import useModal from 'react-hooks-use-modal';
 import "../../styles/eventCard.css";
 import "../../styles/popUp.css";

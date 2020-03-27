@@ -1,16 +1,39 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import TextField from '@material-ui/core/TextField';
 import { useLocation, useHistory } from "react-router-dom";
-
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 import Api from "../api/Api";
 import "../styles/login.css";
 import { FormControlLabel, Grid, Switch } from "@material-ui/core";
 
+function Alert(props) {
+  return <MuiAlert elevation={6}  {...props} />;
+}
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 export default function ReturnTickets() {
 
     let location = useLocation();
     let history = useHistory();
+
+    const classes = useStyles();
+    const [openSnackbar, setOpenSnackbar] = useState({
+      severity : "",
+      message : "",
+      open : false,
+      time : 0,
+      closeType : null
+    });
     
     const [isSending, setIsSending] = useState(false)
     const isMounted = useRef(true)
@@ -22,26 +45,44 @@ export default function ReturnTickets() {
     const[loadTickets, setLoadTickets] = useState(false)
     const [tickets, setTickets] = useState(0)
     
-    useEffect(()=>{
 
-      
+    const successClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      history.push("/Tickets");
+    };
+
+    const errorClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
+    };
+
+    useEffect(()=>{      
 
       if (loadTickets) return
 
       setLoadTickets(true)
 
       async function fetchData(){
+
+        var time = 6000
         let x = location.state.event.id
         let d = await Api.getRequest("unallocated/" + x)
         if(d.message === "success"){
           setTickets(d.ticket)
+
         }else if (x.message === "unauthorized"){
           localStorage.clear();
           history.push("/", {last : "/ReturnTickets"})
+
         }else if(x.message === "error"){
-          console.log("error")
+          setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+  
         }else if(x.message === "no connection"){
-          console.log("no connection")
+          setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
         }
       }
 
@@ -69,43 +110,76 @@ export default function ReturnTickets() {
 
       async function fetchData(){
 
+        var time = 3000
+        var message = "Successfully Returned"
         console.log(x)
         if(bulk){
 
           let t = await Api.deleteRequest("bulkReturn",x)
           console.log(t)
           if(t.message === "success"){
+            if(t.ticket){
+              message = message + ", " + t.ticket
+            }
+            setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
 
-            history.goBack()
-          }else if (x.message === "unauthorized"){
+          }else if (t.message === "unauthorized"){
             localStorage.clear();
             history.push("/", {last : "/ReturnTickets"})
-          }else if(x.message === "error"){
-            console.log("error")
-          }else if(x.message === "no connection"){
-            console.log("no connection")
+
+          }else if(t.message === "error"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+
+          }else if(t.message === "no connection"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+
+          }else if(t.message === "timeout"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+            
+          }else{
+            time = 6000
+            setOpenSnackbar({severity : "warning", message : t.message, open : true, time : time, closeType : errorClose})
+
           }
 
         }else{
+
           let t = await Api.deleteRequest("returnTicket/"+location.state.event.id+"/"+(ticketNumberF)) 
           if(t.message === "success"){
 
-            history.goBack()
-          }else if (x.message === "unauthorized"){
+            if(t.ticket){
+              message = message + ", " + t.ticket
+            }
+            setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
+
+          }else if (t.message === "unauthorized"){
             localStorage.clear();
             history.push("/", {last : "/ReturnTickets", data : location.state})
-          }else if(x.message === "error"){
-            console.log("error")
-          }else if(x.message === "no connection"){
-            console.log("no connection")
+
+          }else if(t.message === "error"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+
+          }else if(t.message === "no connection"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+
+          }else if(t.message === "timeout"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+            
+          }else{
+            time = 6000
+            setOpenSnackbar({severity : "warning", message : t.message, open : true, time : time, closeType : errorClose})
+
           }
 
-        }
-
-        
+        }        
 
       }
-
       
       fetchData()
 
@@ -113,7 +187,7 @@ export default function ReturnTickets() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, bulk, history, location]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, bulk, history, location, successClose, errorClose]); // update the callback if the state changes
 
     const back = () =>{
 
@@ -127,16 +201,24 @@ export default function ReturnTickets() {
     return (
 
       <div className="App">
+
+        <div className={classes.root}>
+            <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
+            <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
+              {openSnackbar.message}
+            </Alert>
+          </Snackbar>
+        </div>
+
         <aside className="profile-card">
           <div className="profile-bio">
           <h3>
           {location.state.event.name}<br/>
           unallocated tickets left: {tickets}
           </h3>
+
           <FormControlLabel
-
           control={
-
           <Grid component="label" container alignItems="center" spacing={1}>
             <Grid item>Single</Grid>
             <Grid item>
@@ -147,12 +229,10 @@ export default function ReturnTickets() {
                 color = "#"
               />
 
-
             </Grid>
             <Grid item>Bulk</Grid>
           </Grid>
           }
-
           />
 
 
@@ -164,13 +244,10 @@ export default function ReturnTickets() {
         InputLabelProps={{
           shrink: true,
         }}
-        variant="outlined"
-        
+        variant="outlined"        
       />
 
-
-        {bulk ?
-        
+        {bulk ?        
         <TextField
         id="filled-number"
         label="To"
@@ -179,10 +256,8 @@ export default function ReturnTickets() {
         InputLabelProps={{
           shrink: true,
         }}
-        variant="outlined"
-        
+        variant="outlined"        
       />
-
         :
         <div/>
         }

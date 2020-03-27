@@ -14,11 +14,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
 import { TiTicket } from "react-icons/ti";
 import {MdEvent, MdDashboard,MdPeople} from "react-icons/md";
-import {FaTicketAlt} from "react-icons/fa"
+import {FaTicketAlt} from "react-icons/fa";
 
-import "../styles/menu.css";;
-
-var user = JSON.parse(localStorage.user)
+import "../styles/menu.css";
+if(localStorage.user)
+  var user = JSON.parse(localStorage.user)
 
 const useStyles = makeStyles(theme =>({
   list: {

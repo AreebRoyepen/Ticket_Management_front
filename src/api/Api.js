@@ -23,7 +23,6 @@ export default class Api {
    })
    .catch(
     e =>{
-        console.log(e)
 
         if(e.response){
 
@@ -34,7 +33,10 @@ export default class Api {
             }
 
         }else{
-            console.log("nice")
+            if (e.code === 'ECONNABORTED'){
+                return {"message" : "timeout"}
+            }
+
             return {"message" : "no connection"}
         }    
     }
@@ -68,6 +70,9 @@ export default class Api {
                 }
     
             }else{
+                if (e.code === 'ECONNABORTED'){
+                    return {"message" : "timeout"}
+                }
                 return {"message" : "no connection"}
             }
         }
@@ -100,7 +105,9 @@ export default class Api {
             }
 
         }else{
-            console.log("nice")
+            if (e.code === 'ECONNABORTED'){
+                return {"message" : "timeout"}
+            }
             return {"message" : "no connection"}
         }
     }
@@ -132,6 +139,9 @@ export default class Api {
             }
 
         }else{
+            if (e.code === 'ECONNABORTED'){
+                return {"message" : "timeout"}
+            }
             return {"message" : "no connection"}
         }
     }
@@ -165,6 +175,9 @@ export default class Api {
             }
 
         }else{
+            if (e.code === 'ECONNABORTED'){
+                return {"message" : "timeout"}
+            }
             return {"message" : "no connection"}
         }
     }

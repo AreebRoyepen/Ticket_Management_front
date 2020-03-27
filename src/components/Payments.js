@@ -4,16 +4,40 @@ import { useLocation, useHistory } from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import Api from "../api/Api";
 import "../styles/login.css";
 
+function Alert(props) {
+  return <MuiAlert elevation={6}  {...props} />;
+}
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 export default function Payments() {
 
     let location = useLocation();
     let history = useHistory();
+
+    const classes = useStyles();
+    const [openSnackbar, setOpenSnackbar] = useState({
+      severity : "",
+      message : "",
+      open : false,
+      time : 0,
+      closeType : null
+    });
 
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
@@ -32,6 +56,21 @@ export default function Payments() {
 
     const[bulk,setBulk] = useState(false);
     const [payOption, setPayOption] = useState(false);
+
+
+    const successClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      history.push("/Tickets");
+    };
+
+    const errorClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
+    };
 
     useEffect(() => {
       let active = true;
@@ -66,6 +105,8 @@ export default function Payments() {
 
         let unpaid = await Api.postRequest("tickets", {event : id})
         console.log(unpaid)
+        var time = 6000
+
         if(unpaid.message==="success"){
  
           var falsestuff = unpaid.ticket.filter( key => {
@@ -78,11 +119,14 @@ export default function Payments() {
         }else if (unpaid.message === "unauthorized"){
           localStorage.clear();
           history.push("/", {last: "/Payments"})
-      }else if(unpaid.message === "error"){
-        console.log("error")
-      }else if(unpaid.message === "no connection"){
-        console.log("no connection")
-      }
+
+        }else if(unpaid.message === "error"){          
+          setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+
+        }else if(unpaid.message === "no connection"){          
+          setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+
+        }
 
 
         
@@ -92,7 +136,7 @@ export default function Payments() {
 
       setLoadTickets(false)
 
-    },[loadTickets, location, history]);
+    },[loadTickets, location, history, errorClose]);
 
  
     const payment = useCallback(async () => {
@@ -106,19 +150,37 @@ export default function Payments() {
       
       async function fetchData(){
 
+        var time = 3000
         if(!payOption){
           let x = await Api.getRequest("payByPerson/"+location.state.event.id+"/"+person.id+"/"+parseInt(amount))
 
           if(x.message === "success"){
-  
-            history.goBack()
+            
+            var message = "Payment Successful"            
+            
+            if(x.short) 
+              setOpenSnackbar({severity : "warning", message :message + " R"+x.amount+" outstanding", open : true, time : time, closeType : successClose})
+            else if(x.surplus)
+              setOpenSnackbar({severity : "success", message :message + " R"+x.amount + " surplus given", open : true, time : time, closeType : successClose})
+            else
+              setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
+
           }else if (x.message === "unauthorized"){
             localStorage.clear();
             history.push("/" , {last: "/Payments"})
+
           }else if(x.message === "error"){
-            console.log("error")
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+
           }else if(x.message === "no connection"){
-            console.log("no connection")
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+            
+          }else if(x.message === "timeout"){
+            time = 6000
+            setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+            
           }
 
         }else{
@@ -139,30 +201,73 @@ export default function Payments() {
             console.log(x)
 
             if(x.message === "success"){
-  
-              history.goBack()
+              time = 3000
+              var message = "Payment Successful"
+              
+              
+              if(x.short) 
+                setOpenSnackbar({severity : "warning", message : message + " R"+x.amount+" outstanding", open : true, time : time, closeType : successClose})
+              else if(x.surplus)
+                setOpenSnackbar({severity : "success", message : message + " R"+x.amount + " surplus given", open : true, time : time, closeType : successClose})
+              else
+                setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
+
             }else if (x.message === "unauthorized"){
               localStorage.clear();
               history.push("/" , {last: "/Payments"})
+
             }else if(x.message === "error"){
-              console.log("error")
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+            
             }else if(x.message === "no connection"){
-              console.log("no connection")
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+
+            }else if(x.message === "timeout"){
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+              
+            }else{
+              time = 6000
+              setOpenSnackbar({severity : "warning", message : x.message, open : true, time : time, closeType : errorClose})
+
             }
   
           }else{
             let x = await Api.getRequest("payment/"+location.state.event.id+"/"+parseInt(ticketNumberF)+"/"+parseInt(amount))
             console.log(x)
             if(x.message === "success"){
-  
-              history.goBack()
+              time = 3000
+              var message = "Payment Successful"
+                            
+              if(x.short) 
+                setOpenSnackbar({severity : "warning", message :message + " R"+x.amount+" outstanding", open : true, time : time, closeType : successClose})
+              else if(x.surplus)
+                setOpenSnackbar({severity : "success", message :message + " R"+x.amount + " surplus given", open : true, time : time, closeType : successClose})
+              else
+                setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
+
             }else if (x.message === "unauthorized"){
               localStorage.clear();
               history.push("/", {last: "/Payments", data: location.state})
+
             }else if(x.message === "error"){
-              console.log("error")
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+            
             }else if(x.message === "no connection"){
-              console.log("no connection")
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+
+            }else if(x.message === "timeout"){
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+              
+            }else{
+              time = 6000
+              setOpenSnackbar({severity : "warning", message : x.message, open : true, time : time, closeType : errorClose})
+
             }
           }
         }
@@ -176,18 +281,23 @@ export default function Payments() {
       if (isMounted.current) // only update if we are still mounted
         setIsSending(false)
 
-    }, [isSending, ticketNumberF, ticketNumberT, history, bulk, location, person, amount, payOption]); // update the callback if the state changes
+    }, [isSending, ticketNumberF, ticketNumberT, history, bulk, location, person, amount, payOption, successClose, errorClose]); // update the callback if the state changes
 
-    const back = () =>{
-
-      history.push("/Tickets");
-
-    }
+    const back = () =>{  history.push("/Tickets");  }
     
     return (
 
       <div className="App">
-                {console.log(person)}
+
+      <div className={classes.root}>
+      <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
+        <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
+          {openSnackbar.message}
+        </Alert>
+      </Snackbar>
+      </div>
+
+      {console.log(person)}
 
         <aside className="profile-card">
           <div className="profile-bio">
@@ -199,14 +309,11 @@ export default function Payments() {
           and {tickets} unpaid<br/>
           </h4>
 
-          
             Pay by
           <br/>
 
           <FormControlLabel
-
             control={
-
             <Grid component="label" container alignItems="center" spacing={1}>
               <Grid item>person</Grid>
               <Grid item>
@@ -217,15 +324,13 @@ export default function Payments() {
                   color = "#99cc33"
                 />
 
-
               </Grid>
               <Grid item>ticket</Grid>
             </Grid>
             }
+          />
 
-            />
-
-          <TextField
+      <TextField
        style={{marginTop: "15px"}}
         id="filled-number"
         label={"Amount"}
@@ -244,10 +349,8 @@ export default function Payments() {
     
     <div>
 
-    <FormControlLabel
-    
-    control={
-    
+    <FormControlLabel    
+    control={    
     <Grid component="label" container alignItems="center" spacing={1}>
       <Grid item>Single</Grid>
       <Grid item>
@@ -256,14 +359,12 @@ export default function Payments() {
           checked={bulk}
           onChange={e => setBulk(e.target.checked)}
           color = "#"
-        />
-    
+        />    
     
       </Grid>
       <Grid item>Bulk</Grid>
     </Grid>
-    }
-    
+    }    
     />
     
     <TextField
@@ -275,13 +376,10 @@ export default function Payments() {
       InputLabelProps={{
         shrink: true,
       }}
-      variant="outlined"
-      
+      variant="outlined"      
     />
     
-      {bulk
-    
-        ?
+      {bulk ?
           <TextField
           id="filled-number"
           label="To"
@@ -290,22 +388,13 @@ export default function Payments() {
           InputLabelProps={{
             shrink: true,
           }}
-          variant="outlined"
-          
+          variant="outlined"          
         />
         :
           <div/>
       }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-            </div>
+        
+      </div>
     
       :
 
@@ -338,17 +427,8 @@ export default function Payments() {
               />
             )}
           />
-      
-      
-      
+            
       }
-
-
-
-
-      
-
-      
 
       <button className = "button" type="button" disabled={isSending} onClick={payment}   style={{marginTop: "10px"}} > Pay </button>
       <button className = "button" type="button" onClick={back}  style={{marginTop: "10px"}}> Cancel</button>
