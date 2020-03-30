@@ -9,7 +9,7 @@ import "../styles/login.css";
 import { FormControlLabel, Grid, Switch } from "@material-ui/core";
 
 function Alert(props) {
-  return <MuiAlert elevation={6}  {...props} />;
+  return <MuiAlert elevation={6} variant = "outlined" {...props} />;
 }
 
 const useStyles = makeStyles(theme => ({
