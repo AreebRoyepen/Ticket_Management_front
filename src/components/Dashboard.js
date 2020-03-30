@@ -3,12 +3,17 @@ import "../styles/dashboard.css";
 import { Chart, Doughnut } from 'react-chartjs-2';
 import Api from "../api/Api";
 import { useHistory } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   card: {
@@ -26,7 +31,31 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  table: {
+    minWidth: 700,
+  },
 });
+
+
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+}))(TableRow);
+
 
 export default function Dashboard(){
 
@@ -34,9 +63,12 @@ export default function Dashboard(){
   const [unallocated, setUnallocated] = useState(0)
   const [paid, setPaid] = useState(0)
   const [unpaid, setUnpaid] = useState(0)
-  const [connection, setConnection] = useState(false)
   const [totalFunds, setTotalFunds] = useState(0)
   const [funds, setFunds] = useState(0)
+  const [events, setEvents] = useState([])
+
+  const [connection, setConnection] = useState(false)
+
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -106,7 +138,7 @@ export default function Dashboard(){
 
         console.log("check your internet connection")
 
-      } else if(x.message === "unauthorized"){
+      }else if(x.message === "unauthorized"){
 
         localStorage.clear();
         history.push("/", {last : "/Dashboard"})
@@ -123,16 +155,23 @@ export default function Dashboard(){
       }else if (y.message === "unauthorized"){
         localStorage.clear();
         history.push("/", {last : "/Dashboard"})
-    }else if(y.message === "error"){
-      console.log("error")
-    }else if(y.message === "no connection"){
-      console.log("no connection")
-    }
+      }else if(y.message === "error"){
+        console.log("error")
+      }else if(y.message === "no connection"){
+        console.log("no connection")
+      }
 
-    let z = await Api.getRequest("events")
-    if(z.message === "success"){
+      let z = await Api.getRequest("events")
+      if(z.message === "success"){
 
       console.log(z)
+
+      var open = z.event.filter( key => {
+        if (key.active === true)
+        return key
+      })
+
+      setEvents(open)
       
       var total =0;
       z.event.forEach(element => {
@@ -142,16 +181,18 @@ export default function Dashboard(){
 
       });
 
+
+
       setTotalFunds(total)
 
-    }else if (z.message === "unauthorized"){
-      localStorage.clear();
-      history.push("/", {last : "/Dashboard"})
-  }else if(z.message === "error"){
-    console.log("error")
-  }else if(z.message === "no connection"){
-    console.log("no connection")
-  }
+      }else if (z.message === "unauthorized"){
+        localStorage.clear();
+        history.push("/", {last : "/Dashboard"})
+      }else if(z.message === "error"){
+        console.log("error")
+      }else if(z.message === "no connection"){
+        console.log("no connection")
+      }
 
 
       setConnection(true)
@@ -215,8 +256,13 @@ export default function Dashboard(){
                   >
                     Collected
                   </Typography>
-                  <Typography className={classes.pos} variant="h5" component="h2">
-                    R {funds}{bull}00
+                  <Typography
+                    className={classes.pos}
+                    variant="h5"
+                    component="h2"
+                  >
+                    R {funds}
+                    {bull}00
                   </Typography>
                   <Typography className={classes.pos} color="textSecondary">
                     in total / from all active events
@@ -235,8 +281,13 @@ export default function Dashboard(){
                   >
                     Expected
                   </Typography>
-                  <Typography className={classes.pos} variant="h5" component="h2">
-                    R {totalFunds}{bull}00
+                  <Typography
+                    className={classes.pos}
+                    variant="h5"
+                    component="h2"
+                  >
+                    R {totalFunds}
+                    {bull}00
                   </Typography>
                   <Typography className={classes.pos} color="textSecondary">
                     in total / from all active events
@@ -256,7 +307,7 @@ export default function Dashboard(){
                       width: "600px",
                       height: "300px",
 
-                      float: "left",
+                      
                       display: "inline-block"
                     },
                     legend: {
@@ -271,6 +322,31 @@ export default function Dashboard(){
                 />
               </div>
             </div>
+
+            <div>
+              <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="customized table">
+
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell>Active Events</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+
+                  <TableBody>
+                    {events.splice(0,3).map(row => (
+                      <StyledTableRow key={row.name}>
+                        <StyledTableCell component="th" scope="row">
+                          {row.name}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    ))}
+                  </TableBody>
+
+                </Table>
+              </TableContainer>
+            </div>
+
           </div>
         ) : (
           <div className="dots-container">
