@@ -81,7 +81,7 @@ export default function EventPage() {
         "name": name,
         "to": parseInt(to),
         "from": parseInt(from),
-        "ticketPrice": parseInt(price),
+        "ticketPrice": parseFloat(price),
       };
 
       async function fetchData(){
@@ -157,7 +157,7 @@ export default function EventPage() {
         "name": name,
         "to": parseInt(to),
         "from": parseInt(from),
-        "ticketPrice": parseInt(price)
+        "ticketPrice": parseFloat(price)
       };
 
       console.log(a);

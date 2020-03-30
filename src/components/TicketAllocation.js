@@ -12,7 +12,7 @@ import "../styles/login.css";
 import { FormControlLabel, Grid, Switch } from "@material-ui/core";
 
 function Alert(props) {
-  return <MuiAlert elevation={6}  {...props} />;
+  return <MuiAlert elevation={6} variant = "outlined" {...props} />;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -166,7 +166,7 @@ export default function TicketAllocation() {
                     "event": location.state.event.id,
                     "ticketNumberF": parseInt(ticketNumberF),
                     "ticketNumberT": parseInt(ticketNumberT),
-                    "amount": parseInt(amount)
+                    "amount": parseFloat(amount)
                     
                   }
                   
@@ -238,7 +238,14 @@ export default function TicketAllocation() {
           if(t.message === "success"){
 
             if(paid){
-              let pay = await Api.getRequest("payment/"+location.state.event.id+"/"+parseInt(ticketNumberF)+"/"+parseInt(amount))
+
+              let x = {
+                eventid: location.state.event.id,
+                ticketNumber: parseInt(ticketNumberF),
+                amount: parseFloat(amount)
+              }
+
+              let pay = await Api.postRequest("payment",x)
 
               console.log(pay)
               if(pay.message === "success"){

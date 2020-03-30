@@ -13,7 +13,7 @@ import Api from "../api/Api";
 import "../styles/login.css";
 
 function Alert(props) {
-  return <MuiAlert elevation={6}  {...props} />;
+  return <MuiAlert elevation={6} variant = "outlined"  {...props} />;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -151,39 +151,50 @@ export default function Payments() {
       async function fetchData(){
 
         var time = 3000
-        if(!payOption){
-          let x = await Api.getRequest("payByPerson/"+location.state.event.id+"/"+person.id+"/"+parseInt(amount))
 
-          if(x.message === "success"){
+        if(!payOption){
+
+          let x = {
+
+            eventid:location.state.event.id,
+            personid: person.id,
+            amount: parseFloat(amount)
+          
+          }
+
+          let resp = await Api.postRequest("payByPerson",x)
+
+          if(resp.message === "success"){
             
             var message = "Payment Successful"            
             
-            if(x.short) 
-              setOpenSnackbar({severity : "warning", message :message + " R"+x.amount+" outstanding", open : true, time : time, closeType : successClose})
-            else if(x.surplus)
-              setOpenSnackbar({severity : "success", message :message + " R"+x.amount + " surplus given", open : true, time : time, closeType : successClose})
+            if(resp.short) 
+              setOpenSnackbar({severity : "warning", message :message + " R"+resp.amount+" outstanding", open : true, time : time, closeType : successClose})
+            else if(resp.surplus)
+              setOpenSnackbar({severity : "success", message :message + " R"+resp.amount + " surplus given", open : true, time : time, closeType : successClose})
             else
               setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
 
-          }else if (x.message === "unauthorized"){
+          }else if (resp.message === "unauthorized"){
             localStorage.clear();
             history.push("/" , {last: "/Payments"})
 
-          }else if(x.message === "error"){
+          }else if(resp.message === "error"){
             time = 6000
             setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
 
-          }else if(x.message === "no connection"){
+          }else if(resp.message === "no connection"){
             time = 6000
             setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
             
-          }else if(x.message === "timeout"){
+          }else if(resp.message === "timeout"){
             time = 6000
             setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
             
           }
 
         }else{
+
           if(bulk){
 
             let pay = {
@@ -191,82 +202,89 @@ export default function Payments() {
               "event": location.state.event.id,
               "ticketNumberF": parseInt(ticketNumberF),
               "ticketNumberT": parseInt(ticketNumberT),
-              "amount": parseInt(amount)
+              "amount": parseFloat(amount)
               
             }
 
             console.log(pay)
             
-            let x = await Api.postRequest("bulkPayment",pay)
-            console.log(x)
+            let resp = await Api.postRequest("bulkPayment",pay)
+            console.log(resp)
 
-            if(x.message === "success"){
+            if(resp.message === "success"){
               time = 3000
               var message = "Payment Successful"
               
               
-              if(x.short) 
-                setOpenSnackbar({severity : "warning", message : message + " R"+x.amount+" outstanding", open : true, time : time, closeType : successClose})
-              else if(x.surplus)
-                setOpenSnackbar({severity : "success", message : message + " R"+x.amount + " surplus given", open : true, time : time, closeType : successClose})
+              if(resp.short) 
+                setOpenSnackbar({severity : "warning", message : message + " R"+resp.amount+" outstanding", open : true, time : time, closeType : successClose})
+              else if(resp.surplus)
+                setOpenSnackbar({severity : "success", message : message + " R"+resp.amount + " surplus given", open : true, time : time, closeType : successClose})
               else
                 setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
 
-            }else if (x.message === "unauthorized"){
+            }else if (resp.message === "unauthorized"){
               localStorage.clear();
               history.push("/" , {last: "/Payments"})
 
-            }else if(x.message === "error"){
+            }else if(resp.message === "error"){
               time = 6000
               setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
             
-            }else if(x.message === "no connection"){
+            }else if(resp.message === "no connection"){
               time = 6000
               setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
 
-            }else if(x.message === "timeout"){
+            }else if(resp.message === "timeout"){
               time = 6000
               setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
               
             }else{
               time = 6000
-              setOpenSnackbar({severity : "warning", message : x.message, open : true, time : time, closeType : errorClose})
+              setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : errorClose})
 
             }
   
           }else{
-            let x = await Api.getRequest("payment/"+location.state.event.id+"/"+parseInt(ticketNumberF)+"/"+parseInt(amount))
-            console.log(x)
-            if(x.message === "success"){
+
+            let x = {
+              eventid: location.state.event.id,
+              ticketNumber: parseInt(ticketNumberF),
+              amount: parseFloat(amount)
+            }
+
+            let resp = await Api.postRequest("payment", x)
+            console.log(resp)
+            if(resp.message === "success"){
               time = 3000
               var message = "Payment Successful"
                             
-              if(x.short) 
-                setOpenSnackbar({severity : "warning", message :message + " R"+x.amount+" outstanding", open : true, time : time, closeType : successClose})
-              else if(x.surplus)
-                setOpenSnackbar({severity : "success", message :message + " R"+x.amount + " surplus given", open : true, time : time, closeType : successClose})
+              if(resp.short) 
+                setOpenSnackbar({severity : "warning", message :message + " R"+resp.amount+" outstanding", open : true, time : time, closeType : successClose})
+              else if(resp.surplus)
+                setOpenSnackbar({severity : "success", message :message + " R"+resp.amount + " surplus given", open : true, time : time, closeType : successClose})
               else
                 setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
 
-            }else if (x.message === "unauthorized"){
+            }else if (resp.message === "unauthorized"){
               localStorage.clear();
               history.push("/", {last: "/Payments", data: location.state})
 
-            }else if(x.message === "error"){
+            }else if(resp.message === "error"){
               time = 6000
               setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
             
-            }else if(x.message === "no connection"){
+            }else if(resp.message === "no connection"){
               time = 6000
               setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
 
-            }else if(x.message === "timeout"){
+            }else if(resp.message === "timeout"){
               time = 6000
               setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
               
             }else{
               time = 6000
-              setOpenSnackbar({severity : "warning", message : x.message, open : true, time : time, closeType : errorClose})
+              setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : errorClose})
 
             }
           }
