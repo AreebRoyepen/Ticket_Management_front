@@ -59,12 +59,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 export default function Dashboard(){
 
-  const [allocated, setAllocated] = useState(0)
-  const [unallocated, setUnallocated] = useState(0)
-  const [paid, setPaid] = useState(0)
-  const [unpaid, setUnpaid] = useState(0)
-  const [totalFunds, setTotalFunds] = useState(0)
-  const [funds, setFunds] = useState(0)
+  const[dData, setData] = useState([])
   const [events, setEvents] = useState([])
 
   const [connection, setConnection] = useState(false)
@@ -83,7 +78,7 @@ export default function Dashboard(){
 
     ],
     datasets: [{
-      data: [allocated,unallocated,paid,(allocated+unallocated)],
+      data: [dData.allocatedTickets,dData.unallocatedTickets,dData.paidTickets,dData.totalTickets],
       backgroundColor: [
       '#1A2819',
       '#2C4A28',
@@ -106,85 +101,30 @@ export default function Dashboard(){
 
     async function fetchData(){
 
-      let x = await Api.postRequest("tickets",{})   
+      let x = await Api.getRequest("dashboard")   
 
       console.log(x)
 
       if(x.message === "success"){
-        setAllocated(x.ticket.length)//sizeof
 
-        var money =0;
-        x.ticket.forEach(element => {
-          
-          money = money + element.amount
-  
-        });
-  
-        setFunds(money)
-
-        var truestuff = x.ticket.filter( key => {
-          if (key.paid === true)
-          return key
-        })
-        setPaid(truestuff.length)
-
-        var falsestuff = x.ticket.filter( key => {
-          if (key.paid === false)
-          return key
-        })
-        setUnpaid(falsestuff.length)
-     
-      }else if (x.message === "no connection"){
-
-        console.log("check your internet connection")
-
-      }else if(x.message === "unauthorized"){
-
+        setData(x.data)
+        
+      }else if (x.message === "unauthorized"){
         localStorage.clear();
         history.push("/", {last : "/Dashboard"})
-
-      }
-      
-      let y = await Api.getRequest("unallocated")
-
-      if(y.message === "success"){
-
-        console.log(y)
-        setUnallocated(y.ticket)
-
-      }else if (y.message === "unauthorized"){
-        localStorage.clear();
-        history.push("/", {last : "/Dashboard"})
-      }else if(y.message === "error"){
+      }else if(x.message === "error"){
         console.log("error")
-      }else if(y.message === "no connection"){
+      }else if(x.message === "no connection"){
         console.log("no connection")
       }
 
-      let z = await Api.getRequest("events")
+      let z = await Api.getRequest("availableEvents")
       if(z.message === "success"){
 
       console.log(z)
 
-      var open = z.event.filter( key => {
-        if (key.active === true)
-        return key
-      })
-
-      setEvents(open)
+      setEvents(z.event)
       
-      var total =0;
-      z.event.forEach(element => {
-        
-        var count = element.to - element.from + 1;
-        total = total +  count * element.ticketPrice
-
-      });
-
-
-
-      setTotalFunds(total)
-
       }else if (z.message === "unauthorized"){
         localStorage.clear();
         history.push("/", {last : "/Dashboard"})
@@ -200,7 +140,7 @@ export default function Dashboard(){
 
     fetchData()
 
-  },[setAllocated, setUnallocated, history, setUnpaid])
+  },[history, setData, setEvents])
 
 
   Chart.pluginService.register({
@@ -228,8 +168,14 @@ export default function Dashboard(){
 
     return (
       <div>
-        {console.log(funds)}
-        {console.log(totalFunds)}
+        {console.log(dData.funds)}
+        {console.log(dData.totalFunds)}
+        {console.log(dData.totalTickets)}
+        {console.log(dData.allocatedTickets)}
+        {console.log(dData.unallocatedTickets)}
+        {console.log(dData.paidTickets)}
+        {console.log(dData.unpaidTickets)}
+
         {connection ? (
           <div>
             <meta
@@ -256,16 +202,34 @@ export default function Dashboard(){
                   >
                     Collected
                   </Typography>
+
+                  <Typography
+                    
+                    variant="h5"
+                    component="h2"
+                  >
+                    R {dData.funds}
+                    {bull}00 
+                  </Typography>
+
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    
+                  >
+                    of
+                  </Typography>
+
                   <Typography
                     className={classes.pos}
                     variant="h5"
                     component="h2"
                   >
-                    R {funds}
+                    R {dData.totalFunds}
                     {bull}00
                   </Typography>
                   <Typography className={classes.pos} color="textSecondary">
-                    in total / from all active events
+                    from all active events
                   </Typography>
                 </CardContent>
               </Card>
@@ -279,18 +243,20 @@ export default function Dashboard(){
                     color="textSecondary"
                     gutterBottom
                   >
-                    Expected
+                    Collected
                   </Typography>
+
                   <Typography
                     className={classes.pos}
                     variant="h5"
                     component="h2"
                   >
-                    R {totalFunds}
-                    {bull}00
+                    R {dData.fundsThisYear}
+                    {bull}00 
                   </Typography>
+
                   <Typography className={classes.pos} color="textSecondary">
-                    in total / from all active events
+                    This year
                   </Typography>
                 </CardContent>
               </Card>
