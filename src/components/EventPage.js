@@ -218,19 +218,21 @@ export default function EventPage() {
           <div className="form__requirements">
             Please enter a valid ticket price
           </div>
-          </div>
-             <div id = {validateForm()}>
-              
+          </div>    
+      </form>
+      <div className="btn-group">
+        
           {location.state.edit ? 
       
-               <button className = "button falseValid" type="button" disabled={isSending} onClick={sendRequest} > Edit Event</button>
+               <button id = {validateForm()} className = "button falseValid"  type="button" disabled={isSending} onClick={sendRequest} > Edit Event</button>
                   :
     
-               <button className = " falseValid button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
+               <button id = {validateForm()} className = " falseValid button" type="button" disabled={isSending} onClick={sendRequest}> Create Event</button>
              }
-             </div>
+
+             
         <button className = "button" type="button" onClick={back}> Cancel</button>
-      </form>
+        </div>
       </body>
 
       </div>

@@ -27,6 +27,9 @@ html {
 }
 
 
+
+
+
 .searchBoxStyle:focus{
   outline: none;
 }
@@ -146,6 +149,7 @@ html {
 .card-body {
   background-color: white;
   color: #08533C;
+  border-color: #C1A162;
   float: left;
   height: 100%;
   padding: 12px 15px;
