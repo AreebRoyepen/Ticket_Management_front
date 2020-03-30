@@ -17,8 +17,9 @@ import {MdEvent, MdDashboard,MdPeople} from "react-icons/md";
 import {FaTicketAlt} from "react-icons/fa";
 
 import "../styles/menu.css";
+var user = ""
 if(localStorage.user)
-  var user = JSON.parse(localStorage.user)
+  user = JSON.parse(localStorage.user)
 
 const useStyles = makeStyles(theme =>({
   list: {

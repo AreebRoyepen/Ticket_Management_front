@@ -5,10 +5,11 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import "../styles/login.css";
 import Api from "../api/Api";
+import { purple } from "@material-ui/core/colors";
 
 
 function Alert(props) {
-  return <MuiAlert elevation={6}  {...props} />;
+  return <MuiAlert elevation={6} variant = "outlined"  {...props} />;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -18,6 +19,11 @@ const useStyles = makeStyles(theme => ({
       marginTop: theme.spacing(2),
     },
   },
+  filledError : {
+    color : purple,
+    backgroundColor: purple
+    
+  }
 }));
 
 

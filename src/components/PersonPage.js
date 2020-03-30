@@ -56,7 +56,7 @@ export default function PersonPage() {
       
       
 
-     },[setName,location]);
+     },[location]);
 
 
      const successClose = (event, reason) => {
@@ -239,13 +239,12 @@ export default function PersonPage() {
     </div>
        <div id = {validateForm()}>
    
-       {location.state.edit ? 
-            
+       {location.state.edit ?             
             
             <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Edit Person</button>
           :
           
-          <button className = "button" type="submit" disabled={isSending} onClick={sendRequest }  id={validateForm} checkFormValidation ="true"> Add Person</button>
+          <button className = "button" type="button" disabled={isSending} onClick={sendRequest } > Add Person</button>
           }
        </div>
   <button className = "button" type="button" onClick={back}> Cancel</button>
