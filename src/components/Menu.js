@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link , useHistory} from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -17,9 +17,6 @@ import {MdEvent, MdDashboard,MdPeople} from "react-icons/md";
 import {FaTicketAlt} from "react-icons/fa";
 
 import "../styles/menu.css";
-var user = ""
-if(localStorage.user)
-  user = JSON.parse(localStorage.user)
 
 const useStyles = makeStyles(theme =>({
   list: {
@@ -49,8 +46,16 @@ export default function Menu({children}) {
   });
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [user, setUser] = React.useState(null)
 
   let history = useHistory();
+
+  useEffect( () => {
+
+    if(localStorage.user)
+      setUser(JSON.parse(localStorage.user))
+
+  },[setUser])
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -99,7 +104,7 @@ export default function Menu({children}) {
           Ticket Management
           </Typography>
           
-          <Button onClick={handleMenu} color="inherit">Hi, {user.name}</Button>
+          <Button onClick={handleMenu} color="inherit">Hi, {user ? user.name : ""}</Button>
 
           <MenuUI
                 id="menu-appbar"
