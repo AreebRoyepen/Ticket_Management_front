@@ -321,7 +321,7 @@ export default function Payments() {
                 <Switch
                   checked={payOption}
                   onChange={e => setPayOption(e.target.checked)}
-                  color = "#99cc33"
+                  color = "#08533C"
                 />
 
               </Grid>

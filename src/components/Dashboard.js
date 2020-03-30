@@ -26,11 +26,11 @@ export default function Dashboard(){
     datasets: [{
       data: [allocated,unallocated],
       backgroundColor: [
-      '#99cc33',
+      '#08533C',
       '#9c9c9c'
       ],
       hoverBackgroundColor: [
-      '#99cc33',
+      '#729B25',
       '#9c9c9c',
       ]
     }]
@@ -44,11 +44,11 @@ export default function Dashboard(){
     datasets: [{
       data: [paid, allocated],
       backgroundColor: [
-      '#99cc33',
+      '#08533C',
       '#9c9c9c'
       ],
       hoverBackgroundColor: [
-      '#99cc33',
+      '#729B25',
       '#9c9c9c',
       ]
     }]
@@ -62,11 +62,11 @@ export default function Dashboard(){
     datasets: [{
       data: [paid, (allocated+unallocated)],
       backgroundColor: [
-      '#99cc33',
+      '#08533C',
       '#9c9c9c'
       ],
       hoverBackgroundColor: [
-      '#99cc33',
+      '#729B25',
       '#9c9c9c',
       ]
     }]
@@ -80,11 +80,11 @@ export default function Dashboard(){
     datasets: [{
       data: [allocated, (allocated+unallocated)],
       backgroundColor: [
-      '#99cc33',
+      '#08533C',
       '#9c9c9c'
       ],
       hoverBackgroundColor: [
-      '#99cc33',
+      '#729B25',
       '#9c9c9c',
       ]
     }]
@@ -190,7 +190,7 @@ export default function Dashboard(){
           ctx = chart.chart.ctx;
   
       ctx.restore();
-      var fontSize = 1.2;
+      var fontSize = 0.75;
       ctx.fontColor = "red";
       ctx.font = fontSize + "em sans-serif";
       ctx.textBaseline = "center";
@@ -214,13 +214,10 @@ export default function Dashboard(){
         {connection         
         
         ?
-
         <div>
-        <main>
-<div>
-<section>
-  <article>
-    <header className="dashboardHeader">
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+    <header className="dashboardHeader" name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
+  
       <h2 className="h2Dashboard">Dashboard</h2>
       <h1 className="h1Dashboard">Overview</h1>
     </header>
@@ -310,12 +307,8 @@ export default function Dashboard(){
     </div> 
 
     </div>
-  </article>
-</section>
-</div>
-</main>
+  
     </div>
-
 
 
         :
