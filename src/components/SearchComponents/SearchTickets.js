@@ -24,36 +24,38 @@ export default function SearchTickets (content) {
         <div>
                 <input  className ="searchBoxStyle" type="text" placeholder="Search" onChange={ e => filterList(e)}/>
           <div>
-            
+          <div  style={{marginBottom:'30px'}}></div>
             {items.map( x =>(
-                <div key = {x.id}>
+              
+              <div key = {x.id}>
                     
-                    <div className="container"> 
-                    
-                    <div className="card">
-                        <div className="card-body" id ={JSON.stringify(x.active)}>
-                        <div className="card-header">
-                                <span className="card-lable">{x.name}</span>
-                            </div>
-                            <span className="card-header">Tickets {x.from} - {x.to}</span>
-                            <div className="card-sub-botton">
-                                {x.active
-                                    ?
-                                    <span className="card-sub-text card-lable">Status: Active</span>
-                                    :
-                                    <span className="card-sub-text card-lable">Status: Closed</span>
-                                }
-                            <span className="card-sub-text card-lable u-float-right">Ticket Price :  R {x.ticketPrice}</span>
-                            </div>
-                            <div className="card-sub-botton card-sub-show">
-                            <input  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} type="submit" value="Allocate" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+              <div className="container"> 
+              
+              <div className="card">
+                  <div className="card-body" id ={JSON.stringify(x.active)}>
+                      <div className="card-header event-name">
+                          <p>{x.name}</p>
+                      </div>
+                      <span className="card-header">Tickets {x.from} - {x.to} |&nbsp;&nbsp;
+                      {x.active
+                              ?
+                              <span>Active |&nbsp;&nbsp;</span>
+                              :
+                              <span>Closed |&nbsp;&nbsp;</span>
+                          }
+                       <span>R {x.ticketPrice} </span>
+                      </span>   
+                      <div className="card-sub-botton card-sub-show">
+                      <input  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} type="submit" value="Allocate" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
                             <input  onClick = {()=>{history.push("/ReturnTickets",{event:x})}} type="submit" value="Return" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
                             <input  onClick = {()=>{history.push("/Payments",{event:x})}}  type="submit" value="Pay" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                      </div>
+                  </div>
+              </div>
+              </div>
+          </div>
+
+  
             ))}</div>
         </div>
       );

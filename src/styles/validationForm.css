@@ -43,18 +43,20 @@
   min-height: 0;
 }
 .form__label {
-  font-weight: 400;
+  font-weight: 600;
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.5px;
   color:#08533C;
 }
 .form__input {
+  font-weight: 600;
   margin: .5rem 0 .25rem;
+  border: 2px solid#C1A162;
+    border-radius: 4px;
   width: 100%;
+  color:#08533C;
   padding: .825rem 0 .825rem 1rem;
   background-color: #f5f5f5;
-  border: 0;
-  border-bottom: 3px solid transparent;
 }
 .form__button {
   background-color: #ACEDFF;

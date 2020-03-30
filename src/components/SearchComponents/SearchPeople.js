@@ -58,42 +58,36 @@ const maskStyle = {
           <div>
             
             {items.map( x =>(
-                <div key = {x.id}>
+
+              
+<div key = {x.id}>
                     
-                    <div className="container"> 
-                    
-                    <div className="card">
-                        <div className="card-body" id ="true">
-                        <div className="card-top">
-                                <span className="card-lable">Person</span>
-                            </div>
-                            <span className="card-header">{x.name + " " + x.surname}</span>
-                            <div className="card-sub-botton">
-                            <span className="card-sub-text card-lable">Number: {x.number}</span>
-                            <span className="card-sub-text card-lable u-float-right"> Email: {x.email} </span>
-                            </div>
-                            <div className="card-sub-botton card-sub-show">
-                            <input  onClick = {() => { console.log(x.id);  history.push("/PersonPage",{x:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
-                           <cat>
-                           <button className = "cardButtons  card-link u-float-right"onClick={open}>Delete</button>
-                             <Modal style={maskStyle}>
-                               <div style={maskStyle}>
-                                 <div style={modalStyle}>
-                                 <h1>Delete</h1>
-                                 <span className="card-header">{x.id}</span>
-                                     <p>You are about to delete this person from your database. Click the delete button to confirm</p>
-                                     <input  type="submit" value="Delete" name="button"className="cardButtons" id={JSON.stringify(x.active)}/>
-                               <button className="cardButtons" onClick={close}>cancel</button>
-                                 </div>
-                                   
-                              </div>
-                             </Modal> 
-                             </cat>  
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+<div className="container"> 
+
+<div className="card">
+    <div className="card-body" id ={JSON.stringify(x.active)}>
+    <div className="card-top">
+       <span className="card-header">Person</span>
+        </div>
+        <div className="card-header event-name">
+            <p>{x.name + " " + x.surname}</p>
+        </div>
+        <span className="card-header">Number : {x.number}<span className="card-header u-float-right"> Email: {x.email} </span>
+        </span>  
+        
+
+        <div className="card-sub-botton card-sub-show">
+        <input  onClick = {() => { console.log(x.id);  history.push("/PersonPage",{x:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+        <input  type="submit" value="Delete" name="button"className="cardButtons card-link u-float-right" id={JSON.stringify(x.active)}/>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+               
             ))}</div>
         </div>
       );

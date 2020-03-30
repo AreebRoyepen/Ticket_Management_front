@@ -237,18 +237,18 @@ export default function PersonPage() {
       Please enter a valid email address
     </div>
     </div>
-       <div id = {validateForm()}>
-   
-       {location.state.edit ?             
-            
-            <button className = "button" type="button" disabled={isSending} onClick={sendRequest} > Edit Person</button>
-          :
-          
-          <button className = "button" type="button" disabled={isSending} onClick={sendRequest } > Add Person</button>
-          }
-       </div>
-  <button className = "button" type="button" onClick={back}> Cancel</button>
 </form>
+<div  className="btn-group">
+   
+   {location.state.edit ?             
+        
+        <button id = {validateForm()} className = "button" type="button" disabled={isSending} onClick={sendRequest} > Edit Person</button>
+      :
+      
+      <button id = {validateForm()} className = "button" type="button" disabled={isSending} onClick={sendRequest } > Add Person</button>
+      }
+       <button className = "button" type="button" onClick={back}> Cancel</button>
+   </div>
 </body>
 
 
