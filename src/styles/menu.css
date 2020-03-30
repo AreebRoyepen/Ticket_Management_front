@@ -1,15 +1,17 @@
 
 .menuText{
-  color: #99cc33;
+  color: #08533C;
   text-decoration: none;
   height: 40px;
   width: 290px;
+  margin-left: -31px;
   font-size: 1.4rem;
+  padding-left: 54px;
 }
 
 .menuHeader {
   margin-top: 10px;
-  color: #99cc33;
+  color: #08533C;
   font-weight: 300;
   margin-bottom: 30px;
   font-size: 1.3em;
@@ -21,5 +23,17 @@
 }
 #appBarColor
 {
-  background-color: #99cc33;
+  background-color: #08533C;
+}
+
+.iconStyling{
+  border: 1.2px solid;
+  border-radius: 19px;
+  border-spacing: 45px;
+  width: 60px;
+  padding: 10px 2px 9px;
+  height: 39px;
+  border-color: #C1A162;
+  margin-top: -15px;
+  color: #08533C;
 }

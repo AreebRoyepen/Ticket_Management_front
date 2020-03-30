@@ -126,7 +126,7 @@ export default function Login ()  {
             <input
               type="text"
               className="sign-up-input"
-              placeholder="Enter in your username"
+              placeholder="ENTER USERNAME"
               autoComplete="username"
               autoFocus
               onChange={e => setUsername(e.target.value)}
@@ -135,7 +135,7 @@ export default function Login ()  {
             <input
               type="password"
               className="sign-up-input"
-              placeholder="Enter in your password"
+              placeholder="ENTER PASSWORD"
               autoComplete="current-password"
               onChange={e => setPassword(e.target.value)}
             />
@@ -146,7 +146,7 @@ export default function Login ()  {
                 className="button"
                 onClick={event => handleClick(event)}
               >
-                Sign in
+                SIGN IN
               </button>
             </div>
           </div>

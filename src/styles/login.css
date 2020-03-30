@@ -8,7 +8,7 @@
 }
 
 .profile-card {
-  background:  #99cc33;
+  background:  #08533C;
   width: 56px;
   height: 56px;
   position: absolute;
@@ -45,7 +45,7 @@
 }
 
 .profile-card  {
-  color:  #99cc33;
+  color:  #08533C;
 }
 
 .profile-card header a {
@@ -65,8 +65,8 @@
   border: 4px solid #FFFFFF;
   -webkit-transform: scale(0);
   transform: scale(0);
-  background: -webkit-linear-gradient(top,  #99cc33 0%,  #99cc33 50%,  #99cc33 50%,  #99cc33 100%);
-  background: linear-gradient( #99cc33 0%,  #99cc33 50%,  #99cc33 50%,  #99cc33 100%);
+  background: -webkit-linear-gradient(top,  #08533C 0%,  #08533C 50%,  #08533C 50%,  #08533C 100%);
+  background: linear-gradient( #08533C 0%,  #08533C 50%,  #08533C 50%,  #08533C 100%);
   -webkit-border-radius: 50%;
   border-radius: 50%;
   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -211,7 +211,7 @@
 
 @-webkit-keyframes moveUp {
   0% {
-    background:  #99cc33;
+    background:  #08533C;
     top: 100%;
   }
   50% {
@@ -225,7 +225,7 @@
 
 @keyframes moveUp {
   0% {
-    background:  #99cc33;
+    background:  #08533C;
     top: 100%;
   }
   50% {
@@ -449,7 +449,7 @@
     left: 0;
     right: 0;
     height: 8px;
-    background: rgb(133, 199, 255);
+   
   }
   
   input {
@@ -462,12 +462,14 @@
   
   .sign-up-input {
     width: 100%;
+    color: #08533C;
+    text-align: center;
     height: 50px;
     margin-bottom: 25px;
     padding: 0 15px 2px;
     font-size: 17px;
     background: white;
-    border: 2px solid #ebebeb;
+    border: 2px solid#C1A162;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 -2px #ebebeb;
     box-shadow: inset 0 -2px #ebebeb;
@@ -489,7 +491,7 @@
     text-align: center;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
    
-    background:  #99cc33;
+    background:  #08533C;
     cursor: pointer;
     -webkit-box-shadow: inset 0 -2px rgb(133, 199, 255);
     box-shadow: inset 0 -2px rgb(133, 199, 255);
@@ -536,9 +538,10 @@
 
 
 .button {
-  color:  #99cc33;
+  color:  white;
   width: 70%;
-  border: 1px solid  #99cc33;
+  border: 1.5px solid  #C1A162;
+  background-color: #08533C;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 20px;
@@ -554,23 +557,12 @@
 }
 
 .button:hover {
-  background-color:  #99cc33;
+  background-color:  #2D6409;
   text-decoration: none;
-  color: #FFF;
+
 }
 
 
-button {
-  background-color: white;
-  margin: 0em;
-  font: 400 13.3333px Arial;
-  padding: 10px 20px;
-  border-width: 2px;
-  border-style: outset;
-  border-color:  #99cc33;
-  margin-right: 10px;
-  margin-left: 10px;
-}
 
 .field-icon {
   float: right;

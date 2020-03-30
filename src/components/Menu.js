@@ -78,12 +78,12 @@ export default function Menu({children}) {
       <List>
         <ListItem className="menuHeader" ><TiTicket/>&nbsp;GIS Ticket Management</ListItem>
         <List>
-          <ListItem> <Link className="menuText" to="/Dashboard">&nbsp;<MdDashboard/>&nbsp;&nbsp;Dashboard</Link></ListItem>
+          <ListItem> <MdDashboard className="iconStyling"/><Link className="menuText" to="/Dashboard">&nbsp;&nbsp;&nbsp;Dashboard</Link></ListItem>
         </List>
         <Divider/>
-        <ListItem> <Link className="menuText" to="/Events">&nbsp;<MdEvent/>&nbsp;&nbsp;Events</Link></ListItem>
-        <ListItem> <Link className="menuText" to="/Tickets">&nbsp;<FaTicketAlt/>&nbsp;&nbsp;Tickets</Link></ListItem>
-        <ListItem> <Link className="menuText" to="/People">&nbsp;<MdPeople/>&nbsp;&nbsp;People</Link></ListItem>
+        <ListItem> <MdEvent className="iconStyling"/><Link className="menuText" to="/Events">&nbsp;&nbsp;&nbsp;Events</Link></ListItem>
+        <ListItem> <FaTicketAlt className="iconStyling"/> <Link className="menuText" to="/Tickets">&nbsp;&nbsp;&nbsp;Tickets</Link></ListItem>
+        <ListItem> <MdPeople  className="iconStyling"/><Link className="menuText" to="/People">&nbsp;&nbsp;&nbsp;People</Link></ListItem>
       </List>
     </div>
   );

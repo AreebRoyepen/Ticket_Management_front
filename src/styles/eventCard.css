@@ -17,7 +17,7 @@ html {
   margin-right: 3%;
   padding-left: 10px;
   padding-top: 6px;
-  color: #99cc33;
+  color: #08533C;
   position: absolute;
   right: 0;
   top: 0;
@@ -33,6 +33,7 @@ html {
 
 .cardButtons[name=button]{
   border: 2px solid white;
+  margin-top: 9%;
   border-radius: 4px;
   font-size: 13px;
   padding: 10px;
@@ -41,7 +42,7 @@ html {
 }
 
 .cardButtons[name=button] {
-  background-color:#99cc33;
+  background-color:#08533C;
   color: white;
   font-weight: bold;
   border: 3px solid white;
@@ -72,14 +73,14 @@ html {
 }
 
 .card-lable {
-  color: #99cc33;
+  color: #08533C;
   font-size: 12px;
 }
 
 .card {
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
-  height: 125px;
+  height: 90px;
   margin-bottom: 25px;
   transition: all 300ms ease-out;
   width: 65%;
@@ -87,7 +88,7 @@ html {
 
 .card .card-body#true:hover {
   box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
-  background-color: #99cc33;
+  background-color: #08533C;
   color: white;
   
 }
@@ -96,6 +97,12 @@ html {
   background-color: #acacac;
   color: white;
   
+}
+#false
+{
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
+  background-color: #acacac;
+  color: white;
 }
 
 .card-header .card-lable:hover{
@@ -138,7 +145,7 @@ html {
 
 .card-body {
   background-color: white;
-  color: #99cc33;
+  color: #08533C;
   float: left;
   height: 100%;
   padding: 12px 15px;
@@ -162,17 +169,20 @@ html {
 
 .card-header {
   display: block;
-  margin-top: 10px;
+  margin-top: -7px;
 }
 
 .card-sub-botton {
   position: absolute;
-  bottom: 10px;
+  bottom: 0;
   left: 0;
+  border-radius: 5px;
   opacity: 1;
   padding: 0 15px;
   transition: all 300ms ease-out;
   width: 100%;
+ 
+  height:100%;
 }
 
 .card:hover .card-sub-botton {
@@ -185,6 +195,7 @@ html {
 }
 
 .card-sub-show {
+  background-color: rgba(8, 83, 60, 0.719);
   opacity: 0;
   transform: translateY(8px);
   transition: all 300ms ease-out;
@@ -196,7 +207,7 @@ html {
 }
 
 .card-link {
-  color: #99cc33;
+  color: #08533C;
   text-decoration: none;
   margin-left: 20px;
 }
@@ -208,7 +219,7 @@ html {
   margin-top: 90px;
   margin-left: 3%;
   border-style: solid;
-  color: #99cc33;
+  color: #08533C;
   border-radius: 15px;
 }
 
@@ -227,7 +238,7 @@ html {
 
 .card-body {
   background-color: white;
-  color: #99cc33;
+  color: #08533C;
   float: left;
   border-style: solid;
   border-radius: 10px;

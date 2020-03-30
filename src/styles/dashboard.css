@@ -7,8 +7,7 @@
 }
 .chartjs-render-monitor 
 {
-  width : 550px !important;
-  height : 270px !important;
+ 
   margin-left: 1% !important;
   margin-right: 1% !important;
 }
@@ -21,12 +20,12 @@
 
 .h2Dashboard
 {
-  color: gray;
+  color:#2D6409;
   font-size: 2em;
 }
 .h1Dashboard
 {
-    color: #99cc33;
+    color: #C1A162;
     font-size: 1.5em;
     font-weight: 500;
 }
@@ -80,7 +79,7 @@
   }
   .dots{
     animation: bounce 1.5s infinite linear;
-    background: #99cc33;
+    background: #08533C ;
     color: white;
     border-radius: 50%;
     display: inline-block;
