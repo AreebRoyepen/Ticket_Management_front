@@ -3,8 +3,30 @@ import "../styles/dashboard.css";
 import { Chart, Doughnut } from 'react-chartjs-2';
 import Api from "../api/Api";
 import { useHistory } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-
+const useStyles = makeStyles({
+  card: {
+    minWidth: 275,
+    textAlign: "center"
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 export default function Dashboard(){
 
@@ -15,82 +37,39 @@ export default function Dashboard(){
   const [connection, setConnection] = useState(false)
   const [totalFunds, setTotalFunds] = useState(0)
   const [funds, setFunds] = useState(0)
+  const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
 
   let history = useHistory();
 
   const data = {
     labels: [
       'Allocated',
-      'Unallocated'
-    ],
-    datasets: [{
-      data: [allocated,unallocated],
-      backgroundColor: [
-      '#08533C',
-      '#9c9c9c'
-      ],
-      hoverBackgroundColor: [
-      '#729B25',
-      '#9c9c9c',
-      ]
-    }]
-  };
-
-  const data2 = {
-    labels: [
-      'Paid',
-      'Allocated'
-    ],
-    datasets: [{
-      data: [paid, allocated],
-      backgroundColor: [
-      '#08533C',
-      '#9c9c9c'
-      ],
-      hoverBackgroundColor: [
-      '#729B25',
-      '#9c9c9c',
-      ]
-    }]
-  };
-
-  const data3 = {
-    labels: [
+      'Unallocated',
       'Paid',
       'Total'
-    ],
-    datasets: [{
-      data: [paid, (allocated+unallocated)],
-      backgroundColor: [
-      '#08533C',
-      '#9c9c9c'
-      ],
-      hoverBackgroundColor: [
-      '#729B25',
-      '#9c9c9c',
-      ]
-    }]
-  };
 
-  const data4 = {
-    labels: [
-      'Allocated',
-      'Total'
     ],
     datasets: [{
-      data: [allocated, (allocated+unallocated)],
+      data: [allocated,unallocated,paid,(allocated+unallocated)],
       backgroundColor: [
+      '#1A2819',
+      '#2C4A28',
       '#08533C',
       '#9c9c9c'
       ],
       hoverBackgroundColor: [
-      '#729B25',
-      '#9c9c9c',
+      '#1A2819',
+      '#2C4A28',
+      '#08533C',
+      '#9c9c9c'
       ]
     }]
   };
 
 
+
+  
   useEffect( () =>{
 
     async function fetchData(){
@@ -207,125 +186,103 @@ export default function Dashboard(){
 
 
     return (
-        
       <div>
         {console.log(funds)}
         {console.log(totalFunds)}
-        {connection         
-        
-        ?
-        <div>
-        <meta name="viewport" content="width=device-width, user-scalable=no"/>
-    <header className="dashboardHeader" name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
-  
-      <h2 className="h2Dashboard">Dashboard</h2>
-      <h1 className="h1Dashboard">Overview</h1>
-    </header>
-    <hr/>
-    <div>
-    <div className = " chart-wrapper">
-    <Doughnut data={data4} options={{
-      cutoutPercentage: 80,
-      responsive: true,
-      style:{
-         width:"600px",
-         height: "300px",
+        {connection ? (
+          <div>
+            <meta
+              name="viewport"
+              content="width=device-width, user-scalable=no"
+            />
 
-         float:"left",
-         display:"inline-block"},
-        legend:{
-          display:false,
-          position:'right'
-        },
-        centerText: {
-          display: true,
-          text: "Total Allocated",
-          
-      }
-      }}/>
-    </div> 
+            <header
+              className="dashboardHeader"
+              name="viewport"
+              content="initial-scale=1.0, maximum-scale=1.0"
+            >
+              <h2 className="h2Dashboard">Dashboard</h2>
+              <h1 className="h1Dashboard">Overview</h1>
+            </header>
 
-    <div className = " chart-wrapper">
-    <Doughnut data={data3} options={{
-      cutoutPercentage: 80,
-      responsive: true,
-      style:{
-         width:"600px",
-         height: "300px",
+            <div>
+              <Card className={classes.card} variant="outlined">
+                <CardContent>
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    Collected
+                  </Typography>
+                  <Typography className={classes.pos} variant="h5" component="h2">
+                    R {funds}{bull}00
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    in total / from all active events
+                  </Typography>
+                </CardContent>
+              </Card>
+            </div>
 
-         float:"left",
-         display:"inline-block"},
-        legend:{
-          display:false,
-          position:'right'
-        },
-        centerText: {
-          display: true,
-          text: "Total Paid"
-      }
-      }}/>
-      
-    </div> 
+            <div>
+              <Card className={classes.card} variant="outlined">
+                <CardContent>
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    Expected
+                  </Typography>
+                  <Typography className={classes.pos} variant="h5" component="h2">
+                    R {totalFunds}{bull}00
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    in total / from all active events
+                  </Typography>
+                </CardContent>
+              </Card>
+            </div>
 
-    <div className = " chart-wrapper">
-    <Doughnut data={data} options={{
-      cutoutPercentage: 80,
-      responsive: true,
-      style:{
-         width:"600px",
-         height: "300px",
+            <div>
+              <div className=" chart-wrapper">
+                <Doughnut
+                  data={data}
+                  options={{
+                    cutoutPercentage: 80,
+                    responsive: true,
+                    style: {
+                      width: "600px",
+                      height: "300px",
 
-         float:"left",
-         display:"inline-block"},
-        legend:{
-          display:false,
-          position:'right'
-        },
-        centerText: {
-          display: true,
-          text: "Allocated vs Unallocated"
-      }
-      }}/>
-    </div> 
-
-    <div className = " chart-wrapper">
-    <Doughnut data={data2} options={{
-      cutoutPercentage: 80,
-      responsive: true,
-      style:{
-         float:"left",
-         display:"inline-block"},
-        legend:{
-          display:false,
-          position:'right'
-        },
-          centerText: {
-          display: true,
-          text: "Paid vs Allocated"
-      }
-      }}/>
-    </div> 
-
-    </div>
-  
-    </div>
-
-
-        :
-
-
-        <div className="dots-container">
-  <div className="dots">L</div>
-  <div className="dots">o</div>
-  <div className="dots">a</div>
-  <div className="dots">d</div>
-  <div className="dots">i</div>
-  <div className="dots">n</div>
-  <div className="dots">g</div>
-</div>
-
-      
-        }
+                      float: "left",
+                      display: "inline-block"
+                    },
+                    legend: {
+                      display: false,
+                      position: "right"
+                    },
+                    centerText: {
+                      display: true,
+                      text: "Totals"
+                    }
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="dots-container">
+            <div className="dots">L</div>
+            <div className="dots">o</div>
+            <div className="dots">a</div>
+            <div className="dots">d</div>
+            <div className="dots">i</div>
+            <div className="dots">n</div>
+            <div className="dots">g</div>
+          </div>
+        )}
       </div>
     );
 }
