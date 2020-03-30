@@ -66,13 +66,10 @@ const maskStyle = {
 
 <div className="card">
     <div className="card-body" id ={JSON.stringify(x.active)}>
-    <div className="card-top">
-       <span className="card-header">Person</span>
-        </div>
         <div className="card-header event-name">
             <p>{x.name + " " + x.surname}</p>
         </div>
-        <span className="card-header">Number : {x.number}<span className="card-header u-float-right"> Email: {x.email} </span>
+        <span className="card-header">{x.number}<span className="card-header u-float-right"> {x.email} </span>
         </span>  
         
 
