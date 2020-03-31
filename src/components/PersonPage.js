@@ -25,7 +25,7 @@ export default function PersonPage() {
 
     let history = useHistory();
     let location = useLocation();
-    
+   
     const classes = useStyles();
     const [openSnackbar, setOpenSnackbar] = useState({
       severity : "",
@@ -63,7 +63,12 @@ export default function PersonPage() {
       if (reason === 'clickaway') {
         return;
       }  
-      history.push("/People");
+
+      if(location.state.last){
+        history.push(location.state.last , location.state.data)
+      }else{
+        history.push("/People");
+      }
     };
 
     const errorClose = (event, reason) => {
@@ -182,7 +187,13 @@ export default function PersonPage() {
     }
     
     
-    const back = () =>{    history.push("/People");    }
+    const back = () =>{    
+      if(location.state.last){
+        history.push(location.state.last , location.state.data)
+      }else{
+        history.push("/People");    
+      }
+    }
 
     return (
      

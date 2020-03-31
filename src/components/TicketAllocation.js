@@ -10,6 +10,8 @@ import "../styles/validationForm.css";
 import Api from "../api/Api";
 import "../styles/login.css";
 import { FormControlLabel, Grid, Switch } from "@material-ui/core";
+import Icon from '@material-ui/icons/AddCircleTwoTone';
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} {...props} />;
@@ -357,7 +359,10 @@ export default function TicketAllocation() {
             }
           />
 
-        <Autocomplete
+
+      <div className = "makeRow">
+
+      <Autocomplete
           style={{ width: 250 , marginBottom: "30px"}}
           open={open}
           onOpen={() => { setOpen(true); }}
@@ -385,6 +390,12 @@ export default function TicketAllocation() {
           />
         )}
       />
+        <button  onClick = { e => history.push("/PersonPage",{last:"/TicketAllocation" , id:null, edit:false, data :location.state})}
+        className = "tinybutton" type="button" ><Icon/></button>
+
+        
+      </div>  
+
 
 
       <TextField
