@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+axios.defaults.timeout = 20000;
+
 let API_BASE_ADDRESS = 'http://localhost:8080';
 // if(process.env.NODE_ENV == "development"){
 //     API_BASE_ADDRESS = ""
