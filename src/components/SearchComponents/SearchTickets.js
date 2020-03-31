@@ -22,7 +22,7 @@ export default function SearchTickets (content) {
 
       return (
         <div>
-                <input  className ="searchBoxStyle" type="search" placeholder="Search" onChange={ e => filterList(e)}/>
+                <input  className ="searchBoxStyle" type="search" placeholder="SEARCH" onChange={ e => filterList(e)}/>
           <div>
           <div  style={{marginBottom:'30px'}}></div>
             {items.map( x =>(

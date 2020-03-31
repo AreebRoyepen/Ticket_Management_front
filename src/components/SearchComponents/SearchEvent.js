@@ -27,7 +27,7 @@ export default function SearchEvent (content) {
  
       return (
         <div>
-                <input className ="searchBoxStyle" type="search" placeholder="Search" onChange={ e => filterList(e)}/>
+                <input className ="searchBoxStyle" type="search" placeholder="SEARCH" onChange={ e => filterList(e)}/>
           <div>
             
             {items.map( x =>(       
