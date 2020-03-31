@@ -9,7 +9,7 @@ import { purple } from "@material-ui/core/colors";
 
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant = "outlined"  {...props} />;
+  return <MuiAlert elevation={6} {...props} />;
 }
 
 const useStyles = makeStyles(theme => ({

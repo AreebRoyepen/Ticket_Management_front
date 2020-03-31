@@ -8,7 +8,7 @@ import "../styles/login.css";
 import "../styles/validationForm.css";
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant = "outlined" {...props} />;
+  return <MuiAlert elevation={6} {...props} />;
 }
 
 const useStyles = makeStyles(theme => ({
