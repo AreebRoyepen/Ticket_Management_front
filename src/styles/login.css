@@ -7,6 +7,11 @@
   float : none;
 }
 
+.makeRow{
+  display:flex; 
+  flex-direction:row;
+}
+
 .profile-card {
   background:  #08533C;
   width: 56px;
@@ -575,7 +580,31 @@
 
 }
 
+.tinybutton {
+  color:  white;
+  width: 50px;
+  height: 50px;
+  border: 1.5px solid  #C1A162;
+  background-color: #08533C;
+  border-radius: 5px;
+  padding: 1px 1px;
+  font-size: 1em;
+  overflow: hidden;
+  text-decoration: unset;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+ 
+  margin-left: 10px;
+}
 
+.tinybutton:hover {
+  background-color:  #2D6409;
+  text-decoration: none;
+
+}
 
 .field-icon {
   float: right;
