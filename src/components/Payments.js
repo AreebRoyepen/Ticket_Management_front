@@ -63,7 +63,7 @@ export default function Payments() {
       if (reason === 'clickaway') {
         return;
       }
-      history.push("/Tickets");
+      history.push("/Events");
     };
 
     const errorClose = (event, reason) => {
@@ -302,7 +302,7 @@ export default function Payments() {
 
     }, [isSending, ticketNumberF, ticketNumberT, history, bulk, location, person, amount, payOption, successClose, errorClose]); // update the callback if the state changes
 
-    const back = () =>{  history.push("/Tickets");  }
+    const back = () =>{  history.push("/Events");  }
     
     return (
 

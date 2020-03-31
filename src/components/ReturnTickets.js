@@ -51,7 +51,7 @@ export default function ReturnTickets() {
       if (reason === 'clickaway') {
         return;
       }
-      history.push("/Tickets");
+      history.push("/Events");
     };
 
     const errorClose = (event, reason) => {
@@ -194,7 +194,7 @@ export default function ReturnTickets() {
 
       // console.log(ticketNumber)
       // console.log(location.state.id)
-      history.push("/Tickets");
+      history.push("/Events");
 
 
     }

@@ -1,6 +1,8 @@
 import React,{ useState } from 'react';
 import "../../styles/eventCard.css";
 import { useHistory } from "react-router-dom";
+import LazyLoad from 'react-lazyload';
+import Loading from '../LoadingIcon';
 
 export default function SearchEvent (content) {
 
@@ -30,9 +32,11 @@ export default function SearchEvent (content) {
                 <input className ="searchBoxStyle" type="search" placeholder="SEARCH" onChange={ e => filterList(e)}/>
           <div>
             
-            {items.map( x =>(       
+            {items.map( x =>(   
+              
+              <LazyLoad key = {x.id} placeholder = {<Loading />}>
 
-                <div key = {x.id}>
+              <div key = {x.id}>
                     
                     <div className="container"> 
                     
@@ -51,6 +55,9 @@ export default function SearchEvent (content) {
                              <span>R {x.ticketPrice} </span>
                             </span>   
                             <div className="card-sub-botton card-sub-show">
+                            <input  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} type="submit" value="Allocate" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+                            <input  onClick = {()=>{history.push("/ReturnTickets",{event:x})}} type="submit" value="Return" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+                            <input  onClick = {()=>{history.push("/Payments",{event:x})}}  type="submit" value="Pay" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
                             <input  onClick = {() => { console.log(x.id);  history.push("/EventPage",{event:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
                             <input  type="submit" value="Delete" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
                             </div>
@@ -58,6 +65,10 @@ export default function SearchEvent (content) {
                     </div>
                     </div>
                 </div>
+
+              </LazyLoad>
+
+
             ))}</div>
         </div>
       );

@@ -20,6 +20,7 @@ export default class Api {
         if(resp.status === 200){
             localStorage.setItem("token","Bearer " + resp.data.token)
             localStorage.setItem("user", JSON.stringify(resp.data.user))
+            localStorage.setItem("expiration", resp.data.expiration)
             return {"message" : "success"}
         }
    })

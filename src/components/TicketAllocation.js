@@ -59,7 +59,7 @@ export default function TicketAllocation() {
       if (reason === 'clickaway') {
         return;
       }
-      history.push("/Tickets");
+      history.push("/Events");
     };
 
     const errorClose = (event, reason) => {
@@ -184,7 +184,7 @@ export default function TicketAllocation() {
       
                   }else if (p.message === "unauthorized"){
                     localStorage.clear();
-                    history.push("/" , {last: "/Payments"})
+                    history.push("/" , {last: "/TicketAllocation"})
 
                   }else if(p.message === "error"){
                     time = 6000
@@ -260,7 +260,7 @@ export default function TicketAllocation() {
   
                 }else if (pay.message === "unauthorized"){
                   localStorage.clear();
-                  history.push("/", {last: "/Payments", data: location.state})
+                  history.push("/", {last: "/TicketAllocation", data: location.state})
 
                 }else if(pay.message === "error"){
                 time = 6000
@@ -315,7 +315,7 @@ export default function TicketAllocation() {
     }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history, location, amount, paid, errorClose, successClose]); // update the callback if the state changes
 
     const back = () => {
-      history.push("/Tickets");
+      history.push("/Events");
 
       
     }

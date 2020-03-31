@@ -1,5 +1,7 @@
 import React,{ useState } from 'react';
 import useModal from 'react-hooks-use-modal';
+import LazyLoad from 'react-lazyload';
+import Loading from '../LoadingIcon';
 import "../../styles/eventCard.css";
 import "../../styles/popUp.css";
 
@@ -59,30 +61,30 @@ const maskStyle = {
             
             {items.map( x =>(
 
-              
-<div key = {x.id}>
-                    
-<div className="container"> 
+              <LazyLoad key = {x.id} placeholder = {<Loading />}>
+              <div key = {x.id}>
+                                    
+                <div className="container"> 
 
-<div className="card">
-    <div className="card-body" id ={JSON.stringify(x.active)}>
-        <div className="card-header event-name">
-            <p>{x.name + " " + x.surname}</p>
-        </div>
-        <span className="card-header">{x.number}<span className="card-header u-float-right"> {x.email} </span>
-        </span>  
-        
+                <div className="card">
+                    <div className="card-body" id ={JSON.stringify(x.active)}>
+                        <div className="card-header event-name">
+                            <p>{x.name + " " + x.surname}</p>
+                        </div>
+                        <span className="card-header">{x.number}<span className="card-header u-float-right"> {x.email} </span>
+                        </span>  
+                        
 
-        <div className="card-sub-botton card-sub-show">
-        <input  onClick = {() => { console.log(x.id);  history.push("/PersonPage",{x:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
-        <input  type="submit" value="Delete" name="button"className="cardButtons card-link u-float-right" id={JSON.stringify(x.active)}/>
-        </div>
-    </div>
-</div>
-</div>
-</div>
+                        <div className="card-sub-botton card-sub-show">
+                        <input  onClick = {() => { console.log(x.id);  history.push("/PersonPage",{x:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+                        <input  type="submit" value="Delete" name="button"className="cardButtons card-link u-float-right" id={JSON.stringify(x.active)}/>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
 
-
+              </LazyLoad>
 
                
             ))}</div>

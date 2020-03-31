@@ -54,6 +54,9 @@ export default function Menu({children}) {
 
     if(localStorage.user)
       setUser(JSON.parse(localStorage.user))
+      setTimeout(function(){ alert("token expired"); }, (localStorage.expiration * 1000));
+
+    
 
   },[setUser])
 
@@ -88,7 +91,6 @@ export default function Menu({children}) {
         </List>
         <Divider/>
         <ListItem> <MdEvent className="iconStyling"/><Link className="menuText" to="/Events">&nbsp;&nbsp;&nbsp;Events</Link></ListItem>
-        <ListItem> <FaTicketAlt className="iconStyling"/> <Link className="menuText" to="/Tickets">&nbsp;&nbsp;&nbsp;Tickets</Link></ListItem>
         <ListItem> <MdPeople  className="iconStyling"/><Link className="menuText" to="/People">&nbsp;&nbsp;&nbsp;People</Link></ListItem>
       </List>
     </div>
