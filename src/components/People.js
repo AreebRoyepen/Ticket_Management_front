@@ -39,7 +39,7 @@ export default function People(){
             ?
         
             <div>
-            <button onClick = {() => {  history.push("/PersonPage",{id:null, edit:false})  }} className="funButton">Add Person</button>
+            <button onClick = {() => {  history.push("/PersonPage",{id:null, edit:false})  }} className="funButton headerButtons">ADD PERSON</button>
             <Searchbar content={data}/>
         </div>
             :

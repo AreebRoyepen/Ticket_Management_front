@@ -40,7 +40,7 @@ export default function Events(){
             ?
             <div>
                 
-            <button onClick = {() => {  history.push("/EventPage", {id:null, edit:false}) }} className="funButton">Create Event</button>
+            <button onClick = {() => {  history.push("/EventPage", {id:null, edit:false}) }} className="funButton headerButtons">CREATE EVENT</button>
             <Searchbar content={data}/>
             </div>
 

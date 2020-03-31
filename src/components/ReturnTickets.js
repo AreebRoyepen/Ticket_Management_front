@@ -5,6 +5,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import Api from "../api/Api";
+import "../styles/validationForm.css";
 import "../styles/login.css";
 import { FormControlLabel, Grid, Switch } from "@material-ui/core";
 
@@ -209,9 +210,9 @@ export default function ReturnTickets() {
             </Alert>
           </Snackbar>
         </div>
-
-        <aside className="profile-card">
-          <div className="profile-bio">
+        <body className="bodyVal htmlVal spanVal">
+        <form className="form">
+          <div className="">
           <h3>
           {location.state.event.name}<br/>
           unallocated tickets left: {tickets}
@@ -261,12 +262,14 @@ export default function ReturnTickets() {
         :
         <div/>
         }
-      <button className = "button" type="button" disabled={isSending} onClick={returnTicket} style={{marginTop: "30px"}}> Return Ticket</button>
-
-      <button className = "button" type="button" onClick={back} style={{marginTop: "30px"}} > Cancel</button>
-  
+     
       </div>
-      </aside>
+      </form>
+      <div className="btn-group"> 
+         <button className = "button" type="button" disabled={isSending} onClick={returnTicket} style={{marginTop: "30px"}}> Return Ticket</button>
+          <button className = "button" type="button" onClick={back} style={{marginTop: "30px"}} > Cancel</button>
+      </div>
+      </body>
       </div>
 
     );

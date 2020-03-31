@@ -80,14 +80,14 @@ export default function Dashboard(){
     datasets: [{
       data: [dData.allocatedTickets,dData.unallocatedTickets,dData.paidTickets,dData.totalTickets],
       backgroundColor: [
-      '#1A2819',
-      '#2C4A28',
+      '#2D6409',
+      '#C1A162',
       '#08533C',
       '#9c9c9c'
       ],
       hoverBackgroundColor: [
-      '#1A2819',
-      '#2C4A28',
+      '#2D6409',
+      '#C1A162',
       '#08533C',
       '#9c9c9c'
       ]

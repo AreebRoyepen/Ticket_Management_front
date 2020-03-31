@@ -1,33 +1,58 @@
 html {
   background-color: #fefefe;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Avenir Book', 'Arial Book', sans-serif;
   font-size: 14px;
   font-weight: 500;
-    overflow-x: hidden; /* Hide scrollbars */
+    overflow-x: hidden; 
 }
 
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
+input[type=search] {
+
+  background-image: url('https://listimg.pinclipart.com/picdir/s/3-38128_computer-icons-search-box-magnifying-glass-download-search.png');
+  background-size: 16px;
+  background-position: 130px;
+  background-repeat: no-repeat;
+}
+
+input[type=search]:focus{
+  background-image: url('');
+}
+::placeholder {
+  color: #08533C;
+  opacity: 1; 
+}
+
 .searchBoxStyle{
   font-size: 13px;
-  padding-bottom: 6px;
   margin-right: 3%;
   padding-left: 10px;
-  padding-top: 6px;
   color: #08533C;
   position: absolute;
   right: 0;
   top: 0;
+  border: solid 1.5px;
   margin-top: 90px;
-  border-radius: 15px;
-  
+  border-radius: 5px;
+  border-color: #C1A162;
+  padding-bottom: 9px;
+  padding-top: 7px;
 }
 
 
-
+.headerButtons
+{
+  color: white !important;
+  background-color: #08533C !important;
+  border-radius: 5px !important;
+  border-color: #C1A162 !important;
+  border: solid 1.5px;
+  margin-bottom: 15px;
+}
 
 
 .searchBoxStyle:focus{
@@ -148,6 +173,7 @@ html {
 
 .card-body {
   background-color: white;
+  border: solid 1.7px;
   color: #08533C;
   border-color: #C1A162;
   float: left;
@@ -255,12 +281,12 @@ html {
 html, body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Avenir Book', 'Arial Book', sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Avenir Book', 'Arial Book', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -268,7 +294,7 @@ body {
 html {
   background-color: #fefefe;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Avenir Book', 'Arial Book', sans-serif;
   font-size: 14px;
   font-weight: 500;
   overflow-x: hidden;

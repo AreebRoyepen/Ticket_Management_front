@@ -22,7 +22,7 @@
     margin-bottom: 1.6%;
     background: #fff;
     line-height: 1.4;
-    font-family: sans-serif;
+    font-family: 'Avenir Book', 'Arial Book', sans-serif;
     border-radius: 5px;
     overflow: hidden;
     z-index: 0;
@@ -83,17 +83,17 @@
     display: inline-block;
   }
   .blog-card .details .author:before {
-    font-family: FontAwesome;
+    font-family: 'Avenir Book', 'Arial Book', sans-serif;
     margin-right: 10px;
     content: "\f007";
   }
   .blog-card .details .date:before {
-    font-family: FontAwesome;
+    font-family: 'Avenir Book', 'Arial Book', sans-serif;
     margin-right: 10px;
     content: "\f133";
   }
   .blog-card .details .tags ul:before {
-    font-family: FontAwesome;
+    font-family: 'Avenir Book', 'Arial Book', sans-serif;
     content: "\f02b";
     margin-right: 10px;
   }
@@ -111,7 +111,7 @@
   }
   .blog-card .description h1,
   .blog-card .description h2 {
-    font-family: Poppins, sans-serif;
+    font-family: 'Avenir Book', 'Arial Book', sans-serif;
   }
   .blog-card .description h1 {
     line-height: 1;

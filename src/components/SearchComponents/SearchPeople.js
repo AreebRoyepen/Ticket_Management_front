@@ -54,7 +54,7 @@ const maskStyle = {
 
       return (
         <div>
-                <input className ="searchBoxStyle" type="text" placeholder="Search" onChange={ e => filterList(e)}/>
+                <input className ="searchBoxStyle" type="search" placeholder="SEARCH" onChange={ e => filterList(e)}/>
           <div>
             
             {items.map( x =>(

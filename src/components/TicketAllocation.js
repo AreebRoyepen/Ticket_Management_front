@@ -6,7 +6,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { useLocation, useHistory } from "react-router-dom";
-
+import "../styles/validationForm.css";
 import Api from "../api/Api";
 import "../styles/login.css";
 import { FormControlLabel, Grid, Switch } from "@material-ui/core";
@@ -331,9 +331,9 @@ export default function TicketAllocation() {
             </Alert>
           </Snackbar>
         </div>
-
-        <aside className="profile-card">
-          <div className="profile-bio">
+        <body className="bodyVal htmlVal spanVal">
+        <form className="form">
+          <div className="">
 
           <h3>{location.state.event.name}<br/>
           unallocated tickets left: {tickets}</h3>
@@ -447,17 +447,26 @@ export default function TicketAllocation() {
                 variant="outlined"
                 
             />
-      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "15px"}}>Allocate & Pay</button> 
+      
 
         </div>    
       :
-      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "15px"}}>Allocate Ticket</button> 
+      <p></p>
+     
       }
-
-      <button className = "button" type="button" onClick={back} style={{marginTop: "15px"}}> Cancel</button>
   
       </div>
-      </aside>
+      </form>
+
+      <div className="btn-group">
+      {paid ?
+      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "15px"}}>Allocate & Pay</button> 
+      :
+      <button className = "button" type="button" disabled={isSending} onClick={allocateTicket} style={{marginTop: "15px"}}>Allocate Ticket</button> 
+      }
+        <button className = "button" type="button" onClick={back} style={{marginTop: "15px"}}> Cancel</button>
+      </div>
+      </body>
       </div>
 
     );

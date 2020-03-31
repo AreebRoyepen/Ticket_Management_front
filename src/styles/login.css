@@ -1,5 +1,5 @@
 .App {
-  font-family: sans-serif;
+  font-family: 'Avenir Book', 'Arial Book', sans-serif;
   text-align: center;
 }
 .MuiAutocomplete-option{
@@ -453,7 +453,7 @@
   }
   
   input {
-    font-family: inherit;
+    font-family: 'Avenir Book', 'Arial Book', sans-serif;
     color: inherit;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

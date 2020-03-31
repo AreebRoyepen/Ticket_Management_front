@@ -11,6 +11,7 @@ import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import Api from "../api/Api";
 import "../styles/login.css";
+import "../styles/validationForm.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant = "outlined"  {...props} />;
@@ -316,9 +317,9 @@ export default function Payments() {
       </div>
 
       {console.log(person)}
-
-        <aside className="profile-card">
-          <div className="profile-bio">
+      <body className="bodyVal htmlVal spanVal">
+        <form className="form">
+          <div>
           
           <h3>
           {location.state.event.name}<br/></h3>
@@ -446,13 +447,14 @@ export default function Payments() {
             )}
           />
             
-      }
-
-      <button className = "button" type="button" disabled={isSending} onClick={payment}   style={{marginTop: "10px"}} > Pay </button>
-      <button className = "button" type="button" onClick={back}  style={{marginTop: "10px"}}> Cancel</button>
-  
+      } 
       </div>
-      </aside>
+      </form>
+      <div className="btn-group">   
+        <button className = "button" type="button" disabled={isSending} onClick={payment}   style={{marginTop: "10px"}} > Pay </button>
+        <button className = "button" type="button" onClick={back}  style={{marginTop: "10px"}}> Cancel</button>
+      </div> 
+      </body>
       </div>
 
     );

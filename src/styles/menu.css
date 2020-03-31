@@ -4,7 +4,7 @@
   text-decoration: none;
   height: 40px;
   width: 290px;
-  margin-left: -31px;
+  margin-left: -50px;
   font-size: 1.4rem;
   padding-left: 54px;
 }
@@ -30,10 +30,14 @@
   border: 1.2px solid;
   border-radius: 19px;
   border-spacing: 45px;
-  width: 60px;
-  padding: 10px 2px 9px;
+  width: 53px;
+  padding: 8px 1px 10px;
   height: 39px;
   border-color: #C1A162;
   margin-top: -15px;
   color: #08533C;
+}
+
+.MuiListItem-root {
+  width: 101% !important;
 }
