@@ -1,7 +1,7 @@
 import React,{ useState } from 'react';
 import useModal from 'react-hooks-use-modal';
 import LazyLoad from 'react-lazyload';
-import Loading from '../LoadingIcon';
+import Loading from '../LazyLoadingIcon';
 import "../../styles/eventCard.css";
 import "../../styles/popUp.css";
 

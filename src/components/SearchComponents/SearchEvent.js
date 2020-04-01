@@ -2,7 +2,7 @@ import React,{ useState } from 'react';
 import "../../styles/eventCard.css";
 import { useHistory } from "react-router-dom";
 import LazyLoad from 'react-lazyload';
-import Loading from '../LoadingIcon';
+import Loading from '../LazyLoadingIcon';
 
 export default function SearchEvent (content) {
 
