@@ -55,11 +55,18 @@ export default function SearchEvent (content) {
                              <span>R {x.ticketPrice} </span>
                             </span>   
                             <div className="card-sub-botton card-sub-show">
-                            <input  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} type="submit" value="Allocate" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
-                            <input  onClick = {()=>{history.push("/ReturnTickets",{event:x})}} type="submit" value="Return" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
-                            <input  onClick = {()=>{history.push("/Payments",{event:x})}}  type="submit" value="Pay" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
-                            <input  onClick = {() => { console.log(x.id);  history.push("/EventPage",{event:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
                             <input  type="submit" value="Delete" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+                            <div class="dropdown u-float-right">
+                               <button class="dropbtn">actions</button>
+                                <div class="dropdown-content">
+                                  <input  onClick = {() => {history.push("/TicketAllocation",{event:x})  }} type="submit" value="Allocate" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+                                  <input  onClick = {()=>{history.push("/ReturnTickets",{event:x})}} type="submit" value="Return" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+                                  <input  onClick = {()=>{history.push("/Payments",{event:x})}}  type="submit" value="Pay" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+                                  <input  onClick = {() => { console.log(x.id);  history.push("/EventPage",{event:x, edit:true})}} type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
+                                  <input  type="submit" value="Delete" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>                        
+                                </div>
+                            </div>
+                           
                             </div>
                         </div>
                     </div>
