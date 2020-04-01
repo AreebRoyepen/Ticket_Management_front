@@ -178,9 +178,9 @@ export default function TicketAllocation() {
                     var message = "Payment Successful"              
               
                     if(p.short) 
-                      setOpenSnackbar({severity : "warning", message : message + " R"+p.amount+" outstanding", open : true, time : time, closeType : successClose})
+                      setOpenSnackbar({severity : "warning", message : message + " R"+parseFloat(p.amount).toFixed(2)+" outstanding", open : true, time : time, closeType : successClose})
                     else if(p.surplus)
-                      setOpenSnackbar({severity : "success", message : message + " R"+p.amount + " surplus given", open : true, time : time, closeType : successClose})
+                      setOpenSnackbar({severity : "success", message : message + " R"+parseFloat(p.amount).toFixed(2) + " surplus given", open : true, time : time, closeType : successClose})
                     else
                       setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
       
@@ -254,9 +254,9 @@ export default function TicketAllocation() {
                 var message = "Payment Successful"
                             
                 if(pay.short) 
-                  setOpenSnackbar({severity : "warning", message :message + " R"+pay.amount+" outstanding", open : true, time : time, closeType : successClose})
+                  setOpenSnackbar({severity : "warning", message :message + " R"+parseFloat(pay.amount).toFixed(2)+" outstanding", open : true, time : time, closeType : successClose})
                 else if(pay.surplus)
-                  setOpenSnackbar({severity : "success", message :message + " R"+pay.amount + " surplus given", open : true, time : time, closeType : successClose})
+                  setOpenSnackbar({severity : "success", message :message + " R"+parseFloat(pay.amount).toFixed(2) + " surplus given", open : true, time : time, closeType : successClose})
                 else
                   setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
   

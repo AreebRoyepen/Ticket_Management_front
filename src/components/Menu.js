@@ -14,7 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
 import { TiTicket } from "react-icons/ti";
 import {MdEvent, MdDashboard,MdPeople} from "react-icons/md";
-import {FaTicketAlt} from "react-icons/fa";
+import useModal from 'react-hooks-use-modal';
 
 import "../styles/menu.css";
 
@@ -36,6 +36,28 @@ const useStyles = makeStyles(theme =>({
   },
 }));
 
+const modalStyle = {
+  backgroundColor: 'white',
+  padding: '40px 45px',
+  marginLeft:"30px",
+  marginRight:"40px",
+  borderRadius: '10px',
+  marginTop:"140px",
+};
+
+
+const maskStyle = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+ 
+  bottom: 0,
+  right: 0,
+  backgroundColor: 'gray',
+  zIndex: 100000
+};
+
+
 export default function Menu({children}) {
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -47,16 +69,41 @@ export default function Menu({children}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [user, setUser] = React.useState(null)
+  const [openM, setOpenModal] = React.useState()
 
   let history = useHistory();
+
+
+  const [Modal, openModal, closeModal, isOpen] = useModal('root', {
+    preventScroll: true,
+    backgroundColor: '#fff',
+    domNode:'cat'
+  });
+
+  const popup = () => (
+    <Modal style={maskStyle}>
+      <div style={maskStyle}>
+        <div style={modalStyle}>
+          <h1>Your Session Is About To Expire</h1>
+          <p>Complete your transaction and log in again please</p>
+          <input
+            type="submit"
+            value="Close"
+            name="button"
+            className="cardButtons"
+            onClick={closeModal}
+          />
+        </div>
+      </div>
+    </Modal>
+  );
+
 
   useEffect( () => {
 
     if(localStorage.user)
       setUser(JSON.parse(localStorage.user))
-      setTimeout(function(){ alert("token expired"); }, (localStorage.expiration * 1000));
-
-    
+      setTimeout(() =>{ setOpenModal(openModal) }, (localStorage.expiration * 1000));    
 
   },[setUser])
 
@@ -65,7 +112,6 @@ export default function Menu({children}) {
   };
 
   const handleClose = () => {
-
     setAnchorEl(null);
   };
 
@@ -97,6 +143,7 @@ export default function Menu({children}) {
   );
   return (
     <div className={classes.root}>
+      {popup()}
       <AppBar id= "appBarColor" position="fixed">
         <Toolbar>
         <Button onClick={toggleDrawer('left', true)}><DehazeIcon id ="menuIcon"/></Button>

@@ -170,9 +170,9 @@ export default function Payments() {
             var message = "Payment Successful"            
             
             if(resp.short) 
-              setOpenSnackbar({severity : "warning", message :message + " R"+resp.amount+" outstanding", open : true, time : time, closeType : successClose})
+              setOpenSnackbar({severity : "warning", message :message + " R"+parseFloat(resp.amount).toFixed(2)+" outstanding", open : true, time : time, closeType : successClose})
             else if(resp.surplus)
-              setOpenSnackbar({severity : "success", message :message + " R"+resp.amount + " surplus given", open : true, time : time, closeType : successClose})
+              setOpenSnackbar({severity : "success", message :message + " R"+parseFloat(resp.amount).toFixed(2) + " surplus given", open : true, time : time, closeType : successClose})
             else
               setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
 
@@ -218,9 +218,9 @@ export default function Payments() {
               
               
               if(resp.short) 
-                setOpenSnackbar({severity : "warning", message : message + " R"+resp.amount+" outstanding", open : true, time : time, closeType : successClose})
+                setOpenSnackbar({severity : "warning", message : message + " R"+parseFloat(resp.amount).toFixed(2)+" outstanding", open : true, time : time, closeType : successClose})
               else if(resp.surplus)
-                setOpenSnackbar({severity : "success", message : message + " R"+resp.amount + " surplus given", open : true, time : time, closeType : successClose})
+                setOpenSnackbar({severity : "success", message : message + " R"+parseFloat(resp.amount).toFixed(2) + " surplus given", open : true, time : time, closeType : successClose})
               else
                 setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
 
@@ -261,9 +261,9 @@ export default function Payments() {
               var message = "Payment Successful"
                             
               if(resp.short) 
-                setOpenSnackbar({severity : "warning", message :message + " R"+resp.amount+" outstanding", open : true, time : time, closeType : successClose})
+                setOpenSnackbar({severity : "warning", message :message + " R"+parseFloat(resp.amount).toFixed(2)+" outstanding", open : true, time : time, closeType : successClose})
               else if(resp.surplus)
-                setOpenSnackbar({severity : "success", message :message + " R"+resp.amount + " surplus given", open : true, time : time, closeType : successClose})
+                setOpenSnackbar({severity : "success", message :message + " R"+parseFloat(resp.amount).toFixed(2) + " surplus given", open : true, time : time, closeType : successClose})
               else
                 setOpenSnackbar({severity : "success", message : message, open : true, time : time, closeType : successClose})
 
