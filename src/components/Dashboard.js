@@ -14,6 +14,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {LoadingIcon} from "./LoadingIcon";
+import {ErrorPage} from "./temp/ErrorPage";
 
 const useStyles = makeStyles({
   card: {
@@ -61,6 +63,7 @@ export default function Dashboard(){
 
   const[dData, setData] = useState([])
   const [events, setEvents] = useState([])
+  const [error,setError] = useState(false)
 
   const [connection, setConnection] = useState(false)
 
@@ -108,34 +111,40 @@ export default function Dashboard(){
       if(x.message === "success"){
 
         setData(x.data)
+
+        let z = await Api.getRequest("availableEvents")
+        if(z.message === "success"){
+
+        console.log(z)
+
+        setEvents(z.event)
+        setConnection(true)
+        
+        }else if (z.message === "unauthorized"){
+          localStorage.clear();
+          history.push("/", {last : "/Dashboard"})
+        }else if(z.message === "error"){
+          console.log("error")
+          setError(true)
+        }else if(z.message === "no connection"){
+          console.log("no connection")
+          setError(true)
+        }
         
       }else if (x.message === "unauthorized"){
         localStorage.clear();
         history.push("/", {last : "/Dashboard"})
       }else if(x.message === "error"){
         console.log("error")
+        setError(true)
       }else if(x.message === "no connection"){
         console.log("no connection")
+        setError(true)
       }
 
-      let z = await Api.getRequest("availableEvents")
-      if(z.message === "success"){
-
-      console.log(z)
-
-      setEvents(z.event)
       
-      }else if (z.message === "unauthorized"){
-        localStorage.clear();
-        history.push("/", {last : "/Dashboard"})
-      }else if(z.message === "error"){
-        console.log("error")
-      }else if(z.message === "no connection"){
-        console.log("no connection")
-      }
 
-
-      setConnection(true)
+      
     }
 
     fetchData()
@@ -176,7 +185,7 @@ export default function Dashboard(){
         {console.log(dData.paidTickets)}
         {console.log(dData.unpaidTickets)}
 
-        {connection ? (
+        {connection ? 
           <div>
             <meta
               name="viewport"
@@ -314,17 +323,21 @@ export default function Dashboard(){
             </div>
 
           </div>
-        ) : (
-          <div className="dots-container">
-            <div className="dots">L</div>
-            <div className="dots">o</div>
-            <div className="dots">a</div>
-            <div className="dots">d</div>
-            <div className="dots">i</div>
-            <div className="dots">n</div>
-            <div className="dots">g</div>
-          </div>
-        )}
+        : 
+
+        <div>          
+
+        {error ?
+        <ErrorPage/>
+        :
+        <LoadingIcon/>
+        }
+
+        </div>
+        }
+
+
+        
       </div>
     );
 }

@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
+import { LoadingIcon } from "./LoadingIcon";
+import {ErrorPage} from "./temp/ErrorPage";
 import "../styles/eventCard.css";
 
 function Alert(props) {
@@ -24,6 +26,8 @@ export default function Events(){
 
     const [data, setData] = useState([]);
     const [connection, setConnection] = useState(false);
+    const [error,setError] = useState(false)
+
     let history = useHistory();
 
     const classes = useStyles();
@@ -54,6 +58,7 @@ export default function Events(){
                 history.push("/", {last: "/Events"})
             }else{
                 setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : 6000, closeType : errorClose})
+                setError(true)
               }
             
         }
@@ -83,15 +88,16 @@ export default function Events(){
             </div>
 
                 :
-                <div className="dots-container">
-                <div className="dots">L</div>
-                <div className="dots">o</div>
-                <div className="dots">a</div>
-                <div className="dots">d</div>
-                <div className="dots">i</div>
-                <div className="dots">n</div>
-                <div className="dots">g</div>
-              </div>
+
+                <div>          
+
+                {error ?
+                <ErrorPage/>
+                :
+                <LoadingIcon/>
+                }
+        
+                </div>
                     
                 }
 
