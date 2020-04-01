@@ -80,7 +80,7 @@ export default function ReturnTickets() {
           history.push("/", {last : "/ReturnTickets"})
 
         }else if(x.message === "error"){
-          setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+          setOpenSnackbar({severity : "error", message : "Unknown Error", open : true, time : time, closeType : errorClose})
   
         }else if(x.message === "no connection"){
           setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
@@ -130,7 +130,7 @@ export default function ReturnTickets() {
 
           }else if(t.message === "error"){
             time = 6000
-            setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+            setOpenSnackbar({severity : "error", message : "Unknown Error", open : true, time : time, closeType : errorClose})
 
           }else if(t.message === "no connection"){
             time = 6000
@@ -162,7 +162,7 @@ export default function ReturnTickets() {
 
           }else if(t.message === "error"){
             time = 6000
-            setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+            setOpenSnackbar({severity : "error", message : "Unknown Error", open : true, time : time, closeType : errorClose})
 
           }else if(t.message === "no connection"){
             time = 6000
