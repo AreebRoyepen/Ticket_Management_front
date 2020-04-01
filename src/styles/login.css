@@ -12,6 +12,18 @@
   flex-direction:row;
 }
 
+.MuiSvgIcon-root {
+
+  font-size: 2.7rem !important;
+  color: #08533C;
+}
+
+
+
+.tinybutton {
+  border: none!important;
+  background-color: #ffffff00 !important;
+}
 .profile-card {
   background:  #08533C;
   width: 56px;
