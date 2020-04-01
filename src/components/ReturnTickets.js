@@ -84,6 +84,8 @@ export default function ReturnTickets() {
   
         }else if(x.message === "no connection"){
           setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+        }else{
+          setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
         }
       }
 

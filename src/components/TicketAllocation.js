@@ -96,6 +96,8 @@ export default function TicketAllocation() {
 
       }else if(x.message === "no connection"){
         setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+      }else{
+        setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
       }
                
 
@@ -116,11 +118,23 @@ export default function TicketAllocation() {
   
       (async () => {
    
-      let persons = await Api.getRequest("person");
+      let resp = await Api.getRequest("person");
 
+      if(resp.message === "success"){
+        
         if (active) {
-          setOptions(persons.person);
+          setOptions(resp.person);
         }
+
+      }else if (resp.message === "unauthorized"){
+        localStorage.clear();
+        history.push("/",  {last : "/TicketAllocation"})
+
+      }else{
+        setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time :6000, closeType : errorClose})
+      }
+
+        
       })();
   
       return () => {

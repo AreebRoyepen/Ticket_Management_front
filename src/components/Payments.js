@@ -82,11 +82,21 @@ export default function Payments() {
   
       (async () => {
    
-      let persons = await Api.getRequest("person");
+      let resp = await Api.getRequest("person");
 
+      if(resp.message === "success"){
+        
         if (active) {
-          setOptions(persons.person);
+          setOptions(resp.person);
         }
+
+      }else if (resp.message === "unauthorized"){
+        localStorage.clear();
+        history.push("/",  {last : "/TicketAllocation"})
+
+      }else{
+        setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time :6000, closeType : errorClose})
+      }
       })();
   
       return () => {
@@ -95,6 +105,12 @@ export default function Payments() {
     }, [loading]);
 
     
+    useEffect(() => {
+      if (!open) {
+        setOptions([]);
+      }
+    }, [open]);
+
     useEffect(()=>{     
 
       if (loadTickets) return
@@ -127,6 +143,8 @@ export default function Payments() {
         }else if(unpaid.message === "no connection"){          
           setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
 
+        }else{
+          setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
         }
 
 
@@ -137,7 +155,7 @@ export default function Payments() {
 
       setLoadTickets(false)
 
-    },[loadTickets, location, history, errorClose]);
+    },[loadTickets, location, history]);
 
  
     const payment = useCallback(async () => {
