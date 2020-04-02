@@ -51,6 +51,14 @@ export default function SearchPeople (content) {
     zIndex: 100000
   };
 
+  const deleteButton = (x) =>{
+
+    if(user.role.id == 1)
+      return <input  type="submit" value="Delete" name="button"className="cardButtons card-link u-float-right" 
+      id={JSON.stringify(x)}/>
+  
+  }
+
 
   const [Modal, open, close, isOpen] = useModal('root', {
     preventScroll: true,
