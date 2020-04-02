@@ -138,9 +138,29 @@ export default function Menu({children}) {
         <Divider/>
         <ListItem> <MdEvent className="iconStyling"/><Link className="menuText" to="/Events">&nbsp;&nbsp;&nbsp;Events</Link></ListItem>
         <ListItem> <MdPeople  className="iconStyling"/><Link className="menuText" to="/People">&nbsp;&nbsp;&nbsp;People</Link></ListItem>
+        
+        {user ?        
+        adminPanel()
+        :
+        <div/>
+        }
+
       </List>
     </div>
   );
+
+  const adminPanel = () =>{
+
+    if(user.role.id ==1)
+    return (
+      <ListItem> 
+      <MdPeople  className="iconStyling"/>
+      <Link className="menuText" to="/Admin">&nbsp;&nbsp;&nbsp;Admin</Link>
+      </ListItem>
+    );
+
+  }
+
   return (
     <div>
       {localStorage.user ?
