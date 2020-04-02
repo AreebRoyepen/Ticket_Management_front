@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, Switch } from "react-router-dom";
-import {createBrowserHistory} from "history";
+import { createBrowserHistory } from "history";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 
@@ -24,22 +24,22 @@ ReactDOM.render(
 
       <Route exact path="/" render={() => <Login />} />
 
-      <Route path="/EventPage" render={() => (<Menu> <EventPage /></Menu> )} />
-      
-      <Route path="/Dashboard" render={() => (<Menu> <Dashboard /></Menu> )} />
+      <Route path="/EventPage" render={() => (<Menu> <EventPage /></Menu>)} />
 
-      <Route path="/PersonPage" render={() => ( <Menu> <PersonPage /> </Menu> )}/>
+      <Route path="/Dashboard" render={() => (<Menu> <Dashboard /></Menu>)} />
 
-      <Route path="/Events" render={() => (<Menu> <Events /></Menu> )} />
-      
-      <Route path="/Payments" render={() => (<Menu> <Payments /></Menu> )} />
+      <Route path="/PersonPage" render={() => (<Menu> <PersonPage /> </Menu>)} />
 
-      <Route path="/People" render={() => ( <Menu> <People /> </Menu> )}/>
+      <Route path="/Events" render={() => (<Menu> <Events /></Menu>)} />
 
-      <Route path="/ReturnTickets" render={() => (<Menu> <ReturnTickets /></Menu> )} />
+      <Route path="/Payments" render={() => (<Menu> <Payments /></Menu>)} />
 
-      <Route path="/TicketAllocation" render={() => ( <Menu> <TicketAllocation /> </Menu> )}/>
-     
+      <Route path="/People" render={() => (<Menu> <People /> </Menu>)} />
+
+      <Route path="/ReturnTickets" render={() => (<Menu> <ReturnTickets /></Menu>)} />
+
+      <Route path="/TicketAllocation" render={() => (<Menu> <TicketAllocation /> </Menu>)} />
+
     </Switch>
   </Router>,
   document.getElementById("root")

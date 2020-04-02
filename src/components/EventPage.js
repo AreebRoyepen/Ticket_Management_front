@@ -157,15 +157,16 @@ export default function EventPage() {
         "name": name,
         "to": parseInt(to),
         "from": parseInt(from),
-        "ticketPrice": parseFloat(price)
+        "ticketPrice":price
       };
 
       console.log(a);
       if(!(/(null|undefined|^$|^\d+$)/).test(a.name) & (/(null|undefined|^$|^\d+$)/).test(a.from) 
-      & (/(null|undefined|^$|^\d+$)/).test(a.to) & (/(null|undefined|^$|^\d+$)/).test(a.ticketPrice))
+      & (/(null|undefined|^$|^\d+$)/).test(a.to) & (/^\d+(\.\d{2})?$/).test(a.ticketPrice) )
        {  
           return "trueValid";}
       
+      console.log(a.ticketPrice);
       return "falseValid";
     }
 
@@ -173,51 +174,49 @@ export default function EventPage() {
     return (
       
       <div>
+        <div className={classes.root}>
+          <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
+            <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
+              {openSnackbar.message}
+            </Alert>
+          </Snackbar>
+        </div>
+        <body className="bodyVal htmlVal spanVal">
+          <form className="form ">
 
-      <div className={classes.root}>
-      <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
-        <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
-          {openSnackbar.message}
-        </Alert>
-      </Snackbar>
-      </div>
-
-      <body className="bodyVal htmlVal spanVal">
-      <form className="form ">
+            <div>
+              <label htmlFor="text" className="form__label">Event Name</label>
+              <input required type="text" className="form__input inputValText" name="text" placeholder="Event Name" value = {name} onChange={ e => setName(e.target.value)} />
+              <div className="form__requirements">
+                Event Name is required
+              </div>
+            </div>
+          
           <div>
-          <label htmlFor="text" className="form__label">Event Name</label>
-          <input required type="text" className="form__input inputValText" name="text" placeholder="Event Name" value = {name}
-              onChange={ e => setName(e.target.value)} />
-          <div className="form__requirements">
-            Event Name is required
-          </div>
-          </div>
-
-          <div>
-          <label htmlFor="number" className="form__label">Ticket Start Number</label>
-          <input required type="number" className="form__input inputValText" name="text" placeholder="2001"  value = {from}
+            <label htmlFor="number" className="form__label">Ticket Start Number</label>
+            <input required type="number" className="form__input inputValText" name="text" placeholder="2001"  value = {from}
              onChange={ e => setFrom(e.target.value)}/>
-          <div className="form__requirements">
-            Please enter in a valid ticket number
-          </div>
+            <div className="form__requirements">
+              Please enter in a valid ticket number
+            </div>
           </div>
 
-        <div>
-          <label htmlFor="number" className="form__label">Ticket end number</label>
-          <input required type="number" className="form__input inputValText" name="text" placeholder="2005"  value = {to}
+          <div>
+            <label htmlFor="number" className="form__label">Ticket end number</label>
+            <input required type="number" className="form__input inputValText" name="text" placeholder="2005"  value = {to}
              onChange={ e => setTo(e.target.value)}/>
-          <div className="form__requirements">
-            Please enter in a valid ticket number
-          </div>
+            <div className="form__requirements">
+              Please enter in a valid ticket number
+            </div>
           </div>
 
-           <div>
-          <label htmlFor="number" className="form__label">Ticket Price (R)</label>
-          <input required type="number" className="form__input inputValEmail" name="text" placeholder="100"  value = {price}
-              onChange={ e => setPrice(e.target.value)} />
-          <div className="form__requirements">
-            Please enter a valid ticket price
-          </div>
+          <div>
+            <label htmlFor="number" className="form__label">Ticket Price (R)</label>
+            <input required type="text" className="form__input inputValEmail" name="text" placeholder="100"  value = {price}
+              onChange={ e => setPrice(e.target.value)}  pattern="^\d+(\.\d{2,2})?$"/>
+            <div className="form__requirements">
+              Please enter a valid ticket price
+            </div>
           </div>    
       </form>
       <div className="btn-group">

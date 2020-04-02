@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link , useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import DehazeIcon from '@material-ui/icons/Dehaze';
@@ -13,12 +13,12 @@ import MenuUI from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
 import { TiTicket } from "react-icons/ti";
-import {MdEvent, MdDashboard,MdPeople} from "react-icons/md";
+import { MdEvent, MdDashboard, MdPeople } from "react-icons/md";
 import useModal from 'react-hooks-use-modal';
 
 import "../styles/menu.css";
 
-const useStyles = makeStyles(theme =>({
+const useStyles = makeStyles(theme => ({
   list: {
     width: 250,
   },
@@ -39,10 +39,10 @@ const useStyles = makeStyles(theme =>({
 const modalStyle = {
   backgroundColor: 'white',
   padding: '40px 45px',
-  marginLeft:"30px",
-  marginRight:"40px",
+  marginLeft: "30px",
+  marginRight: "40px",
   borderRadius: '10px',
-  marginTop:"140px",
+  marginTop: "140px",
 };
 
 
@@ -50,7 +50,7 @@ const maskStyle = {
   position: 'fixed',
   top: 0,
   left: 0,
- 
+
   bottom: 0,
   right: 0,
   backgroundColor: 'gray',
@@ -58,7 +58,7 @@ const maskStyle = {
 };
 
 
-export default function Menu({children}) {
+export default function Menu({ children }) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -77,7 +77,7 @@ export default function Menu({children}) {
   const [Modal, openModal, closeModal, isOpen] = useModal('root', {
     preventScroll: true,
     backgroundColor: '#fff',
-    domNode:'cat'
+    domNode: 'cat'
   });
 
   const popup = () => (
@@ -99,13 +99,13 @@ export default function Menu({children}) {
   );
 
 
-  useEffect( () => {
+  useEffect(() => {
 
-    if(localStorage.user)
+    if (localStorage.user)
       setUser(JSON.parse(localStorage.user))
-      setTimeout(() =>{ setOpenModal(openModal) }, (localStorage.expiration * 1000));    
+    setTimeout(() => { setOpenModal(openModal) }, (localStorage.expiration * 1000));
 
-  },[setUser])
+  }, [setUser])
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -131,47 +131,47 @@ export default function Menu({children}) {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem className="menuHeader" ><TiTicket/>&nbsp;GIS Ticket Management</ListItem>
+        <ListItem className="menuHeader" ><TiTicket />&nbsp;GIS Ticket Management</ListItem>
         <List>
-          <ListItem> <MdDashboard className="iconStyling"/><Link className="menuText" to="/Dashboard">&nbsp;&nbsp;&nbsp;Dashboard</Link></ListItem>
+          <ListItem> <MdDashboard className="iconStyling" /><Link className="menuText" to="/Dashboard">&nbsp;&nbsp;&nbsp;Dashboard</Link></ListItem>
         </List>
-        <Divider/>
-        <ListItem> <MdEvent className="iconStyling"/><Link className="menuText" to="/Events">&nbsp;&nbsp;&nbsp;Events</Link></ListItem>
-        <ListItem> <MdPeople  className="iconStyling"/><Link className="menuText" to="/People">&nbsp;&nbsp;&nbsp;People</Link></ListItem>
+        <Divider />
+        <ListItem> <MdEvent className="iconStyling" /><Link className="menuText" to="/Events">&nbsp;&nbsp;&nbsp;Events</Link></ListItem>
+        <ListItem> <MdPeople className="iconStyling" /><Link className="menuText" to="/People">&nbsp;&nbsp;&nbsp;People</Link></ListItem>
       </List>
     </div>
   );
   return (
     <div className={classes.root}>
       {popup()}
-      <AppBar id= "appBarColor" position="fixed">
+      <AppBar id="appBarColor" position="fixed">
         <Toolbar>
-        <Button onClick={toggleDrawer('left', true)}><DehazeIcon id ="menuIcon"/></Button>
-      <Drawer open={state.left} onClose={toggleDrawer('left', false)} children={sideList('left')}>
-      </Drawer>
-         <Typography variant="h6" align = "center" className={classes.title}>
-          Ticket Management
+          <Button onClick={toggleDrawer('left', true)}><DehazeIcon id="menuIcon" /></Button>
+          <Drawer open={state.left} onClose={toggleDrawer('left', false)} children={sideList('left')}>
+          </Drawer>
+          <Typography variant="h6" align="center" className={classes.title}>
+            Ticket Management
           </Typography>
-          
+
           <Button onClick={handleMenu} color="inherit">Hi, {user ? user.name : ""}</Button>
 
           <MenuUI
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick = {() => { history.push("/");   localStorage.clear(); }}> Log Out</MenuItem>
-              </MenuUI>
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={open}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={() => { history.push("/"); localStorage.clear(); }}> Log Out</MenuItem>
+          </MenuUI>
 
         </Toolbar>
       </AppBar>
