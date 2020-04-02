@@ -142,6 +142,7 @@ export default function Menu({ children }) {
     </div>
   );
   return (
+<<<<<<< HEAD
     <div className={classes.root}>
       {popup()}
       <AppBar id="appBarColor" position="fixed">
@@ -176,6 +177,59 @@ export default function Menu({ children }) {
         </Toolbar>
       </AppBar>
       {children}
+=======
+    <div>
+      {localStorage.user ?
+
+          <div className={classes.root}>
+          {popup()}
+          <AppBar id= "appBarColor" position="fixed">
+            <Toolbar>
+            <Button onClick={toggleDrawer('left', true)}><DehazeIcon id ="menuIcon"/></Button>
+          <Drawer open={state.left} onClose={toggleDrawer('left', false)} children={sideList('left')}>
+          </Drawer>
+            <Typography variant="h6" align = "center" className={classes.title}>
+              Ticket Management
+              </Typography>
+              
+              <Button onClick={handleMenu} color="inherit">Hi, {user ? user.name : ""}</Button>
+
+              <MenuUI
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={open}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick = {() => { history.push("/");   localStorage.clear(); }}> Log Out</MenuItem>
+                  </MenuUI>
+
+            </Toolbar>
+          </AppBar>
+          {children}
+          </div>
+    
+    
+      :
+
+      //if they are not logged in they are booted out to log in page
+      history.push("/")
+      
+
+      
+      }
+
+
+>>>>>>> 5e068b9309a27fc2afcae1e7a75fb13802b8cbd2
     </div>
+
   );
 }
