@@ -142,40 +142,57 @@ export default function Menu({children}) {
     </div>
   );
   return (
-    <div className={classes.root}>
-      {popup()}
-      <AppBar id= "appBarColor" position="fixed">
-        <Toolbar>
-        <Button onClick={toggleDrawer('left', true)}><DehazeIcon id ="menuIcon"/></Button>
-      <Drawer open={state.left} onClose={toggleDrawer('left', false)} children={sideList('left')}>
-      </Drawer>
-         <Typography variant="h6" align = "center" className={classes.title}>
-          Ticket Management
-          </Typography>
-          
-          <Button onClick={handleMenu} color="inherit">Hi, {user ? user.name : ""}</Button>
+    <div>
+      {localStorage.user ?
 
-          <MenuUI
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick = {() => { history.push("/");   localStorage.clear(); }}> Log Out</MenuItem>
-              </MenuUI>
+          <div className={classes.root}>
+          {popup()}
+          <AppBar id= "appBarColor" position="fixed">
+            <Toolbar>
+            <Button onClick={toggleDrawer('left', true)}><DehazeIcon id ="menuIcon"/></Button>
+          <Drawer open={state.left} onClose={toggleDrawer('left', false)} children={sideList('left')}>
+          </Drawer>
+            <Typography variant="h6" align = "center" className={classes.title}>
+              Ticket Management
+              </Typography>
+              
+              <Button onClick={handleMenu} color="inherit">Hi, {user ? user.name : ""}</Button>
 
-        </Toolbar>
-      </AppBar>
-      {children}
+              <MenuUI
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={open}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick = {() => { history.push("/");   localStorage.clear(); }}> Log Out</MenuItem>
+                  </MenuUI>
+
+            </Toolbar>
+          </AppBar>
+          {children}
+          </div>
+    
+    
+      :
+
+      //if they are not logged in they are booted out to log in page
+      history.push("/")
+      
+
+      
+      }
+
+
     </div>
+
   );
 }
