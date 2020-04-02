@@ -15,6 +15,8 @@ import TicketAllocation from "./components/TicketAllocation";
 import Menu from "./components/Menu";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import Admin from "./components/Admin";
+import UserPage from "./components/UserPage";
 
 const history = createBrowserHistory();
 
@@ -39,6 +41,11 @@ ReactDOM.render(
       <Route path="/ReturnTickets" render={() => (<Menu> <ReturnTickets /></Menu> )} />
 
       <Route path="/TicketAllocation" render={() => ( <Menu> <TicketAllocation /> </Menu> )}/>
+
+      <Route path="/Admin" render={() => ( <Menu> <Admin /> </Menu> )}/>
+
+      <Route path="/UserPage" render={() => ( <Menu> <UserPage /> </Menu> )}/>
+
      
     </Switch>
   </Router>,
