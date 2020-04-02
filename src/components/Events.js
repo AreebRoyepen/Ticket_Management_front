@@ -30,6 +30,12 @@ export default function Events(){
 
     let history = useHistory();
 
+    const [user, setUser] = useState(null)
+
+    useEffect( () => {
+      setUser(JSON.parse(localStorage.user))  
+    },[setUser])
+
     const classes = useStyles();
     const [openSnackbar, setOpenSnackbar] = useState({
       severity : "",
@@ -66,6 +72,14 @@ export default function Events(){
         fetchData()
     },[history]);
 
+    const createEventBtn= () =>{
+      if(user.role.id == 1)
+      return(
+        <button onClick = {() => {  history.push("/EventPage", {id:null, edit:false}) }} 
+        className="funButton headerButtons">CREATE EVENT</button>
+      );
+    }
+
     return (
         
         <div>
@@ -82,8 +96,13 @@ export default function Events(){
             
             ?
             <div>
-                
-            <button onClick = {() => {  history.push("/EventPage", {id:null, edit:false}) }} className="funButton headerButtons">CREATE EVENT</button>
+            {user ? (
+              <div>
+                {createEventBtn()}
+              </div>
+            ) : (
+              <div />
+            )}                
             <Searchbar content={data}/>
             </div>
 
