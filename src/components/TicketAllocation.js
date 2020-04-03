@@ -343,23 +343,38 @@ export default function TicketAllocation() {
       "ticketNumberF": parseInt(ticketNumberF),
       "amount": amount,
       "person": person,
-      "paid":paid
+      "paid":paid,
+      "bulk":bulk,
+      "ticketNumberT":ticketNumberT
     };
     console.log(x.amount)
-    if(x.paid)
+
+    if(x.person && ((/(null|undefined|^$|^\d+$)/).test(x.ticketNumberF)&& x.ticketNumberF>0))
     {
-      if( (/^\d+(\.\d{2})?$/).test(x.amount) &&(x.person ||  ((/(null|undefined|^$|^\d+$)/).test(x.ticketNumberF)&& x.ticketNumberF>0)))
+      if(bulk && !((/(null|undefined|^$|^\d+$)/).test(x.ticketNumberT)&& x.ticketNumberT>0))
+      {
+        return "falseValid";
+      }
+      if(x.paid)
+      {
+        if((/^\d+(\.\d{2})?$/).test(x.amount))
+        {
+          return "trueValid";
+        }
+        else
+        {
+          return "falseValid";
+        }
+      }
+      else
       {
         return "trueValid";
       }
     }
-    if(!x.paid &&(x.person ||  ((/(null|undefined|^$|^\d+$)/).test(x.ticketNumberF)&& x.ticketNumberF>0)))
-     {  
-       console.log("off")
-        return "trueValid";
-      }
-      console.log("on")
-    return "falseValid";
+    else
+    {
+      return "falseValid";
+    } 
   }
 
   return (
@@ -415,13 +430,14 @@ export default function TicketAllocation() {
                 onChange={(event, newValue) => { setPerson(newValue); }}
                 renderInput={params => (
                   <TextField
+                   
                     {...params}
                     label="Select Person"
                     variant="outlined"
                     InputProps={{
                       ...params.InputProps,
                       endAdornment: (
-                        <React.Fragment>
+                        <React.Fragment >
                           {loading ? <CircularProgress color="inherit" size={20} /> : null}
                           {params.InputProps.endAdornment}
                         </React.Fragment>
