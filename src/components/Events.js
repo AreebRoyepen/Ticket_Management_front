@@ -54,7 +54,7 @@ export default function Events(){
 
     useEffect(() => {
 
-        async function fetchData(){
+        async function fetchAll(){
             let x = await Api.getRequest("events")
             if(x.message === "success"){
                 setData(x.event);
@@ -69,8 +69,31 @@ export default function Events(){
             
         }
 
-        fetchData()
-    },[history]);
+        async function fetchActive(){
+          let x = await Api.getRequest("availableEvents")
+          if(x.message === "success"){
+              setData(x.event);
+              setConnection(true)
+          }else if (x.message === "unauthorized"){
+              localStorage.clear();
+              history.push("/", {last: "/Events"})
+          }else{
+              setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : 6000, closeType : errorClose})
+              setError(true)
+            }
+          
+      }
+
+      if(user){
+        if(user.role.id == 1){
+          fetchAll()
+        }else{
+          fetchActive()
+        }
+      }
+
+        
+    },[history, user]);
 
     const createEventBtn= () =>{
       if(user.role.id == 1)
@@ -85,7 +108,7 @@ export default function Events(){
         <div>
 
             <div className={classes.root}>
-                <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
+            <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
                 <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
                 {openSnackbar.message}
                 </Alert>
