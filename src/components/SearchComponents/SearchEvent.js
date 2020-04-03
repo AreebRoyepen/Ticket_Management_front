@@ -85,6 +85,15 @@ export default function SearchEvent (content) {
                   id={JSON.stringify(x.active)}
                 />
 
+                <input
+
+                  type="submit"
+                  value={x.active ?"Close" : "Open"}
+                  name="button"
+                  className="cardButtons  card-link u-float-right"
+                  id={JSON.stringify(x.active)}
+                />
+
               </div>
             ) : (
               <div />
