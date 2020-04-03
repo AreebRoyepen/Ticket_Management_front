@@ -153,10 +153,19 @@ export default function Menu({children}) {
 
     if(user.role.id ==1)
     return (
+      <div>
+        <hr/>
       <ListItem> 
       <MdPeople  className="iconStyling"/>
       <Link className="menuText" to="/Admin">&nbsp;&nbsp;&nbsp;Admin</Link>
       </ListItem>
+
+      <ListItem> 
+      <MdPeople  className="iconStyling"/>
+      <Link className="menuText" to="/Reports">&nbsp;&nbsp;&nbsp;Reports</Link>
+      </ListItem>
+
+      </div>
     );
 
   }

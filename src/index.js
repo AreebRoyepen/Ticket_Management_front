@@ -17,6 +17,7 @@ import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Admin from "./components/Admin";
 import UserPage from "./components/UserPage";
+import Reports from "./components/Reports";
 
 const history = createBrowserHistory();
 
@@ -45,6 +46,9 @@ ReactDOM.render(
       <Route path="/Admin" render={() => ( <Menu> <Admin /> </Menu> )}/>
 
       <Route path="/UserPage" render={() => ( <Menu> <UserPage /> </Menu> )}/>
+
+      <Route path="/Reports" render={() => ( <Menu> <Reports /> </Menu> )}/>
+
 
      
     </Switch>
