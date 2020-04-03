@@ -69,7 +69,7 @@ export default function People(){
         }
       
         fetchData()
-    },[history]);
+    },[history, errorClose]);
 
 
     const sendRequest = useCallback(async (user) => {
@@ -126,7 +126,7 @@ export default function People(){
         if (isMounted.current) // only update if we are still mounted
           setIsSending(false)
   
-      }, [isSending, location, history]); // update the callback if the state changes
+      }, [isSending, location, history, errorClose]); // update the callback if the state changes
   
 
     return (

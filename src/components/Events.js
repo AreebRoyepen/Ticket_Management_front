@@ -85,7 +85,7 @@ export default function Events(){
       }
 
       if(user){
-        if(user.role.id == 1){
+        if(user.role.id === 1){
           fetchAll()
         }else{
           fetchActive()
@@ -93,7 +93,7 @@ export default function Events(){
       }
 
         
-    },[history, user]);
+    },[history, user, errorClose]);
 
     const createEventBtn= () =>{
       if(user.role.id == 1)

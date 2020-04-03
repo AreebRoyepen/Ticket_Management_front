@@ -105,7 +105,7 @@ export default function Menu({children}) {
       setUser(JSON.parse(localStorage.user))
       setTimeout(() =>{ setOpenModal(openModal) }, (localStorage.expiration * 1000));    
 
-  },[setUser])
+  },[setUser, setOpenModal])
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -151,7 +151,7 @@ export default function Menu({children}) {
 
   const adminPanel = () =>{
 
-    if(user.role.id ==1)
+    if(user.role.id === 1)
     return (
       <div>
         <hr/>
