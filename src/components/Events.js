@@ -74,10 +74,15 @@ export default function Events(){
 
     const createEventBtn= () =>{
       if(user.role.id == 1)
-      return(
+     { return(
         <button onClick = {() => {  history.push("/EventPage", {id:null, edit:false}) }} 
         className="funButton headerButtons">CREATE EVENT</button>
-      );
+      );}
+      else{
+        return(
+          <button disabled style={{opacity:0}}className="funButton headerButtons">Can't create</button>
+        );
+      }
     }
 
     return (
@@ -96,13 +101,10 @@ export default function Events(){
             
             ?
             <div>
-            {user ? (
-              <div>
+          
+            <div>
                 {createEventBtn()}
-              </div>
-            ) : (
-              <div />
-            )}                
+              </div>               
             <Searchbar content={data}/>
             </div>
 

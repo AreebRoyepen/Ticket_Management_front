@@ -66,14 +66,6 @@ export default function SearchEvent (content) {
             {user.role.id == 1 ? (
               <div>
                 <input
-                  type="submit"
-                  value="Delete"
-                  name="button"
-                  className="cardButtons  card-link u-float-right"
-                  id={JSON.stringify(x.active)}
-                />
-
-                <input
                   onClick={() => {
                     console.log(x.id);
                     history.push("/EventPage", { event: x, edit: true });
@@ -123,19 +115,30 @@ export default function SearchEvent (content) {
                           <span>R {x.ticketPrice} </span>
                         </span>
                         <div className="card-sub-botton card-sub-show">
-                          <input
-                            type="submit"
-                            value="Delete"
-                            name="button"
-                            className="cardButtons  card-link u-float-right"
-                            id={JSON.stringify(x.active)}
-                          />
-
                           {user ? (
                             <div class="dropdown u-float-right">
                               <button class="dropbtn">actions</button>
                               <div class="dropdown-content">
                               {allButtons(x)}
+                              <div class="dropdown2 event-right-delete u-float-right">
+                            <button class="cardButtons2">delete</button>
+                            <div class="dropdown-content2">
+                              <input
+                                type="submit"
+                                value="confirm"
+                                name="button"
+                                className="cardButtons event-right-delete card-link u-float-right"
+                                id={JSON.stringify(x.active)}
+                              />
+                              <input
+                                type="submit"
+                                value="cancel"
+                                name="button"
+                                className="cardButtons event-right-delete  card-link u-float-right"
+                                id={JSON.stringify(x.active)}
+                              />
+                            </div>
+                          </div>
                               </div>
                             </div>
                           ) : (

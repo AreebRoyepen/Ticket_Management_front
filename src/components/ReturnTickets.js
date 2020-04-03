@@ -200,6 +200,29 @@ export default function ReturnTickets() {
 
 
     }
+
+    const validateForm = () => {
+  
+      var x = {
+        "ticketNumberF": parseInt(ticketNumberF),
+        "bulk":bulk,
+        "ticketNumberT":ticketNumberT
+      };
+
+      if((/(null|undefined|^$|^\d+$)/).test(x.ticketNumberF)&& x.ticketNumberF>0)
+      {
+        if(bulk && !((/(null|undefined|^$|^\d+$)/).test(x.ticketNumberT)&& x.ticketNumberT>0))
+        {
+          return "falseValid";
+        }
+        else
+        {
+          return "trueValid";
+        }
+      }
+      return "falseValid";
+    }
+  
     
     return (
 
@@ -268,7 +291,7 @@ export default function ReturnTickets() {
       </div>
       </form>
       <div className="btn-group"> 
-         <button className = "button" type="button" disabled={isSending} onClick={returnTicket} style={{marginTop: "30px"}}> Return Ticket</button>
+         <button id={validateForm()} className = "button" type="button" disabled={isSending} onClick={returnTicket} style={{marginTop: "30px"}}> Return Ticket</button>
           <button className = "button" type="button" onClick={back} style={{marginTop: "30px"}} > Cancel</button>
       </div>
       </body>
