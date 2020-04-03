@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import "../styles/eventCard.css";
 import Api from "../api/Api";
 import LazyLoad from 'react-lazyload';
@@ -6,7 +6,7 @@ import LazyLoadingIcon from "./LazyLoadingIcon";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { LoadingIcon } from "./LoadingIcon";
 import {ErrorPage} from "./temp/ErrorPage";
 
@@ -29,7 +29,11 @@ export default function People(){
     const [connection, setConnection] = useState(false);
     const [error,setError] = useState(false)
 
+    const [isSending, setIsSending] = useState(false)
+    const isMounted = useRef(true)
+
     let history = useHistory();
+    let location = useLocation();
 
     const classes = useStyles();
     const [openSnackbar, setOpenSnackbar] = useState({
@@ -67,6 +71,64 @@ export default function People(){
         fetchData()
     },[history]);
 
+
+    const sendRequest = useCallback(async (user) => {
+        // don't send again while we are sending
+        if (isSending) return
+  
+        // update state
+        setIsSending(true)
+        // send the actual request
+  
+        var x = {
+            "user" : user.id,
+            "active": !user.active
+        };
+  
+        async function fetchData(){
+  
+            var time = 3000
+  
+            let resp = await Api.postRequest("changeUserStatus",x)
+            console.log(resp)
+            if(resp.message === "success"){
+              
+              setOpenSnackbar({severity : "success", message : "Successfully edited", open : true, time : time, closeType : errorClose})
+              
+            }else if (resp.message === "unauthorized"){
+              localStorage.clear();
+              history.push("/", {last : "/Admin", data: location.state})
+  
+            }else if(resp.message === "error"){
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
+  
+            }else if(resp.message === "no connection"){
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+            }else if(resp.message === "timeout"){
+              time = 6000
+              setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
+              
+            }
+            
+    
+    
+          
+  
+        }
+  
+        fetchData()
+  
+  
+  
+        // once the request is sent, update state again
+        if (isMounted.current) // only update if we are still mounted
+          setIsSending(false)
+  
+      }, [isSending, location, history]); // update the callback if the state changes
+  
+
     return (
         <div>
             <div className={classes.root}>
@@ -102,23 +164,15 @@ export default function People(){
                                 <input  onClick = {() => { console.log(x.id);  history.push("/UserPage",{x:x, edit:true})}} 
                                 type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
                                 
-                            {x.active ?
                                 <input
                                 type="submit"
-                                value="Deactivate"
+                                onClick = {() => sendRequest(x)}
+                                value={x.active ?"Deactivate" : "Activate"}
                                 name="button"
                                 className="cardButtons  card-link u-float-right"
                                 id={JSON.stringify(x.active)}
                                 />
-                            :
-                                <input
-                                type="submit"
-                                value="Activate"
-                                name="button"
-                                className="cardButtons  card-link u-float-right"
-                                id={JSON.stringify(x.active)}
-                                />
-                            }
+
                             
                             </div>
                         </div>
