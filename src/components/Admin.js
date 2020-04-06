@@ -35,6 +35,12 @@ export default function People(){
     let history = useHistory();
     let location = useLocation();
 
+    const [user, setUser] = useState(null)
+
+    useEffect( () => {
+      setUser(JSON.parse(localStorage.user))  
+    },[setUser])
+
     const classes = useStyles();
     const [openSnackbar, setOpenSnackbar] = useState({
       severity : "",
@@ -151,11 +157,13 @@ export default function People(){
 
                     <LazyLoad key = {x.id} placeholder = {<LazyLoadingIcon />}>
                     <div key = {x.id}>                              
+
+                    
                     <div className="container"> 
                     <div className="card">
                         <div className="card-body" id ={JSON.stringify(x.active)}>
                             <div className="card-header event-name">
-                                <p>{x.name + " " + x.surname}</p>
+                                <p>{x.id == user.id ? x.name + " " + x.surname +" (me)" : x.name + " " + x.surname}</p>
                             </div>
                             <span className="card-header">{x.number}<span className="card-header u-float-right"> {x.email} </span>
                             </span>                 
@@ -164,6 +172,14 @@ export default function People(){
                                 <input  onClick = {() => { console.log(x.id);  history.push("/UserPage",{x:x, edit:true})}} 
                                 type="submit" value="Edit" name="button"className="cardButtons  card-link u-float-right" id={JSON.stringify(x.active)}/>
                                 
+                                
+
+                                {x.id == user.id ?
+                                                    
+                                <div/>          
+
+                                :
+
                                 <input
                                 type="submit"
                                 onClick = {() => sendRequest(x)}
@@ -173,6 +189,7 @@ export default function People(){
                                 id={JSON.stringify(x.active)}
                                 />
 
+                                }
                             
                             </div>
                         </div>

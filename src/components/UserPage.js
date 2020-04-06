@@ -57,10 +57,13 @@ export default function UserPage() {
     useEffect(() => {      
 
       if(location.state.edit){
+        console.log(location.state.x)
         setName(location.state.x.name)
         setSurname(location.state.x.surname)
         setEmail(location.state.x.email)
         setNumber(location.state.x.number)
+        setUsername(location.state.x.username)
+        setRole(location.state.x.role)
       }
       
       
@@ -88,7 +91,6 @@ export default function UserPage() {
     };
 
     useEffect(() => {
-        let active = true;
     
         if (!loading) {
           return undefined;
@@ -100,9 +102,9 @@ export default function UserPage() {
   
         if(resp.message === "success"){
           
-          if (active) {
-            setOptions(resp.role);
-          }
+          
+          setOptions(resp.role);
+          
   
         }else if (resp.message === "unauthorized"){
           localStorage.clear();
@@ -114,21 +116,10 @@ export default function UserPage() {
   
           
         })();
-    
-        return () => {
-          active = false;
-        };
+
       }, [loading]);
   
   
-      useEffect(() => {
-        if (!open) {
-          setOptions([]);
-        }
-      }, [open]);
-
-
-
     const sendRequest = useCallback(async () => {
       // don't send again while we are sending
       if (isSending) return
