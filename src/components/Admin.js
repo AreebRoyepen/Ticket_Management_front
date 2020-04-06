@@ -57,25 +57,27 @@ export default function People(){
         setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
       };
 
+      async function fetchData(){
+
+        let x = await Api.getRequest("users");
+        if(x.message === "success"){
+            setData(x.user)
+            setConnection(true)
+        }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/" , {last: "/People"})
+        }else{
+            setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : 6000, closeType : errorClose})
+            setError(true)
+          }
+
+    }
+
     useEffect(() => {
-        async function fetchData(){
 
-            let x = await Api.getRequest("users");
-            if(x.message === "success"){
-                setData(x.user)
-                setConnection(true)
-            }else if (x.message === "unauthorized"){
-                localStorage.clear();
-                history.push("/" , {last: "/People"})
-            }else{
-                setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : 6000, closeType : errorClose})
-                setError(true)
-              }
-
-        }
       
         fetchData()
-    },[history, errorClose]);
+    },[history]);
 
 
     const sendRequest = useCallback(async (user) => {
@@ -91,7 +93,7 @@ export default function People(){
             "active": !user.active
         };
   
-        async function fetchData(){
+        async function changeStatus(){
   
             var time = 3000
   
@@ -117,22 +119,18 @@ export default function People(){
               setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
               
             }
-            
-    
-    
-          
+                   
   
         }
   
-        fetchData()
-  
+        changeStatus()
   
   
         // once the request is sent, update state again
         if (isMounted.current) // only update if we are still mounted
           setIsSending(false)
   
-      }, [isSending, location, history, errorClose]); // update the callback if the state changes
+      }, [isSending, location, history]); // update the callback if the state changes
   
 
     return (

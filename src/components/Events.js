@@ -93,7 +93,7 @@ export default function Events(){
       }
 
         
-    },[history, user, errorClose]);
+    },[history, user]);
 
     const createEventBtn= () =>{
       if(user.role.id == 1)
