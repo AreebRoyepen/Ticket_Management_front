@@ -4,8 +4,10 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import Api from "../api/Api";
+import SimpleTabs from "./Tabs";
 import "../styles/validationForm.css";
 import "../styles/login.css";
+import "../styles/tab.css"
 
 function Alert(props) {
   return <MuiAlert elevation={6} {...props} />;
@@ -107,19 +109,26 @@ export default function Reports() {
 
     return(
         
-        <div>
-            {console.log(data)}
+      <div>
+        {console.log(data)}
 
-            <div className={classes.root}>
-            <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
+        <div className={classes.root}>
+          <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
             <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
               {openSnackbar.message}
             </Alert>
           </Snackbar>
-        </div>
 
-         <button className = "funButton headerButtons" type="button" disabled={isSending} onClick={ticketStuff}>Tickets</button> 
         </div>
+        <div style={{marginTop:"140px"}}></div>
+        <input
+            className="searchBoxStyle"
+            type="search"
+            placeholder="SEARCH"
+          />
+        <SimpleTabs content={"kl"}/>
+        <SimpleTabs content={"cat"}/>
+      </div>
 
     );
 }
