@@ -1,4 +1,11 @@
+#dashboard-box-shadow .MuiPaper-elevation1
+{
+  box-shadow: none !important;
+}
 
+.MuiPaper-outlined {
+  border: none !important;
+}
 .charts-container {
   width: 80%;
   margin: 0 auto;
@@ -10,6 +17,7 @@
  
   margin-left: 1% !important;
   margin-right: 1% !important;
+  margin-top: -40px !important;
 }
 
 .dashboardHeader

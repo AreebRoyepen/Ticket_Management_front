@@ -1,20 +1,11 @@
 import React from "react";
 import './style.css'
-
+import CustomPopUp from "../Modal";
 
 export const ErrorPage = () => (
 
-<div>
-
-<div id="notfound">
-    <div class="notfound">
-        <div class="notfound-404">
-            <h1>Oops!</h1>
-            <h2>Error while loading, please try again :)</h2>
-        </div>
+    <div>
+        <CustomPopUp content={"Something has gone wrong server side, try checking your internet connection and reloading the page"} />
     </div>
-</div>
-
-</div>
 
 )
