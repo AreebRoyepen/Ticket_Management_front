@@ -447,7 +447,7 @@ export default function TicketAllocation() {
                 )}
               />
               <button onClick={e => history.push("/PersonPage", { last: "/TicketAllocation", id: null, edit: false, data: location.state })}
-                className="tinybutton" type="button" ><Icon /></button>
+               id="add-person-icon" className="tinybutton" type="button" ><Icon /></button>
 
 
             </div>

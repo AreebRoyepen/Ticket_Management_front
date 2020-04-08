@@ -15,6 +15,14 @@
 .MuiSvgIcon-root {
 
   color: #08533C;
+
+}
+
+
+#add-person-icon .MuiSvgIcon-root {
+
+  font-size: 2.5rem;
+
 }
 
 

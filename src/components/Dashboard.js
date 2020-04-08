@@ -16,6 +16,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { LoadingIcon } from "./LoadingIcon";
+import {MdAccountBalance} from "react-icons/md";
 import { ErrorPage } from "./temp/ErrorPage";
 
 const useStyles = makeStyles((theme) => ({
@@ -169,7 +170,7 @@ export default function Dashboard() {
         ctx = chart.chart.ctx;
 
       ctx.restore();
-      var fontSize = 0.75;
+      var fontSize = 1;
       ctx.fontColor = "red";
       ctx.font = fontSize + "em sans-serif";
       ctx.textBaseline = "center";
@@ -220,6 +221,7 @@ export default function Dashboard() {
                   <Paper className={classes.paper}>
                     <Card className={classes.card} variant="outlined">
                       <CardContent>
+                      <MdAccountBalance size={60} color="#08533C" style={{marginLeft:'-250px'}}/>
                         <Typography
                           className={classes.title}
                           color="textSecondary"

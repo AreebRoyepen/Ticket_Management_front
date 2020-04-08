@@ -6,6 +6,19 @@
 .MuiPaper-outlined {
   border: none !important;
 }
+
+
+.MuiCardContent-root:last-child {
+  padding-bottom: 24px;
+  /* color: green; */
+  /* background: #08533c; */
+  /* color: white; */
+  /* border: solid; */
+  border-top: solid 30px #08533C;
+  border-left: solid 1px #08533C;
+  border-right: solid 1px #08533C;
+  border-bottom: solid 1px #08533C;
+}
 .charts-container {
   width: 80%;
   margin: 0 auto;

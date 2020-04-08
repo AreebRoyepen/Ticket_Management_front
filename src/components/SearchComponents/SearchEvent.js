@@ -3,6 +3,8 @@ import "../../styles/eventCard.css";
 import { useHistory } from "react-router-dom";
 import LazyLoad from 'react-lazyload';
 import Loading from '../LazyLoadingIcon';
+import PopOver from "../DeletePopOver";
+import ChangeStatus from "../ChangeStatusPopOver";
 
 export default function SearchEvent (content) {
   
@@ -27,7 +29,7 @@ export default function SearchEvent (content) {
     }
 
     const allButtons = (x) =>{
-
+      console.log(x);
         return (
           <div>
             <input
@@ -76,16 +78,7 @@ export default function SearchEvent (content) {
                   className="cardButtons  card-link u-float-right"
                   id={JSON.stringify(x.active)}
                 />
-
-                <input
-
-                  type="submit"
-                  value={x.active ?"Close" : "Open"}
-                  name="button"
-                  className="cardButtons  card-link u-float-right"
-                  id={JSON.stringify(x.active)}
-                />
-
+                <ChangeStatus content={x}/>
               </div>
             ) : (
               <div />
@@ -129,25 +122,7 @@ export default function SearchEvent (content) {
                               <button class="dropbtn">actions</button>
                               <div class="dropdown-content">
                               {allButtons(x)}
-                              <div class="dropdown2 event-right-delete u-float-right">
-                            <button class="cardButtons2">delete</button>
-                            <div class="dropdown-content2">
-                              <input
-                                type="submit"
-                                value="confirm"
-                                name="button"
-                                className="cardButtons event-right-delete card-link u-float-right"
-                                id={JSON.stringify(x.active)}
-                              />
-                              <input
-                                type="submit"
-                                value="cancel"
-                                name="button"
-                                className="cardButtons event-right-delete  card-link u-float-right"
-                                id={JSON.stringify(x.active)}
-                              />
-                            </div>
-                          </div>
+                              <PopOver content={x}/>
                               </div>
                             </div>
                           ) : (

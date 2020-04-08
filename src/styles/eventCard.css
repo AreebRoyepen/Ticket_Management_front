@@ -437,3 +437,23 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+.MuiPopover-paper {
+  top: 150px !important;
+  left: 50 !important;
+  margin: auto !important;
+  margin-top: 100px !important;
+  width: 70% !important;
+  position: unset !important;
+}
+
+.popOverOverlay
+{
+  /*top:56px !important;*/
+  background-color: rgba(0, 0, 0, 0.27);
+  
+}
+
+.MuiButton-containedPrimary {
+  background-color: #08533C !important;
+}
