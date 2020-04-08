@@ -100,7 +100,7 @@ export default function People(){
             let resp = await Api.postRequest("changeUserStatus",x)
             console.log(resp)
             if(resp.message === "success"){
-              
+              fetchData()              
               setOpenSnackbar({severity : "success", message : "Successfully edited", open : true, time : time, closeType : errorClose})
               
             }else if (resp.message === "unauthorized"){

@@ -188,25 +188,20 @@ export default class Api {
 
    }
 
-   static async reportRequest(option){
+   static async reportRequest(endpoint, option){
     
-    const uri = API_BASE_ADDRESS + "/" + "whoOwesWhat/" + option;
+    const uri = API_BASE_ADDRESS + "/" + endpoint+"/" + option;
 
-    axios(uri, {
+    return axios(uri, {
         method: 'GET',
         responseType: "blob",
         headers : {"Authorization" : localStorage.getItem("token")}
     })
     .then(response => {
-    //Create a Blob from the PDF Stream
-    console.log(response)
-        const file = new Blob(
-          [response.data], 
-          {type: 'application/pdf'});
-    //Build a URL from the file
-        const fileURL = URL.createObjectURL(file);
-    //Open the URL on new Window
-        window.open(fileURL);
+
+            return {"message" : "success", "data":response.data}
+
+
     })
    .catch(
     e =>{
