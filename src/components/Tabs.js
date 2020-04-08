@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,6 +7,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import "../styles/tab.css"
+import Api from "../api/Api";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,12 +60,30 @@ export default function SimpleTabs(content) {
     setValue(newValue);
   };
 
+
+  
+
+  const clicked = useCallback(async () => {
+
+    async function fetchData(){
+
+        let t = await Api.reportRequest("all")       
+        
+        console.log(t)
+
+    }
+    
+    fetchData()
+
+  });
+
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Person" {...a11yProps(0)} />
-          <Tab label="Outsanding Per Event" {...a11yProps(1)} />
+          <Tab label="Outstanding Per Event" {...a11yProps(1)} />
           <Tab label="Action" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
@@ -89,6 +109,7 @@ export default function SimpleTabs(content) {
               name="button"
               className="cardButtons"
               id="true"
+              onClick = {() => clicked()}
             />
           <input
               type="submit"
