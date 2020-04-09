@@ -3,9 +3,9 @@ import { useLocation, useHistory } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import Api from "../api/Api";
-import "../styles/login.css";
-import "../styles/validationForm.css";
+import Api from "../../../api/Api";
+import "../../../styles/login.css";
+import "../../../styles/validationForm.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} {...props} />;

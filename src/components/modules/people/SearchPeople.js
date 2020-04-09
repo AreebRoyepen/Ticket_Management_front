@@ -1,15 +1,12 @@
 import React,{ useState, useEffect } from 'react';
-import useModal from 'react-hooks-use-modal';
-import LazyLoad from 'react-lazyload';
-import Loading from '../LazyLoadingIcon';
-import "../../styles/eventCard.css";
-import "../../styles/popUp.css";
-import DeletePopOver from "../DeletePopOver";
-
 import { useHistory } from "react-router-dom";
+import LazyLoad from 'react-lazyload';
+import Loading from '../shared/LazyLoadingIcon';
+import DeletePopOver from "../shared/DeletePopOver";
+import "../../../styles/eventCard.css";
+import "../../../styles/popUp.css";
 
 export default function SearchPeople (content) {
-
 
   const [initialItems, ] = useState(content.content);
   const [items, setItems] = useState(content.content);
@@ -30,42 +27,13 @@ export default function SearchPeople (content) {
     setItems(items);
   }
 
-    
-  const modalStyle = {
-    backgroundColor: 'white',
-    padding: '40px 45px',
-    marginLeft:"30px",
-    marginRight:"40px",
-    borderRadius: '10px',
-    marginTop:"140px",
-  };
-
-
-  const maskStyle = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-  
-    bottom: 0,
-    right: 0,
-    backgroundColor: 'gray',
-    zIndex: 100000
-  };
-
   const deleteButton = (x) =>{
 
     if(user.role.id == 1)
       return <DeletePopOver content={x} type = "Person" className=" card-link u-float-right"/>
   
   }
-
-
-  const [Modal, open, close, isOpen] = useModal('root', {
-    preventScroll: true,
-    backgroundColor: '#fff',
-    domNode:'cat'
-  });
-    
+  
 
   return (
     <div>

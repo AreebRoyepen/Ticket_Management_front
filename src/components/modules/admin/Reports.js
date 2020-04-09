@@ -5,13 +5,10 @@ import MuiAlert from '@material-ui/lab/Alert';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
-import Api from "../api/Api";
-import SimpleTabs from "./Tabs";
-import "../styles/validationForm.css";
-import "../styles/login.css";
-import "../styles/tab.css"
+import Api from "../../../api/Api";
+import "../../../styles/validationForm.css";
+import "../../../styles/login.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} {...props} />;

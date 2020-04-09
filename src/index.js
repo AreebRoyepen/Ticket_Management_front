@@ -5,19 +5,23 @@ import {createBrowserHistory} from "history";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 
-import EventPage from "./components/EventPage";
-import PersonPage from "./components/PersonPage";
-import Events from "./components/Events";
-import Payments from "./components/Payments";
-import People from "./components/People";
-import ReturnTickets from "./components/ReturnTickets";
-import TicketAllocation from "./components/TicketAllocation";
+import EventPage from "./components/modules/events/EventPage";
+import Events from "./components/modules/events/Events";
+
+import PersonPage from "./components/modules/people/PersonPage";
+import People from "./components/modules/people/People";
+
+import Payments from "./components/modules/tickets/Payments";
+import ReturnTickets from "./components/modules/tickets/ReturnTickets";
+import TicketAllocation from "./components/modules/tickets/TicketAllocation";
+
 import Menu from "./components/Menu";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
-import Admin from "./components/Admin";
-import UserPage from "./components/UserPage";
-import Reports from "./components/Reports";
+
+import Users from "./components/modules/admin/Users";
+import UserPage from "./components/modules/admin/UserPage";
+import Reports from "./components/modules/admin/Reports";
 
 const history = createBrowserHistory();
 
@@ -43,7 +47,7 @@ ReactDOM.render(
 
       <Route path="/TicketAllocation" render={() => ( <Menu> <TicketAllocation /> </Menu> )}/>
 
-      <Route path="/Admin" render={() => ( <Menu> <Admin /> </Menu> )}/>
+      <Route path="/Users" render={() => ( <Menu> <Users /> </Menu> )}/>
 
       <Route path="/UserPage" render={() => ( <Menu> <UserPage /> </Menu> )}/>
 

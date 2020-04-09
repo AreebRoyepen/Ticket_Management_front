@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Api from "../api/Api";
-import Searchbar from "./SearchComponents/SearchEvent";
 import { useHistory } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import { LoadingIcon } from "./LoadingIcon";
-import {ErrorPage} from "./temp/ErrorPage";
-import "../styles/eventCard.css";
+import Searchbar from "./SearchEvent";
+import { LoadingIcon } from "../shared/LoadingIcon";
+import {ErrorPage} from "../shared/ErrorPage";
+import Api from "../../../api/Api";
+import "../../../styles/eventCard.css";
 
 function Alert(props) {
     return <MuiAlert elevation={6} {...props} />;

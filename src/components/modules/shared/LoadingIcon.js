@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/eventCard.css";
+import "../../../styles/eventCard.css";
 
 export const LoadingIcon =  () =>(
 

@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useLocation, useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import { useLocation, useHistory } from "react-router-dom";
-import "../styles/validationForm.css";
-import Api from "../api/Api";
-import "../styles/login.css";
 import { FormControlLabel, Grid, Switch } from "@material-ui/core";
 import Icon from '@material-ui/icons/AddCircleTwoTone';
+import Api from "../../../api/Api";
+import "../../../styles/login.css";
+import "../../../styles/validationForm.css";
 
 
 function Alert(props) {

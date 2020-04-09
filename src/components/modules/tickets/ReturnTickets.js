@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import TextField from '@material-ui/core/TextField';
 import { useLocation, useHistory } from "react-router-dom";
+import { FormControlLabel, Grid, Switch } from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import Api from "../api/Api";
-import "../styles/validationForm.css";
-import "../styles/login.css";
-import { FormControlLabel, Grid, Switch } from "@material-ui/core";
+import Api from "../../../api/Api";
+import "../../../styles/validationForm.css";
+import "../../../styles/login.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} {...props} />;

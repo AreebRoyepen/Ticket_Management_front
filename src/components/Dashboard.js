@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "../styles/dashboard.css";
-import { Chart, Doughnut } from 'react-chartjs-2';
-import Api from "../api/Api";
 import { useHistory } from "react-router-dom";
+import { Chart, Doughnut } from 'react-chartjs-2';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -15,9 +13,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { LoadingIcon } from "./LoadingIcon";
+import { LoadingIcon } from "./modules/shared/LoadingIcon";
 import {MdAccountBalance} from "react-icons/md";
-import { ErrorPage } from "./temp/ErrorPage";
+import { ErrorPage } from "./modules/shared/ErrorPage";
+import Api from "../api/Api"
+import "../styles/dashboard.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {

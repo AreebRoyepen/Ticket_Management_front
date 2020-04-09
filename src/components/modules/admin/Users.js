@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import "../styles/eventCard.css";
-import Api from "../api/Api";
 import LazyLoad from 'react-lazyload';
-import LazyLoadingIcon from "./LazyLoadingIcon";
+import LazyLoadingIcon from "../shared/LazyLoadingIcon";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, useLocation } from "react-router-dom";
-import { LoadingIcon } from "./LoadingIcon";
-import {ErrorPage} from "./temp/ErrorPage";
+import { LoadingIcon } from "../shared/LoadingIcon";
+import {ErrorPage} from "../shared/ErrorPage";
+import Api from "../../../api/Api";
+import "../../../styles/eventCard.css";
+// import "../styles/eventCard.css";
+
 
 function Alert(props) {
     return <MuiAlert elevation={6} {...props} />;
@@ -65,7 +67,7 @@ export default function People(){
             setConnection(true)
         }else if (x.message === "unauthorized"){
             localStorage.clear();
-            history.push("/" , {last: "/Admin"})
+            history.push("/" , {last: "/Users"})
         }else{
             setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : 6000, closeType : errorClose})
             setError(true)
@@ -105,7 +107,7 @@ export default function People(){
               
             }else if (resp.message === "unauthorized"){
               localStorage.clear();
-              history.push("/", {last : "/Admin", data: location.state})
+              history.push("/", {last : "/Users", data: location.state})
   
             }else if(resp.message === "error"){
               time = 6000

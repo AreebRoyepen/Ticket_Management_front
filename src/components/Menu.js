@@ -157,7 +157,7 @@ export default function Menu({children}) {
         <hr/>
       <ListItem> 
       <MdPeople  className="iconStyling"/>
-      <Link className="menuText" to="/Admin">&nbsp;&nbsp;&nbsp;Admin</Link>
+      <Link className="menuText" to="/Users">&nbsp;&nbsp;&nbsp;Users</Link>
       </ListItem>
 
       <ListItem> 

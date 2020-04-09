@@ -1,10 +1,10 @@
 import React,{ useState, useEffect} from 'react';
-import "../../styles/eventCard.css";
 import { useHistory } from "react-router-dom";
 import LazyLoad from 'react-lazyload';
-import Loading from '../LazyLoadingIcon';
-import DeletePopOver from "../DeletePopOver";
-import ChangeStatusPopOver from "../ChangeStatusPopOver";
+import Loading from '../shared/LazyLoadingIcon';
+import DeletePopOver from "../shared/DeletePopOver";
+import ChangeStatusPopOver from "../shared/ChangeStatusPopOver";
+import "../../../styles/eventCard.css";
 
 export default function SearchEvent (content) {
   

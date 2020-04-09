@@ -1,13 +1,13 @@
 import React,{ useState, useRef, useCallback } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { useHistory, useLocation } from 'react-router-dom';
-import Api from "../api/Api";
-import "../styles/eventCard.css"
+import Api from "../../../api/Api";
+import "../../../styles/eventCard.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} {...props} />;
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimplePopover(content) {
+export default function SimplePopover(props) {
   const classes = useStyles();
   const [openSnackbar, setOpenSnackbar] = useState({
     severity : "",
@@ -35,7 +35,8 @@ export default function SimplePopover(content) {
     closeType : null
   });
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [var3, setVar3] = useState(content.content);
+  const [var3, setVar3] = useState(props.content);
+  const [type, setType] = useState(props.type)
   const [isSending, setIsSending] = useState(false)
   const isMounted = useRef(true)
 
@@ -57,8 +58,12 @@ export default function SimplePopover(content) {
     setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
     setAnchorEl(null)
 
-    history.push("/Events")
-
+    if(type === "Event"){
+      console.log("to events")
+      history.push("/Events")
+    }else if(type === "Person"){
+      history.push("/People")
+    }
   };
 
   const deleteRequest = useCallback(async () => {
@@ -73,19 +78,12 @@ export default function SimplePopover(content) {
 
       var time =5000
 
-      var x = {
+      if(type === "Event"){
 
-        active : !var3.active
-
-      }
-
-
-        let resp = await Api.putRequest("updateEvent/"+var3.id,x)
+        let resp = await Api.deleteRequest("deleteEvent/"+var3.id)
         console.log(resp)
         if(resp.message === "success"){
-          if(x.active) setOpenSnackbar({severity : "success", message : "Successfully Opened", open : true, time : time, closeType : close})
-          else setOpenSnackbar({severity : "success", message : "Successfully Closed", open : true, time : time, closeType : close})
-
+          setOpenSnackbar({severity : "success", message : "Successfully Deleted", open : true, time : time, closeType : close})
           
         }else if (resp.message === "unauthorized"){
           localStorage.clear();
@@ -103,7 +101,41 @@ export default function SimplePopover(content) {
           setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : close})
           
         }
+        
+
+
+      }else if(type === "Person"){
+        
+        let resp =await Api.deleteRequest("deletePerson/"+var3.id)
+        console.log(resp)
+        if(resp.message === "success"){
+          setOpenSnackbar({severity : "success", message : "Successfully Deleted", open : true, time : time, closeType : close})
+          
+        }else if (resp.message === "unauthorized"){
+          localStorage.clear();
+          history.push("/", {last : "/People"})
+
+        }else if(resp.message === "error"){
+          time = 6000
+          setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : close})
+
+        }else if(resp.message === "no connection"){
+          time = 6000
+          setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : close})
+
+        }else if(resp.message === "timeout"){
+          time = 6000
+          setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : close})
+          
+        }else{
+          time = 6000
+          setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : close})
+
+        }
       
+      
+      }
+
     }
 
     fetchData()
@@ -122,10 +154,11 @@ export default function SimplePopover(content) {
 
   return (
     <div>
+
       <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
-      {var3.active ?"Close" : "Open"}
+        delete
       </Button>
-      <Popover className="popOverOverlay"
+      <Popover className="popOverOverlay "
         id={id}
         open={open}
         anchorEl={anchorEl}
@@ -139,7 +172,6 @@ export default function SimplePopover(content) {
           horizontal: 'center',
         }}
       >
-
         <div className={classes.root}>
             <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
             <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
@@ -148,13 +180,13 @@ export default function SimplePopover(content) {
           </Snackbar>
         </div>
 
-        <Typography className={classes.typography}>Are you sure you want to  {var3.active ?"close" : "open"} {var3.name}?</Typography>
+        <Typography className={classes.typography}>Are you sure you want to delete <strong>{var3.name}  {var3.surname}</strong>?</Typography>
         <input
           type="submit"
           value="confirm"
           name="button"
+          onClick={deleteRequest}
           className="cardButtons event-right-delete card-link u-float-right"
-          onClick = {deleteRequest}
           id={JSON.stringify(var3.active)}
         />
         <input
