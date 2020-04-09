@@ -3,8 +3,8 @@ import "../../styles/eventCard.css";
 import { useHistory } from "react-router-dom";
 import LazyLoad from 'react-lazyload';
 import Loading from '../LazyLoadingIcon';
-import PopOver from "../DeletePopOver";
-import ChangeStatus from "../ChangeStatusPopOver";
+import DeletePopOver from "../DeletePopOver";
+import ChangeStatusPopOver from "../ChangeStatusPopOver";
 
 export default function SearchEvent (content) {
   
@@ -78,7 +78,8 @@ export default function SearchEvent (content) {
                   className="cardButtons  card-link u-float-right"
                   id={JSON.stringify(x.active)}
                 />
-                <ChangeStatus content={x}/>
+                <ChangeStatusPopOver content={x}/>
+                <DeletePopOver content={x} type = "Event"/>
               </div>
             ) : (
               <div />
@@ -122,7 +123,7 @@ export default function SearchEvent (content) {
                               <button class="dropbtn">actions</button>
                               <div class="dropdown-content">
                               {allButtons(x)}
-                              <PopOver content={x}/>
+                              
                               </div>
                             </div>
                           ) : (

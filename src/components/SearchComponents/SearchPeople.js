@@ -4,7 +4,7 @@ import LazyLoad from 'react-lazyload';
 import Loading from '../LazyLoadingIcon';
 import "../../styles/eventCard.css";
 import "../../styles/popUp.css";
-import PopOver from "../DeletePopOver";
+import DeletePopOver from "../DeletePopOver";
 
 import { useHistory } from "react-router-dom";
 
@@ -55,7 +55,7 @@ export default function SearchPeople (content) {
   const deleteButton = (x) =>{
 
     if(user.role.id == 1)
-      return <PopOver content={x} className=" card-link u-float-right"/>
+      return <DeletePopOver content={x} type = "Person" className=" card-link u-float-right"/>
   
   }
 
