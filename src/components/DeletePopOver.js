@@ -57,6 +57,13 @@ export default function SimplePopover(props) {
     }
     setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
     setAnchorEl(null)
+
+    if(type === "Event"){
+      console.log("to events")
+      history.push("/Events")
+    }else if(type === "Person"){
+      history.push("/People")
+    }
   };
 
   const deleteRequest = useCallback(async () => {
@@ -76,7 +83,6 @@ export default function SimplePopover(props) {
         let resp = await Api.deleteRequest("deleteEvent/"+var3.id)
         console.log(resp)
         if(resp.message === "success"){
-          
           setOpenSnackbar({severity : "success", message : "Successfully Deleted", open : true, time : time, closeType : close})
           
         }else if (resp.message === "unauthorized"){
@@ -149,14 +155,6 @@ export default function SimplePopover(props) {
   return (
     <div>
 
-    <div className={classes.root}>
-        <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
-        <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
-          {openSnackbar.message}
-        </Alert>
-      </Snackbar>
-    </div>
-
       <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
         delete
       </Button>
@@ -174,6 +172,14 @@ export default function SimplePopover(props) {
           horizontal: 'center',
         }}
       >
+        <div className={classes.root}>
+            <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
+            <Alert onClose={openSnackbar.closeType} severity={openSnackbar.severity}>
+              {openSnackbar.message}
+            </Alert>
+          </Snackbar>
+        </div>
+
         <Typography className={classes.typography}>Are you sure you want to delete <strong>{var3.name}  {var3.surname}</strong>?</Typography>
         <input
           type="submit"
