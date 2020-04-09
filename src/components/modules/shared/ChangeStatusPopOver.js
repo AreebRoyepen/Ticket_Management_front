@@ -125,7 +125,7 @@ export default function SimplePopover(content) {
       <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
       {var3.active ?"Close" : "Open"}
       </Button>
-      <Popover className="popOverOverlay"
+      <Popover className="custopm-pop-over1 popOverOverlay"
         id={id}
         open={open}
         anchorEl={anchorEl}

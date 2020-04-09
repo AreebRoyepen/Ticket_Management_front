@@ -438,7 +438,7 @@ html {
   box-sizing: inherit;
 }
 
-.MuiPopover-paper {
+.custopm-pop-over1 .MuiPopover-paper {
   top: 150px !important;
   left: 50 !important;
   margin: auto !important;

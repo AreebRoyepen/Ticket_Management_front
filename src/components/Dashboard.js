@@ -14,7 +14,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { LoadingIcon } from "./modules/shared/LoadingIcon";
-import {MdAccountBalance} from "react-icons/md";
+import { MdAccountBalance, MdAttachMoney, MdSupervisorAccount } from "react-icons/md";
 import { ErrorPage } from "./modules/shared/ErrorPage";
 import Api from "../api/Api"
 import "../styles/dashboard.css";
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#08533C',
     color: theme.palette.common.white,
   },
   body: {
@@ -82,6 +82,10 @@ export default function Dashboard() {
   const bull = <span className={classes.bullet}>•</span>;
 
   let history = useHistory();
+
+  /**Formart String */
+
+  /**Formart String */
 
   const data = {
     labels: [
@@ -170,7 +174,7 @@ export default function Dashboard() {
         ctx = chart.chart.ctx;
 
       ctx.restore();
-      var fontSize = 1;
+      var fontSize = 1.3;
       ctx.fontColor = "red";
       ctx.font = fontSize + "em sans-serif";
       ctx.textBaseline = "center";
@@ -216,32 +220,33 @@ export default function Dashboard() {
 
           <div id="dashboard-box-shadow">
             <div className={classes.root}>
-              <Grid container spacing={3} id="dashboard-box-shadow">
+              <Grid container spacing={2} id="dashboard-box-shadow">
                 <Grid item xs id="dashboard-box-shadow">
-                  <Paper className={classes.paper}>
-                    <Card className={classes.card} variant="outlined">
-                      <CardContent>
-                      <MdAccountBalance size={60} color="#08533C" style={{marginLeft:'-250px'}}/>
+                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
+                    <Card className={classes.card} style={{ boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),0 12.5px 10px rgba(0, 0, 0, 0.06),0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),0 100px 80px rgba(0, 0, 0, 0.12)' }} variant="outlined">
+                      <CardContent style={{ borderLeft: 'solid 15px #C1A162' }}>
+                        <MdAccountBalance size={60} color="#08533C" style={{ marginLeft: '70%' }} />
                         <Typography
                           className={classes.title}
+                          style={{ marginTop: '-67px', marginRight: '90%', color: '#2D6409', fontSize: "2em" }}
                           color="textSecondary"
-                          gutterBottom
                         >
                           Collected
                         </Typography>
 
                         <Typography
-
+                          style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
                           variant="h5"
                           component="h2"
+
                         >
-                          R {dData.funds}
-                          {bull}00
-                         </Typography>
+                          R {parseFloat(dData.funds).toFixed(2)}
+                        </Typography>
 
                         <Typography
                           className={classes.title}
-                          color="textSecondary"
+                          style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
+                          color="#729B25"
 
                         >
                           of
@@ -251,98 +256,148 @@ export default function Dashboard() {
                           className={classes.pos}
                           variant="h5"
                           component="h2"
+                          style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
                         >
-                          R {dData.totalFunds}
-                          {bull}00
+                          R {parseFloat(dData.totalFunds).toFixed(2)}
                         </Typography>
-                        <Typography className={classes.pos} color="textSecondary">
+                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '-40px', color: '#C1A162', fontSize: "0.7em" }}>
                           from all active events
                         </Typography>
                       </CardContent>
                     </Card></Paper>
                 </Grid>
-                <Grid item xs>
-                  <Paper className={classes.paper}>
-                    <Card className={classes.card} variant="outlined">
-                      <CardContent>
+                <Grid item xs id="dashboard-box-shadow">
+                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }} >
+                    <Card className={classes.card} style={{ boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),0 12.5px 10px rgba(0, 0, 0, 0.06),0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),0 100px 80px rgba(0, 0, 0, 0.12)' }} variant="outlined">
+                      <CardContent style={{ borderLeft: 'solid 15px #729B25' }}>
+                        <MdAttachMoney size={60} color=" #729B25" style={{ marginLeft: '70%' }} />
                         <Typography
                           className={classes.title}
+                          style={{ marginTop: '-67px', marginRight: '90%', color: '#2D6409', fontSize: "2em" }}
                           color="textSecondary"
-                          gutterBottom
                         >
                           Collected
-                  </Typography>
+                        </Typography>
 
                         <Typography
-                          className={classes.pos}
+                          style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
                           variant="h5"
                           component="h2"
-                        >
-                          R {dData.fundsThisYear}
-                          {bull}00
-                  </Typography>
 
-                        <Typography className={classes.pos} color="textSecondary">
+                        >
+                          R {parseFloat(dData.fundsThisYear).toFixed(2)}
+
+                        </Typography>
+                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.7em" }}>
                           This year
-                  </Typography>
+                        </Typography>
                       </CardContent>
                     </Card></Paper>
                 </Grid>
-                <Grid item xs>
-                  <Paper className={classes.paper}>
-                    <div className=" chart-wrapper">
-                      <Doughnut
-                        data={data}
-                        options={{
-                          cutoutPercentage: 80,
-                          responsive: true,
-                          style: {
-                            width: "600px",
-                            height: "300px",
+                <Grid item xs id="dashboard-box-shadow">
+                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
+                    <Card className={classes.card} style={{ boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),0 12.5px 10px rgba(0, 0, 0, 0.06),0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),0 100px 80px rgba(0, 0, 0, 0.12)' }} variant="outlined">
+                      <CardContent style={{ borderLeft: 'solid 15px #866F3E' }}>
+                        <MdSupervisorAccount size={60} color="#866F3E" style={{ marginLeft: '70%' }} />
+                        <Typography
+                          className={classes.title}
+                          style={{ marginTop: '-67px', marginRight: '90%', color: '#2D6409', fontSize: "2em" }}
+                          color="textSecondary"
+                        >
+                          People
+                        </Typography>
+
+                        <Typography
+                          style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
+                          variant="h5"
+                          component="h2"
+
+                        >
+                          R {dData.fundsThisYear}
+                          {bull}00
+                         </Typography>
+                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.7em" }}>
+                          Total Fundraisers
+                        </Typography>
+                      </CardContent>
+                    </Card></Paper>
+                </Grid>
 
 
-                            display: "inline-block"
-                          },
-                          legend: {
-                            display: false,
-                            position: "right"
-                          },
-                          centerText: {
-                            display: true,
-                            text: "Totals"
-                          }
-                        }}
-                      />
-                    </div></Paper>
+              </Grid>
+
+            </div>
+
+          </div>
+
+
+          <div id="dashboard-box-shadow">
+            <div className={classes.root}>
+              <Grid container spacing={2} id="dashboard-box-shadow">
+
+                <Grid item xs id="dashboard-box-shadow" style={{ backgroundColor: '#ffffff00' }}>
+                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
+                    <Card className={classes.card} style={{ boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),0 12.5px 10px rgba(0, 0, 0, 0.06),0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),0 100px 80px rgba(0, 0, 0, 0.12)' }} variant="outlined">
+                      <CardContent>
+                        <div className=" chart-wrapper">
+                          <Doughnut
+                            data={data}
+                            options={{
+                              cutoutPercentage: 80,
+                              responsive: true,
+                              style: {
+                                width: "600px",
+                                height: "300px",
+
+
+                                display: "inline-block"
+                              },
+                              legend: {
+                                display: false,
+                                position: "right"
+                              },
+                              centerText: {
+                                display: true,
+                                text: "Tickets"
+                              }
+                            }}
+                          />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Paper>
+                </Grid>
+                <Grid item xs id="dashboard-box-shadow">
+                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
+                    <TableContainer component={Paper} >
+                      <Table className={classes.table} aria-label="customized table" >
+
+                        <TableHead>
+                          <TableRow>
+                            <StyledTableCell>Active Events</StyledTableCell>
+                          </TableRow>
+                        </TableHead>
+
+                        <TableBody>
+                          {events.splice(0, 6).map(row => (
+                            <StyledTableRow key={row.name}>
+                              <StyledTableCell component="th" scope="row">
+                                {row.name}
+                              </StyledTableCell>
+                            </StyledTableRow>
+                          ))}
+                        </TableBody>
+
+                      </Table>
+                    </TableContainer>
+                  </Paper>
                 </Grid>
               </Grid>
 
             </div>
 
           </div>
-          <div>
-            <TableContainer component={Paper}>
-              <Table className={classes.table} aria-label="customized table">
 
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Active Events</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-
-                <TableBody>
-                  {events.splice(0, 3).map(row => (
-                    <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-
-              </Table>
-            </TableContainer>
-          </div>
 
         </div>
         :

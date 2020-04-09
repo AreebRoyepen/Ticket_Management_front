@@ -158,7 +158,7 @@ export default function SimplePopover(props) {
       <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
         delete
       </Button>
-      <Popover className="popOverOverlay "
+      <Popover className="popOverOverlay custopm-pop-over1 "
         id={id}
         open={open}
         anchorEl={anchorEl}

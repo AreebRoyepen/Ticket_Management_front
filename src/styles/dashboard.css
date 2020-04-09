@@ -14,10 +14,8 @@
   /* background: #08533c; */
   /* color: white; */
   /* border: solid; */
-  border-top: solid 30px #08533C;
-  border-left: solid 1px #08533C;
-  border-right: solid 1px #08533C;
-  border-bottom: solid 1px #08533C;
+  color: #C1A162;
+
 }
 .charts-container {
   width: 80%;
@@ -25,10 +23,7 @@
   height: 90%;
   padding: 20px;
 }
-.chartjs-render-monitor 
-{
-  margin-top: -40px !important;
-}
+
 
 .dashboardHeader
 {
