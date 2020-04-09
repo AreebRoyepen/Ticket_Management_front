@@ -65,7 +65,7 @@ export default function People(){
             setConnection(true)
         }else if (x.message === "unauthorized"){
             localStorage.clear();
-            history.push("/" , {last: "/People"})
+            history.push("/" , {last: "/Admin"})
         }else{
             setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : 6000, closeType : errorClose})
             setError(true)

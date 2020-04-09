@@ -108,7 +108,7 @@ export default function UserPage() {
   
         }else if (resp.message === "unauthorized"){
           localStorage.clear();
-          history.push("/",  {last : "/TicketAllocation"})
+          history.push("/",  {last : "/UserPage"})
   
         }else{
           setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time :6000, closeType : errorClose})
@@ -152,7 +152,7 @@ export default function UserPage() {
             
           }else if (resp.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last : "/PersonPage", data: location.state})
+            history.push("/", {last : "/UserPage", data: location.state})
 
           }else if(resp.message === "error"){
             time = 6000
@@ -176,15 +176,15 @@ export default function UserPage() {
           if(resp.message === "success"){
             setOpenSnackbar({severity : "success", message : "Successfully added", open : true, time : time, closeType : successClose})
             
-          }else if (x.message === "unauthorized"){
+          }else if (resp.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last : "/PersonPage"})
+            history.push("/", {last : "/UserPage"})
 
-          }else if(x.message === "error"){
+          }else if(resp.message === "error"){
             time = 6000
             setOpenSnackbar({severity : "error", message : "unknown error", open : true, time : time, closeType : errorClose})
 
-          }else if(x.message === "no connection"){
+          }else if(resp.message === "no connection"){
             time = 6000
             setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
 
@@ -194,7 +194,7 @@ export default function UserPage() {
             
           }else{
             time = 6000
-            setOpenSnackbar({severity : "warning", message : x.message, open : true, time : time, closeType : errorClose})
+            setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : errorClose})
 
           }
         
