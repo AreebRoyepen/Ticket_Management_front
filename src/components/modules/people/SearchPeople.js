@@ -30,7 +30,7 @@ export default function SearchPeople (content) {
   const deleteButton = (x) =>{
 
     if(user.role.id == 1)
-      return <DeletePopOver content={x} type = "Person" className=" card-link u-float-right"/>
+      return <DeletePopOver style={{float:'right !important'}} content={x} type = "Person" className=" card-link u-float-right"/>
   
   }
   

@@ -389,6 +389,7 @@ export default function TicketAllocation() {
         </Snackbar>
       </div>
       <body className="bodyVal htmlVal spanVal">
+      <h1 className="h1Dashboard" style={{marginTop:'-100px'}}>Ticket Allocation</h1>
         <form className="form">
           <div className="">
 

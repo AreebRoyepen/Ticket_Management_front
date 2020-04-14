@@ -49,7 +49,7 @@ input[type=search] {
   border-radius: 2px !important;
 }
 
-.dropdown-content input {
+.dropdown-content input  {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -194,14 +194,37 @@ input[type=search]:focus{
   transition: all .15s ease-in;
 }
 
-.cardButtons[name=button] {
-  background-color:#08533C;
-  color: white;
-  font-weight: bold;
-  border: 3px solid white;
+.cardButtons {
+  background-color:#08533C !important;
+  color: white !important;
+  font-weight: bold !important;
+  border: 3px solid white !important;
 }
 
-.cardButtons[name=button]#false{
+.cardButtons #false{
+  background-color:#acacac;
+}
+
+.cardButtons {
+  border: 2px solid white !important;
+  margin-top: 20px !important;
+  border-radius: 4px !important;
+  font-size: 13px !important;
+  padding: 10px !important;
+  color: white !important;
+  transition: all .15s ease-in !important;
+}
+
+.cardButtons {
+  background-color:#08533C !important;
+  color: white !important;
+  font-weight: bold !important;
+  border: 3px solid white !important;
+  line-height: inherit !important;
+  text-transform: none !important;
+}
+
+.cardButtons #false{
   background-color:#acacac;
 }
 
@@ -214,7 +237,8 @@ input[type=search]:focus{
 
 .u-float-right
 {
-  float: right;
+  float: right !important;
+  margin-left: 10px;
 }
 
 .u-flex-center {

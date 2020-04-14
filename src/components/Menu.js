@@ -13,7 +13,7 @@ import MenuUI from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
 import { TiTicket } from "react-icons/ti";
-import {MdEvent, MdDashboard,MdPeople} from "react-icons/md";
+import {MdEvent, MdDashboard,MdPeople, MdAssignment, MdContacts, MdVerifiedUser} from "react-icons/md";
 import useModal from 'react-hooks-use-modal';
 
 import "../styles/menu.css";
@@ -154,14 +154,15 @@ export default function Menu({children}) {
     if(user.role.id === 1)
     return (
       <div>
-        <hr/>
-      <ListItem> 
-      <MdPeople  className="iconStyling"/>
+        <hr style={{height: '14px',boxShadow: 'inset 0 12px 12px -12px  #08533C'}}/>
+        <ListItem className="menuHeader" style={{marginBottom:'12px'}}><MdVerifiedUser/>&nbsp;Admin</ListItem>
+      <ListItem style={{marginLeft:'20px'}}> 
+      <MdContacts  className="iconStyling"/>
       <Link className="menuText" to="/Users">&nbsp;&nbsp;&nbsp;Users</Link>
       </ListItem>
 
-      <ListItem> 
-      <MdPeople  className="iconStyling"/>
+      <ListItem style={{marginLeft:'20px'}}> 
+      <MdAssignment  className="iconStyling"/>
       <Link className="menuText" to="/Reports">&nbsp;&nbsp;&nbsp;Reports</Link>
       </ListItem>
 

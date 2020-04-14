@@ -78,8 +78,6 @@ export default function SearchEvent (content) {
                   className="cardButtons  card-link u-float-right"
                   id={JSON.stringify(x.active)}
                 />
-                <ChangeStatusPopOver content={x}/>
-                <DeletePopOver content={x} type = "Event"/>
               </div>
             ) : (
               <div />
@@ -119,18 +117,28 @@ export default function SearchEvent (content) {
                         </span>
                         <div className="card-sub-botton card-sub-show">
                           {user ? (
-                            <div class="dropdown u-float-right">
-                              <button class="dropbtn">actions</button>
-                              <div class="dropdown-content">
-                              {allButtons(x)}
-                              
+                            <div>
+                              {user.role.id == 1 ? (
+                                <div>
+                                  <DeletePopOver content={x} type="Event" />
+                                  <ChangeStatusPopOver content={x} />
+                                </div>
+                              ) : (
+                                  <div />
+                                )}
+                              <div class="dropdown u-float-right">
+                                <button class="dropbtn">actions</button>
+                                <div class="dropdown-content">
+                                  {allButtons(x)}
+                                </div>
                               </div>
                             </div>
                           ) : (
-                            <div />
-                          )}
+                              <div />
+                            )
+                          }
                         </div>
-
+                          
                       </div>
                     </div>
                   </div>

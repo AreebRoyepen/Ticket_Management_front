@@ -153,10 +153,10 @@ export default function SimplePopover(props) {
   const id = open ? 'simple-popover' : undefined;
 
   return (
-    <div>
+    <div className=" u-float-right">
 
-      <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
-        delete
+      <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick} className=" cardButtons">
+        Delete
       </Button>
       <Popover className="popOverOverlay custopm-pop-over1 "
         id={id}

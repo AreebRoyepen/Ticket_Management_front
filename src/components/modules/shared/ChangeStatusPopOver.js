@@ -121,11 +121,11 @@ export default function SimplePopover(content) {
   const id = open ? 'simple-popover' : undefined;
 
   return (
-    <div>
-      <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
+    <div className=" u-float-right"> 
+      <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}  className=" cardButtons">
       {var3.active ?"Close" : "Open"}
       </Button>
-      <Popover className="custopm-pop-over1 popOverOverlay"
+      <Popover className="custopm-pop-over1 popOverOverlay "
         id={id}
         open={open}
         anchorEl={anchorEl}
