@@ -481,3 +481,9 @@ html {
 .MuiButton-containedPrimary {
   background-color: #08533C !important;
 }
+
+@media screen and (min-height: 50px) and (max-height: 450px) {
+  .form {
+    margin-top: 400px;
+  }
+}
