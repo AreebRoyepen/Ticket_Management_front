@@ -188,6 +188,7 @@ export default class Api {
 
    }
 
+   
    static async reportRequest(endpoint, option){
     
     const uri = API_BASE_ADDRESS + "/" + endpoint+"/" + option;
