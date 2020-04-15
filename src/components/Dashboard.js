@@ -190,6 +190,23 @@ export default function Dashboard() {
 
 
 
+
+  const formatCurrency = (x) => {
+    var delimeter = " "
+    var groupsOf = 3
+    var result = (''+x).split('.'), s = '', i, j;
+    i = result[0].length;
+    while (i > groupsOf) {
+        j = i - groupsOf;
+        s = delimeter + result[0].slice(j, i) + s;
+        i = j;
+    }
+    s = result[0].slice(0, i) + s;
+    result[0] = s;
+    return result.join('.');
+  }
+
+
   return (
     <div>
       {console.log(dData.funds)}
@@ -240,7 +257,7 @@ export default function Dashboard() {
                           component="h2"
 
                         >
-                          R {parseFloat(dData.funds).toFixed(2)}
+                          R {formatCurrency(parseFloat(dData.funds).toFixed(2))}
                         </Typography>
 
                         <Typography
@@ -258,7 +275,7 @@ export default function Dashboard() {
                           component="h2"
                           style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
                         >
-                          R {parseFloat(dData.totalFunds).toFixed(2)}
+                          R {formatCurrency(parseFloat(dData.totalFunds).toFixed(2))}
                         </Typography>
                         <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '-40px', color: '#C1A162', fontSize: "0.7em" }}>
                           from all active events
@@ -285,7 +302,7 @@ export default function Dashboard() {
                           component="h2"
 
                         >
-                          R {parseFloat(dData.fundsThisYear).toFixed(2)}
+                          R {formatCurrency(parseFloat(dData.fundsThisYear).toFixed(2))}
 
                         </Typography>
                         <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.7em" }}>
@@ -374,7 +391,7 @@ export default function Dashboard() {
 
                         <TableHead>
                           <TableRow>
-                            <StyledTableCell>Active Events</StyledTableCell>
+                          <StyledTableCell>Active Events </StyledTableCell>
                           </TableRow>
                         </TableHead>
 
