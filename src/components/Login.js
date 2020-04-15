@@ -69,20 +69,19 @@ export default function Login ()  {
         
         
         console.log(localStorage.token)
-        //user in local storage is an object and must be parsed to a variable to use in a component
+        //user in local storage is an string and must be parsed to an object to use in a component
         //user has all details to deal with authorization between pages
         console.log(JSON.parse(localStorage.user))
-        console.log(x)
 
         //if they have been logged out this pushes them back to last page with state data to fill page
         if(location.state){
           history.push(location.state.last, location.state.data)
         }else{
-          //otherwise as proceed as normal
+          //otherwise, proceed as normal
           history.push("/Dashboard")
         }
 
-        // here if username / password is wrong or does not exist (no differentiation for security)
+        // here user feedback if username / password is wrong or does not exist (no differentiation for security)
       }else if (x.message === "unauthorized"){
           console.log(x.message)
 
