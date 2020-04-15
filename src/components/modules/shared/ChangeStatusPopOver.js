@@ -48,6 +48,7 @@ export default function SimplePopover(content) {
 
   const handleClose = () => {
     setAnchorEl(null);
+    window.location.reload(false);
   };
 
   const close = (event, reason) => {
