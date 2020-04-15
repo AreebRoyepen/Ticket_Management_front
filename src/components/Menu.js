@@ -101,9 +101,18 @@ export default function Menu({children}) {
 
   useEffect( () => {
 
+    //upon setting user to local storage
+    //start timeout for session expiry popup (5 min before token expires)
     if(localStorage.user)
       setUser(JSON.parse(localStorage.user))
-      setTimeout(() =>{ setOpenModal(openModal) }, (localStorage.expiration * 1000));    
+      setTimeout(() =>{
+        setOpenModal(openModal); 
+        
+        //once the pop up opens, start a timeout for the remaining time
+        //then log user out 
+        setTimeout(() =>{ if(closeModal){history.push("/"); localStorage.clear()} }, ((300)* 1000))
+      }
+      , ((localStorage.expiration -300)* 1000));      
 
   },[setUser, setOpenModal])
 
