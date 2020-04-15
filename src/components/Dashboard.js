@@ -330,8 +330,7 @@ export default function Dashboard() {
                           component="h2"
 
                         >
-                          R {dData.fundsThisYear}
-                          {bull}00
+                          {dData.people}
                          </Typography>
                         <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.7em" }}>
                           Total Fundraisers
