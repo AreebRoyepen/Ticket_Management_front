@@ -59,10 +59,9 @@ export default function SimplePopover(props) {
     setAnchorEl(null)
 
     if(type === "Event"){
-      console.log("to events")
-      history.push("/Events")
+      window.location.reload(false);
     }else if(type === "Person"){
-      history.push("/People")
+      window.location.reload(false);
     }
   };
 

@@ -57,7 +57,8 @@ export default function SimplePopover(content) {
     setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
     setAnchorEl(null)
 
-    history.push("/Events")
+    window.location.reload(false);
+
 
   };
 
