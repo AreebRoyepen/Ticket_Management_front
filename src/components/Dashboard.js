@@ -252,32 +252,32 @@ export default function Dashboard() {
                         </Typography>
 
                         <Typography
-                          style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
-                          variant="h5"
-                          component="h2"
+                         
+                          className={classes.title}
+                          style={{width:'40%', textAlign:'left',color: '#C1A162', fontSize: "0.8em" }}
+                          color="textSecondary"
 
                         >
                           R {formatCurrency(parseFloat(dData.funds).toFixed(2))}
                         </Typography>
-
                         <Typography
                           className={classes.title}
-                          style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
+                          style={{width:'40%', textAlign:'left',color: '#C1A162', fontSize: "0.8em" }}
                           color="#729B25"
 
                         >
-                          of
+                        of
                          </Typography>
-
                         <Typography
-                          className={classes.pos}
-                          variant="h5"
-                          component="h2"
-                          style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
-                        >
-                          R {formatCurrency(parseFloat(dData.totalFunds).toFixed(2))}
-                        </Typography>
-                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '-40px', color: '#C1A162', fontSize: "0.7em" }}>
+                         
+                         className={classes.title}
+                         style={{width:'40%', textAlign:'left',color: '#C1A162', fontSize: "0.8em" }}
+                         color="textSecondary"
+
+                       >
+                        R {formatCurrency(parseFloat(dData.totalFunds).toFixed(2))}
+                       </Typography>
+                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '-30px', color: '#C1A162', fontSize: "0.7em" }}>
                           from all active events
                         </Typography>
                       </CardContent>
@@ -297,7 +297,7 @@ export default function Dashboard() {
                         </Typography>
 
                         <Typography
-                          style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
+                          style={{width:'40%', textAlign:'left',color: '#C1A162', fontSize: "0.8em" }}
                           variant="h5"
                           component="h2"
 
@@ -306,8 +306,9 @@ export default function Dashboard() {
 
                         </Typography>
                         <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.7em" }}>
-                          This year
+                         Total funds this Year
                         </Typography>
+                        
                       </CardContent>
                     </Card></Paper>
                 </Grid>
@@ -325,7 +326,7 @@ export default function Dashboard() {
                         </Typography>
 
                         <Typography
-                          style={{ marginRight: '70%', color: '#C1A162', fontSize: "0.8em" }}
+                         style={{width:'40%', textAlign:'left',color: '#C1A162', fontSize: "0.8em" }}
                           variant="h5"
                           component="h2"
 
