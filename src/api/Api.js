@@ -189,13 +189,13 @@ export default class Api {
    }
 
    
-   static async reportRequest(endpoint, option){
+   static async reportRequest(endpoint, option1, option2,option3){
     
-    const uri = API_BASE_ADDRESS + "/" + endpoint+"/" + option;
+    const uri = API_BASE_ADDRESS + "/" + endpoint+"/" + option1 +"/" + option2 +"/" + option3;
 
     return axios(uri, {
         method: 'GET',
-        responseType: "blob",
+        //responseType: "blob",
         headers : {"Authorization" : localStorage.getItem("token")}
     })
     .then(response => {
