@@ -18,7 +18,12 @@
 
 }
 
-
+#validate-password-false{
+  display: none;
+}
+#validate-password-true{
+  display: block;
+}
 #add-person-icon .MuiSvgIcon-root {
 
   font-size: 2.5rem;

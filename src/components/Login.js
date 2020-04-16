@@ -42,6 +42,7 @@ export default function Login ()  {
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [validPassword, setValidPassword] =useState("validate-password-false");
  
   const errorClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -76,15 +77,17 @@ export default function Login ()  {
         //if they have been logged out this pushes them back to last page with state data to fill page
         if(location.state){
           history.push(location.state.last, location.state.data)
+          setValidPassword("validate-password-false");
         }else{
           //otherwise, proceed as normal
           history.push("/Dashboard")
+          setValidPassword("validate-password-false");
         }
 
         // here user feedback if username / password is wrong or does not exist (no differentiation for security)
       }else if (x.message === "unauthorized"){
           console.log(x.message)
-
+          setValidPassword("validate-password-true");
 
       // below is other http errors
       }else if(x.message === "error"){
@@ -143,6 +146,7 @@ export default function Login ()  {
               autoComplete="current-password"
               onChange={e => setPassword(e.target.value)}
             />
+            <p  id={validPassword} style={{color:'red', marginTop:'-20px'}}>username or password incorrect</p>
             </form>
            
             <div>
