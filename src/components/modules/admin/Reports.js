@@ -4,6 +4,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import Api from "../../../api/Api";
@@ -249,68 +251,78 @@ export default function Reports() {
             </Alert>
           </Snackbar>
         </div>
-
         <div className="makeRow">
-          <div className="funButton ">
-                Report on which Events:
-          </div>
-          <RadioGroup row value={selectedOption} onChange={handleChange}>
-              <FormControlLabel value="All" 
+
+          <h1 className="h1Dashboard" style={{ marginTop: '100px',fontSize:'1.2em',marginRight:'40%' }}>Radio Button Description: </h1>
+          <RadioGroup row value={selectedOption} style={{ marginTop: '100px' }} onChange={handleChange}>
+            <FormControlLabel value="All"
               control={<Radio
-                        color="default"
-                        inputProps={{ 'aria-label': 'D' }}
-                        />} 
-              label="All" 
+                color="default"
+                inputProps={{ 'aria-label': 'D' }}
+              />}
+              label="All"
               labelPlacement="top"
-              />
-              <FormControlLabel value="Open" 
+            />
+            <FormControlLabel value="Open"
               control={<Radio
-                        color="default"
-                        inputProps={{ 'aria-label': 'D' }}
-                        />} 
-              label="Open" 
+                color="default"
+                inputProps={{ 'aria-label': 'D' }}
+              />}
+              label="Open"
               labelPlacement="top"
-              />
-              <FormControlLabel value="Closed" 
+            />
+            <FormControlLabel value="Closed"
               control={<Radio
-                        color="default"
-                        inputProps={{ 'aria-label': 'D' }}
-                        />} 
-              label="Closed" 
+                color="default"
+                inputProps={{ 'aria-label': 'D' }}
+              />}
+              label="Closed"
               labelPlacement="top"
-              />
+            />
           </RadioGroup>
         </div>
-
-          
-
-
-        <div >
+        <div className="makeRow" >
+              <p style={{marginRight:'40%'}}>Events Outstanding Totals :</p>
         <button
-              className="funButton headerButtons"
+              className="headerButtons"
               onClick = {() => eventsOutstandingTotals()}>
-                Events Outstanding Totals
+               Download PDF
+          </button>
+          <button
+              className=" headerButtons"
+          >
+               Send as email
           </button>
         </div>
 
-        <div >
+        <div className="makeRow">
+          <p style={{marginRight:'40%'}}>People Outstanding Totals :</p>
             <button
-              className="funButton headerButtons"
+              className="headerButtons"
               onClick = {() => whoOwesWhat()}>
-            People Outstanding Totals
+              Download PDF
           </button>
+          <button
+              className="headerButtons"
+          >
+               Send as email
+          </button>
+          
         </div>
 
-        <div >
+        <div className="makeRow">
+          <p style={{marginRight:'40%'}}>&nbsp;&nbsp;&nbsp;Returned Tickets Totals :</p>
             <button
-              className="funButton headerButtons"
+              className="headerButtons"
               onClick = {() => returnedTickets()}>
-            returnedTickets Totals
+              Download PDF
+          </button>
+          <button
+              className="headerButtons"
+          >
+               Send as email
           </button>
         </div>
-
-            
-
       </div>
 
     );
