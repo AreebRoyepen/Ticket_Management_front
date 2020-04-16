@@ -83,7 +83,7 @@ export default function Reports() {
   
             }else if (t.message === "unauthorized"){
               localStorage.clear();
-              history.push("/", {last : "/ReturnTickets", data : location.state})
+              history.push("/", {last : "/Reports", data : location.state})
   
             }else if(t.message === "error"){
               time = 6000
@@ -144,7 +144,7 @@ export default function Reports() {
   
             }else if (t.message === "unauthorized"){
               localStorage.clear();
-              history.push("/", {last : "/ReturnTickets", data : location.state})
+              history.push("/", {last : "/Reports", data : location.state})
   
             }else if(t.message === "error"){
               time = 6000
@@ -205,7 +205,7 @@ export default function Reports() {
   
             }else if (t.message === "unauthorized"){
               localStorage.clear();
-              history.push("/", {last : "/ReturnTickets", data : location.state})
+              history.push("/", {last : "/Reports", data : location.state})
   
             }else if(t.message === "error"){
               time = 6000
