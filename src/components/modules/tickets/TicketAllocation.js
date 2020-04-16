@@ -389,10 +389,9 @@ export default function TicketAllocation() {
         </Snackbar>
       </div>
       <body className="bodyVal htmlVal spanVal">
-      <h1 className="h1Dashboard" style={{marginTop:'-100px'}}>Ticket Allocation</h1>
         <form className="form">
           <div className="">
-
+          <h1 className="h1Dashboard">Ticket Allocation</h1>
             <h3>{location.state.event.name}<br />
           unallocated tickets left: {tickets}</h3>
 
