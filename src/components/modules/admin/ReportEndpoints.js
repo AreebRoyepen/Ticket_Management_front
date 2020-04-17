@@ -48,39 +48,30 @@ export default function ReportEndpoints(props) {
 
     useEffect(() => {
 
-        console.log(props)
-
-        // param1 : null,
-        // param2 : null,
-        // endpoint: null,
-
         const x = props.props
 
         if (isSending) return
   
         // update state
         setIsSending(true)
-
-        console.log(x)
     
         // send the actual request 
         async function fetchData(){
-            console.log(x)
             var time = 6000
 
             if(x.param2 == "download"){
                 console.log("bob")
-
+                setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
                 setOpenSnackbar({severity : "success", message : "Report to download shortly", open : true, time : time, closeType : closeSnack})
 
                 if(x.endpoint == "eventsOutstanding"){
 
                     console.log("bob")
-                    let t = await Api.reportRequest("eventsOutstanding",x.param1, x.param2, "x") 
+                    let t = await Api.reportDownloadRequest("eventsOutstanding",x.param1, x.param2) 
                     console.log(t)
                     if(t.message === "success"){
-
-                        setOpenSnackbar({severity : "success", message : "Report to downloaded", open : true, time : time, closeType : closeSnack})
+                        setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
+                        setOpenSnackbar({severity : "success", message : "Report downloaded", open : true, time : time, closeType : closeSnack})
 
                         const url = window.URL.createObjectURL(new Blob([t.data]));
                         const link = document.createElement('a');
@@ -114,10 +105,11 @@ export default function ReportEndpoints(props) {
                     }
                 }else if(x.endpoint == "whoOwesWhat"){
 
-                    let t = await Api.reportRequest("whoOwesWhat",x.param1, x.param2,"x") 
+                    let t = await Api.reportDownloadRequest("whoOwesWhat",x.param1, x.param2) 
                     if(t.message === "success"){
 
-                        setOpenSnackbar({severity : "success", message : "Report to downloaded", open : true, time : time, closeType : closeSnack})
+                        setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
+                        setOpenSnackbar({severity : "success", message : "Report downloaded", open : true, time : time, closeType : closeSnack})
 
                         const url = window.URL.createObjectURL(new Blob([t.data]));
                         const link = document.createElement('a');
@@ -152,10 +144,11 @@ export default function ReportEndpoints(props) {
 
                 }else if(x.endpoint == "returnedTickets"){
 
-                    let t = await Api.reportRequest("returnedTickets",x.param1, x.param2,"x") 
+                    let t = await Api.reportDownloadRequest("returnedTickets",x.param1, x.param2) 
                     if(t.message === "success"){
-                        
-                        setOpenSnackbar({severity : "success", message : "Report to downloaded", open : true, time : time, closeType : closeSnack})
+
+                        setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
+                        setOpenSnackbar({severity : "success", message : "Report downloaded", open : true, time : time, closeType : closeSnack})
         
                         const url = window.URL.createObjectURL(new Blob([t.data]));
                         const link = document.createElement('a');
@@ -192,13 +185,14 @@ export default function ReportEndpoints(props) {
 
             }else if (x.param2 == "email"){
 
+                setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
                 setOpenSnackbar({severity : "success", message : "Email to be sent shortly", open : true, time : time, closeType : closeSnack})
 
-                let t = await Api.reportRequest(x.endpoint,x.param1, x.param2, x.email) 
+                let t = await Api.reportEmailRequest(x.endpoint,x.param1, x.param2, x.email) 
                 
                     console.log(t)
                     if(t.message === "success"){
-
+                        setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
                         setOpenSnackbar({severity : "success", message : t.data.message, open : true, time : time, closeType : closeSnack})
             
                     }else if (t.message === "unauthorized"){
@@ -223,11 +217,7 @@ export default function ReportEndpoints(props) {
             
                     }
 
-            }
-    
-            
-    
-                    
+            }      
     
         }
         
@@ -237,7 +227,7 @@ export default function ReportEndpoints(props) {
         if (isMounted.current) // only update if we are still mounted
             setIsSending(false)
     
-        }, [isSending, history, location, props]); // update the callback if the state changes
+        }, [isSending, props]); // update the callback if the state changes
 
     
     return(

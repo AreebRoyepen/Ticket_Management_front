@@ -188,14 +188,49 @@ export default class Api {
 
    }
 
-   
-   static async reportRequest(endpoint, option1, option2,option3){
+   static async reportDownloadRequest(endpoint, option1, option2){
+    
+    const uri = API_BASE_ADDRESS + "/" + endpoint+"/" + option1 +"/" + option2 +"/null";
+
+    return axios(uri, {
+        method: 'GET',
+        responseType: "blob",
+        timeout : 100000,
+        headers : {"Authorization" : localStorage.getItem("token")}
+    })
+    .then(response => {
+
+            return {"message" : "success", "data":response.data}
+
+
+    })
+   .catch(
+    e =>{
+        console.log(e)
+
+        if(e.response){
+
+            if(e.response.status === 400){
+                return {"message" : "error"}
+            }else if(e.response.status === 401){
+                return {"message" : "unauthorized"}
+            }
+
+        }else{
+            if (e.code === 'ECONNABORTED'){
+                return {"message" : "timeout"}
+            }
+            return {"message" : "no connection"}
+        }
+    }
+)
+   }
+   static async reportEmailRequest(endpoint, option1, option2,option3){
     
     const uri = API_BASE_ADDRESS + "/" + endpoint+"/" + option1 +"/" + option2 +"/" + option3;
 
     return axios(uri, {
         method: 'GET',
-        //responseType: "blob",
         timeout : 100000,
         headers : {"Authorization" : localStorage.getItem("token")}
     })
