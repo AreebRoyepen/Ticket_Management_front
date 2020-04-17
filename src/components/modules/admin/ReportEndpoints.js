@@ -70,12 +70,17 @@ export default function ReportEndpoints(props) {
 
             if(x.param2 == "download"){
                 console.log("bob")
+
+                setOpenSnackbar({severity : "success", message : "Report to download shortly", open : true, time : time, closeType : closeSnack})
+
                 if(x.endpoint == "eventsOutstanding"){
 
                     console.log("bob")
                     let t = await Api.reportRequest("eventsOutstanding",x.param1, x.param2, "x") 
                     console.log(t)
                     if(t.message === "success"){
+
+                        setOpenSnackbar({severity : "success", message : "Report to downloaded", open : true, time : time, closeType : closeSnack})
 
                         const url = window.URL.createObjectURL(new Blob([t.data]));
                         const link = document.createElement('a');
@@ -85,9 +90,6 @@ export default function ReportEndpoints(props) {
                         link.setAttribute('download', filename);
                         document.body.appendChild(link);
                         link.click();
-
-                        setOpenSnackbar({severity : "success", message : "Report to download shortly", open : true, time : time, closeType : closeSnack})
-
             
                     }else if (t.message === "unauthorized"){
                         localStorage.clear();
@@ -115,84 +117,85 @@ export default function ReportEndpoints(props) {
                     let t = await Api.reportRequest("whoOwesWhat",x.param1, x.param2,"x") 
                     if(t.message === "success"){
 
-                    const url = window.URL.createObjectURL(new Blob([t.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    var date = new Date()
-                    var filename = "REPORT People Outstanding Totals for " + x.param1 + " Events " + date.toDateString() +".pdf"
-                    link.setAttribute('download', filename);
-                    document.body.appendChild(link);
-                    link.click();
+                        setOpenSnackbar({severity : "success", message : "Report to downloaded", open : true, time : time, closeType : closeSnack})
 
-                    setOpenSnackbar({severity : "success", message : "Report to download shortly", open : true, time : time, closeType : closeSnack})
-
+                        const url = window.URL.createObjectURL(new Blob([t.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        var date = new Date()
+                        var filename = "REPORT People Outstanding Totals for " + x.param1 + " Events " + date.toDateString() +".pdf"
+                        link.setAttribute('download', filename);
+                        document.body.appendChild(link);
+                        link.click();
         
                     }else if (t.message === "unauthorized"){
-                    localStorage.clear();
-                    history.push("/", {last : "/Reports", data : location.state})
-        
+                        localStorage.clear();
+                        history.push("/", {last : "/Reports", data : location.state})
+            
                     }else if(t.message === "error"){
-                    time = 6000
-                    setOpenSnackbar({severity : "error", message : "Unknown Error", open : true, time : time, closeType : closeSnack})
-        
+                        time = 6000
+                        setOpenSnackbar({severity : "error", message : "Unknown Error", open : true, time : time, closeType : closeSnack})
+            
                     }else if(t.message === "no connection"){
-                    time = 6000
-                    setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : closeSnack})
-        
+                        time = 6000
+                        setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : closeSnack})
+            
                     }else if(t.message === "timeout"){
-                    time = 6000
-                    setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : closeSnack})
-                    
+                        time = 6000
+                        setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : closeSnack})
+                        
                     }else{
-                    time = 6000
-                    setOpenSnackbar({severity : "warning", message : t.message, open : true, time : time, closeType : closeSnack})
-        
+                        time = 6000
+                        setOpenSnackbar({severity : "warning", message : t.message, open : true, time : time, closeType : closeSnack})
+            
                     }
 
                 }else if(x.endpoint == "returnedTickets"){
 
                     let t = await Api.reportRequest("returnedTickets",x.param1, x.param2,"x") 
                     if(t.message === "success"){
-
-                    const url = window.URL.createObjectURL(new Blob([t.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    var date = new Date()
-                    var filename = "REPORT Returned Ticket Totals for " + x.param1 + " Events " + date.toDateString() +".pdf"
-                    link.setAttribute('download', filename);
-                    document.body.appendChild(link);
-                    link.click();
-
-                    setOpenSnackbar({severity : "success", message : "Report to download shortly", open : true, time : time, closeType : closeSnack})
-
+                        
+                        setOpenSnackbar({severity : "success", message : "Report to downloaded", open : true, time : time, closeType : closeSnack})
+        
+                        const url = window.URL.createObjectURL(new Blob([t.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        var date = new Date()
+                        var filename = "REPORT Returned Ticket Totals for " + x.param1 + " Events " + date.toDateString() +".pdf"
+                        link.setAttribute('download', filename);
+                        document.body.appendChild(link);
+                        link.click();
         
                     }else if (t.message === "unauthorized"){
-                    localStorage.clear();
-                    history.push("/", {last : "/Reports", data : location.state})
-        
+                        localStorage.clear();
+                        history.push("/", {last : "/Reports", data : location.state})
+            
                     }else if(t.message === "error"){
-                    time = 6000
-                    setOpenSnackbar({severity : "error", message : "Unknown Error", open : true, time : time, closeType : closeSnack})
-        
+                        time = 6000
+                        setOpenSnackbar({severity : "error", message : "Unknown Error", open : true, time : time, closeType : closeSnack})
+            
                     }else if(t.message === "no connection"){
-                    time = 6000
-                    setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : closeSnack})
-        
+                        time = 6000
+                        setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : closeSnack})
+            
                     }else if(t.message === "timeout"){
-                    time = 6000
-                    setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : closeSnack})
-                    
+                        time = 6000
+                        setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : closeSnack})
+                        
                     }else{
-                    time = 6000
-                    setOpenSnackbar({severity : "warning", message : t.message, open : true, time : time, closeType : closeSnack})
-        
+                        time = 6000
+                        setOpenSnackbar({severity : "warning", message : t.message, open : true, time : time, closeType : closeSnack})
+            
                     }
 
                 }
 
             }else if (x.param2 == "email"){
 
+                setOpenSnackbar({severity : "success", message : "Email to be sent shortly", open : true, time : time, closeType : closeSnack})
+
                 let t = await Api.reportRequest(x.endpoint,x.param1, x.param2, x.email) 
+                
                     console.log(t)
                     if(t.message === "success"){
 

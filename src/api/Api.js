@@ -196,6 +196,7 @@ export default class Api {
     return axios(uri, {
         method: 'GET',
         //responseType: "blob",
+        timeout : 100000,
         headers : {"Authorization" : localStorage.getItem("token")}
     })
     .then(response => {
