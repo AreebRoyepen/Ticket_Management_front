@@ -60,8 +60,8 @@ export default function Reports() {
 
         <div className="makeRow">
 
-          <h1 className="h1Dashboard" style={{ marginTop: '100px',fontSize:'1.2em',marginRight:'40%' }}>Radio Button Description: </h1>
-          <RadioGroup row value={selectedOption} style={{ marginTop: '100px' }} onChange={handleChange}>
+          <h1 className="h1Dashboard" >Radio Button Description: </h1>
+          <RadioGroup row  className="makeRow" value={selectedOption} onChange={handleChange}>
             <FormControlLabel value="All"
               control={<Radio
                 color="default"
@@ -90,7 +90,7 @@ export default function Reports() {
         </div>
 
         <div className="makeRow" >
-              <p style={{marginRight:'40%'}}>Events Outstanding Totals :</p>
+              <p>Events Outstanding Totals :</p>
         <button
               className="headerButtons"
               onClick = {() => tempfunction("download","eventsOutstanding")}>
@@ -104,7 +104,7 @@ export default function Reports() {
         </div>
 
         <div className="makeRow">
-          <p style={{marginRight:'40%'}}>People Outstanding Totals :</p>
+          <p>People Outstanding Totals :</p>
             <button
               className="headerButtons"
               onClick = {() => tempfunction("download","whoOwesWhat")}>
@@ -119,7 +119,7 @@ export default function Reports() {
         </div>
 
         <div className="makeRow">
-          <p style={{marginRight:'40%'}}>&nbsp;&nbsp;&nbsp;Returned Tickets Totals :</p>
+          <p>&nbsp;&nbsp;&nbsp;Returned Tickets Totals :</p>
             <button
               className="headerButtons"
               onClick = {() => tempfunction("download", "returnedTickets")}>

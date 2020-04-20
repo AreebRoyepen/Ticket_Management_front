@@ -13,6 +13,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Reports from "./modules/admin/Reports"
 import { LoadingIcon } from "./modules/shared/LoadingIcon";
 import { MdAccountBalance, MdAttachMoney, MdSupervisorAccount } from "react-icons/md";
 import { ErrorPage } from "./modules/shared/ErrorPage";
@@ -82,6 +83,13 @@ export default function Dashboard() {
   const bull = <span className={classes.bullet}>•</span>;
 
   let history = useHistory();
+
+  
+  const [user, setUser] = useState(null)
+
+  useEffect( () => {
+    setUser(JSON.parse(localStorage.user))  
+  },[setUser])
 
   /**Formart String */
 
@@ -352,7 +360,7 @@ export default function Dashboard() {
             <div className={classes.root}>
               <Grid container spacing={2} id="dashboard-box-shadow">
 
-                <Grid item xs id="dashboard-box-shadow" style={{ backgroundColor: '#ffffff00' }}>
+                <Grid item  xs={12} sm={6} id="dashboard-box-shadow" style={{ backgroundColor: '#ffffff00' }}>
                   <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
                     <Card className={classes.card} style={{ boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),0 12.5px 10px rgba(0, 0, 0, 0.06),0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),0 100px 80px rgba(0, 0, 0, 0.12)' }} variant="outlined">
                       <CardContent>
@@ -384,7 +392,7 @@ export default function Dashboard() {
                     </Card>
                   </Paper>
                 </Grid>
-                <Grid item xs id="dashboard-box-shadow">
+                <Grid item  xs={12} sm={6} id="dashboard-box-shadow">
                   <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
                     <TableContainer component={Paper} >
                       <Table className={classes.table} aria-label="customized table" >
@@ -409,8 +417,19 @@ export default function Dashboard() {
                     </TableContainer>
                   </Paper>
                 </Grid>
-              </Grid>
+               
+                {user.role.id == 1 ? (
+                <Grid item xs id="dashboard-box-shadow">
+                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
+                  <TableContainer component={Paper} >
 
+                   <Reports/>
+                   </TableContainer>
+                  </Paper>
+                </Grid>):
+                (<div/>)}
+              </Grid>
+             
             </div>
 
           </div>
