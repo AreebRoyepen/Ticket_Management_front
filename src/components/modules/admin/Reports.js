@@ -3,6 +3,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ReportEndpoints from "./ReportEndpoints";
+import { MdFileDownload,MdEmail} from "react-icons/md";
 import "../../../styles/validationForm.css";
 import "../../../styles/login.css";
 
@@ -89,49 +90,70 @@ export default function Reports() {
           </RadioGroup>
         </div>
 
-        <div className="makeRow" >
-              <p>Events Outstanding Totals :</p>
-        <button
-              className="headerButtons"
-              onClick = {() => tempfunction("download","eventsOutstanding")}>
-               Download PDF
+        <div id="demo makeRow">
+          <table id="table" class="table table-hover table-mc-light-blue makeRow">
+            <thead>
+              <tr>
+                <th style={{textAlign:'center', backgroundColor:'#08533C',color:'white', width:'33.33%'}}>Genarated PDF</th>
+                <th style={{textAlign:'center', backgroundColor:'#C1A162',color:'white',width:'33.33%'}}>Download PDF</th>
+                <th style={{textAlign:'center', backgroundColor:'rgb(114, 155, 37)',color:'white',width:'33.33%'}}>Email PDF</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{textAlign:'center'}} data-title="Name">Events Outstanding Totals </td>
+                <td data-title="Link" style={{textAlign:'center'}} >
+                  <button style={{textAlign:'center'}}
+                    className="reportsButton makeRow"
+                    onClick={() => tempfunction("download", "eventsOutstanding")}><MdFileDownload size={20} />
+                </button>
+
+                </td>
+                <td data-title="Status" style={{textAlign:'center'}}> <button
+                  className=" reportsButton makeRow"
+                  style={{color:'rgb(114, 155, 37)', borderColor:'rgb(114, 155, 37) !important'}}
+                  onClick={() => tempfunction("email", "eventsOutstanding")}>
+                  <MdEmail size={20}/>
+          </button></td>
+              </tr>
+              <tr>
+                <td data-title="Name" style={{textAlign:'center'}}>People Outstanding Totals</td>
+                <td data-title="Link" style={{textAlign:'center'}}>
+                  <button
+                    className="reportsButton"
+                    onClick={() => tempfunction("download", "whoOwesWhat")}>
+                   <MdFileDownload size={20} />
           </button>
-          <button
-              className=" headerButtons"
-              onClick = {() => tempfunction("email","eventsOutstanding")}>
-               Send as email
+                </td>
+                <td data-title="Status" style={{textAlign:'center'}}> <button
+                  className="reportsButton"
+                  style={{color:'rgb(114, 155, 37)', borderColor:'rgb(114, 155, 37) !important'}}
+                  onClick={() => tempfunction("email", "whoOwesWhat")}>
+                  <MdEmail size={20} />
+          </button></td>
+              </tr>
+              <tr>
+                <td data-title="Name" style={{textAlign:'center'}}>Returned Tickets Totals</td>
+                <td data-title="Link" style={{textAlign:'center'}}>
+                  <button
+                    className="reportsButton"
+                    onClick={() => tempfunction("download", "returnedTickets")}>
+                   <MdFileDownload size={20} />
           </button>
+
+                </td>
+                <td data-title="Status" style={{textAlign:'center'}}> <button
+                  className="reportsButton"
+                  style={{color:'rgb(114, 155, 37)', borderColor:'rgb(114, 155, 37) !important'}}
+                  onClick={() => tempfunction("email", "returnedTickets")}>
+                  <MdEmail size={20} />
+          </button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <div className="makeRow">
-          <p>People Outstanding Totals :</p>
-            <button
-              className="headerButtons"
-              onClick = {() => tempfunction("download","whoOwesWhat")}>
-              Download PDF
-          </button>
-          <button
-              className="headerButtons"
-              onClick = {() => tempfunction("email","whoOwesWhat")}>
-               Send as email
-          </button>
-          
-        </div>
-
-        <div className="makeRow">
-          <p>&nbsp;&nbsp;&nbsp;Returned Tickets Totals :</p>
-            <button
-              className="headerButtons"
-              onClick = {() => tempfunction("download", "returnedTickets")}>
-              Download PDF
-          </button>
-          <button
-              className="headerButtons"
-              onClick = {() => tempfunction("email","returnedTickets")}>
-               Send as email
-          </button>
-        </div>
       </div>
-
+      
     );
 }

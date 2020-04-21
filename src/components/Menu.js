@@ -169,12 +169,6 @@ export default function Menu({children}) {
       <MdContacts  className="iconStyling"/>
       <Link className="menuText" to="/Users">&nbsp;&nbsp;&nbsp;Users</Link>
       </ListItem>
-
-      <ListItem style={{marginLeft:'20px'}}> 
-      <MdAssignment  className="iconStyling"/>
-      <Link className="menuText" to="/Reports">&nbsp;&nbsp;&nbsp;Reports</Link>
-      </ListItem>
-
       </div>
     );
 

@@ -156,6 +156,19 @@ input[type=search]:focus{
   padding-top: 7px;
 }
 
+.reportsButton
+{
+  
+    color: #C1A162 ;
+    background-color: white ;
+    border-radius: 28px ;
+    height: 4em;
+    width: 4em;
+    border-color: #C1A162 ;
+    border: solid 1.5px;
+    margin-bottom: 15px;
+
+}
 
 .headerButtons
 {
