@@ -275,6 +275,14 @@ input[type=search]:focus{
   margin-bottom: 25px;
   transition: all 300ms ease-out;
   width: 65%;
+  
+}
+
+.container .card-body#true:hover {
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
+  background-color: #08533C;
+  color: white;
+  
 }
 
 .card .card-body#true:hover {
@@ -283,11 +291,27 @@ input[type=search]:focus{
   color: white;
   
 }
+
+.container .card-body#false:hover {
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
+  background-color: #acacac;
+  color: white;
+}
+
 .card .card-body#false:hover {
   box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
   background-color: #acacac;
   color: white;
 }
+
+
+.container .container #true:hover {
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
+  background-color: #08533C;
+  color: white;
+  
+}
+
 
 .card .container #true:hover {
   box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
@@ -295,11 +319,19 @@ input[type=search]:focus{
   color: white;
   
 }
+
+.container .container#false:hover {
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
+  background-color: #acacac;
+  color: white;
+}
+
 .card .container#false:hover {
   box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
   background-color: #acacac;
   color: white;
 }
+
 #false
 {
   box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
@@ -337,6 +369,14 @@ input[type=search]:focus{
   z-index: 10;
 }
 
+.container:hover .card-object:after {
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.4) 100%);
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 52%,rgba(0,0,0,0.4) 100%);
+  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 52%,rgba(0,0,0,0.4) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
+  opacity: 1;
+}
+
 .card:hover .card-object:after {
   background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.4) 100%);
   background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 52%,rgba(0,0,0,0.4) 100%);
@@ -345,9 +385,13 @@ input[type=search]:focus{
   opacity: 1;
 }
 
-
 .card-top {
   display: block;
+}
+
+.container:hover{
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card:hover{
@@ -378,6 +422,11 @@ input[type=search]:focus{
   height:100%;
 }
 
+.container:hover .card-sub-botton {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
 .card:hover .card-sub-botton {
   opacity: 0;
   transform: translateY(-8px);
@@ -394,6 +443,10 @@ input[type=search]:focus{
   transition: all 300ms ease-out;
 }
 
+.container:hover .card-sub-show {
+  opacity: 1;
+  transform: translateY(0);
+}
 .card:hover .card-sub-show {
   opacity: 1;
   transform: translateY(0);
