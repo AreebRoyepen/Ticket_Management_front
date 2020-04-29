@@ -92,7 +92,7 @@ export default function Payments() {
 
       } else if (resp.message === "unauthorized") {
         localStorage.clear();
-        history.push("/", { last: "/TicketAllocation" })
+        history.push("/", { last: location.pathname })
 
       } else {
         setOpenSnackbar({ severity: "error", message: "Check your internet connection", open: true, time: 6000, closeType: errorClose })
@@ -135,7 +135,7 @@ export default function Payments() {
 
       } else if (unpaid.message === "unauthorized") {
         localStorage.clear();
-        history.push("/", { last: "/Payments" })
+        history.push("/", { last: location.pathname })
 
       } else if (unpaid.message === "error") {
         setOpenSnackbar({ severity: "error", message: "unknown error", open: true, time: time, closeType: errorClose })
@@ -196,7 +196,7 @@ export default function Payments() {
 
         } else if (resp.message === "unauthorized") {
           localStorage.clear();
-          history.push("/", { last: "/Payments" })
+          history.push("/", { last: location.pathname })
 
         } else if (resp.message === "error") {
           time = 6000
@@ -244,7 +244,7 @@ export default function Payments() {
 
           } else if (resp.message === "unauthorized") {
             localStorage.clear();
-            history.push("/", { last: "/Payments" })
+            history.push("/", { last: location.pathname })
 
           } else if (resp.message === "error") {
             time = 6000
@@ -287,7 +287,7 @@ export default function Payments() {
 
           } else if (resp.message === "unauthorized") {
             localStorage.clear();
-            history.push("/", { last: "/Payments", data: location.state })
+            history.push("/", { last: location.pathname, data: location.state })
 
           } else if (resp.message === "error") {
             time = 6000

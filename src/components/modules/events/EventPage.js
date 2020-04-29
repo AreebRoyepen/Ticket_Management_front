@@ -95,7 +95,7 @@ export default function EventPage() {
             
           }else if (resp.message === "unauthorized"){
             localStorage.clear();
-            history.push("/" , {last : "/EventPage", data : location.state})
+            history.push("/" , {last : location.pathname, data : location.state})
 
           }else if(resp.message === "error"){
             time = 6000
@@ -119,7 +119,7 @@ export default function EventPage() {
             
           }else if (resp.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last : "/EventPage"})
+            history.push("/", {last : location.pathname})
 
           }else if(resp.message === "error"){
             time = 6000

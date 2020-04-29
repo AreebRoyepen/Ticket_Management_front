@@ -108,7 +108,7 @@ export default function PersonPage() {
             
           }else if (resp.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last : "/PersonPage", data: location.state})
+            history.push("/", {last : location.pathname, data: location.state})
 
           }else if(resp.message === "error"){
             time = 6000
@@ -134,7 +134,7 @@ export default function PersonPage() {
             
           }else if (x.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last : "/PersonPage"})
+            history.push("/", {last : location.pathname})
 
           }else if(x.message === "error"){
             time = 6000

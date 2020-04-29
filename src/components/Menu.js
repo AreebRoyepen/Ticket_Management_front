@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link , useHistory} from "react-router-dom";
+import { Link , useHistory, useLocation} from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import DehazeIcon from '@material-ui/icons/Dehaze';
@@ -72,6 +72,7 @@ export default function Menu({children}) {
   const [openM, setOpenModal] = React.useState()
 
   let history = useHistory();
+  let location = useLocation();
 
 
   const [Modal, openModal, closeModal, isOpen] = useModal('root', {
@@ -110,9 +111,17 @@ export default function Menu({children}) {
         
         //once the pop up opens, start a timeout for the remaining time
         //then log user out 
-        setTimeout(() =>{ if(closeModal){history.push("/"); localStorage.clear()} }, ((300)* 1000))
+        setTimeout(() =>{ if(closeModal){
+                            console.log(location)
+                            console.log(window.location.href)
+                            var loc = window.location.href.toString().split("/");
+                             
+                            history.push("/", { last: loc[loc.length-1] }); 
+                            localStorage.clear()
+                          } 
+                        }, ((10)* 1000))
       }
-      , ((localStorage.expiration -300)* 1000));      
+      , ((localStorage.expiration -10)* 1000));      
 
   },[setUser, setOpenModal])
 
@@ -206,7 +215,7 @@ export default function Menu({children}) {
                     open={open}
                     onClose={handleClose}
                   >
-                    <MenuItem onClick = {() => { history.push("/");   localStorage.clear(); }}> Log Out</MenuItem>
+                    <MenuItem onClick = {() => { history.push("/", {last : location.pathname});   localStorage.clear(); }}> Log Out</MenuItem>
                   </MenuUI>
 
             </Toolbar>

@@ -84,7 +84,7 @@ export default function ReportEndpoints(props) {
             
                     }else if (t.message === "unauthorized"){
                         localStorage.clear();
-                        history.push("/", {last : "/Reports", data : location.state})
+                        history.push("/", {last : location.pathname, data : location.state})
             
                     }else if(t.message === "error"){
                         time = 6000
@@ -122,7 +122,7 @@ export default function ReportEndpoints(props) {
         
                     }else if (t.message === "unauthorized"){
                         localStorage.clear();
-                        history.push("/", {last : "/Reports", data : location.state})
+                        history.push("/", {last : location.pathname, data : location.state})
             
                     }else if(t.message === "error"){
                         time = 6000
@@ -161,7 +161,7 @@ export default function ReportEndpoints(props) {
         
                     }else if (t.message === "unauthorized"){
                         localStorage.clear();
-                        history.push("/", {last : "/Reports", data : location.state})
+                        history.push("/", {last : location.pathname, data : location.state})
             
                     }else if(t.message === "error"){
                         time = 6000
@@ -197,7 +197,7 @@ export default function ReportEndpoints(props) {
             
                     }else if (t.message === "unauthorized"){
                         localStorage.clear();
-                        history.push("/", {last : "/Reports", data : location.state})
+                        history.push("/", {last : location.pathname, data : location.state})
             
                     }else if(t.message === "error"){
                         time = 6000

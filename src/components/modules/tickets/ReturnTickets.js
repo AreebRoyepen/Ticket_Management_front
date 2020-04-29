@@ -77,7 +77,7 @@ export default function ReturnTickets() {
 
         }else if (x.message === "unauthorized"){
           localStorage.clear();
-          history.push("/", {last : "/ReturnTickets"})
+          history.push("/", {last : location.pathname})
 
         }else if(x.message === "error"){
           setOpenSnackbar({severity : "error", message : "Unknown Error", open : true, time : time, closeType : errorClose})
@@ -128,7 +128,7 @@ export default function ReturnTickets() {
 
           }else if (t.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last : "/ReturnTickets"})
+            history.push("/", {last : location.pathname})
 
           }else if(t.message === "error"){
             time = 6000
@@ -160,7 +160,7 @@ export default function ReturnTickets() {
 
           }else if (t.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last : "/ReturnTickets", data : location.state})
+            history.push("/", {last : location.pathname, data : location.state})
 
           }else if(t.message === "error"){
             time = 6000

@@ -108,7 +108,7 @@ export default function UserPage() {
   
         }else if (resp.message === "unauthorized"){
           localStorage.clear();
-          history.push("/",  {last : "/UserPage"})
+          history.push("/",  {last : location.pathname})
   
         }else{
           setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time :6000, closeType : errorClose})
@@ -152,7 +152,7 @@ export default function UserPage() {
             
           }else if (resp.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last : "/UserPage", data: location.state})
+            history.push("/", {last : location.pathname, data: location.state})
 
           }else if(resp.message === "error"){
             time = 6000
@@ -178,7 +178,7 @@ export default function UserPage() {
             
           }else if (resp.message === "unauthorized"){
             localStorage.clear();
-            history.push("/", {last : "/UserPage"})
+            history.push("/", {last : location.pathname})
 
           }else if(resp.message === "error"){
             time = 6000

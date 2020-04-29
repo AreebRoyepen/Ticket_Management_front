@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Searchbar from "./SearchPeople";
 import { LoadingIcon } from "../shared/LoadingIcon";
 import {ErrorPage} from "../shared/ErrorPage";
@@ -30,6 +30,7 @@ export default function People(){
     const [error,setError] = useState(false)
 
     let history = useHistory();
+    let location = useLocation()
 
     const classes = useStyles();
     const [openSnackbar, setOpenSnackbar] = useState({
@@ -56,7 +57,7 @@ export default function People(){
                 setConnection(true)
             }else if (x.message === "unauthorized"){
                 localStorage.clear();
-                history.push("/" , {last: "/People"})
+                history.push("/" , {last: location.pathname})
             }else{
                 setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : 6000, closeType : errorClose})
                 setError(true)

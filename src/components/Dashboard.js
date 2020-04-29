@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Chart, Doughnut } from 'react-chartjs-2';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -83,6 +83,7 @@ export default function Dashboard() {
   const bull = <span className={classes.bullet}>•</span>;
 
   let history = useHistory();
+  let location = useLocation()
 
   
   const [user, setUser] = useState(null)
@@ -145,7 +146,7 @@ export default function Dashboard() {
 
         } else if (z.message === "unauthorized") {
           localStorage.clear();
-          history.push("/", { last: "/Dashboard" })
+          history.push("/", { last: location.pathname })
         } else if (z.message === "error") {
           console.log("error")
           setError(true)
@@ -156,7 +157,7 @@ export default function Dashboard() {
 
       } else if (x.message === "unauthorized") {
         localStorage.clear();
-        history.push("/", { last: "/Dashboard" })
+        history.push("/", { last: location.pathname })
       } else if (x.message === "error") {
         console.log("error")
         setError(true)
