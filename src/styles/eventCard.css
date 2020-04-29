@@ -553,3 +553,21 @@ html {
     margin-top: 400px;
   }
 }
+
+@media screen and (max-width: 299px)
+{
+input[type=search] {
+    /* width: 155px; */
+    font-family: 'Avenir Book', 'Arial Book', sans-serif;
+    color: inherit;
+    box-sizing: border-box;
+    /* float: right !important; */
+    margin-bottom: 111px;
+    /* margin-left: -174px; */
+    left: 0 !important;
+    margin-left: 3%;
+}
+.funButton {
+  margin-top: 136px;
+}
+}
