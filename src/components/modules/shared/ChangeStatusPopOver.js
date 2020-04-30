@@ -91,7 +91,7 @@ export default function SimplePopover(content) {
           
         }else if (resp.message === "unauthorized"){
           localStorage.clear();
-          history.push("/", {last : "/Events", data: location.state})
+          history.push("/", {last : location.pathname, data: location.state})
 
         }else if(resp.message === "error"){
           time = 6000

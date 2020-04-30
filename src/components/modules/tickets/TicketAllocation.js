@@ -89,7 +89,7 @@ export default function TicketAllocation() {
 
       } else if (x.message === "unauthorized") {
         localStorage.clear();
-        history.push("/", { last: "/TicketAllocation" })
+        history.push("/", { last: location.pathname })
 
       } else if (x.message === "error") {
         setOpenSnackbar({ severity: "error", message: "unknown error", open: true, time: time, closeType: errorClose })
@@ -128,7 +128,7 @@ export default function TicketAllocation() {
 
       } else if (resp.message === "unauthorized") {
         localStorage.clear();
-        history.push("/", { last: "/TicketAllocation" })
+        history.push("/", { last: location.pathname })
 
       } else {
         setOpenSnackbar({ severity: "error", message: "Check your internet connection", open: true, time: 6000, closeType: errorClose })
@@ -200,7 +200,7 @@ export default function TicketAllocation() {
 
             } else if (p.message === "unauthorized") {
               localStorage.clear();
-              history.push("/", { last: "/TicketAllocation" })
+              history.push("/", { last: location.pathname })
 
             } else if (p.message === "error") {
               time = 6000
@@ -222,7 +222,7 @@ export default function TicketAllocation() {
 
         } else if (t.message === "unauthorized") {
           localStorage.clear();
-          history.push("/", { last: "/TicketAllocation" })
+          history.push("/", { last: location.pathname })
 
         } else if (t.message === "error") {
           time = 6000
@@ -276,7 +276,7 @@ export default function TicketAllocation() {
 
             } else if (pay.message === "unauthorized") {
               localStorage.clear();
-              history.push("/", { last: "/TicketAllocation", data: location.state })
+              history.push("/", { last: location.pathname, data: location.state })
 
             } else if (pay.message === "error") {
               time = 6000
@@ -298,7 +298,7 @@ export default function TicketAllocation() {
 
         } else if (t.message === "unauthorized") {
           localStorage.clear();
-          history.push("/", { last: "/TicketAllocation", data: location.state })
+          history.push("/", { last: location.pathname, data: location.state })
 
         } else if (t.message === "error") {
           time = 6000

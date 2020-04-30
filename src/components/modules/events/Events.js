@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,6 +29,7 @@ export default function Events(){
     const [error,setError] = useState(false)
 
     let history = useHistory();
+    let location = useLocation();
 
     const [user, setUser] = useState(null)
 
@@ -61,7 +62,7 @@ export default function Events(){
                 setConnection(true)
             }else if (x.message === "unauthorized"){
                 localStorage.clear();
-                history.push("/", {last: "/Events"})
+                history.push("/", {last: location.pathname})
             }else{
                 setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : 6000, closeType : errorClose})
                 setError(true)
@@ -76,7 +77,7 @@ export default function Events(){
               setConnection(true)
           }else if (x.message === "unauthorized"){
               localStorage.clear();
-              history.push("/", {last: "/Events"})
+              history.push("/", {last: location.pathname})
           }else{
               setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : 6000, closeType : errorClose})
               setError(true)
