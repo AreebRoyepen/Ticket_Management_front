@@ -45,7 +45,7 @@ export default function ServerModal(content) {
         container={() => rootRef.current}
       >
         <div className={classes.paper}>
-          <h2 id="server-modal-title">Error Message</h2>
+          <h2 id="server-modal-title">Something Went Wrong, </h2>
           <p id="server-modal-description">{var3}</p>
         </div>
       </Modal>
