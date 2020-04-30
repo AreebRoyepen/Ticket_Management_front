@@ -112,13 +112,13 @@ export default function Menu({children}) {
   useEffect( () => {
 
     //upon setting user to local storage
-    //start timeout for session expiry popup (5 min before token expires)
+    //start calling refresh endpoint so session does expire
     if(localStorage.user){
 
       setUser(JSON.parse(localStorage.user))
       
       var id = setInterval(() =>{
-        setOpenModal(openModal); 
+        //setOpenModal(openModal); 
         
         async function fetchData(){
                         
@@ -139,11 +139,13 @@ export default function Menu({children}) {
       
 
       fetchData() 
-      
       if(!isMounted.current) return clearInterval(id)
+      
 
       }
-      , ((localStorage.expiration -60)* 1000));      
+      , ((localStorage.expiration -300)* 1000));      
+
+      
 
     }else{
       return
