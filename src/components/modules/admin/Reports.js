@@ -29,9 +29,7 @@ export default function Reports() {
       setSelectedOption(event.target.value);
     };
 
-      const tempfunction = (x, y) =>{
-
-        console.log(x + " " + y)
+      const getOptions = (x, y) =>{
 
           setParams({
             param1 : selectedOption,
@@ -105,14 +103,14 @@ export default function Reports() {
                 <td data-title="Link" style={{textAlign:'center'}} >
                   <button style={{textAlign:'center'}}
                     className="reportsButton makeRow"
-                    onClick={() => tempfunction("download", "eventsOutstanding")}><MdFileDownload size={20} />
+                    onClick={() => getOptions("download", "eventsOutstanding")}><MdFileDownload size={20} />
                 </button>
 
                 </td>
                 <td data-title="Status" style={{textAlign:'center'}}> <button
                   className=" reportsButton makeRow"
                   style={{color:'rgb(114, 155, 37)', borderColor:'rgb(114, 155, 37) !important'}}
-                  onClick={() => tempfunction("email", "eventsOutstanding")}>
+                  onClick={() => getOptions("email", "eventsOutstanding")}>
                   <MdEmail size={20}/>
           </button></td>
               </tr>
@@ -121,14 +119,14 @@ export default function Reports() {
                 <td data-title="Link" style={{textAlign:'center'}}>
                   <button
                     className="reportsButton"
-                    onClick={() => tempfunction("download", "whoOwesWhat")}>
+                    onClick={() => getOptions("download", "whoOwesWhat")}>
                    <MdFileDownload size={20} />
           </button>
                 </td>
                 <td data-title="Status" style={{textAlign:'center'}}> <button
                   className="reportsButton"
                   style={{color:'rgb(114, 155, 37)', borderColor:'rgb(114, 155, 37) !important'}}
-                  onClick={() => tempfunction("email", "whoOwesWhat")}>
+                  onClick={() => getOptions("email", "whoOwesWhat")}>
                   <MdEmail size={20} />
           </button></td>
               </tr>
@@ -137,7 +135,7 @@ export default function Reports() {
                 <td data-title="Link" style={{textAlign:'center'}}>
                   <button
                     className="reportsButton"
-                    onClick={() => tempfunction("download", "returnedTickets")}>
+                    onClick={() => getOptions("download", "returnedTickets")}>
                    <MdFileDownload size={20} />
           </button>
 
@@ -145,7 +143,7 @@ export default function Reports() {
                 <td data-title="Status" style={{textAlign:'center'}}> <button
                   className="reportsButton"
                   style={{color:'rgb(114, 155, 37)', borderColor:'rgb(114, 155, 37) !important'}}
-                  onClick={() => tempfunction("email", "returnedTickets")}>
+                  onClick={() => getOptions("email", "returnedTickets")}>
                   <MdEmail size={20} />
           </button></td>
               </tr>

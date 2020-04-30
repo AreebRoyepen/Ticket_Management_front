@@ -329,13 +329,10 @@ export default function Payments() {
       "amount": amount,
       "person": person
     };
-    console.log(x.amount)
     if( (/^\d+(\.\d{2})?$/).test(x.amount) &&(x.person ||  ((/(null|undefined|^$|^\d+$)/).test(x.ticketNumberF)&& x.ticketNumberF>0)))
      {  
-       console.log("off")
         return "trueValid";
       }
-      console.log("on")
     return "falseValid";
   }
 

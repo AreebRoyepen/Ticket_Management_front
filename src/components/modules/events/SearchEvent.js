@@ -24,12 +24,10 @@ export default function SearchEvent (content) {
       items = items.filter((item) => {
         return JSON.stringify(item).toLowerCase().search(event.target.value.toLowerCase()) !== -1;
       });
-      console.log(items)
       setItems(items);
     }
 
     const allButtons = (x) =>{
-      console.log(x);
         return (
           <div>
             <input

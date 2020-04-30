@@ -60,13 +60,11 @@ export default function ReportEndpoints(props) {
             var time = 6000
 
             if(x.param2 == "download"){
-                console.log("bob")
                 setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
                 setOpenSnackbar({severity : "success", message : "Report to download shortly", open : true, time : time, closeType : closeSnack})
 
                 if(x.endpoint == "eventsOutstanding"){
 
-                    console.log("bob")
                     let t = await Api.reportDownloadRequest("eventsOutstanding",x.param1, x.param2) 
                     console.log(t)
                     if(t.message === "success"){

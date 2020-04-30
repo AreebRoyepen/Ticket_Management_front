@@ -23,7 +23,6 @@ export default function SearchPeople (content) {
     items = items.filter((item) => {
       return JSON.stringify(item).toLowerCase().search(event.target.value.toLowerCase()) !== -1;
     });
-    console.log(items)
     setItems(items);
   }
 
