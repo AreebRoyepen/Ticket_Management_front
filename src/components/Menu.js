@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link , useHistory, useLocation} from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,6 +15,7 @@ import ListItem from '@material-ui/core/ListItem';
 import { TiTicket } from "react-icons/ti";
 import {MdEvent, MdDashboard,MdPeople, MdAssignment, MdContacts, MdVerifiedUser} from "react-icons/md";
 import useModal from 'react-hooks-use-modal';
+import Api from "../api/Api";
 
 import "../styles/menu.css";
 
@@ -70,10 +71,18 @@ export default function Menu({children}) {
   const open = Boolean(anchorEl);
   const [user, setUser] = React.useState(null)
   const [openM, setOpenModal] = React.useState()
+  
+  const isMounted = useRef(true)
 
   let history = useHistory();
   let location = useLocation();
 
+//clean up function
+  useEffect(() => {
+    return () => { 
+      isMounted.current = false
+    }
+  }, [])
 
   const [Modal, openModal, closeModal, isOpen] = useModal('root', {
     preventScroll: true,
@@ -86,10 +95,10 @@ export default function Menu({children}) {
       <div style={maskStyle}>
         <div style={modalStyle}>
           <h1>Your Session Is About To Expire</h1>
-          <p>Complete your transaction and log in again please</p>
+          <p>Click OK to stay logged in</p>
           <input
             type="submit"
-            value="Close"
+            value="OK"
             name="button"
             className="cardButtons"
             onClick={closeModal}
@@ -104,26 +113,45 @@ export default function Menu({children}) {
 
     //upon setting user to local storage
     //start timeout for session expiry popup (5 min before token expires)
-    if(localStorage.user)
+    if(localStorage.user){
+
       setUser(JSON.parse(localStorage.user))
-      setTimeout(() =>{
+      
+      var id = setInterval(() =>{
         setOpenModal(openModal); 
         
-        //once the pop up opens, start a timeout for the remaining time
-        //then log user out 
-        setTimeout(() =>{ if(closeModal){
-                            console.log(location)
-                            console.log(window.location.href)
-                            var loc = window.location.href.toString().split("/");
-                             
-                            history.push("/", { last: loc[loc.length-1] }); 
-                            localStorage.clear()
-                          } 
-                        }, ((10)* 1000))
-      }
-      , ((localStorage.expiration -10)* 1000));      
+        async function fetchData(){
+                        
+          let x = await Api.refresh("refresh")
+          console.log(x)
+          
+          if(x.message === "success"){
 
-  },[setUser, setOpenModal])
+            console.log("refreshed")
+                                    
+          }else if (x.message === "unauthorized"){
+            localStorage.clear();
+            history.push("/")
+
+          }
+      }
+          
+      
+
+      fetchData() 
+      
+      if(!isMounted.current) return clearInterval(id)
+
+      }
+      , ((localStorage.expiration -60)* 1000));      
+
+    }else{
+      return
+    }
+
+
+  },[setUser, setOpenModal, isMounted])
+
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);

@@ -52,9 +52,7 @@ static async refresh(endpoint){
     
     return axios.get(uri, {headers : {"Authorization" : localStorage.getItem("token")}})
     .then(resp => {
-        console.log(resp)
-        console.log("BOOOOOOOOOOOOB")
-
+        
         if(resp.status === 200){
             localStorage.setItem("token","Bearer " + resp.data.token)
             return {"message" : "success"}
