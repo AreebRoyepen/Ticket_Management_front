@@ -118,8 +118,7 @@ export default function Menu({children}) {
       setUser(JSON.parse(localStorage.user))
       
       var id = setInterval(() =>{
-        //setOpenModal(openModal); 
-        
+        //setOpenModal(openModal);
         async function fetchData(){
                         
           let x = await Api.refresh("refresh")
@@ -143,7 +142,7 @@ export default function Menu({children}) {
       
 
       }
-      , ((localStorage.expiration -300)* 1000));      
+      , ((parseInt(localStorage.expiration) -(1/2 * parseInt(localStorage.expiration)))* 1000));      
 
       
 
