@@ -212,7 +212,7 @@ export default function Dashboard() {
     }
     s = result[0].slice(0, i) + s;
     result[0] = s;
-    return result.join('.');
+    return result.join('‧');
   }
 
 
@@ -263,7 +263,7 @@ export default function Dashboard() {
                         <Typography
                          
                           className={classes.title}
-                          style={{width:'40%', textAlign:'left',color: '#C1A162', fontSize: "0.8em" }}
+                          style={{ textAlign:'left',color: '#C1A162', fontSize: "1.2em" }}
                           color="textSecondary"
 
                         >
@@ -271,7 +271,7 @@ export default function Dashboard() {
                         </Typography>
                         <Typography
                           className={classes.title}
-                          style={{width:'40%', textAlign:'left',color: '#C1A162', fontSize: "0.8em" }}
+                          style={{ textAlign:'left',color: '#C1A162', fontSize: "1.2em" }}
                           color="#729B25"
 
                         >
@@ -280,14 +280,14 @@ export default function Dashboard() {
                         <Typography
                          
                          className={classes.title}
-                         style={{width:'40%', textAlign:'left',color: '#C1A162', fontSize: "0.8em" }}
+                         style={{textAlign:'left',color: '#C1A162', fontSize: "1.2em" }}
                          color="textSecondary"
 
                        >
                         R {formatCurrency(parseFloat(dData.totalFunds).toFixed(2))}
                        </Typography>
-                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '-30px', color: '#C1A162', fontSize: "0.7em" }}>
-                          from all active events
+                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '-45px', color: '#C1A162', fontSize: "0.9em" }}>
+                          from current  active  events
                         </Typography>
                       </CardContent>
                     </Card></Paper>
@@ -306,7 +306,7 @@ export default function Dashboard() {
                         </Typography>
 
                         <Typography
-                          style={{width:'40%', textAlign:'left',color: '#C1A162', fontSize: "0.8em" }}
+                          style={{textAlign:'left',color: '#C1A162', fontSize: "1.2em" }}
                           variant="h5"
                           component="h2"
 
@@ -314,8 +314,9 @@ export default function Dashboard() {
                           R {formatCurrency(parseFloat(dData.fundsThisYear).toFixed(2))}
 
                         </Typography>
-                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.7em" }}>
-                         Total funds this Year
+      
+                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.9em" }}>
+                         total funds for this year
                         </Typography>
                         
                       </CardContent>
@@ -335,15 +336,15 @@ export default function Dashboard() {
                         </Typography>
 
                         <Typography
-                         style={{width:'40%', textAlign:'left',color: '#C1A162', fontSize: "0.8em" }}
+                         style={{textAlign:'left',color: '#C1A162', fontSize: "1.2em" }}
                           variant="h5"
                           component="h2"
 
                         >
                           {dData.people}
                          </Typography>
-                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.7em" }}>
-                          Total Fundraisers
+                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.9em" }}>
+                          number of fundraisers
                         </Typography>
                       </CardContent>
                     </Card></Paper>
