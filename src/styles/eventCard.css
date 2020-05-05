@@ -133,7 +133,7 @@ input[type=search] {
 
 
 input[type=search]:focus{
-  background-image: url('');
+  background-image: url('#');
 }
 ::placeholder {
   color: #08533C;

@@ -41,9 +41,16 @@ export default function SimplePopover(content) {
 
   let history = useHistory();
   let location = useLocation();
+  var count = 0;
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    count = count + 1;
+    if(count > 1)
+    {
+      setAnchorEl(event.currentTarget);
+      count = 0;
+    }
+    
   };
 
   const handleClose = () => {

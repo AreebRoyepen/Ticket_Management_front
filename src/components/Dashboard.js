@@ -80,7 +80,6 @@ export default function Dashboard() {
   const [connection, setConnection] = useState(false)
 
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   let history = useHistory();
   let location = useLocation()

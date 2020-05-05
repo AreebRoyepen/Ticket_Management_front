@@ -13,7 +13,7 @@ import MenuUI from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
 import { TiTicket } from "react-icons/ti";
-import {MdEvent, MdDashboard,MdPeople, MdAssignment, MdContacts, MdVerifiedUser} from "react-icons/md";
+import {MdEvent, MdDashboard,MdPeople, MdContacts, MdVerifiedUser} from "react-icons/md";
 import useModal from 'react-hooks-use-modal';
 import Api from "../api/Api";
 
