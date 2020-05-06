@@ -577,6 +577,16 @@
   float: left; 
 }
 
+@media screen and (min-height: 50px)
+{
+  .btn-group {
+    padding: 10px 12px;
+    cursor: pointer;
+    float: left;
+}
+}
+
+
 .btn-group:after {
   content: "";
   clear: both;
