@@ -143,10 +143,6 @@ export default function EventPage() {
       fetchData()
 
 
-      // once the request is sent, update state again
-      if (isMounted.current) // only update if we are still mounted
-        setIsSending(false)
-
     }, [isSending, to, from,price, name, location, history, errorClose, successClose]); // update the callback if the state changes
 
     const back = () =>{ history.push("/Events"); }

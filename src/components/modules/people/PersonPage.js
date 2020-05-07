@@ -161,12 +161,6 @@ export default function PersonPage() {
 
       fetchData()
 
-
-
-      // once the request is sent, update state again
-      if (isMounted.current) // only update if we are still mounted
-        setIsSending(false)
-
     }, [isSending,name, surname,number, email, location, history]); // update the callback if the state changes
 
     
