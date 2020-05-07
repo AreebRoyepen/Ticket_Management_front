@@ -5,10 +5,12 @@ html {
   font-size: 14px;
   font-weight: 500;
     overflow-x: hidden; 
+    
 }
 
 *, *:before, *:after {
   box-sizing: inherit;
+  
 }
 
 input[type=search] {
@@ -246,6 +248,7 @@ input[type=search]:focus{
   margin: 2% 0 auto 3%;
   width: 100%;
   z-index: -1;
+  
 }
 
 .u-float-right

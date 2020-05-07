@@ -3,6 +3,9 @@ body {
   font-family: 'Avenir Book', 'Arial Book', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-transform : 1; 
+-ms-transform : 1; 
+ transform : 1 ;
 }
 
 code {

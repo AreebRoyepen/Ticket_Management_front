@@ -229,11 +229,7 @@ export default function Dashboard() {
 
 
         <div>
-          <meta
-            name="viewport"
-            content="width=device-width, user-scalable=no"
-          />
-
+          
           <header
             className="dashboardHeader"
             name="viewport"
