@@ -314,9 +314,6 @@ export default function Payments() {
 
     fetchData();
 
-    // once the request is sent, update state again
-    if (isMounted.current) // only update if we are still mounted
-      setIsSending(false)
 
   }, [isSending, ticketNumberF, ticketNumberT, history, bulk, location, person, amount, payOption, successClose, errorClose]); // update the callback if the state changes
 

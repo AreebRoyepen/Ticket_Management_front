@@ -186,10 +186,6 @@ export default function ReturnTickets() {
       
       fetchData()
 
-      // once the request is sent, update state again
-      if (isMounted.current) // only update if we are still mounted
-        setIsSending(false)
-
     }, [isSending, ticketNumberF, ticketNumberT, bulk, history, location, successClose, errorClose]); // update the callback if the state changes
 
     const back = () =>{

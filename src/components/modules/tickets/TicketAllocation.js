@@ -324,10 +324,6 @@ export default function TicketAllocation() {
     fetchData()
 
 
-    // once the request is sent, update state again
-    if (isMounted.current) // only update if we are still mounted
-      setIsSending(false)
-
   }, [isSending, ticketNumberF, ticketNumberT, person, bulk, history, location, amount, paid, errorClose, successClose]); // update the callback if the state changes
 
   const back = () => {
@@ -347,7 +343,6 @@ export default function TicketAllocation() {
       "bulk":bulk,
       "ticketNumberT":ticketNumberT
     };
-    console.log(x.amount)
 
     if(x.person && ((/(null|undefined|^$|^\d+$)/).test(x.ticketNumberF)&& x.ticketNumberF>0))
     {
