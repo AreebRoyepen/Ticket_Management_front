@@ -155,7 +155,7 @@ export default function SimplePopover(content) {
           </Snackbar>
         </div>
 
-        <Typography className={classes.typography}>Are you sure you want to  {var3.active ?"close" : "open"} {var3.name}?</Typography>
+        <Typography className={classes.typography}>Are you sure you want to  {var3.active ?"close" : "open"} <strong>{var3.name}</strong>?</Typography>
         <input
           type="submit"
           value="confirm"
