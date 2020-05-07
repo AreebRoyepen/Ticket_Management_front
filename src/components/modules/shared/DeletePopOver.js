@@ -38,6 +38,7 @@ export default function SimplePopover(props) {
   const [var3, setVar3] = useState(props.content);
   const [type, setType] = useState(props.type)
   const [isSending, setIsSending] = useState(false)
+  const [success, setSuccess] = useState(false)
   const isMounted = useRef(true)
 
   let history = useHistory();
@@ -56,7 +57,9 @@ export default function SimplePopover(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
-    //window.location.reload(false);
+    if(success){
+      window.location.reload(false);
+    }
   };
 
   const close = (event, reason) => {
@@ -83,13 +86,14 @@ export default function SimplePopover(props) {
 
     async function fetchData(){
 
-      var time =5000
+      var time =3000
 
       if(type === "Event"){
 
         let resp = await Api.deleteRequest("deleteEvent/"+var3.id)
         console.log(resp)
         if(resp.message === "success"){
+          setSuccess(true)
           setOpenSnackbar({severity : "success", message : "Successfully Deleted", open : true, time : time, closeType : close})
           
         }else if (resp.message === "unauthorized"){
@@ -107,6 +111,10 @@ export default function SimplePopover(props) {
           time = 6000
           setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : close})
           
+        }else{
+          time = 6000
+          setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : close})
+
         }
         
 
@@ -116,6 +124,7 @@ export default function SimplePopover(props) {
         let resp =await Api.deleteRequest("deletePerson/"+var3.id)
         console.log(resp)
         if(resp.message === "success"){
+          setSuccess(true)
           setOpenSnackbar({severity : "success", message : "Successfully Deleted", open : true, time : time, closeType : close})
           
         }else if (resp.message === "unauthorized"){
@@ -146,12 +155,6 @@ export default function SimplePopover(props) {
     }
 
     fetchData()
-
-
-
-    // once the request is sent, update state again
-    if (isMounted.current) // only update if we are still mounted
-      setIsSending(false)
 
   }, [isSending, location, history]); // update the callback if the state changes
 
@@ -193,6 +196,7 @@ export default function SimplePopover(props) {
           value="confirm"
           name="button"
           onClick={deleteRequest}
+          disabled = {isSending}
           className="cardButtons event-right-delete card-link u-float-right"
           id={JSON.stringify(var3.active)}
         />
@@ -201,6 +205,7 @@ export default function SimplePopover(props) {
           value="cancel"
           name="button"
           className="cardButtons event-right-delete  card-link u-float-right"
+          disabled = {isSending}
           id={JSON.stringify(var3.active)}
           onClick={handleClose}
         />
