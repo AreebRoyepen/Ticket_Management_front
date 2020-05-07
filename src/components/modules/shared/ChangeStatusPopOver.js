@@ -37,6 +37,7 @@ export default function SimplePopover(content) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [var3, setVar3] = useState(content.content);
   const [isSending, setIsSending] = useState(false)
+  const [success, setSuccess] = useState(false)
   const isMounted = useRef(true)
 
   let history = useHistory();
@@ -55,7 +56,9 @@ export default function SimplePopover(content) {
 
   const handleClose = () => {
     setAnchorEl(null);
-    //window.location.reload(false);
+    if(success){
+      window.location.reload(false);
+    }
   };
 
   const close = (event, reason) => {
@@ -92,6 +95,7 @@ export default function SimplePopover(content) {
         let resp = await Api.putRequest("updateEvent/"+var3.id,x)
         console.log(resp)
         if(resp.message === "success"){
+          setSuccess(true)
           if(x.active) setOpenSnackbar({severity : "success", message : "Successfully Opened", open : true, time : time, closeType : close})
           else setOpenSnackbar({severity : "success", message : "Successfully Closed", open : true, time : time, closeType : close})
 
@@ -116,12 +120,6 @@ export default function SimplePopover(content) {
     }
 
     fetchData()
-
-
-
-    // once the request is sent, update state again
-    if (isMounted.current) // only update if we are still mounted
-      setIsSending(false)
 
   }, [isSending, location, history]); // update the callback if the state changes
 
@@ -163,6 +161,7 @@ export default function SimplePopover(content) {
           value="confirm"
           name="button"
           className="cardButtons event-right-delete card-link u-float-right"
+          disabled = {isSending}
           onClick = {deleteRequest}
           id={JSON.stringify(var3.active)}
         />
@@ -171,6 +170,7 @@ export default function SimplePopover(content) {
           value="cancel"
           name="button"
           className="cardButtons event-right-delete  card-link u-float-right"
+          disabled = {isSending}
           id={JSON.stringify(var3.active)}
           onClick={handleClose}
         />
