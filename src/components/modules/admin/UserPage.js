@@ -144,7 +144,7 @@ export default function UserPage() {
 
         if(location.state.edit){
 
-          let resp = await Api.putRequest("updatePerson/"+location.state.x.id,x)
+          let resp = await Api.putRequest("updateUser/"+location.state.x.id,x)
           console.log(resp)
           if(resp.message === "success"){
             
@@ -165,6 +165,10 @@ export default function UserPage() {
             time = 6000
             setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
             
+          }else{
+            time = 6000
+            setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : errorClose})
+            window.location.reload(false);
           }
           
   
@@ -195,7 +199,7 @@ export default function UserPage() {
           }else{
             time = 6000
             setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : errorClose})
-
+            window.location.reload(false);
           }
         
         

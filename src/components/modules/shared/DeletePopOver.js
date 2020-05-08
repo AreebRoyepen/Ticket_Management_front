@@ -114,7 +114,7 @@ export default function SimplePopover(props) {
         }else{
           time = 6000
           setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : close})
-
+          window.location.reload(false);
         }
         
 
@@ -146,7 +146,7 @@ export default function SimplePopover(props) {
         }else{
           time = 6000
           setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : close})
-
+          window.location.reload(false);
         }
       
       

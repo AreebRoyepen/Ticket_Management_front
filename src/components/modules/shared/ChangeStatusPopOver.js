@@ -115,6 +115,10 @@ export default function SimplePopover(content) {
           time = 6000
           setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : close})
           
+        }else{
+          time = 6000
+          setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : close})
+          window.location.reload(false);
         }
       
     }

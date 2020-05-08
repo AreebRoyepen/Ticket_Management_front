@@ -210,6 +210,10 @@ export default function Payments() {
           time = 6000
           setOpenSnackbar({ severity: "error", message: "Request timed out. Please Try Again", open: true, time: time, closeType: errorClose })
 
+        }else{
+          time = 6000
+          setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : errorClose})
+          window.location.reload(false);
         }
 
       } else {
@@ -261,7 +265,7 @@ export default function Payments() {
           } else {
             time = 6000
             setOpenSnackbar({ severity: "warning", message: resp.message, open: true, time: time, closeType: errorClose })
-
+            window.location.reload(false);
           }
 
         } else {
@@ -304,7 +308,7 @@ export default function Payments() {
           } else {
             time = 6000
             setOpenSnackbar({ severity: "warning", message: resp.message, open: true, time: time, closeType: errorClose })
-
+            window.location.reload(false);
           }
         }
       }

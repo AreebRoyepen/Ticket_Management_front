@@ -214,6 +214,10 @@ export default function TicketAllocation() {
               time = 6000
               setOpenSnackbar({ severity: "error", message: "Request timed out. Please Try Again", open: true, time: time, closeType: errorClose })
 
+            }else{
+              time = 6000
+              setOpenSnackbar({severity : "warning", message : p.message, open : true, time : time, closeType : errorClose})
+              window.location.reload(false);
             }
           } else {
             setOpenSnackbar({ severity: "success", message: "Allocation Successful", open: true, time: time, closeType: successClose })
@@ -239,7 +243,7 @@ export default function TicketAllocation() {
         } else {
           time = 6000
           setOpenSnackbar({ severity: "warning", message: t.message, open: true, time: time, closeType: errorClose })
-
+          window.location.reload(false);
         }
 
       } else {
@@ -290,6 +294,10 @@ export default function TicketAllocation() {
               time = 6000
               setOpenSnackbar({ severity: "error", message: "Request timed out. Please Try Again", open: true, time: time, closeType: errorClose })
 
+            }else{
+              time = 6000
+              setOpenSnackbar({severity : "warning", message : pay.message, open : true, time : time, closeType : errorClose})
+              window.location.reload(false);
             }
           } else {
             setOpenSnackbar({ severity: "success", message: "Allocation Successful", open: true, time: time, closeType: successClose })
@@ -315,7 +323,7 @@ export default function TicketAllocation() {
         } else {
           time = 6000
           setOpenSnackbar({ severity: "warning", message: t.message, open: true, time: time, closeType: errorClose })
-
+          window.location.reload(false);
         }
       }
 

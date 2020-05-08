@@ -120,6 +120,10 @@ export default function People(){
               time = 6000
               setOpenSnackbar({severity : "error", message : "Request timed out. Please Try Again", open : true, time : time, closeType : errorClose})
               
+            }else{
+              time = 6000
+              setOpenSnackbar({severity : "warning", message : resp.message, open : true, time : time, closeType : errorClose})
+              window.location.reload(false);
             }
                    
   

@@ -85,7 +85,9 @@ export default function ReturnTickets() {
         }else if(x.message === "no connection"){
           setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
         }else{
-          setOpenSnackbar({severity : "error", message : "Check your internet connection", open : true, time : time, closeType : errorClose})
+          time = 6000
+          setOpenSnackbar({severity : "warning", message : x.message, open : true, time : time, closeType : errorClose})
+          window.location.reload(false);
         }
       }
 
@@ -145,7 +147,7 @@ export default function ReturnTickets() {
           }else{
             time = 6000
             setOpenSnackbar({severity : "warning", message : t.message, open : true, time : time, closeType : errorClose})
-
+            window.location.reload(false);
           }
 
         }else{
@@ -177,7 +179,7 @@ export default function ReturnTickets() {
           }else{
             time = 6000
             setOpenSnackbar({severity : "warning", message : t.message, open : true, time : time, closeType : errorClose})
-
+            window.location.reload(false);
           }
 
         }        
