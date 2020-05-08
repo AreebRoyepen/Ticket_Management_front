@@ -216,7 +216,7 @@ export default function Dashboard() {
 
 
   return (
-    <div>
+    <div style = {{  overflowX: 'hidden'}}>
       {console.log(dData.funds)}
       {console.log(dData.totalFunds)}
       {console.log(dData.totalTickets)}

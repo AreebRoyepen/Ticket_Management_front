@@ -224,7 +224,7 @@ export default function ReturnTickets() {
     
     return (
 
-      <div className="App">
+      <div className="App" style = {{  overflowX: 'hidden'}}>
 
         <div className={classes.root}>
             <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>

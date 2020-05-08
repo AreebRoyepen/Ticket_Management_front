@@ -224,13 +224,25 @@ export default function UserPage() {
         "name": name,
         "surname": surname,
         "number": number,
-        "email": email
+        "email": email,
+        "password":password,
+        "password2":password2,
+        "role":role
       };
       var emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
       console.log(x)
       if((/^\D*$/.test(x.name)) && (/^\D*$/.test(x.surname)) && x.number.length >9
        && emailRegex.test(x.email) && !(/(null|undefined|^$|^\d+$)/).test(x.name) && !(/(null|undefined|^$|^\d+$)/).test(x.surname))
-       return "trueValid";
+      {
+        if(x.password+"" === x.password2+"" & x.password2.length > 0 )
+        {
+          if(!(x.role === undefined || x.role == null || x.role.length <= 0))
+          {
+            return "trueValid";
+          }
+        
+        }
+      } 
      return "falseValid";
     }
     
@@ -245,7 +257,7 @@ export default function UserPage() {
 
     return (
      
-      <div>
+      <div style={{marginTop:"100px", overflowX:"hidden"}}> 
 
     <div className={classes.root}>
         <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>

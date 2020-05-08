@@ -195,7 +195,7 @@ export default function PersonPage() {
 
     return (
      
-      <div>
+      <div style = {{  overflowX: 'hidden'}}>
 
     <div className={classes.root}>
         <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
