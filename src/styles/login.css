@@ -22,6 +22,70 @@
   color: #08533C;
 
 }
+/**********************************************************************************/
+
+.users-scrolling
+{
+  margin-top: 0px;
+}
+
+@media (min-width: 1024px) 
+{
+  
+.users-scrolling
+{
+  margin-top: 50px !important;
+}
+}
+
+@media (min-width: 600px) 
+{
+  
+.users-scrolling
+{
+  margin-top: -10px !important;
+}
+}
+
+@media (min-width: 300px) 
+{
+  
+.users-scrolling
+{
+  margin-top: 100px !important;
+}
+}
+
+
+@media (min-height: 800px) 
+{
+  
+.users-scrolling
+{
+  margin-top: 30px !important;
+}
+}
+
+@media (min-height: 200px) 
+{
+  
+.users-scrolling
+{
+  margin-top: 50px !important;
+}
+}
+
+
+@media (min-width: 320px) 
+{
+  
+.users-scrolling
+{
+  margin-top: 150px !important;
+}
+}
+
+/*************************************************************************************/
 
 #validate-password-false{
   display: none;

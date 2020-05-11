@@ -13,6 +13,27 @@ html {
   
 }
 
+
+/*************************************************************************/
+
+.noCard {
+  margin-top: 150px;
+  color: #08533C;
+  font-size: 1.8em;
+  font-weight: bold;
+  font-family:  'Avenir Book', 'Arial Book', sans-serif;
+  text-shadow: 
+    0 1px 0 white, 
+    0 2px 0 white, 
+    0 3px 0 white, 
+    0 4px 0 white;
+    text-align: center;
+}
+
+
+
+/**********************************************************************/
+
 input[type=search] {
 
   background-image: url('../search.png');

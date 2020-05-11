@@ -5,6 +5,7 @@ import Loading from '../shared/LazyLoadingIcon';
 import DeletePopOver from "../shared/DeletePopOver";
 import ChangeStatusPopOver from "../shared/ChangeStatusPopOver";
 import "../../../styles/eventCard.css";
+import NoCard from "./../shared/NoCard"
 
 export default function SearchEvent (content) {
   
@@ -87,7 +88,9 @@ export default function SearchEvent (content) {
 
  
       return (
+   
         <div>
+          {items ? (<div>
           <input
             className="searchBoxStyle"
             type="search"
@@ -144,6 +147,7 @@ export default function SearchEvent (content) {
               </LazyLoad>
             ))}
           </div>
+        </div>):(<NoCard></NoCard>)}
         </div>
       );
     

@@ -257,7 +257,7 @@ export default function UserPage() {
 
     return (
      
-      <div style={{marginTop:"100px", overflowX:"hidden"}}> 
+      <div className="users-scrolling"> 
 
     <div className={classes.root}>
         <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>

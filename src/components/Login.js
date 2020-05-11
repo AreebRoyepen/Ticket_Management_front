@@ -7,6 +7,7 @@ import { purple } from "@material-ui/core/colors";
 import Api from "../api/Api";
 import "../styles/login.css";
 
+
 function Alert(props) {
   return <MuiAlert elevation={6} {...props} />;
 }
@@ -109,7 +110,7 @@ export default function Login ()  {
 
     
     return (
-      <div className="App">
+     <div className="App">
 
         <div className={classes.root}>
             <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
