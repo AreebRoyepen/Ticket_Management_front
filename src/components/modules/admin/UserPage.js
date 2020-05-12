@@ -236,7 +236,7 @@ export default function UserPage() {
       {
         if(x.password+"" === x.password2+"" & x.password2.length > 0 )
         {
-          if((/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\^*])(?=.{7,})/.test(x.password)))
+          if((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(x.password)))
           {
             if(!(x.role === undefined || x.role == null || x.role.length <= 0))
           {
@@ -246,13 +246,6 @@ export default function UserPage() {
         }
       } 
      return "falseValid";
-     /********************************* 
-      (?=.*[a-z])	 must contain at least 1 lowercase letter
-      (?=.*[A-Z])	 must contain at least 1 uppercase letter
-      (?=.*[0-9])	 must contain at least 1 number
-      (?=.*[!@#$%^&*]) must contain at least one special character
-      (?=.{7,})greater that 7
-     ************************************ */
     }
     
     
@@ -329,16 +322,16 @@ export default function UserPage() {
 
     <div>
 		<label htmlFor="password" className="form__label ">Password</label>
-		<input required type="password" className="form__input inputValText" name="text" placeholder="1234" value = {password}  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#^*])(?=.{7,})"
+		<input required type="password" className="form__input inputValText" name="text" placeholder="1234" value = {password}  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
         onChange={ e => setPassword(e.target.value)} />
     </div>
 
     <div>
 		<label htmlFor="password" className="form__label ">Re-enter Password</label>
-		<input required type="password" className="form__input inputValText" name="text" placeholder="1234" value = {password2}  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\^*])(?=.{7,})"
+		<input required type="password" className="form__input inputValText" name="text" placeholder="1234" value = {password2}  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
         onChange={ e => setPassword2(e.target.value)} />
-		<div className="form__requirements">
-      password is required, must match and must be greater than 7 character, 1 number one upercase and contain at least '!@#\^*'
+		<div className="form__requirements" style={{marginBottom:'10px'}}>
+      password is required, must match and must be greater than 8 characters, one number and one upercase
     </div>
     </div>
 
