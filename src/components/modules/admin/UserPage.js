@@ -223,6 +223,7 @@ export default function UserPage() {
       var x = {
         "name": name,
         "surname": surname,
+        "username": username,
         "number": number,
         "email": email,
         "password":password,
@@ -231,10 +232,10 @@ export default function UserPage() {
       };
       var emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
       console.log(x)
-      if((/^\D*$/.test(x.name)) && (/^\D*$/.test(x.surname)) && x.number.length >9
+      if((/^\D*$/.test(x.name)) && (/^\D*$/.test(x.surname)) && x.number.length >9 & (/^\S*$/.test(x.username))
        && emailRegex.test(x.email) && !(/(null|undefined|^$|^\d+$)/).test(x.name) && !(/(null|undefined|^$|^\d+$)/).test(x.surname))
       {
-        if(x.password+"" === x.password2+"" & x.password2.length > 0 )
+        if(x.password+"" === x.password2+"" & x.password2.length > 0  )
         {
           if((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(x.password)))
           {
@@ -313,10 +314,10 @@ export default function UserPage() {
 
     <div>
 		<label htmlFor="text" className="form__label ">Username</label>
-		<input required type="text" className="form__input inputValText" name="text" placeholder="doe123" value = {username}
+    <input required type="text" className="form__input inputValText" name="text" placeholder="doe123" value = {username} pattern="^\S*$"
         onChange={ e => setUsername(e.target.value)} />
 		<div className="form__requirements">
-      username is required
+      username is required and must not contain any spaces
     </div>
     </div>
 
