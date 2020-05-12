@@ -236,14 +236,23 @@ export default function UserPage() {
       {
         if(x.password+"" === x.password2+"" & x.password2.length > 0 )
         {
-          if(!(x.role === undefined || x.role == null || x.role.length <= 0))
+          if((/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{7,})/.test(x.password)))
+          {
+            if(!(x.role === undefined || x.role == null || x.role.length <= 0))
           {
             return "trueValid";
           }
-        
+          }
         }
       } 
      return "falseValid";
+     /********************************* 
+      (?=.*[a-z])	 must contain at least 1 lowercase letter
+      (?=.*[A-Z])	 must contain at least 1 uppercase letter
+      (?=.*[0-9])	 must contain at least 1 number
+      (?=.*[!@#$%^&*]) must contain at least one special character
+      (?=.{7,})greater that 7 characters
+     ************************************ */
     }
     
     
