@@ -59,7 +59,7 @@ export default function Reports() {
 
         <div className="makeRow">
 
-          <h1 className="h1Dashboard" >Select Events to Report On:</h1>
+          <h1 className="h1Dashboard" >Select Events To Report On:</h1>
           <RadioGroup row  className="makeRow" value={selectedOption} onChange={handleChange}>
             <FormControlLabel value="All"
               control={<Radio
