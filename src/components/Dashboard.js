@@ -80,6 +80,7 @@ export default function Dashboard() {
   const [connection, setConnection] = useState(false)
 
   const classes = useStyles();
+  var today = new Date();
 
   let history = useHistory();
   let location = useLocation()
@@ -238,130 +239,18 @@ export default function Dashboard() {
             <h2 className="h2Dashboard"></h2>
             <h1 className="h1Dashboard">Dashboard</h1>
           </header>
-
-          <div id="dashboard-box-shadow">
-            <div className={classes.root}>
-              <Grid container spacing={2} id="dashboard-box-shadow">
-                <Grid item xs id="dashboard-box-shadow">
-                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
-                    <Card className={classes.card} style={{ boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),0 12.5px 10px rgba(0, 0, 0, 0.06),0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),0 100px 80px rgba(0, 0, 0, 0.12)' }} variant="outlined">
-                      <CardContent style={{ borderLeft: 'solid 15px #C1A162' }}>
-                        <MdAccountBalance size={60} color="#08533C" style={{ marginLeft: '70%' }} />
-                        <Typography
-                          className={classes.title}
-                          style={{ marginTop: '-67px', marginRight: '90%', color: '#2D6409', fontSize: "2em" }}
-                          color="textSecondary"
-                        >
-                          Collected
-                        </Typography>
-
-                        <Typography
-                         
-                          className={classes.title}
-                          style={{ textAlign:'left',color: '#C1A162', fontSize: "1.2em" }}
-                          color="textSecondary"
-
-                        >
-                          R {formatCurrency(parseFloat(dData.funds).toFixed(2))}
-                        </Typography>
-                        <Typography
-                          className={classes.title}
-                          style={{ textAlign:'left',color: '#C1A162', fontSize: "1.2em" }}
-                          color="#729B25"
-
-                        >
-                        of
-                         </Typography>
-                        <Typography
-                         
-                         className={classes.title}
-                         style={{textAlign:'left',color: '#C1A162', fontSize: "1.2em" }}
-                         color="textSecondary"
-
-                       >
-                        R {formatCurrency(parseFloat(dData.totalFunds).toFixed(2))}
-                       </Typography>
-                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '-45px', color: '#C1A162', fontSize: "0.9em" }}>
-                          from current  active  events
-                        </Typography>
-                      </CardContent>
-                    </Card></Paper>
-                </Grid>
-                <Grid item xs id="dashboard-box-shadow">
-                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }} >
-                    <Card className={classes.card} style={{ boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),0 12.5px 10px rgba(0, 0, 0, 0.06),0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),0 100px 80px rgba(0, 0, 0, 0.12)' }} variant="outlined">
-                      <CardContent style={{ borderLeft: 'solid 15px #729B25' }}>
-                        <MdAttachMoney size={60} color=" #729B25" style={{ marginLeft: '70%' }} />
-                        <Typography
-                          className={classes.title}
-                          style={{ marginTop: '-67px', marginRight: '90%', color: '#2D6409', fontSize: "2em" }}
-                          color="textSecondary"
-                        >
-                          Collected
-                        </Typography>
-
-                        <Typography
-                          style={{textAlign:'left',color: '#C1A162', fontSize: "1.2em" }}
-                          variant="h5"
-                          component="h2"
-
-                        >
-                          R {formatCurrency(parseFloat(dData.fundsThisYear).toFixed(2))}
-
-                        </Typography>
-      
-                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.9em" }}>
-                         total funds for this year
-                        </Typography>
-                        
-                      </CardContent>
-                    </Card></Paper>
-                </Grid>
-                <Grid item xs id="dashboard-box-shadow">
-                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
-                    <Card className={classes.card} style={{ boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),0 12.5px 10px rgba(0, 0, 0, 0.06),0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),0 100px 80px rgba(0, 0, 0, 0.12)' }} variant="outlined">
-                      <CardContent style={{ borderLeft: 'solid 15px #866F3E' }}>
-                        <MdSupervisorAccount size={60} color="#866F3E" style={{ marginLeft: '70%' }} />
-                        <Typography
-                          className={classes.title}
-                          style={{ marginTop: '-67px', marginRight: '90%', color: '#2D6409', fontSize: "2em" }}
-                          color="textSecondary"
-                        >
-                          People
-                        </Typography>
-
-                        <Typography
-                         style={{textAlign:'left',color: '#C1A162', fontSize: "1.2em" }}
-                          variant="h5"
-                          component="h2"
-
-                        >
-                          {dData.people}
-                         </Typography>
-                        <Typography className={classes.pos} color="textSecondary" style={{ marginLeft: '70%', marginTop: '5px', color: '#C1A162', fontSize: "0.9em" }}>
-                          number of fundraisers
-                        </Typography>
-                      </CardContent>
-                    </Card></Paper>
-                </Grid>
-
-
-              </Grid>
-
-            </div>
-
-          </div>
-
-
           <div id="dashboard-box-shadow">
             <div className={classes.root}>
               <Grid container spacing={2} id="dashboard-box-shadow">
 
-                <Grid item  xs={12} sm={6} id="dashboard-box-shadow" style={{ backgroundColor: '#ffffff00' }}>
-                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
-                    <Card className={classes.card} style={{ boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),0 12.5px 10px rgba(0, 0, 0, 0.06),0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),0 100px 80px rgba(0, 0, 0, 0.12)' }} variant="outlined">
-                      <CardContent>
-                        <div className=" chart-wrapper">
+                <Grid item  xs id="dashboard-box-shadow" style={{ backgroundColor: '#ffffff00' }}>
+                  <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00', textAlign: 'left' }}>
+                    <div class='widget'>
+                      <header>
+                        <h3>Quick Stats</h3>
+                      </header>
+                      <div class='chart'>
+                      <div className=" chart-wrapper">
                           <Doughnut
                             data={data}
                             options={{
@@ -385,11 +274,38 @@ export default function Dashboard() {
                             }}
                           />
                         </div>
-                      </CardContent>
-                    </Card>
+                    </div>
+                      <div class='info'>
+                      <div class="section section-info">
+                          <span class="info-time" style={{color:"#C1A162"}}>{today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()}</span>
+                          <h3 class="info-title h3-card-special" style={{marginTop:'8px'}}> <MdAccountBalance size={15} color="#08533C"style={{marginRight:'5px'}} />Collected</h3>
+                          <div class="info-block" style={{marginTop:'-15px'}}>
+                            <dl>
+                              <dt>  R {formatCurrency(parseFloat(dData.funds).toFixed(2))} of R {formatCurrency(parseFloat(dData.totalFunds).toFixed(2))}</dt>
+                              <dd>from current active events</dd>
+                            </dl>
+                          </div>
+                          <h3 class="info-title h3-card-special" style={{color:'rgb(114, 155, 37)', marginTop:'77px'}}>  <MdAttachMoney size={17} color=" #729B25" style={{marginRight:'5px'}} />Collected</h3>
+                          <div class="info-block" style={{marginTop:'-15px', backgroundColor:'rgba(114, 155, 37, 0.274)', color:'rgb(114, 155, 37)'}}>
+                            <dl>
+                              <dt> R {formatCurrency(parseFloat(dData.fundsThisYear).toFixed(2))}</dt>
+                              <dd>Total Funds This Year</dd>
+                            </dl>
+                          </div>
+                          <div class="info-aapl">
+                            <div style={{color:'rgb(134, 111, 62)'}}>
+                            <h3 class="info-title h3-card-special" style={{ marginTop:'7px'}}> <MdSupervisorAccount size={18} color="#866F3E" style={{marginRight:'5px'}} />People</h3>
+                              <h5 style={{marginTop:'-15px', textAlign:"left", fontSize:'1em'}}>{dData.people}</h5>
+                            </div>
+                          </div>
+                          <div class="section"></div>
+                        </div>
+                      </div>
+                    </div>
+              
                   </Paper>
                 </Grid>
-                <Grid item  xs={12} sm={6} id="dashboard-box-shadow">
+                <Grid item  xs id="dashboard-box-shadow">
                   <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
                     <TableContainer component={Paper} >
                       <Table className={classes.table} aria-label="customized table" >
@@ -401,7 +317,7 @@ export default function Dashboard() {
                         </TableHead>
 
                         <TableBody>
-                          {events.splice(0, 6).map(row => (
+                          {events.splice(0, 5).map(row => (
                             <StyledTableRow key={row.name}>
                               <StyledTableCell component="th" scope="row">
                                 {row.name}
@@ -416,7 +332,7 @@ export default function Dashboard() {
                 </Grid>
                
                 {user.role.id == 1 ? (
-                <Grid item xs id="dashboard-box-shadow">
+                <Grid item xs={12} id="dashboard-box-shadow">
                   <Paper className={classes.paper} style={{ backgroundColor: '#ffffff00' }}>
                   <TableContainer component={Paper} >
 
