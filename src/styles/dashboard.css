@@ -1,3 +1,409 @@
+/****************************************************************************************/
+.container-widget {
+  width: 283px;
+  margin: 0 auto;
+  top: 0;
+}
+
+.widget {
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.widget {
+  width: 100%;
+  max-width: 730px;
+  margin: 0em auto;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+}
+.widget::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.widget header {
+  background: #08533C;
+  padding: 1em 1.5em;
+  border-top: 4px solid #C1A162;
+  color: #fff;
+}
+.widget header h3 {
+  margin: 0;
+  font-size: 1.35em;
+  font-weight: 400;
+}
+.widget .chart {
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+@media only screen and (min-width: 600px) {
+  .widget .chart {
+    float: right;
+    width: 65%;
+    height: 275px;
+  }
+}
+.widget .chart .controls {
+  height: 50px;
+  border-bottom: 1px solid #ccc;
+}
+.widget .chart .controls::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.widget .chart .controls nav {
+  float: left;
+  width: 75%;
+  line-height: 50px;
+  border-right: 1px solid #ccc;
+}
+.widget .chart .controls nav a {
+  display: block;
+  padding: 0 1.5em;
+  text-decoration: none;
+  color: #3c3c3c;
+}
+@media only screen and (min-width: 600px) {
+  .widget .chart .controls nav a {
+    padding: 0 1em;
+  }
+}
+@media only screen and (max-width: 800px) and (min-width:700px) {
+  .widget {
+    width: 200%;
+  }
+  .widget .chart {
+    height: 325px;
+  }
+  .widget .info {
+    height: 325px !important;
+}
+}
+
+@media only screen and (max-width: 1050px) and (min-width:801px) {
+  .widget {
+    width: 200% !important;
+     max-width: 980px !important;
+  }
+  .widget .chart {
+    height: 400px !important;
+}
+  .widget .info {
+    height: 400px !important;
+}
+}
+.widget .chart .controls nav span {
+  display: inline-block;
+  float: right;
+  line-height: 50px;
+  color: #3797d3;
+}
+.widget .chart .controls div {
+  float: left;
+  width: 25%;
+  line-height: 50px;
+  text-align: center;
+}
+.widget .chart .controls div span:first-child {
+  color: #7dd343;
+}
+.widget .chart .controls div span:nth-child(2) {
+  font-weight: 600;
+  font-size: 1.35em;
+  color: #3c3c3c;
+}
+.widget .chart .canvas-container {
+  width: 100%;
+  text-align: center;
+}
+.widget .chart .canvas-container canvas {
+  display: inline;
+  width: 370px;
+  height: 210px;
+  padding: 1em;
+}
+.widget .info {
+  position: relative;
+  width: 100%;
+  height: 275px;
+  background: rgba(193, 161, 98, 0.144);
+}
+@media only screen and (min-width: 600px) {
+  .widget .info {
+    float: left;
+    width: 35%;
+  }
+}
+.widget .info h4 {
+  margin: 0 0 0.35em;
+  padding: 1em 1.5em;
+  font-size: 1em;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #fff;
+}
+.widget .info .info-module {
+  padding: 0 1.5em;
+  font-weight: 400;
+}
+.widget .info .info-module .heading {
+  font-size: 0.85em;
+}
+.widget .info .info-module .heading::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.widget .info .info-module .heading span {
+  display: inline-block;
+  color: #fff;
+}
+.widget .info .info-module .heading span:first-child {
+  float: left;
+}
+.widget .info .info-module .heading span:nth-child(2) {
+  float: right;
+}
+.widget .info .info-module .progress {
+  height: 5px;
+  margin: 0.35em 0 1em;
+  background: #0f3d77;
+  border-radius: 10px;
+}
+.widget .info .info-module .progress:after {
+  content: '';
+  display: block;
+  height: 100%;
+  background: #45b0e6;
+  border-radius: 5px;
+}
+.widget .info .info-module .undergraduate:after {
+  width: 65%;
+  -webkit-animation: undergraduate 2s ease-in-out forwards;
+  animation: undergraduate 2s ease-in-out forwards;
+}
+.widget .info .info-module .graduate:after {
+  width: 30%;
+  -webkit-animation: graduate 2s ease-in-out forwards;
+  animation: graduate 2s ease-in-out forwards;
+}
+.widget .info .info-module .transfer:after {
+  width: 5%;
+  -webkit-animation: transfer 2s ease-in-out forwards;
+  animation: transfer 2s ease-in-out forwards;
+}
+@-webkit-keyframes undergraduate {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 65%;
+  }
+}
+@keyframes undergraduate {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 65%;
+  }
+}
+@-webkit-keyframes graduate {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 30%;
+  }
+}
+@keyframes graduate {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 30%;
+  }
+}
+@-webkit-keyframes transfer {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 5%;
+  }
+}
+@keyframes transfer {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 5%;
+  }
+}
+.widget .info nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.widget .info nav a {
+  display: block;
+  line-height: 50px;
+  text-decoration: none;
+  text-align: center;
+  color: #fff;
+}
+.widget .info nav span:first-child {
+  float: left;
+  width: 75%;
+  background: #49b4e8;
+}
+.widget .info nav span:nth-child(2) {
+  float: left;
+  width: 25%;
+  line-height: 50px;
+  background: #3099dd;
+}
+
+
+
+
+/*
+ * Graph section
+ */
+
+  .graph-info {
+  z-index: 99;
+  position: absolute;
+  font-weight: bold;
+  margin-left: 21px;
+  width: 100px;
+}
+  .graph-info .graph-arrow {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid white;
+  float: left;
+}
+  .graph-info .graph-info-big {
+  font-size: 24px;
+  float: left;
+  margin-left: 3px;
+}
+  .graph-info .graph-info-small {
+  margin-left: 3px;
+  font-size: 12px;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.5);
+  clear: left;
+  margin-left: 8px;
+}
+
+/*
+ * Info Section
+ */
+.h3-card-special {
+  font-size: 18px;
+  margin-top: 2px;
+}
+
+.h4-card-special {
+  font-size: 13px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.section-info {
+  padding: 21px 21px 41px;
+  color: #08533C;
+  overflow: hidden;
+}
+
+.info-time {
+  font-size: 12px;
+}
+
+.info-block {
+  background-color: rgba(45, 100, 9, 0.37);
+  text-align: center;
+  width: 100%;
+  border-radius: 3px;
+  color: #08533C;
+  float: left;
+  padding: 0px 0;
+}
+.info-block.last {
+  margin-left: 1px;
+}
+.info-block dt, .info-block dd {
+  margin: 0;
+  padding: 0;
+  font-size: 0.8em;
+}
+.info-block dt {
+  font-weight: bold;
+
+}
+.info-block dd {
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.info-aapl {
+  float: left;
+}
+.info-aapl ul {
+  margin: 0;
+  padding: 0;
+}
+.info-aapl li {
+  margin: 0;
+  display: block;
+  width: 9px;
+  height: 40px;
+  margin-right: 6px;
+  background-color: #f5f0ec;
+  float: left;
+  position: relative;
+}
+.info-aapl li span {
+  display: block;
+  width: 9px;
+  height: 40px;
+  position: absolute;
+  bottom: 0;
+}
+.info-aapl li span.orange {
+  background-color: #e75e3a;
+}
+.info-aapl li span.green {
+  background-color: #4eaf7c;
+}
+
+.yearly-change {
+  width: 94px;
+  float: right;
+}
+.yearly-change span {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  color: white;
+  background-color: #4eaf7c;
+  text-align: center;
+  border-radius: 3px;
+  font-weight: bold;
+}
+.yearly-change span em {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/***************************************************************************************/
 #dashboard-box-shadow .MuiPaper-elevation1
 {
   box-shadow: none !important;
@@ -73,8 +479,7 @@
     width: 29%;
     height: 300px;
   }
-  
-  /* Simple responsivenss example */
+
   @media (max-width: 700px) {
     .sub.chart-wrapper {
       width: 96%;

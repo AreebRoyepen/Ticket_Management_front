@@ -223,6 +223,7 @@ export default function UserPage() {
       var x = {
         "name": name,
         "surname": surname,
+        "username": username,
         "number": number,
         "email": email,
         "password":password,
@@ -231,16 +232,18 @@ export default function UserPage() {
       };
       var emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
       console.log(x)
-      if((/^\D*$/.test(x.name)) && (/^\D*$/.test(x.surname)) && x.number.length >9
+      if((/^\D*$/.test(x.name)) && (/^\D*$/.test(x.surname)) && x.number.length >9 & (/^\S*$/.test(x.username))
        && emailRegex.test(x.email) && !(/(null|undefined|^$|^\d+$)/).test(x.name) && !(/(null|undefined|^$|^\d+$)/).test(x.surname))
       {
-        if(x.password+"" === x.password2+"" & x.password2.length > 0 )
+        if(x.password+"" === x.password2+"" & x.password2.length > 0  )
         {
-          if(!(x.role === undefined || x.role == null || x.role.length <= 0))
+          if((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(x.password)))
+          {
+            if(!(x.role === undefined || x.role == null || x.role.length <= 0))
           {
             return "trueValid";
           }
-        
+          }
         }
       } 
      return "falseValid";
@@ -257,7 +260,7 @@ export default function UserPage() {
 
     return (
      
-      <div style={{marginTop:"100px", overflowX:"hidden"}}> 
+      <div className="users-scrolling"> 
 
     <div className={classes.root}>
         <Snackbar open={openSnackbar.open} autoHideDuration={openSnackbar.time} onClose={openSnackbar.closeType}>
@@ -311,28 +314,25 @@ export default function UserPage() {
 
     <div>
 		<label htmlFor="text" className="form__label ">Username</label>
-		<input required type="text" className="form__input inputValText" name="text" placeholder="doe123" value = {username}
+    <input required type="text" className="form__input inputValText" name="text" placeholder="doe123" value = {username} pattern="^\S*$"
         onChange={ e => setUsername(e.target.value)} />
 		<div className="form__requirements">
-      username is required
+      username is required and must not contain any spaces
     </div>
     </div>
 
     <div>
 		<label htmlFor="password" className="form__label ">Password</label>
-		<input required type="password" className="form__input inputValText" name="text" placeholder="1234" value = {password}
+		<input required type="password" className="form__input inputValText" name="text" placeholder="1234" value = {password}  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
         onChange={ e => setPassword(e.target.value)} />
-		<div className="form__requirements">
-      password is required
-    </div>
     </div>
 
     <div>
 		<label htmlFor="password" className="form__label ">Re-enter Password</label>
-		<input required type="password" className="form__input inputValText" name="text" placeholder="1234" value = {password2}
+		<input required type="password" className="form__input inputValText" name="text" placeholder="1234" value = {password2}  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
         onChange={ e => setPassword2(e.target.value)} />
-		<div className="form__requirements">
-      password is required
+		<div className="form__requirements" style={{marginBottom:'10px'}}>
+      password is required, must match and must be greater than 8 characters, one number and one upercase
     </div>
     </div>
 
