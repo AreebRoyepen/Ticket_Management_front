@@ -8,7 +8,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormControlLabel, Grid, Switch } from "@material-ui/core";
 import Icon from '@material-ui/icons/AddCircleTwoTone';
-import Api from "../../../api/Api";
+import {getRequest,postRequest} from "../../../api/Api";
 import "../../../styles/login.css";
 import "../../../styles/validationForm.css";
 
@@ -83,7 +83,7 @@ export default function TicketAllocation() {
       let x = location.state.event.id
       var time = 6000
 
-      let t = await Api.getRequest("unallocated/" + x)
+      let t = await getRequest("unallocated/" + x)
       if (t.message === "success") {
         setTickets(t.ticket)
 
@@ -118,7 +118,7 @@ export default function TicketAllocation() {
 
     (async () => {
 
-      let resp = await Api.getRequest("person");
+      let resp = await getRequest("person");
 
       if (resp.message === "success") {
 
@@ -171,7 +171,7 @@ export default function TicketAllocation() {
         };
 
         console.log(allocateBulk)
-        let t = await Api.postRequest("bulkAllocateTicket", allocateBulk)
+        let t = await postRequest("bulkAllocateTicket", allocateBulk)
         console.log(t)
         if (t.message === "success") {
 
@@ -186,7 +186,7 @@ export default function TicketAllocation() {
 
             }
 
-            let p = await Api.postRequest("bulkPayment", pay)
+            let p = await postRequest("bulkPayment", pay)
             console.log(p)
             if (p.message === "success") {
               var message = "Payment Successful"
@@ -254,7 +254,7 @@ export default function TicketAllocation() {
           "person": person.id
         };
 
-        let t = await Api.postRequest("allocateTicket", allocate)
+        let t = await postRequest("allocateTicket", allocate)
         if (t.message === "success") {
 
           if (paid) {
@@ -265,7 +265,7 @@ export default function TicketAllocation() {
               amount: parseFloat(amount)
             }
 
-            let pay = await Api.postRequest("payment", x)
+            let pay = await postRequest("payment", x)
 
             console.log(pay)
             if (pay.message === "success") {

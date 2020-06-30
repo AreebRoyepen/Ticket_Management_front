@@ -17,7 +17,7 @@ import Reports from "./modules/admin/Reports"
 import { LoadingIcon } from "./modules/shared/LoadingIcon";
 import { MdAccountBalance, MdAttachMoney, MdSupervisorAccount } from "react-icons/md";
 import { ErrorPage } from "./modules/shared/ErrorPage";
-import Api from "../api/Api"
+import {getRequest} from "../api/Api"
 import "../styles/dashboard.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -127,7 +127,7 @@ export default function Dashboard() {
 
     async function fetchData() {
 
-      let x = await Api.getRequest("dashboard")
+      let x = await getRequest("dashboard")
 
       console.log(x)
 
@@ -135,7 +135,7 @@ export default function Dashboard() {
 
         setData(x.data)
 
-        let z = await Api.getRequest("availableEvents")
+        let z = await getRequest("availableEvents")
         if (z.message === "success") {
 
           console.log(z)

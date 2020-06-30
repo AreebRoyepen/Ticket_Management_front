@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, useLocation } from "react-router-dom";
 import { LoadingIcon } from "../shared/LoadingIcon";
 import {ErrorPage} from "../shared/ErrorPage";
-import Api from "../../../api/Api";
+import {getRequest, postRequest} from "../../../api/Api";
 import "../../../styles/eventCard.css";
 // import "../styles/eventCard.css";
 
@@ -61,7 +61,7 @@ export default function People(){
 
       async function fetchData(){
 
-        let x = await Api.getRequest("users");
+        let x = await getRequest("users");
         if(x.message === "success"){
             setData(x.user)
             setConnection(true)
@@ -99,7 +99,7 @@ export default function People(){
   
             var time = 3000
   
-            let resp = await Api.postRequest("changeUserStatus",x)
+            let resp = await postRequest("changeUserStatus",x)
             console.log(resp)
             if(resp.message === "success"){
               fetchData()              

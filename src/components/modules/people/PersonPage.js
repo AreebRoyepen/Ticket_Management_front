@@ -3,7 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import Api from "../../../api/Api";
+import {postRequest,putRequest} from "../../../api/Api";
 import "../../../styles/login.css";
 import "../../../styles/validationForm.css";
 
@@ -100,7 +100,7 @@ export default function PersonPage() {
 
         if(location.state.edit){
 
-          let resp = await Api.putRequest("updatePerson/"+location.state.x.id,x)
+          let resp = await putRequest("updatePerson/"+location.state.x.id,x)
           console.log(resp)
           if(resp.message === "success"){
             
@@ -131,7 +131,7 @@ export default function PersonPage() {
   
         }else{
           
-          let resp =await Api.postRequest("addPerson",x)
+          let resp =await postRequest("addPerson",x)
           console.log(resp)
           if(resp.message === "success"){
             setOpenSnackbar({severity : "success", message : "Successfully added", open : true, time : time, closeType : successClose})

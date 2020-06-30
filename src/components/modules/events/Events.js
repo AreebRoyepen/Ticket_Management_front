@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Searchbar from "./SearchEvent";
 import { LoadingIcon } from "../shared/LoadingIcon";
 import {ErrorPage} from "../shared/ErrorPage";
-import Api from "../../../api/Api";
+import {getRequest} from "../../../api/Api";
 import "../../../styles/eventCard.css";
 
 function Alert(props) {
@@ -56,7 +56,7 @@ export default function Events(){
     useEffect(() => {
 
         async function fetchAll(){
-            let x = await Api.getRequest("events")
+            let x = await getRequest("events")
             if(x.message === "success"){
                 setData(x.event);
                 setConnection(true)
@@ -71,7 +71,7 @@ export default function Events(){
         }
 
         async function fetchActive(){
-          let x = await Api.getRequest("availableEvents")
+          let x = await getRequest("availableEvents")
           if(x.message === "success"){
               setData(x.event);
               setConnection(true)

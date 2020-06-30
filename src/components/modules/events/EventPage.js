@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import Api from "../../../api/Api";
+import {putRequest,postRequest} from "../../../api/Api";
 import "../../../styles/login.css";
 import "../../../styles/validationForm.css";
 
@@ -88,7 +88,7 @@ export default function EventPage() {
         var time;
         if(location.state.edit){
 
-          let resp = await Api.putRequest("updateEvent/"+location.state.event.id, x)
+          let resp = await putRequest("updateEvent/"+location.state.event.id, x)
           if(resp.message === "success"){
             time = 3000
             setOpenSnackbar({severity : "success", message : "Successfully edited", open : true, time : time, closeType : successClose})
@@ -116,7 +116,7 @@ export default function EventPage() {
           }
           
         }else{
-          let resp = await Api.postRequest("addEvent",x)
+          let resp = await postRequest("addEvent",x)
           if(resp.message === "success"){
             time = 3000
             setOpenSnackbar({severity : "success", message : "Successfully added", open : true, time : time, closeType : successClose})

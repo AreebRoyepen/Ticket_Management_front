@@ -9,7 +9,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
-import Api from "../../../api/Api";
+import {getRequest,postRequest} from "../../../api/Api";
 import "../../../styles/login.css";
 import "../../../styles/validationForm.css";
 
@@ -82,7 +82,7 @@ export default function Payments() {
 
     (async () => {
 
-      let resp = await Api.getRequest("person");
+      let resp = await getRequest("person");
 
       if (resp.message === "success") {
 
@@ -120,7 +120,7 @@ export default function Payments() {
     async function fetchData() {
       let id = location.state.event.id
 
-      let unpaid = await Api.postRequest("tickets", { event: id })
+      let unpaid = await postRequest("tickets", { event: id })
       console.log(unpaid)
       var time = 6000
 
@@ -181,7 +181,7 @@ export default function Payments() {
 
         }
 
-        let resp = await Api.postRequest("payByPerson", x)
+        let resp = await postRequest("payByPerson", x)
 
         if (resp.message === "success") {
 
@@ -231,7 +231,7 @@ export default function Payments() {
 
           console.log(pay)
 
-          let resp = await Api.postRequest("bulkPayment", pay)
+          let resp = await postRequest("bulkPayment", pay)
           console.log(resp)
 
           if (resp.message === "success") {
@@ -276,7 +276,7 @@ export default function Payments() {
             amount: parseFloat(amount)
           }
 
-          let resp = await Api.postRequest("payment", x)
+          let resp = await postRequest("payment", x)
           console.log(resp)
           if (resp.message === "success") {
             time = 3000

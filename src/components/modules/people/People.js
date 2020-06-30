@@ -6,7 +6,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import Searchbar from "./SearchPeople";
 import { LoadingIcon } from "../shared/LoadingIcon";
 import {ErrorPage} from "../shared/ErrorPage";
-import Api from "../../../api/Api";
+import {getRequest} from "../../../api/Api";
 import "../../../styles/eventCard.css";
 
 
@@ -51,7 +51,7 @@ export default function People(){
     useEffect(() => {
         async function fetchData(){
 
-            let x = await Api.getRequest("person");
+            let x = await getRequest("person");
             if(x.message === "success"){
                 setData(x.person)
                 setConnection(true)

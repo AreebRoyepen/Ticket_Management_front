@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useHistory, useLocation } from 'react-router-dom';
-import Api from "../../../api/Api";
+import {putRequest} from "../../../api/Api";
 import "../../../styles/eventCard.css";
 
 function Alert(props) {
@@ -92,7 +92,7 @@ export default function SimplePopover(content) {
       }
 
 
-        let resp = await Api.putRequest("updateEvent/"+var3.id,x)
+        let resp = await putRequest("updateEvent/"+var3.id,x)
         console.log(resp)
         if(resp.message === "success"){
           setSuccess(true)

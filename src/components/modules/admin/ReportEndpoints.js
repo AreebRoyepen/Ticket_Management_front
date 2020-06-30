@@ -3,7 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import Api from "../../../api/Api";
+import {reportDownloadRequest, reportEmailRequest} from "../../../api/Api";
 import "../../../styles/validationForm.css";
 import "../../../styles/login.css";
 
@@ -65,7 +65,7 @@ export default function ReportEndpoints(props) {
 
                 if(x.endpoint == "eventsOutstanding"){
 
-                    let t = await Api.reportDownloadRequest("eventsOutstanding",x.param1, x.param2) 
+                    let t = await reportDownloadRequest("eventsOutstanding",x.param1, x.param2) 
                     console.log(t)
                     if(t.message === "success"){
                         setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
@@ -103,7 +103,7 @@ export default function ReportEndpoints(props) {
                     }
                 }else if(x.endpoint == "whoOwesWhat"){
 
-                    let t = await Api.reportDownloadRequest("whoOwesWhat",x.param1, x.param2) 
+                    let t = await reportDownloadRequest("whoOwesWhat",x.param1, x.param2) 
                     if(t.message === "success"){
 
                         setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
@@ -142,7 +142,7 @@ export default function ReportEndpoints(props) {
 
                 }else if(x.endpoint == "returnedTickets"){
 
-                    let t = await Api.reportDownloadRequest("returnedTickets",x.param1, x.param2) 
+                    let t = await reportDownloadRequest("returnedTickets",x.param1, x.param2) 
                     if(t.message === "success"){
 
                         setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
@@ -186,7 +186,7 @@ export default function ReportEndpoints(props) {
                 setOpenSnackbar({...openSnackbar, [openSnackbar.open]:false})
                 setOpenSnackbar({severity : "success", message : "Email to be sent shortly", open : true, time : time, closeType : closeSnack})
 
-                let t = await Api.reportEmailRequest(x.endpoint,x.param1, x.param2, x.email) 
+                let t = await reportEmailRequest(x.endpoint,x.param1, x.param2, x.email) 
                 
                     console.log(t)
                     if(t.message === "success"){

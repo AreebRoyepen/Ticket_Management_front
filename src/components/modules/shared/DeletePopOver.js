@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import Api from "../../../api/Api";
+import {getRequest} from "../../../api/Api";
 import "../../../styles/eventCard.css";
 
 function Alert(props) {
@@ -90,7 +90,7 @@ export default function SimplePopover(props) {
 
       if(type === "Event"){
 
-        let resp = await Api.deleteRequest("deleteEvent/"+var3.id)
+        let resp = await deleteRequest("deleteEvent/"+var3.id)
         console.log(resp)
         if(resp.message === "success"){
           setSuccess(true)
@@ -121,7 +121,7 @@ export default function SimplePopover(props) {
 
       }else if(type === "Person"){
         
-        let resp =await Api.deleteRequest("deletePerson/"+var3.id)
+        let resp =await deleteRequest("deletePerson/"+var3.id)
         console.log(resp)
         if(resp.message === "success"){
           setSuccess(true)

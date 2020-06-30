@@ -1,19 +1,65 @@
 import axios from 'axios';
 
-axios.defaults.timeout = 20000;
-
-let API_BASE_ADDRESS = 'http://localhost:8080';
+let API_BASE_ADDRESS = 'http://localhost:8080/';
 // if(process.env.NODE_ENV == "development"){
 //     API_BASE_ADDRESS = ""
 // }
 
-export default class Api {
-   
-   static async login(endpoint, payload){
 
-    const uri = API_BASE_ADDRESS + "/" + endpoint;
+let axiosInstance = axios.create({
+    baseURL: API_BASE_ADDRESS,
+    timeout: 20000,
+  });
+  
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      return response;
+    }, async (error) => {
+      const originalRequest = error.config;
+  
+      if (error.response.status === 401 && originalRequest.url === "refresh") {
+        return Promise.reject(error);
+      }
+  
+      if (error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+        const refreshToken = localStorage.refreshToken;
+        const user = JSON.parse(localStorage.user);
+        
+        return await axiosInstance
+          .post(
+            "refresh",
+            {
+              refreshToken: refreshToken,
+              username: user.username,
+            },
+            { headers: {} }
+          )
+          .then((resp) => {
+            if (resp.status === 200) {
+  
+              localStorage.clear();
+              localStorage.setItem("token","Bearer " + resp.data.token)
+            localStorage.setItem("user", JSON.stringify(resp.data.user))
+            localStorage.setItem("expiration", resp.data.expiration)
+            localStorage.setItem("refreshToken", resp.data.refreshToken);
+            
+              originalRequest.headers["Authorization"] =  localStorage.token;
+              axiosInstance.defaults.headers.common["Authorization"] =  localStorage.token;
+              return axiosInstance(originalRequest);
+            }
+          });
+      }
+      return Promise.reject(error);
+    }
+  );
+
+   
+   export async function login(endpoint, payload){
+
+    const uri = endpoint;
     
-    return axios.post(uri,payload)
+    return axiosInstance.post(uri,payload)
     .then(resp => {
         console.log(resp)
 
@@ -21,6 +67,8 @@ export default class Api {
             localStorage.setItem("token","Bearer " + resp.data.token)
             localStorage.setItem("user", JSON.stringify(resp.data.user))
             localStorage.setItem("expiration", resp.data.expiration)
+            localStorage.setItem("refreshToken", resp.data.refreshToken);
+            axiosInstance.defaults.headers.common["Authorization"] =  localStorage.token;
             return {"message" : "success"}
         }
    })
@@ -46,11 +94,11 @@ export default class Api {
 )
 }
 
-static async refresh(endpoint){
+export async function refresh(endpoint){
 
-    const uri = API_BASE_ADDRESS + "/" + endpoint;
+    const uri = endpoint;
     
-    return axios.get(uri, {headers : {"Authorization" : localStorage.getItem("token")}})
+    return axiosInstance.get(uri)
     .then(resp => {
         
         if(resp.status === 200){
@@ -81,11 +129,11 @@ static async refresh(endpoint){
 }
 
 
-   static async getRequest(endpoint){
+   export async function getRequest(endpoint){
 
-    const uri = API_BASE_ADDRESS + "/" + endpoint;
+    const uri = endpoint;
     
-    return axios.get(uri, {headers : {"Authorization" : localStorage.getItem("token")}})
+    return axiosInstance.get(uri)
     .then(resp => {
         if(resp.status === 200){
             return resp.data
@@ -117,11 +165,11 @@ static async refresh(endpoint){
 
    }
 
-   static async postRequest(endpoint, payload){
+   export async function postRequest(endpoint, payload){
 
-    const uri = API_BASE_ADDRESS + "/" + endpoint;
+    const uri = endpoint;
     
-    return axios.post(uri,payload, {headers : {"Authorization" : localStorage.token }})
+    return axiosInstance.post(uri,payload)
     .then(resp => {
         if(resp.status === 200){
             return resp.data
@@ -149,11 +197,11 @@ static async refresh(endpoint){
 )
 }
 
-   static async putRequest(endpoint, payload){
+   export async function putRequest(endpoint, payload){
 
-    const uri = API_BASE_ADDRESS + "/" + endpoint;
+    const uri = endpoint;
     
-    return axios.put(uri,payload, {headers : {"Authorization" : localStorage.getItem("token")}})
+    return axiosInstance.put(uri,payload)
     .then(resp => {
 
         if(resp.status === 200){
@@ -183,11 +231,11 @@ static async refresh(endpoint){
        
    }
 
-   static async deleteRequest(endpoint, payload){
+   export async function deleteRequest(endpoint, payload){
 
-    const uri = API_BASE_ADDRESS + "/" + endpoint;
+    const uri = endpoint;
     
-    return axios.delete(uri, {headers : {"Authorization" : localStorage.getItem("token")} ,data : payload})
+    return axiosInstance.delete(uri, {data : payload})
     .then(resp => {
 
         if(resp.status === 200){
@@ -218,15 +266,15 @@ static async refresh(endpoint){
 
    }
 
-   static async reportDownloadRequest(endpoint, option1, option2){
+   export async function reportDownloadRequest(endpoint, option1, option2){
     
-    const uri = API_BASE_ADDRESS + "/" + endpoint+"/" + option1 +"/" + option2 +"/null";
+    const uri = endpoint+"/" + option1 +"/" + option2 +"/null";
 
-    return axios(uri, {
+    return axiosInstance(uri, {
         method: 'GET',
         responseType: "blob",
         timeout : 100000,
-        headers : {"Authorization" : localStorage.getItem("token")}
+        
     })
     .then(response => {
 
@@ -255,14 +303,14 @@ static async refresh(endpoint){
     }
 )
    }
-   static async reportEmailRequest(endpoint, option1, option2,option3){
+   export async function reportEmailRequest(endpoint, option1, option2,option3){
     
-    const uri = API_BASE_ADDRESS + "/" + endpoint+"/" + option1 +"/" + option2 +"/" + option3;
+    const uri = endpoint+"/" + option1 +"/" + option2 +"/" + option3;
 
-    return axios(uri, {
+    return axiosInstance(uri, {
         method: 'GET',
         timeout : 100000,
-        headers : {"Authorization" : localStorage.getItem("token")}
+        
     })
     .then(response => {
 
@@ -292,4 +340,3 @@ static async refresh(endpoint){
 )
    }
 
-}

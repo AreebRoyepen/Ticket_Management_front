@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import Api from "../../../api/Api";
+import {getRequest,deleteRequest} from "../../../api/Api";
 import "../../../styles/validationForm.css";
 import "../../../styles/login.css";
 
@@ -71,7 +71,7 @@ export default function ReturnTickets() {
 
         var time = 6000
         let x = location.state.event.id
-        let d = await Api.getRequest("unallocated/" + x)
+        let d = await getRequest("unallocated/" + x)
         if(d.message === "success"){
           setTickets(d.ticket)
 
@@ -120,7 +120,7 @@ export default function ReturnTickets() {
         console.log(x)
         if(bulk){
 
-          let t = await Api.deleteRequest("bulkReturn",x)
+          let t = await deleteRequest("bulkReturn",x)
           console.log(t)
           if(t.message === "success"){
             if(t.ticket){
@@ -152,7 +152,7 @@ export default function ReturnTickets() {
 
         }else{
 
-          let t = await Api.deleteRequest("returnTicket/"+location.state.event.id+"/"+(ticketNumberF)) 
+          let t = await deleteRequest("returnTicket/"+location.state.event.id+"/"+(ticketNumberF)) 
           if(t.message === "success"){
 
             if(t.ticket){

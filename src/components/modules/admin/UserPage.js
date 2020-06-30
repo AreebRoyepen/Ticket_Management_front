@@ -6,7 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import Api from "../../../api/Api";
+import {getRequest,postRequest, putRequest} from "../../../api/Api";
 import "../../../styles/login.css";
 import "../../../styles/validationForm.css";
 
@@ -98,7 +98,7 @@ export default function UserPage() {
     
         (async () => {
      
-        let resp = await Api.getRequest("roles");
+        let resp = await getRequest("roles");
   
         if(resp.message === "success"){
           
@@ -144,7 +144,7 @@ export default function UserPage() {
 
         if(location.state.edit){
 
-          let resp = await Api.putRequest("updateUser/"+location.state.x.id,x)
+          let resp = await putRequest("updateUser/"+location.state.x.id,x)
           console.log(resp)
           if(resp.message === "success"){
             
@@ -175,7 +175,7 @@ export default function UserPage() {
   
         }else{
           
-          let resp =await Api.postRequest("register",x)
+          let resp =await postRequest("register",x)
           console.log(resp)
           if(resp.message === "success"){
             setOpenSnackbar({severity : "success", message : "Successfully added", open : true, time : time, closeType : successClose})

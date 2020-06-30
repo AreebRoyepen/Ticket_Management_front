@@ -15,7 +15,7 @@ import ListItem from '@material-ui/core/ListItem';
 import { TiTicket } from "react-icons/ti";
 import {MdEvent, MdDashboard,MdPeople, MdContacts, MdVerifiedUser} from "react-icons/md";
 import useModal from 'react-hooks-use-modal';
-import Api from "../api/Api";
+import {getRequest} from "../api/Api";
 
 import "../styles/menu.css";
 
@@ -116,35 +116,7 @@ export default function Menu({children}) {
     if(localStorage.user){
 
       setUser(JSON.parse(localStorage.user))
-      
-      var id = setInterval(() =>{
-        //setOpenModal(openModal);
-        async function fetchData(){
-                        
-          let x = await Api.refresh("refresh")
-          console.log(x)
-          
-          if(x.message === "success"){
-
-            console.log("refreshed")
-                                    
-          }else if (x.message === "unauthorized"){
-            localStorage.clear();
-            history.push("/")
-
-          }
-      }
-          
-      
-
-      fetchData() 
-      if(!isMounted.current) return clearInterval(id)
-      
-
-      }
-      , ((parseInt(localStorage.expiration) -(1/2 * parseInt(localStorage.expiration)))* 1000));      
-
-      
+           
 
     }else{
       return

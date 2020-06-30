@@ -4,7 +4,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { purple } from "@material-ui/core/colors";
-import Api from "../api/Api";
+import {login} from "../api/Api";
 import "../styles/login.css";
 
 function Alert(props) {
@@ -62,7 +62,7 @@ export default function Login ()  {
 
       console.log(body)
 
-      let x = await Api.login("login", body)
+      let x = await login("login", body)
       var time = 6000
       console.log(x)
       
